@@ -1,0 +1,80 @@
+package entities;
+
+import java.util.ArrayList;
+
+import basic.Config;
+import map.Map;
+import map.MapField;
+import utilities.Experience;
+import utilities.Inventory;
+import utilities.Skill;
+
+public class Player {
+	
+	private String name;
+	private double health;
+	private Inventory inventory;
+	private ArrayList<Skill> skills;
+	private Experience experience;
+	private int daysAlive;
+	private Map currentMap;
+	private MapField currentMapField;
+	private Time time;
+	
+	public Player(String name, Map mainMap) {
+		this.name = name;
+		this.health = Config.PLAYER_HEALTH;
+		this.inventory = new Inventory();
+		this.skills = new ArrayList<Skill>();
+		this.experience = new Experience();
+		this.daysAlive = 0;
+		this.currentMap = mainMap;
+		this.currentMapField = mainMap.getMapFieldByCoordinate(Config.MAP_SIZEX/2, Config.MAP_SIZEY/2);
+		this.time = Time.DAY;
+	}
+
+	public double getHealth() {
+		return health;
+	}
+
+	public void setHealth(double health) {
+		this.health = health;
+	}
+
+	public Map getCurrentMap() {
+		return currentMap;
+	}
+
+	public void setCurrentMap(Map currentMap) {
+		this.currentMap = currentMap;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public ArrayList<Skill> getSkills() {
+		return skills;
+	}
+
+	public Experience getExperience() {
+		return experience;
+	}
+
+	public int getDaysAlive() {
+		return daysAlive;
+	}
+	
+	public MapField getCurrentMapField() {
+		return currentMapField;
+	}
+	
+	public Time getTime() {
+		return time;
+	}	
+	
+}

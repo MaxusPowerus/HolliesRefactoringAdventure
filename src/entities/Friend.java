@@ -1,4 +1,4 @@
-package npcs;
+package entities;
 
 public class Friend {
 

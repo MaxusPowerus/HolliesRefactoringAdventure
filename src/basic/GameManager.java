@@ -1,23 +1,30 @@
 package basic;
 
 
+import entities.Player;
 import gui.GUIManager;
 import map.Map;
-import utilities.Player;
 
 public class GameManager {
 
-	private Player player;
+	private static Player player;
 	private Map mainMap;
 	
 	private GUIManager guiManager;
 	
 	public GameManager() {
+		this.prepareGame();
+	}
+	
+	public void prepareGame() {		
+		mainMap = new Map();
+		mainMap.generateMainMap();
+		player = new Player(Config.PLAYER_NAME, mainMap);
+
 		this.guiManager = new GUIManager();
 	}
 	
-	public void prepareGame() {
-		mainMap = new Map();
-		player = new Player(Config.PLAYER_NAME, mainMap);
+	public static Player getPlayer() {
+		return player;
 	}
 }

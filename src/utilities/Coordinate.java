@@ -9,7 +9,6 @@ public class Coordinate {
 		this.posY = posY;
 	}
 	
-	
 	public boolean isEqual(Coordinate coordinate) {
 		return (posX == coordinate.getPosX() && posY == coordinate.getPosY());
 	}
@@ -20,5 +19,10 @@ public class Coordinate {
 	
 	public int getPosY() {
 		return posY;
+	}
+	
+	@Override
+	public String toString() {
+		return "X: " + this.posX + ", Y: " + this.posY;
 	}
 }
