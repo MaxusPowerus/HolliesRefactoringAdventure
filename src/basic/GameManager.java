@@ -23,6 +23,8 @@ public class GameManager {
 		player = new Player(Config.PLAYER_NAME, mainMap);
 
 		this.guiManager = new GUIManager();
+		
+		this.startGame();
 	}
 	
 	public static Player getPlayer() {
@@ -32,6 +34,10 @@ public class GameManager {
 	public void restart() {
 		this.guiManager.destroy();
 		this.prepareGame();
+	}
+	
+	private void startGame() {
+		this.guiManager.updateView(player);
 	}
 	
 	public static GameManager getInstance() {
