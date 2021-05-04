@@ -4,19 +4,26 @@ import java.util.Random;
 
 public enum Biom {
 	
-	FOREST("Wald"),
-	DESERT("Wüste"),
-	SWAMP("Sumpf"),
-	MOUNTAINS("Gebirge");
+	MEADOW("WI", 60),
+	FOREST("WA", 60),
+	DESERT("Wü", 20),
+	SWAMP("SU", 40),
+	MOUNTAINS("GE", 25);
 
 	private String name;
+	private int chance;
 	
-	Biom(String name) {
+	Biom(String name, int chance) {
 		this.name = name;
+		this.chance = chance;
 	}
 	
 	public String getName() {
 		return name;
+	}
+	
+	public int getChance() {
+		return chance;
 	}
 	
 	public static Biom getRandomBiom() {
@@ -26,4 +33,5 @@ public enum Biom {
 		
 		return Biom.values()[randInt];
 	}
+	
 }
