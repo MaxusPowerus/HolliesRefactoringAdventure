@@ -19,6 +19,7 @@ public class GameManager {
 	public void prepareGame() {		
 		mainMap = new Map();
 		mainMap.generateMainMap();
+		//mainMap.prntMapDebug();
 		player = new Player(Config.PLAYER_NAME, mainMap);
 
 		this.guiManager = new GUIManager();
