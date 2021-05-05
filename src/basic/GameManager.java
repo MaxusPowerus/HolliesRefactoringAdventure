@@ -1,6 +1,8 @@
 package basic;
 
 
+import java.io.IOException;
+
 import entities.Player;
 import gui.GUIManager;
 import map.Map;
@@ -19,8 +21,8 @@ public class GameManager {
 	
 	public void prepareGame() {		
 		mainMap = new Map();
-		mainMap.generateMainMap();
-		//mainMap.prntMapDebug();
+		mainMap.generateMainMapStepOne();
+		//mainMap.generateMainMapStepTwo();
 		player = new Player(Config.PLAYER_NAME, mainMap);
 
 		this.guiManager = new GUIManager();
