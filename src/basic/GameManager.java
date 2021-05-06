@@ -5,7 +5,9 @@ import java.io.IOException;
 
 import entities.Player;
 import gui.GUIManager;
+import map.Biom;
 import map.Map;
+import map.MapGenerator;
 
 public class GameManager {
 
@@ -18,11 +20,17 @@ public class GameManager {
 		instance = this;
 		this.prepareGame();
 	}
-	
+	//------------------------------------------------------------------
 	public void prepareGame() {		
 		mainMap = new Map();
-		mainMap.generateMainMapStepOne();
-		//mainMap.generateMainMapStepTwo();
+		MapGenerator mapGenerator = new MapGenerator(mainMap);
+		
+		mainMap = mapGenerator.generateMainMapBasic();
+		//mainMap = mapGenerator.setMapToBiom(Biom.MEADOW);
+		//mainMap = mapGenerator.generateForestOnly();
+		mainMap.printMapDebug("");
+		//-------------------------------------------------------------
+		
 		player = new Player(Config.PLAYER_NAME, mainMap);
 
 		this.guiManager = new GUIManager();

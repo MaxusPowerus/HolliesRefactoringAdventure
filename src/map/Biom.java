@@ -7,7 +7,7 @@ public enum Biom {
 	MEADOW(0, "WI", 60),
 	FOREST(1, "WA", 80),
 	DESERT(2, "Wü", 1),
-	SWAMP(3, "SU", 25),
+	SWAMP(3, "SU", 15),
 	MOUNTAINS(4, "GE", 10);
 
 	private int id;
@@ -39,5 +39,6 @@ public enum Biom {
 		
 		return Biom.values()[randInt];
 	}
+	
 	
 }
