@@ -1,4 +1,4 @@
-package utilities;
+package items;
 
 public class Item {
 
