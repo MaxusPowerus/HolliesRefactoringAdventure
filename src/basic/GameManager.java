@@ -22,11 +22,11 @@ public class GameManager {
 		mainMap = new Map();
 		MapGenerator mapGenerator = new MapGenerator(mainMap);
 
-		mainMap = mapGenerator.generateMainMapBasic();
+		mainMap = mapGenerator.generateMapMK2();
 
 		player = new Player(Config.PLAYER_NAME, mainMap);
 
-		resourceManager = new ResourceManager();
+		// resourceManager = new ResourceManager();
 
 		this.guiManager = new GUIManager();
 
