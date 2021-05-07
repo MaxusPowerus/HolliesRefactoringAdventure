@@ -10,40 +10,60 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import items.Item;
+import items.Weapon;
 
 public class ResourceManager {
 
 	private ArrayList<Item> items;
 
 	public ResourceManager() {
-		items = new ArrayList<Item>();
-		loadItems();
+		this.items = new ArrayList<Item>();
+		this.loadItems();
 	}
 
+	@SuppressWarnings("unchecked")
 	private void loadItems() {
 		try {
-			FileReader fileReader = new FileReader(
-					"D:\\Users\\Rechenknecht\\Desktop\\Eclipse Workspace\\Holly\\Hollies Adventure\\resources\\items.json");
+			FileReader fileReader = new FileReader("resources\\items.json");
 			JSONParser parser = new JSONParser();
 
 			JSONObject items = (JSONObject) parser.parse(fileReader);
 			items = (JSONObject) items.get("Categories");
 			Set<Map> set = items.keySet();
 			Iterator<Map> itr = set.iterator();
-			while (itr.hasNext()) {
+
+			for (Object key : items.keySet()) {
+				Object value = items.get(key);
+
 				JSONObject category = (JSONObject) items.get(itr.next());
 				Set<Map> categoryItem = category.keySet();
 				Iterator<Map> itemItr = categoryItem.iterator();
+
 				while (itemItr.hasNext()) {
-					JSONObject i = (JSONObject) category.get(itemItr.next());
-					Item item = new Item();
+					JSONObject innerItem = (JSONObject) category.get(itemItr.next());
+					Item item = null;
+
+					switch (key.toString()) {
+					case "Weapons":
+						System.out.println("Weapon: " + innerItem.get("label"));
+						item = new Weapon(); // TODO
+						break;
+					case "Food":
+						System.out.println("Food: " + innerItem.get("label"));
+						// item = new Food(); // TODO
+						break;
+					default:
+						System.out.println("Default item (no category): " + innerItem.get("label"));
+						item = new Item(); // TODO
+						break;
+					}
+
+					this.items.add(item);
 
 				}
-
-				System.out.println(itr.next());
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 }
