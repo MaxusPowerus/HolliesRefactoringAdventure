@@ -33,7 +33,7 @@ public class GameManager {
 		this.startGame();
 	}
 
-	public static Player getPlayer() {
+	public Player getPlayer() {
 		return player;
 	}
 
@@ -43,7 +43,11 @@ public class GameManager {
 	}
 
 	private void startGame() {
-		this.guiManager.updateView(player);
+		this.guiManager.updateAllViews();
+	}
+
+	public GUIManager getGuiManager() {
+		return guiManager;
 	}
 
 	public static GameManager getInstance() {

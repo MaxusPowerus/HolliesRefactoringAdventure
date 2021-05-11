@@ -1,12 +1,12 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import basic.Config;
-import entities.Player;
 
 public class GUIManager {
 
@@ -24,6 +24,7 @@ public class GUIManager {
 		this.jFrame = new JFrame();
 		this.jFrame.setSize(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
 		this.jFrame.setTitle(Config.GAME_TITLE);
+		this.jFrame.setMinimumSize(new Dimension(Config.MIN_WINDOW_WIDTH, Config.MIN_WINDOW_HEIGHT));
 		this.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.contentPane = new ContentPane();
@@ -46,8 +47,37 @@ public class GUIManager {
 		this.jFrame.dispose();
 	}
 
-	public void updateView(Player player) {
-		((MainPanel) this.mainPanel).loadView(player);
+	public void updateMainView() {
+		((MainPanel) this.mainPanel).updateView();
+	}
+
+	public void updatePlayerInfoView() {
+		((PlayerInfoPanel) this.playerInfoPanel).updateView();
+	}
+
+	public void updateWorldInfoView() {
+		((WorldInfoPanel) this.getWorldInfoPanel()).updateView();
+	}
+
+	public void updateAllViews() {
+		this.updatePlayerInfoView();
+		this.updateMainView();
+		this.updateWorldInfoView();
+
+		this.jFrame.revalidate();
+		this.jFrame.repaint();
+	}
+
+	public MainPanel getMainPanel() {
+		return (MainPanel) mainPanel;
+	}
+
+	public PlayerInfoPanel getPlayerInfoPanel() {
+		return (PlayerInfoPanel) playerInfoPanel;
+	}
+
+	public WorldInfoPanel getWorldInfoPanel() {
+		return (WorldInfoPanel) worldInfoPanel;
 	}
 
 }
