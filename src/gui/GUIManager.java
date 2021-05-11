@@ -39,6 +39,7 @@ public class GUIManager {
 		this.contentPane.add(BorderLayout.CENTER, this.mainPanel);
 		this.contentPane.add(BorderLayout.SOUTH, this.worldInfoPanel);
 
+		this.jFrame.pack();
 		this.jFrame.setLocationRelativeTo(null);
 		this.jFrame.setVisible(true);
 	}

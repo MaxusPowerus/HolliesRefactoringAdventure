@@ -47,19 +47,23 @@ public class ResourceManager {
 
 					switch (key.toString()) {
 					case "Weapons":
-						item = new Weapon(innerItem.get("label").toString(), (int) innerItem.get("value"),
-								(int) innerItem.get("damage"));
+						item = new Weapon(innerItem.get("label").toString(),
+								Integer.valueOf(String.valueOf(innerItem.get("value"))),
+								Integer.valueOf(innerItem.get("value").toString()));
 						break;
 					case "Outfits":
-						item = new Outfit(innerItem.get("label").toString(), (int) innerItem.get("value"),
-								(int) innerItem.get("armor"));
+						item = new Outfit(innerItem.get("label").toString(),
+								Integer.valueOf(String.valueOf(innerItem.get("value"))),
+								Integer.valueOf(innerItem.get("armor").toString()));
 						break;
 					case "Food":
-						item = new Food(innerItem.get("label").toString(), (int) innerItem.get("value"),
-								(int) innerItem.get("energy"));
+						item = new Food(innerItem.get("label").toString(),
+								Integer.valueOf(String.valueOf(innerItem.get("value"))),
+								Integer.valueOf(innerItem.get("energy").toString()));
 						break;
 					default:
-						item = new Item(innerItem.get("label").toString(), (int) innerItem.get("value")); // TODO
+						item = new Item(innerItem.get("label").toString(),
+								Integer.valueOf(String.valueOf(innerItem.get("value"))));
 						break;
 					}
 

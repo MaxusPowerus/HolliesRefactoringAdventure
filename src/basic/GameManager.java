@@ -26,7 +26,7 @@ public class GameManager {
 
 		player = new Player(Config.PLAYER_NAME, mainMap);
 
-		// resourceManager = new ResourceManager();
+		resourceManager = new ResourceManager();
 
 		this.guiManager = new GUIManager();
 
@@ -52,5 +52,9 @@ public class GameManager {
 
 	public static GameManager getInstance() {
 		return instance;
+	}
+
+	public ResourceManager getResourceManager() {
+		return resourceManager;
 	}
 }

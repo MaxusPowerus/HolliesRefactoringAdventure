@@ -14,6 +14,7 @@ import basic.Config;
 import basic.GameManager;
 import entities.Player;
 import gui.actions.BackButtonAction;
+import gui.actions.InspectAction;
 import gui.actions.InventoryShowAction;
 import gui.actions.NavigationButtonAction;
 import map.Direction;
@@ -49,6 +50,7 @@ public class MainPanel extends JPanel {
 
 		buttonPanel.add(this.getNavigationButtons());
 		buttonPanel.add(this.getInventoryButton());
+		buttonPanel.add(this.getInspectButton());
 
 		this.add(buttonPanel, BorderLayout.SOUTH);
 	}
@@ -87,6 +89,21 @@ public class MainPanel extends JPanel {
 		buttonPanel.add(buttonThirdLine, BorderLayout.SOUTH);
 
 		return buttonPanel;
+	}
+
+	public JPanel getInspectButton() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BorderLayout());
+		panel.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 20));
+
+		JButton button = new JButton();
+		button.setText("Bereich untersuchen");
+		this.setButtonStyle(button);
+		button.addActionListener(new InspectAction());
+
+		panel.add(button, BorderLayout.CENTER);
+
+		return panel;
 	}
 
 	public JPanel getInventoryButton() {
