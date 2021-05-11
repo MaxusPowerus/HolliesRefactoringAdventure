@@ -2,6 +2,7 @@ package utilities;
 
 import java.util.ArrayList;
 
+import basic.GameManager;
 import items.Item;
 
 public class Container {
@@ -14,7 +15,7 @@ public class Container {
 		this.name = name;
 		inventory = new Inventory();
 
-		ArrayList<Item> items = new ArrayList<Item>();
+		ArrayList<Item> items = GameManager.getInstance().getResourceManager().getAllItems();
 		for (int i = 0; i < items.size(); i++) {
 			inventory.add(items.get(i));
 		}
@@ -26,5 +27,22 @@ public class Container {
 
 	public void setFound(boolean found) {
 		this.found = found;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public String stringifyItems() {
+		StringBuilder builder = new StringBuilder();
+		for (Item item : this.inventory.getAllItems()) {
+			System.out.println(item.getName());
+			builder.append(item.getName()).append(", ");
+		}
+		return builder.substring(0, builder.length() - 2).toString();
 	}
 }

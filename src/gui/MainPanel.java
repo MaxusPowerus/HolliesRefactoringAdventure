@@ -99,7 +99,7 @@ public class MainPanel extends JPanel {
 		JButton button = new JButton();
 		button.setText("Bereich untersuchen");
 		this.setButtonStyle(button);
-		button.addActionListener(new InspectAction());
+		button.addActionListener(new InspectAction(this));
 
 		panel.add(button, BorderLayout.CENTER);
 

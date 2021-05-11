@@ -19,14 +19,14 @@ public class GameManager {
 	}
 
 	public void prepareGame() {
+		resourceManager = new ResourceManager();
+
 		mainMap = new Map();
 		MapGenerator mapGenerator = new MapGenerator(mainMap);
 
 		mainMap = mapGenerator.generateMapMK2();
 
 		player = new Player(Config.PLAYER_NAME, mainMap);
-
-		resourceManager = new ResourceManager();
 
 		this.guiManager = new GUIManager();
 
