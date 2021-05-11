@@ -1,5 +1,6 @@
 package map;
 
+import utilities.Container;
 import utilities.Coordinate;
 
 public class MapField {
@@ -8,6 +9,7 @@ public class MapField {
 	private boolean disabled;
 	private Biom biom;
 
+	private Container container = null;
 	private Map subMap;
 
 	public MapField(Coordinate coordinate, Biom biom) {
@@ -42,6 +44,18 @@ public class MapField {
 
 	public void setBiom(Biom biom) {
 		this.biom = biom;
+	}
+
+	public void setContainer(String name) {
+		container = new Container(name);
+	}
+
+	public Container getContainer() {
+		if (container == null) {
+			return null;
+		} else {
+			return container;
+		}
 	}
 
 	public String getText() {
