@@ -47,17 +47,19 @@ public class ResourceManager {
 
 					switch (key.toString()) {
 					case "Weapons":
-						item = new Weapon(innerItem.get("label").toString(), (int) innerItem.get("damage")); // TODO
+						item = new Weapon(innerItem.get("label").toString(), (int) innerItem.get("value"),
+								(int) innerItem.get("damage"));
 						break;
 					case "Outfits":
-						item = new Outfit(innerItem.get("label").toString(), (int) innerItem.get("armor")); // TODO
+						item = new Outfit(innerItem.get("label").toString(), (int) innerItem.get("value"),
+								(int) innerItem.get("armor"));
 						break;
 					case "Food":
-						item = new Food(innerItem.get("label").toString(), (int) innerItem.get("energy")); // TODO
+						item = new Food(innerItem.get("label").toString(), (int) innerItem.get("value"),
+								(int) innerItem.get("energy"));
 						break;
 					default:
-						System.out.println("Default item (no category): " + innerItem.get("label"));
-						item = new Item(innerItem.get("label").toString()); // TODO
+						item = new Item(innerItem.get("label").toString(), (int) innerItem.get("value")); // TODO
 						break;
 					}
 
@@ -68,5 +70,19 @@ public class ResourceManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public ArrayList<Item> getAllItems() {
+		return items;
+	}
+
+	public Item getItem(String name) {
+
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i).getName().equals(name)) {
+				return items.get(i);
+			}
+		}
+		return null;
 	}
 }

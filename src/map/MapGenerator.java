@@ -249,17 +249,17 @@ public class MapGenerator {
 
 	public Map generateMapMK2() {
 		map = setMapToBiom(Biom.MEADOW);
-		System.out.println("Meadow Done");
+		// System.out.println("Meadow Done");
 		map = makeForest(3, 16);
-		System.out.println("Forest Done");
+		// System.out.println("Forest Done");
 		map = makeSwamps(1);
-		System.out.println("Swamp Done");
+		// System.out.println("Swamp Done");
 		map = makeMountains(1, 15);
-		System.out.println("Mountains Done");
+		// System.out.println("Mountains Done");
 		map = makeOneDesert(1200);
-		System.out.println("Desert Done");
+		// System.out.println("Desert Done");
 		map = flatForestDesertBorder();
-		System.out.println("Flater01 Done");
+		// System.out.println("Flater01 Done");
 
 		map.printMapDebug("");
 		return map;
