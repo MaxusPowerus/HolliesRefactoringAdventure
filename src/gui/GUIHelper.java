@@ -27,4 +27,10 @@ public class GUIHelper {
 		return panel;
 	}
 
+	public static void resetPanel(JPanel panel) {
+		panel.removeAll();
+		panel.revalidate();
+		panel.repaint();
+	}
+
 }

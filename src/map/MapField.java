@@ -39,14 +39,14 @@ public class MapField {
 	public Biom getBiom() {
 		return biom;
 	}
-	
+
 	public void setBiom(Biom biom) {
 		this.biom = biom;
 	}
 
 	public String getText() {
-		String text = "Das ist das erste Mal, dass der kleine Max alleine in die freie Welt gelassen wurde. Doch was er da sah, Ã¼bertraf all' seine Erwartungen.\n"
-				+ "Ein groÃŸer Elefant ðŸ�˜ stand plÃ¤tzlich vor ihm! Was soll er jetzt tun?";
+		String text = "Das ist das erste Mal, dass der kleine Max alleine in die freie Welt gelassen wurde. Doch was er da sah, uebertraf all' seine Erwartungen.\n"
+				+ "Ein grosser Elefant stand ploetzlich vor ihm! Was soll er jetzt tun?";
 
 		return text;
 	}

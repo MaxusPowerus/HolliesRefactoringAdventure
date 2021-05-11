@@ -13,14 +13,15 @@ public class WorldInfoPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public WorldInfoPanel() {
-		Player player = GameManager.getPlayer();
+	public void updateView() {
+		Player player = GameManager.getInstance().getPlayer();
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 10));
 		this.setBackground(Color.decode(Config.BOX_COLOR));
 
 		this.add(GUIHelper.createTextPanel("Du befindest dich hier", player.getCurrentMapField().getBiom().getName()));
-		this.add(GUIHelper.createTextPanel("Tageszeit", player.getTime().getName()));
+		this.add(GUIHelper.createTextPanel("Tageszeit (Stunden)",
+				player.getTime().toTimeString() + " (" + player.getTime().getHours() + ")"));
 	}
 
 }

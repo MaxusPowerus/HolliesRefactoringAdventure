@@ -1,17 +1,22 @@
 package entities;
 
-public enum Time {
+public class Time {
 
-	DAY("Tag"),
-	NIGHT("Nacht");
-	
-	String name;
-	
-	Time(String name) {
-		this.name = name;
+	int hours;
+
+	Time(int hours) {
+		this.hours = hours;
 	}
-	
-	public String getName() {
-		return name;
+
+	public int getHours() {
+		return hours;
+	}
+
+	public void addHours(int hours) {
+		this.hours += hours;
+	}
+
+	public String toTimeString() {
+		return this.hours % 24 <= 12 ? "Nacht" : "Tag";
 	}
 }

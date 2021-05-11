@@ -17,8 +17,8 @@ public class PlayerInfoPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public PlayerInfoPanel() {
-		Player player = GameManager.getPlayer();
+	public void updateView() {
+		Player player = GameManager.getInstance().getPlayer();
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 10));
 //		this.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
