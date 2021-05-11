@@ -9,7 +9,9 @@ import java.util.Set;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import items.Food;
 import items.Item;
+import items.Outfit;
 import items.Weapon;
 
 public class ResourceManager {
@@ -45,16 +47,17 @@ public class ResourceManager {
 
 					switch (key.toString()) {
 					case "Weapons":
-						System.out.println("Weapon: " + innerItem.get("label"));
-						item = new Weapon(); // TODO
+						item = new Weapon(innerItem.get("label").toString(), (int) innerItem.get("damage")); // TODO
+						break;
+					case "Outfits":
+						item = new Outfit(innerItem.get("label").toString(), (int) innerItem.get("armor")); // TODO
 						break;
 					case "Food":
-						System.out.println("Food: " + innerItem.get("label"));
-						// item = new Food(); // TODO
+						item = new Food(innerItem.get("label").toString(), (int) innerItem.get("energy")); // TODO
 						break;
 					default:
 						System.out.println("Default item (no category): " + innerItem.get("label"));
-						item = new Item(); // TODO
+						item = new Item(innerItem.get("label").toString()); // TODO
 						break;
 					}
 

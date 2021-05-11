@@ -106,6 +106,48 @@ public class MapGenerator {
 		return map;
 	}
 
+	public Map makeSwamps(int swampChance) {
+		Random Randy = new Random();
+		for (int y = 0; y < Config.MAP_SIZEY; y++) {
+			for (int x = Config.MAP_SIZEX - 1; x >= 0; x--) {
+				if (Randy.nextInt(1000) < swampChance) {
+					map.getMapFieldByCoordinate(x, y).setBiom(Biom.SWAMP);
+
+					if (Randy.nextInt(100) % 4 == 0) {
+						if (map.getMapFieldByCoordinate(x + 1, y + 1) != null) {
+							map.getMapFieldByCoordinate(x + 1, y + 1).setBiom(Biom.SWAMP);
+						}
+						if (map.getMapFieldByCoordinate(x + 1, y - 1) != null) {
+							map.getMapFieldByCoordinate(x + 1, y - 1).setBiom(Biom.SWAMP);
+						}
+					} else if (Randy.nextInt(100) % 3 == 0) {
+						if (map.getMapFieldByCoordinate(x + 1, y - 1) != null) {
+							map.getMapFieldByCoordinate(x + 1, y - 1).setBiom(Biom.SWAMP);
+						}
+						if (map.getMapFieldByCoordinate(x - 1, y - 1) != null) {
+							map.getMapFieldByCoordinate(x - 1, y - 1).setBiom(Biom.SWAMP);
+						}
+					} else if (Randy.nextInt(100) % 2 == 0) {
+						if (map.getMapFieldByCoordinate(x - 1, y - 1) != null) {
+							map.getMapFieldByCoordinate(x - 1, y - 1).setBiom(Biom.SWAMP);
+						}
+						if (map.getMapFieldByCoordinate(x - 1, y + 1) != null) {
+							map.getMapFieldByCoordinate(x - 1, y + 1).setBiom(Biom.SWAMP);
+						}
+					} else if (Randy.nextInt(100) % 1 == 0) {
+						if (map.getMapFieldByCoordinate(x - 1, y + 1) != null) {
+							map.getMapFieldByCoordinate(x - 1, y + 1).setBiom(Biom.SWAMP);
+						}
+						if (map.getMapFieldByCoordinate(x + 1, y + 1) != null) {
+							map.getMapFieldByCoordinate(x + 1, y + 1).setBiom(Biom.SWAMP);
+						}
+					}
+				}
+			}
+		}
+		return map;
+	}
+
 	public Map makeMountains(int mountainsChance, int mountainsBoost) {
 		Random Randy = new Random();
 		for (int y = 0; y < Config.MAP_SIZEY; y++) {
@@ -153,7 +195,7 @@ public class MapGenerator {
 		for (int y = 0; y < Config.MAP_SIZEY; y++) {
 			for (int x = 0; x < Config.MAP_SIZEX; x++) {
 				Coordinate coordinate = new Coordinate(x, y);
-				if (map.getMapFieldByCoordinate(coordinate).getBiom() == Biom.FOREST)
+				if (map.getMapFieldByCoordinate(coordinate).getBiom() == Biom.FOREST) {
 					for (int i = 0; i < 8; i++) {
 						if (map.getMapFieldByCoordinate(coordinate.getNeighbours()[i]) != null) {
 							if (map.getMapFieldByCoordinate(coordinate.getNeighbours()[i]).getBiom() == Biom.DESERT) {
@@ -161,8 +203,8 @@ public class MapGenerator {
 								map.getMapFieldByCoordinate(coordinate.getNeighbours()[i]).setBiom(Biom.MEADOW);
 							}
 						}
-
 					}
+				}
 			}
 		}
 		return map;
@@ -208,11 +250,13 @@ public class MapGenerator {
 	public Map generateMapMK2() {
 		map = setMapToBiom(Biom.MEADOW);
 		System.out.println("Meadow Done");
-		map = makeForest(3, 15);
+		map = makeForest(3, 16);
 		System.out.println("Forest Done");
+		map = makeSwamps(1);
+		System.out.println("Swamp Done");
 		map = makeMountains(1, 15);
 		System.out.println("Mountains Done");
-		map = makeOneDesert(500);
+		map = makeOneDesert(1200);
 		System.out.println("Desert Done");
 		map = flatForestDesertBorder();
 		System.out.println("Flater01 Done");
