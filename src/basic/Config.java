@@ -15,6 +15,7 @@ public class Config {
 	public final static String BUTTON_COLOR = "#10E875";
 	public final static String MAIN_BUTTON_COLOR = "#55C1B9";
 	public final static String COMPASS_COLOR = "#7F4930";
+	public final static String SECONDARY_BUTTON_COLOR = "#DDDDDD";
 
 	// DATABASE CONNECTION
 
@@ -23,7 +24,7 @@ public class Config {
 	public final static String PLAYER_NAME = "Holly";
 
 	// MAP
-	public final static int MAP_SIZEX = 200;
-	public final static int MAP_SIZEY = 200;
+	public final static int MAP_SIZEX = 50;
+	public final static int MAP_SIZEY = 50;
 
 }

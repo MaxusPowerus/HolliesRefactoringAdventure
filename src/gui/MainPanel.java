@@ -13,6 +13,8 @@ import javax.swing.border.EmptyBorder;
 import basic.Config;
 import basic.GameManager;
 import entities.Player;
+import gui.actions.BackButtonAction;
+import gui.actions.InventoryShowAction;
 import gui.actions.NavigationButtonAction;
 import map.Direction;
 import map.MapField;
@@ -24,6 +26,11 @@ public class MainPanel extends JPanel {
 	public MainPanel() {
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(50, 30, 50, 30));
+	}
+
+	public void loadMainView() {
+		GUIHelper.resetPanel(this);
+		this.updateView();
 	}
 
 	public void updateView() {
@@ -89,8 +96,9 @@ public class MainPanel extends JPanel {
 
 		JButton button = new JButton();
 
-		button.setText("Inventar öffnen");
+		button.setText("Rucksack öffnen");
 		this.setButtonStyle(button);
+		button.addActionListener(new InventoryShowAction(this));
 
 		panel.add(button, BorderLayout.CENTER);
 
@@ -115,6 +123,18 @@ public class MainPanel extends JPanel {
 		label.setForeground(Color.decode(Config.TEXT_COLOR));
 
 		this.add(label, BorderLayout.NORTH);
+	}
+
+	public void addBackButton() {
+		JPanel panel = new JPanel();
+		JButton button = new JButton();
+
+		button.setText("Rucksack schliessen");
+		this.setButtonStyle(button);
+		button.addActionListener(new BackButtonAction(this));
+
+		panel.add(button);
+		this.add(panel, BorderLayout.SOUTH);
 	}
 
 }
