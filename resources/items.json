@@ -5,6 +5,10 @@
 			"Spear": { "label": "Speer", "damage": 2}
 		}
 		
+		"Outfits": {
+			"UnicornCostume": {"label": Einhorn-Kostum, "armor": 5}
+		}
+		
 		"Food": {
 			"Snickers": { "label": "Snickers", "energy": 1000}
 		}

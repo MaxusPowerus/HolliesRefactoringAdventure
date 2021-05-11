@@ -19,7 +19,7 @@ public class Config {
 	public final static String PLAYER_NAME = "Holly";
 
 	// MAP
-	public final static int MAP_SIZEX = 100;
-	public final static int MAP_SIZEY = 100;
+	public final static int MAP_SIZEX = 200;
+	public final static int MAP_SIZEY = 200;
 
 }
