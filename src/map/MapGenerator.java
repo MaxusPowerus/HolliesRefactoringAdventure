@@ -247,6 +247,20 @@ public class MapGenerator {
 		return map;
 	}
 
+	public void generateContainer() {
+		String[] containerNames = { "Truhe", "Geldbeutel", "Leiche", "Kühlschrank" };
+		Random Randy = new Random();
+
+		for (int y = 0; y < Config.MAP_SIZEY; y++) {
+			for (int x = 0; x < Config.MAP_SIZEX; x++) {
+				if (Randy.nextInt(100) < 100) {
+					map.getMapFieldByCoordinate(x, y)
+							.setContainer(containerNames[Randy.nextInt(containerNames.length - 1)]);
+				}
+			}
+		}
+	}
+
 	public Map generateMapMK2() {
 		map = setMapToBiom(Biom.MEADOW);
 		// System.out.println("Meadow Done");
@@ -260,6 +274,9 @@ public class MapGenerator {
 		// System.out.println("Desert Done");
 		map = flatForestDesertBorder();
 		// System.out.println("Flater01 Done");
+
+		generateContainer();
+		System.out.println("Container Done");
 
 		map.printMapDebug("");
 		return map;
