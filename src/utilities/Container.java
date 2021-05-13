@@ -40,7 +40,6 @@ public class Container {
 	public String stringifyItems() {
 		StringBuilder builder = new StringBuilder();
 		for (Item item : this.inventory.getAllItems()) {
-			System.out.println(item.getName());
 			builder.append(item.getName()).append(", ");
 		}
 		return builder.substring(0, builder.length() - 2).toString();

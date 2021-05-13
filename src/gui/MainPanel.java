@@ -112,9 +112,7 @@ public class MainPanel extends JPanel {
 		panel.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 20));
 
 		JButton button = new JButton();
-
-		button.setText("Rucksack öffnen");
-		this.setButtonStyle(button);
+		GUIHelper.setIconAsButton(button, Icon.BACKPACK);
 		button.addActionListener(new InventoryShowAction(this));
 
 		panel.add(button, BorderLayout.CENTER);

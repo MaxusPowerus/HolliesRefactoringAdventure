@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import basic.GameManager;
 import entities.Player;
 import gui.MainPanel;
-import items.Item;
 import utilities.Container;
 import utilities.Inventory;
 
@@ -38,9 +37,7 @@ public class InspectAction implements ActionListener {
 
 			// add items to player
 			Inventory inv = container.getInventory();
-			for (Item item : inv.getAllItems()) {
-				player.getInventory().add(item);
-			}
+			player.getInventory().add(container);
 		}
 	}
 

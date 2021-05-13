@@ -38,7 +38,6 @@ public class InventoryShowAction implements ActionListener {
 
 		JPanel itemPanel = new JPanel();
 
-//		itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
 		itemPanel.setPreferredSize(new Dimension(200, 200));
 
 		// load items
@@ -60,7 +59,8 @@ public class InventoryShowAction implements ActionListener {
 		panel.setLayout(new FlowLayout(1, 30, 20));
 		panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.decode(Config.BOX_COLOR)));
 
-		JLabel name = new JLabel(item.getName());
+		JLabel name = new JLabel();
+		name.setText(item.getName() + " (" + item.getCount() + ")");
 
 		JButton button = new JButton();
 

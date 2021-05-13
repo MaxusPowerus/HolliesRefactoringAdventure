@@ -2,11 +2,14 @@ package items;
 
 public class Item {
 
+	private String uniqueName;
 	private String name;
 	private int value;
 	private int count;
+	private double discount;
 
-	public Item(String name, int value) {
+	public Item(String uniqueName, String name, int value) {
+		this.uniqueName = uniqueName;
 		this.name = name;
 		this.value = value;
 		this.count = 1;
@@ -29,12 +32,33 @@ public class Item {
 		}
 	}
 
-	public boolean equals(Item item) {
-		if (this.name.equals(item.getName())) {
-			return true;
-		} else {
+	@Override
+	public boolean equals(Object object) {
+		if (!(object instanceof Item))
 			return false;
-		}
 
+		Item item = (Item) object;
+
+		return this.uniqueName == item.uniqueName;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public String getUniqueName() {
+		return uniqueName;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
 	}
 }
