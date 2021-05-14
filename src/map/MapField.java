@@ -46,8 +46,8 @@ public class MapField {
 		this.biom = biom;
 	}
 
-	public void setContainer(String name) {
-		container = new Container(name);
+	public void setContainer(Container container) {
+		this.container = container;
 	}
 
 	public Container getContainer() {

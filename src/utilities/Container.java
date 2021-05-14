@@ -1,9 +1,13 @@
 package utilities;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import basic.GameManager;
+import items.Food;
 import items.Item;
+import items.Outfit;
+import items.Weapon;
 
 public class Container {
 
@@ -14,10 +18,58 @@ public class Container {
 	public Container(String name) {
 		this.name = name;
 		inventory = new Inventory();
+	}
 
+	public void fill(int chance, int div) {
 		ArrayList<Item> items = GameManager.getInstance().getResourceManager().getAllItems();
-		for (int i = 0; i < items.size(); i++) {
-			inventory.add(items.get(i));
+
+		Random Randy = new Random();
+		if (Randy.nextInt(101) < chance) {
+			chance = chance / div;
+			inventory.add(items.get(Randy.nextInt(items.size() - 1)));
+			fill(chance, div);
+		}
+	}
+
+	public void fillByCategory(int chance, int div, String category) {
+		ArrayList<Item> items = GameManager.getInstance().getResourceManager().getAllItems();
+		ArrayList<Item> catItems = new ArrayList<Item>();
+
+		category.toLowerCase();
+
+		switch (category) {
+
+		case "weapon":
+			for (int i = 0; i < items.size(); i++) {
+				if (items.get(i) instanceof Weapon) {
+					catItems.add(items.get(i));
+				}
+			}
+			break;
+
+		case "outfit":
+			for (int i = 0; i < items.size(); i++) {
+				if (items.get(i) instanceof Outfit) {
+					catItems.add(items.get(i));
+				}
+			}
+			break;
+
+		case "food":
+			for (int i = 0; i < items.size(); i++) {
+				if (items.get(i) instanceof Food) {
+					catItems.add(items.get(i));
+				}
+			}
+			break;
+
+		}
+
+		Random Randy = new Random();
+		if (Randy.nextInt(101) < chance) {
+			chance = chance / div;
+			inventory.add(catItems.get(Randy.nextInt(catItems.size() - 1)));
+			fill(chance, div);
 		}
 	}
 
@@ -31,6 +83,10 @@ public class Container {
 
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Inventory getInventory() {

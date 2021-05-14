@@ -3,6 +3,7 @@ package map;
 import java.util.Random;
 
 import basic.Config;
+import utilities.Container;
 import utilities.Coordinate;
 
 public class MapGenerator {
@@ -247,148 +248,78 @@ public class MapGenerator {
 		return map;
 	}
 
-	public void generateContainer() {
+	public void generateContainer(int meadowChance, int forestChance, int desertChance, int swampChance,
+			int mountainsChance) {
 		String[] containerNames = { "Truhe", "Geldbeutel", "Leiche", "Kühlschrank" };
 		Random Randy = new Random();
 
 		for (int y = 0; y < Config.MAP_SIZEY; y++) {
 			for (int x = 0; x < Config.MAP_SIZEX; x++) {
-				if (Randy.nextInt(100) < 100) {
-					map.getMapFieldByCoordinate(x, y)
-							.setContainer(containerNames[Randy.nextInt(containerNames.length - 1)]);
+				Container container = new Container("undef");
+				Biom biom = map.getMapFieldByCoordinate(x, y).getBiom();
+
+				switch (biom) {
+				case MEADOW:
+					if (Randy.nextInt(101) < meadowChance) {
+						container = new Container(containerNames[Randy.nextInt(containerNames.length)]);
+						container.fill(100, 2);
+					}
+					break;
+
+				case FOREST:
+					if (Randy.nextInt(101) < forestChance) {
+						container = new Container(containerNames[Randy.nextInt(containerNames.length)]);
+						container.fillByCategory(100, 2, "weapon");
+					}
+					break;
+
+				case DESERT:
+					if (Randy.nextInt(101) < desertChance) {
+						container = new Container(containerNames[Randy.nextInt(containerNames.length)]);
+						container.fillByCategory(100, 2, "outfit");
+					}
+					break;
+
+				case SWAMP:
+					if (Randy.nextInt(101) < swampChance) {
+						container = new Container(containerNames[Randy.nextInt(containerNames.length)]);
+						container.fillByCategory(100, 2, "food");
+					}
+					break;
+
+				case MOUNTAINS:
+					if (Randy.nextInt(101) < mountainsChance) {
+						container = new Container(containerNames[Randy.nextInt(containerNames.length)]);
+						container.fill(100, 2);
+					}
+					break;
+
 				}
+
+				map.getMapFieldByCoordinate(x, y).setContainer(container);
 			}
 		}
 	}
 
 	public Map generateMapMK2() {
 		map = setMapToBiom(Biom.MEADOW);
-		// System.out.println("Meadow Done");
+		System.out.println("Meadow Done");
 		map = makeForest(3, 16);
-		// System.out.println("Forest Done");
+		System.out.println("Forest Done");
 		map = makeSwamps(1);
-		// System.out.println("Swamp Done");
+		System.out.println("Swamp Done");
 		map = makeMountains(1, 15);
-		// System.out.println("Mountains Done");
+		System.out.println("Mountains Done");
 		map = makeOneDesert(1200);
-		// System.out.println("Desert Done");
+		System.out.println("Desert Done");
 		map = flatForestDesertBorder();
-		// System.out.println("Flater01 Done");
+		System.out.println("Flater01 Done");
 
-		generateContainer();
+		generateContainer(100, 100, 10, 30, 25);
 		System.out.println("Container Done");
 
-		map.printMapDebug("");
+		// map.printMapDebug("");
 		return map;
 	}
 
-	public Map generateMainMapBasic() {
-		String parameter = "emty";
-		Random Randy = new Random();
-		for (int y = 0; y < Config.MAP_SIZEY; y++) {
-			for (int x = 0; x < Config.MAP_SIZEX; x++) {
-				Coordinate coordinate = new Coordinate(x, y);
-
-				MapField field = new MapField(coordinate, Biom.getRandomBiom());
-
-				int meadowChance = Biom.MEADOW.getChance();
-				int forestChance = Biom.FOREST.getChance();
-				int desertChance = Biom.DESERT.getChance();
-				int swampChance = Biom.SWAMP.getChance();
-				int mountainsChance = Biom.MOUNTAINS.getChance();
-
-				Biom above;
-				Biom left;
-				Biom leftAbove;
-
-				if (x > 0)
-					left = map.getMapFieldByCoordinate(x - 1, y).getBiom();
-				else
-					left = null;
-
-				if (y > 0)
-					above = map.getMapFieldByCoordinate(x, y - 1).getBiom();
-				else
-					above = null;
-
-				if (x > 0 && y > 0)
-					leftAbove = map.getMapFieldByCoordinate(x - 1, y - 1).getBiom();
-				else
-					leftAbove = null;
-
-				int meadowBoost = 200;
-				int forestBoost = 150;
-				int desertBoost = 200;
-				int swampBoost = 100;
-				int mountainsBoost = 100;
-
-				parameter = "WI: " + meadowChance + "/" + meadowBoost + ", WA: " + forestChance + "/" + forestBoost
-						+ ", WÜ: " + desertChance + "/" + desertBoost + ", SU: " + swampChance + "/" + swampBoost
-						+ ", GE: " + mountainsChance + "/" + mountainsBoost;
-
-				if (left == Biom.MEADOW)
-					meadowChance += meadowBoost * 2;
-				if (above == Biom.MEADOW)
-					meadowChance += meadowBoost * 3;
-				if (leftAbove == Biom.MEADOW)
-					meadowChance += meadowBoost * 2;
-
-				if (left == Biom.FOREST)
-					forestChance += forestBoost * 3;
-				if (above == Biom.FOREST)
-					forestChance += forestBoost * 2;
-				if (leftAbove == Biom.FOREST)
-					forestChance += forestBoost * 3;
-
-				if (left == Biom.DESERT)
-					desertChance += desertBoost * 2.5;
-				if (above == Biom.DESERT)
-					desertChance += desertBoost * 2.5;
-				if (leftAbove == Biom.DESERT)
-					desertChance += desertBoost * 2.5;
-
-				if (left == Biom.SWAMP)
-					swampChance += swampBoost * 2;
-				if (above == Biom.SWAMP)
-					swampChance += swampBoost - 30;
-				if (leftAbove == Biom.SWAMP)
-					swampChance += swampBoost * 2;
-
-				if (left == Biom.MOUNTAINS)
-					mountainsChance += mountainsBoost * 3;
-				if (above == Biom.MOUNTAINS)
-					mountainsChance += mountainsBoost * 8;
-				if (leftAbove == Biom.MOUNTAINS)
-					mountainsChance += mountainsBoost * 1.5;
-
-				int sumOfChances = meadowChance + forestChance + desertChance + swampChance + mountainsChance + 1;
-
-				int randomInt = Randy.nextInt(sumOfChances);
-
-				if (0 < randomInt && randomInt < meadowChance)
-					field = new MapField(coordinate, Biom.MEADOW);
-
-				if (meadowChance < randomInt && randomInt < meadowChance + forestChance)
-					field = new MapField(coordinate, Biom.FOREST);
-
-				if (meadowChance + forestChance < randomInt && randomInt < meadowChance + forestChance + desertChance)
-					field = new MapField(coordinate, Biom.DESERT);
-
-				if (meadowChance + forestChance + desertChance < randomInt
-						&& randomInt < meadowChance + forestChance + desertChance + swampChance)
-					field = new MapField(coordinate, Biom.SWAMP);
-
-				if (meadowChance + forestChance + desertChance + swampChance < randomInt
-						&& randomInt < meadowChance + forestChance + desertChance + swampChance + mountainsChance)
-					field = new MapField(coordinate, Biom.MOUNTAINS);
-
-				// System.out.println(field.getBiom().getName() + chances[0] + " " + chances[1]
-				// + " " + chances[2] + " " + chances[3] + " " + chances[4] + "||" + randomInt +
-				// "||" + sumOfChances);
-				map.getFields().add(field);
-			}
-		}
-		// map.printMapDebug(parameter);
-		return map;
-	}
 }

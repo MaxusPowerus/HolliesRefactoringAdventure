@@ -53,7 +53,5 @@ public class Map {
 			writer.close();
 		} catch (Exception e) {
 		}
-
 	}
-
 }
