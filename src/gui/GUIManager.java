@@ -49,7 +49,7 @@ public class GUIManager {
 	}
 
 	public void updateMainView() {
-		((MainPanel) this.mainPanel).updateView();
+		((MainPanel) this.mainPanel).setMainView();
 	}
 
 	public void updatePlayerInfoView() {

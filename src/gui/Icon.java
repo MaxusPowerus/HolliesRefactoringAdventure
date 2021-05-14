@@ -15,4 +15,12 @@ public enum Icon {
 		return path;
 	}
 
+	public static Icon getByName(String name) {
+		for (Icon icon : Icon.values()) {
+			if (icon.toString().equalsIgnoreCase(name))
+				return icon;
+		}
+		return null;
+	}
+
 }

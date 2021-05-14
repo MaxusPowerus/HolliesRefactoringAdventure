@@ -38,9 +38,15 @@ public class Container {
 	}
 
 	public String stringifyItems() {
+		return this.stringifyItems(false);
+	}
+
+	public String stringifyItems(boolean htmlBreak) {
 		StringBuilder builder = new StringBuilder();
 		for (Item item : this.inventory.getAllItems()) {
 			builder.append(item.getName()).append(", ");
+			if (htmlBreak)
+				builder.append("<br>");
 		}
 		return builder.substring(0, builder.length() - 2).toString();
 	}

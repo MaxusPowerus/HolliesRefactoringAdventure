@@ -6,6 +6,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -36,14 +37,26 @@ public class GUIHelper {
 		panel.repaint();
 	}
 
-	private static ImageIcon getIcon(Icon icon) {
-		return new ImageIcon(new ImageIcon(icon.getPath()).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+	private static ImageIcon getIcon(Icon icon, int width, int height) {
+		return new ImageIcon(
+				new ImageIcon(icon.getPath()).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
 	}
 
-	public static void setIconAsButton(JButton button, Icon icon) {
-		button.setIcon(GUIHelper.getIcon(icon));
-		button.setContentAreaFilled(false);
-		button.setBorder(null);
+	public static void setIcon(JComponent component, Icon icon) {
+		GUIHelper.setIcon(component, icon, 80, 80);
+	}
+
+	public static void setIcon(JComponent component, Icon icon, int width, int height) {
+		if (component instanceof JButton) {
+			((JButton) component).setIcon(GUIHelper.getIcon(icon, width, height));
+			((JButton) component).setContentAreaFilled(false);
+			((JButton) component).setBorder(null);
+		} else if (component instanceof JLabel) {
+			((JLabel) component).setIcon(GUIHelper.getIcon(icon, width, height));
+			((JLabel) component).setBorder(null);
+		} else {
+			System.out.println("[WARN] GUIHelper: Wrong component type");
+		}
 	}
 
 }

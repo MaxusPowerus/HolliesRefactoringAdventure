@@ -3,12 +3,14 @@
 		"Enemy": {
 			"AngryCat": {
                 "label": "Wütende Katze",
+                "prefix": "eine",
                 "damage": 100,
+                "health": 20,
                 "items": {
                     "Apple": {
                         "amount": 1
                     },
-                    "Snickers": {
+                    "Catfood": {
                         "amount": 5
                     }
                 }
@@ -17,6 +19,7 @@
 		"Friend": {
 			"NiceCat": {
                 "label": "Freundliche Katze",
+                "prefix": "eine",
                 "items": {
                     "Sword": {
                         "amount": 1,

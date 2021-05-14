@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import basic.Config;
 import basic.GameManager;
 import gui.GUIHelper;
+import gui.Icon;
 import gui.MainPanel;
 import items.Food;
 import items.Item;
@@ -62,7 +63,13 @@ public class InventoryShowAction implements ActionListener {
 		JLabel name = new JLabel();
 		name.setText(item.getName() + " (" + item.getCount() + ")");
 
+		Icon itemIcon = Icon.getByName(item.getUniqueName());
+		if (itemIcon != null) {
+			GUIHelper.setIcon(name, itemIcon, 30, 30);
+		}
+
 		JButton button = new JButton();
+		this.mainPanel.setButtonStyle(button);
 
 		if (item instanceof Weapon) {
 			button.setText("ausrüsten");
