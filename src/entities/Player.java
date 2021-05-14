@@ -111,13 +111,13 @@ public class Player {
 		int posY = coordinate.getPosY();
 
 		if (direction == Direction.NORTH)
-			posX -= 1;
-		if (direction == Direction.EAST)
-			posY += 1;
-		if (direction == Direction.SOUTH)
-			posX += 1;
-		if (direction == Direction.WEST)
 			posY -= 1;
+		if (direction == Direction.EAST)
+			posX += 1;
+		if (direction == Direction.SOUTH)
+			posY += 1;
+		if (direction == Direction.WEST)
+			posX -= 1;
 
 		Coordinate newCoordinate = new Coordinate(posX, posY);
 		MapField newField = this.currentMap.getMapFieldByCoordinate(newCoordinate);

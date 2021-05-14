@@ -3,7 +3,6 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,13 +12,12 @@ import javax.swing.border.EmptyBorder;
 
 import basic.Config;
 import basic.GameManager;
-import basic.HelperFunctions;
-import entities.NPC;
 import entities.Player;
 import gui.actions.BackButtonAction;
 import gui.actions.InspectAction;
 import gui.actions.InventoryShowAction;
 import gui.actions.NavigationButtonAction;
+import gui.mainPanelComponents.NPCDialog;
 import map.Direction;
 import map.MapField;
 
@@ -31,6 +29,7 @@ public class MainPanel extends JPanel {
 	public MainPanel() {
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(50, 30, 50, 30));
+
 		this.mainDialog = new JPanel();
 		this.mainDialog.setBorder(new EmptyBorder(20, 20, 20, 20));
 		this.add(mainDialog, BorderLayout.CENTER);
@@ -54,7 +53,7 @@ public class MainPanel extends JPanel {
 		this.add(mainText, BorderLayout.NORTH);
 
 		// add npc dialog
-		this.setNPCDialog(gameManager);
+		new NPCDialog(this);
 
 		// add control buttons
 		JPanel buttonPanel = new JPanel();
@@ -188,24 +187,6 @@ public class MainPanel extends JPanel {
 	public void repaintMainDialog() {
 		this.mainDialog.revalidate();
 		this.mainDialog.repaint();
-	}
-
-	public void setNPCDialog(GameManager gameManager) {
-		Random Randy = new Random();
-		NPC npc = gameManager.getResourceManager().getNpcs()
-				.get(Randy.nextInt(gameManager.getResourceManager().getNpcs().size()));
-
-		StringBuilder builder;
-		// TODO
-
-		JLabel npcDialog = new JLabel();
-		npcDialog.setFont(new Font("Dialog", Font.PLAIN, 15));
-		npcDialog.setForeground(Color.decode(Config.TEXT_COLOR));
-		npcDialog.setText(
-				"<html><p style=\"text-align:center;\">Huhu! " + HelperFunctions.firstLetter2Upper(npc.getPrefix())
-						+ " <b>" + npc.getName().toLowerCase() + "</b> ist erschienen!</p></html>");
-		this.mainDialog.add(npcDialog, BorderLayout.CENTER);
-		this.repaintMainDialog();
 	}
 
 }
