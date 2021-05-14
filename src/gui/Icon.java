@@ -2,7 +2,8 @@ package gui;
 
 public enum Icon {
 
-	BACKPACK("resources\\images\\rucksack.png");
+	BACKPACK("resources\\images\\backpack.png"), APPLE("resources\\images\\apple.png"),
+	SWORD("resources\\images\\sword.png");
 
 	private String path;
 

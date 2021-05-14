@@ -97,12 +97,14 @@ public class Player {
 		if (direction == Direction.WEST)
 			posY -= 1;
 
-		coordinate.setCoordinate(posX, posY);
+		Coordinate newCoordinate = new Coordinate(posX, posY);
+		MapField newField = this.currentMap.getMapFieldByCoordinate(newCoordinate);
 
-		MapField newField = this.currentMap.getMapFieldByCoordinate(coordinate);
 		if (newField != null) {
 			this.currentMapField = newField;
 			this.currentMapField.getCoordinate().print();
+			System.out.println(newField.getBiom().getName());
+			System.out.println(this.currentMapField.getBiom().getName());
 			this.time.addHours(2);
 		} else {
 			System.out.println("no move");
