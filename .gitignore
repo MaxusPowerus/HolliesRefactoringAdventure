@@ -18,6 +18,7 @@
 .classpath
 .settings/
 bin/
+.metadata/
 
 Map.txt
 ~$*
