@@ -16,21 +16,46 @@ public class Inventory {
 	}
 
 	public void add(Item item) {
-		for (int i = 0; i < items.size(); i++) {
-			if (items.get(i).equals(item)) {
-				items.get(i).incrementCount();
-			}
+		Item itemInInv = this.getItem(item);
+		if (itemInInv != null) {
+			itemInInv.incrementCount();
+			return;
 		}
+
 		items.add(item);
 	}
 
-	public void remove(Item item) {
+	public void add(Container container) {
+		Inventory inv = container.getInventory();
+		this.add(inv);
+	}
+
+	private void add(Inventory inventory) {
+		ArrayList<Item> items = inventory.getAllItems();
+		this.add(items);
+	}
+
+	private void add(ArrayList<Item> items) {
 		for (int i = 0; i < items.size(); i++) {
-			if (items.get(i).equals(item)) {
-				items.get(i).decrementCount();
-			}
+			this.add(items.get(i));
 		}
-		items.remove(item);
+	}
+
+	public void remove(Item item) {
+		Item itemInInv = this.getItem(item);
+		if (itemInInv != null) {
+			itemInInv.decrementCount();
+			return;
+		}
+		items.remove(itemInInv);
+	}
+
+	private Item getItem(Item item) {
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i).equals(item))
+				return items.get(i);
+		}
+		return null;
 	}
 
 	public ArrayList<Item> getAllItems() {

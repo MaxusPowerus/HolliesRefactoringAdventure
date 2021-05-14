@@ -9,9 +9,7 @@ import javax.swing.JLabel;
 import basic.GameManager;
 import entities.Player;
 import gui.MainPanel;
-import items.Item;
 import utilities.Container;
-import utilities.Inventory;
 
 public class InspectAction implements ActionListener {
 
@@ -29,18 +27,14 @@ public class InspectAction implements ActionListener {
 		if (container != null && !container.getFound()) {
 			container.setFound(true);
 
-			JLabel containerFound = new JLabel("Du hast ein(e) " + container.getName()
-					+ " mit folgendem Inhalt gefunden: " + container.stringifyItems());
-			this.mainPanel.add(containerFound, BorderLayout.CENTER);
-
-			this.mainPanel.revalidate();
-			this.mainPanel.repaint();
+			JLabel containerFound = new JLabel("<html><p>Du hast ein(e) " + container.getName()
+					+ " mit folgendem Inhalt gefunden:<br>" + container.stringifyItems(true) + "</p></html>");
+			this.mainPanel.clearMainDialog();
+			this.mainPanel.getMainDialog().add(containerFound, BorderLayout.CENTER);
+			this.mainPanel.repaintMainDialog();
 
 			// add items to player
-			Inventory inv = container.getInventory();
-			for (Item item : inv.getAllItems()) {
-				player.getInventory().add(item);
-			}
+			player.getInventory().add(container);
 		}
 	}
 

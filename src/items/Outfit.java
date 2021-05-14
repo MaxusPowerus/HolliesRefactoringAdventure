@@ -4,8 +4,8 @@ public class Outfit extends Item {
 
 	private int armor;
 
-	public Outfit(String name, int value, int armor) {
-		super(name, value);
+	public Outfit(String uniqueName, String name, int value, int armor) {
+		super(uniqueName, name, value);
 		this.armor = armor;
 	}
 

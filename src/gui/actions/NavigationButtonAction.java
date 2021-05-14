@@ -28,7 +28,7 @@ public class NavigationButtonAction implements ActionListener {
 		GUIHelper.resetPanel(guiManager.getPlayerInfoPanel());
 		GUIHelper.resetPanel(guiManager.getWorldInfoPanel());
 
-		guiManager.getMainPanel().updateView();
+		guiManager.getMainPanel().setMainView();
 		guiManager.getPlayerInfoPanel().updateView();
 		guiManager.getWorldInfoPanel().updateView();
 	}

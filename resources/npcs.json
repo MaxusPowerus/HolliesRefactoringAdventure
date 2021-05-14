@@ -1,0 +1,36 @@
+{
+	"Categories": {
+		"Enemy": {
+			"AngryCat": {
+                "label": "Wütende Katze",
+                "prefix": "eine",
+                "damage": 100,
+                "health": 20,
+                "items": {
+                    "Apple": {
+                        "amount": 1
+                    },
+                    "Catfood": {
+                        "amount": 5
+                    }
+                }
+            }
+		},
+		"Friend": {
+			"NiceCat": {
+                "label": "Freundliche Katze",
+                "prefix": "eine",
+                "items": {
+                    "Sword": {
+                        "amount": 1,
+                        "discount": 0.5
+                    },
+                    "Axe": {
+                        "amount": 2,
+                        "discount": 0.1
+                    }
+                }
+            }
+		}
+	}
+}

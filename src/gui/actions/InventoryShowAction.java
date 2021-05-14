@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import basic.Config;
 import basic.GameManager;
 import gui.GUIHelper;
+import gui.Icon;
 import gui.MainPanel;
 import items.Food;
 import items.Item;
@@ -38,7 +39,6 @@ public class InventoryShowAction implements ActionListener {
 
 		JPanel itemPanel = new JPanel();
 
-//		itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
 		itemPanel.setPreferredSize(new Dimension(200, 200));
 
 		// load items
@@ -60,9 +60,16 @@ public class InventoryShowAction implements ActionListener {
 		panel.setLayout(new FlowLayout(1, 30, 20));
 		panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.decode(Config.BOX_COLOR)));
 
-		JLabel name = new JLabel(item.getName());
+		JLabel name = new JLabel();
+		name.setText(item.getName() + " (" + item.getCount() + ")");
+
+		Icon itemIcon = Icon.getByName(item.getUniqueName());
+		if (itemIcon != null) {
+			GUIHelper.setIcon(name, itemIcon, 30, 30);
+		}
 
 		JButton button = new JButton();
+		this.mainPanel.setButtonStyle(button);
 
 		if (item instanceof Weapon) {
 			button.setText("ausrüsten");

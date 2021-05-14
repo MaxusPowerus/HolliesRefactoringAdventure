@@ -1,28 +1,27 @@
 {
-	"Categories": {
-		"Weapons": {
-			"Sword": { "label": "Schwert", "damage": 15, "value": 100 },
-			"Axe": { "label": "Axt", "damage": 10, "value": 20},
-			"Spear": { "label": "Speer", "damage": 5, "value": 10},
-			"Stick": { "label": "Stock", "damage": 3, "value": 1000},
-			"Mace": {"label": "Keule", "damage": 1, "value": 1}
-		},
-		"Outfits": {
-			"UnicornCostume": {"label": "Einhorn-Kostum", "armor": 0, "value": 50},
-			"LetherArmor": {"label": "Einhorn-Kostum", "armor": 5, "value": 50},
-			"ChainMail": {"label": "KettenRÃ¼stung", "armor": 10, "value": 100},
-			"IronArmor": {"label": "EisenrÃ¼stung", "armor": 15, "value": 150},
-			"NobelDress": {"label": "Feine Kleidung", "armor": 0, "value": 30},
-			"NormalDress": {"label": "Kleidung", "armor": 0, "value": 10},
-			"rags": {"label": "Lumpen", "armor": 0, "value": 3},
-			
-		},
-		"Food": {
-			"Catfood": { "label": "Katzenfutter", "energy": 1000, "value": 1},
-			"Flesh": { "label": "Fleisch", "energy": 30, "value": 15},
-			"Bread": { "label": "Brot", "energy": 25, "value": 5},
-			"Apple": { "label": "Apfel", "energy": 5, "value": 3},
-			"Beer": {"label": "Bier", "energy": 10, "value": 5}
-		}
-	}
+    "Categories": {
+        "Weapons": {
+            "Sword": { "label": "Schwert", "damage": 15, "value": 100 },
+            "Axe": { "label": "Axt", "damage": 10, "value": 20},
+            "Spear": { "label": "Speer", "damage": 5, "value": 10},
+            "Stick": { "label": "Stock", "damage": 3, "value": 1000},
+            "Mace": {"label": "Keule", "damage": 1, "value": 1}
+        },
+        "Outfits": {
+            "UnicornCostume": {"label": "Einhorn-Kostüm", "armor": 0, "value": 50},
+            "LetherArmor": {"label": "Einhorn-Kostüm", "armor": 5, "value": 50},
+            "ChainMail": {"label": "Kettenrüstung", "armor": 10, "value": 100},
+            "IronArmor": {"label": "Eisenrüstung", "armor": 15, "value": 150},
+            "NobelDress": {"label": "Feine Kleidung", "armor": 0, "value": 30},
+            "NormalDress": {"label": "Kleidung", "armor": 0, "value": 10},
+            "rags": {"label": "Lumpen", "armor": 0, "value": 3}
+        },
+        "Food": {
+            "Catfood": { "label": "Katzenfutter", "energy": 1000, "value": 1},
+            "Flesh": { "label": "Fleisch", "energy": 30, "value": 15},
+            "Bread": { "label": "Brot", "energy": 25, "value": 5},
+            "Apple": { "label": "Apfel", "energy": 5, "value": 3},
+            "Beer": {"label": "Bier", "energy": 10, "value": 5}
+        }
+    }
 }

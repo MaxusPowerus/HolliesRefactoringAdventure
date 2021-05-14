@@ -40,8 +40,6 @@ public class PlayerInfoPanel extends JPanel {
 
 		this.add(GUIHelper.createTextPanel("Name", player.getName()), FlowLayout.LEFT);
 		this.add(GUIHelper.createTextPanel("Lebenspunkte", String.valueOf(player.getHealth())), FlowLayout.CENTER);
-		this.add(GUIHelper.createTextPanel("Position", player.getCurrentMapField().getCoordinate().toString()),
-				FlowLayout.RIGHT);
 	}
 
 }

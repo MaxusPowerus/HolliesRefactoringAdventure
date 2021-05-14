@@ -79,6 +79,28 @@ public class Player {
 		return time;
 	}
 
+	public boolean canGo(Direction direction) {
+		MapField currentField = this.currentMapField;
+		Coordinate coordinate = currentField.getCoordinate();
+
+		int posX = coordinate.getPosX();
+		int posY = coordinate.getPosY();
+
+		if (direction == Direction.NORTH)
+			posX -= 1;
+		if (direction == Direction.EAST)
+			posY += 1;
+		if (direction == Direction.SOUTH)
+			posX += 1;
+		if (direction == Direction.WEST)
+			posY -= 1;
+
+		Coordinate newCoordinate = new Coordinate(posX, posY);
+		MapField newField = this.currentMap.getMapFieldByCoordinate(newCoordinate);
+
+		return newField != null;
+	}
+
 	public void go(Direction direction) {
 		System.out.println("Gehe nach " + direction.getName());
 
@@ -97,9 +119,9 @@ public class Player {
 		if (direction == Direction.WEST)
 			posY -= 1;
 
-		coordinate.setCoordinate(posX, posY);
+		Coordinate newCoordinate = new Coordinate(posX, posY);
+		MapField newField = this.currentMap.getMapFieldByCoordinate(newCoordinate);
 
-		MapField newField = this.currentMap.getMapFieldByCoordinate(coordinate);
 		if (newField != null) {
 			this.currentMapField = newField;
 			this.currentMapField.getCoordinate().print();
