@@ -24,15 +24,26 @@ import map.MapField;
 public class MainPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel mainDialog;
+	private JPanel main;
+	private JPanel header;
+	private JPanel footer;
 
 	public MainPanel() {
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(50, 30, 50, 30));
 
-		this.mainDialog = new JPanel();
-		this.mainDialog.setBorder(new EmptyBorder(20, 20, 20, 20));
-		this.add(mainDialog, BorderLayout.CENTER);
+		this.main = new JPanel();
+//		this.mainDialog.setBorder(new EmptyBorder(20, 20, 20, 20));
+		this.main.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, Color.LIGHT_GRAY));
+		this.add(main, BorderLayout.CENTER);
+
+		this.header = new JPanel();
+		this.header.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.LIGHT_GRAY));
+		this.add(this.header, BorderLayout.NORTH);
+
+		this.footer = new JPanel();
+		this.footer.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.LIGHT_GRAY));
+		this.add(this.footer, BorderLayout.SOUTH);
 	}
 
 	public void loadMainView() {
@@ -50,7 +61,7 @@ public class MainPanel extends JPanel {
 		mainText.setFont(new Font("Dialog", Font.PLAIN, 18));
 		mainText.setForeground(Color.decode(Config.TEXT_COLOR));
 		mainText.setText("<html><p style=\"text-align:center;\">" + currentMapField.getText() + "</p></html>");
-		this.add(mainText, BorderLayout.NORTH);
+		this.header.add(mainText);
 
 		// add npc dialog
 		new NPCDialog(this);
@@ -60,7 +71,7 @@ public class MainPanel extends JPanel {
 		buttonPanel.add(this.getNavigationButtons());
 		buttonPanel.add(this.getInventoryButton());
 		buttonPanel.add(this.getInspectButton());
-		this.add(buttonPanel, BorderLayout.SOUTH);
+		this.footer.add(buttonPanel);
 	}
 
 	public JPanel getNavigationButtons() {
@@ -176,17 +187,25 @@ public class MainPanel extends JPanel {
 		this.add(panel, BorderLayout.SOUTH);
 	}
 
-	public JPanel getMainDialog() {
-		return mainDialog;
+	public JPanel getMain() {
+		return main;
+	}
+
+	public JPanel getFooter() {
+		return footer;
+	}
+
+	public JPanel getHeader() {
+		return header;
 	}
 
 	public void clearMainDialog() {
-		this.mainDialog.removeAll();
+		this.main.removeAll();
 	}
 
 	public void repaintMainDialog() {
-		this.mainDialog.revalidate();
-		this.mainDialog.repaint();
+		this.main.revalidate();
+		this.main.repaint();
 	}
 
 }

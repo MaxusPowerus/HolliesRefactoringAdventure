@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import basic.Config;
 import basic.GameManager;
 import entities.Player;
+import utilities.Skill;
 
 public class PlayerInfoPanel extends JPanel {
 
@@ -40,6 +41,15 @@ public class PlayerInfoPanel extends JPanel {
 
 		this.add(GUIHelper.createTextPanel("Name", player.getName()), FlowLayout.LEFT);
 		this.add(GUIHelper.createTextPanel("Lebenspunkte", String.valueOf(player.getHealth())), FlowLayout.CENTER);
+		this.add(GUIHelper.createTextPanel("Skills (S, W, A, C, I, GE, GL)",
+				"(" + player.getSkillSet().getSkillValue(Skill.STRENGTH) + ", "
+						+ player.getSkillSet().getSkillValue(Skill.PERCEPTION) + ", "
+						+ player.getSkillSet().getSkillValue(Skill.PERSEVERANCE) + ", "
+						+ player.getSkillSet().getSkillValue(Skill.CHARISMA) + ", "
+						+ player.getSkillSet().getSkillValue(Skill.INTELLIGENCE) + ", "
+						+ player.getSkillSet().getSkillValue(Skill.SKILL) + ", "
+						+ player.getSkillSet().getSkillValue(Skill.LUCK) + ")"),
+				FlowLayout.CENTER);
 	}
 
 }

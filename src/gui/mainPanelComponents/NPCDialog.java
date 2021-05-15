@@ -27,6 +27,7 @@ public class NPCDialog extends JPanel {
 	private void update() {
 		GameManager gameManager = GameManager.getInstance();
 
+		// TODO get npc from current map field
 		Random Randy = new Random();
 		NPC npc = gameManager.getResourceManager().getNpcs()
 				.get(Randy.nextInt(gameManager.getResourceManager().getNpcs().size()));
@@ -48,8 +49,8 @@ public class NPCDialog extends JPanel {
 		npcDialog.setFont(new Font("Dialog", Font.PLAIN, 15));
 		npcDialog.setForeground(Color.decode(Config.TEXT_COLOR));
 		npcDialog.setText("<html><p style=\"text-align:center;\">" + builder.toString() + "</p></html>");
-		this.mainPanel.getMainDialog().add(npcDialog, BorderLayout.CENTER);
-		this.mainPanel.add(this.mainPanel.getMainDialog(), BorderLayout.CENTER);
+		this.mainPanel.getMain().add(npcDialog, BorderLayout.CENTER);
+		this.mainPanel.add(this.mainPanel.getMain(), BorderLayout.CENTER);
 		this.mainPanel.repaintMainDialog();
 
 		npc.setDiscovered(true);

@@ -12,11 +12,13 @@ import items.Weapon;
 public class Container {
 
 	private String name;
+	private String prefix;
 	private Inventory inventory;
 	private boolean found = false;
 
-	public Container(String name) {
+	public Container(String name, String prefix) {
 		this.name = name;
+		this.prefix = prefix;
 		inventory = new Inventory();
 	}
 
@@ -94,16 +96,10 @@ public class Container {
 	}
 
 	public String stringifyItems() {
-		return this.stringifyItems(false);
-	}
-
-	public String stringifyItems(boolean htmlBreak) {
 		StringBuilder builder = new StringBuilder();
 		for (Item item : this.inventory.getAllItems()) {
 			builder.append(item.getName()).append(", ");
-			if (htmlBreak)
-				builder.append("<br>");
 		}
-		return builder.substring(0, builder.length() - 2).toString();
+		return builder.substring(0, builder.toString().lastIndexOf(',')).toString();
 	}
 }

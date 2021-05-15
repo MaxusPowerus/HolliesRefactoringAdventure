@@ -251,45 +251,48 @@ public class MapGenerator {
 	public void generateContainer(int meadowChance, int forestChance, int desertChance, int swampChance,
 			int mountainsChance) {
 		String[] containerNames = { "Truhe", "Geldbeutel", "Leiche", "Kühlschrank" };
+		String[] containerPrefixes = { "eine", "einen", "eine", "einen" };
 		Random Randy = new Random();
 
 		for (int y = 0; y < Config.MAP_SIZEY; y++) {
 			for (int x = 0; x < Config.MAP_SIZEX; x++) {
-				Container container = new Container("undef");
+				Container container = null;
 				Biom biom = map.getMapFieldByCoordinate(x, y).getBiom();
+
+				int rand = Randy.nextInt(containerNames.length);
 
 				switch (biom) {
 				case MEADOW:
 					if (Randy.nextInt(101) < meadowChance) {
-						container = new Container(containerNames[Randy.nextInt(containerNames.length)]);
+						container = new Container(containerNames[rand], containerPrefixes[rand]);
 						container.fill(100, 2);
 					}
 					break;
 
 				case FOREST:
 					if (Randy.nextInt(101) < forestChance) {
-						container = new Container(containerNames[Randy.nextInt(containerNames.length)]);
+						container = new Container(containerNames[rand], containerPrefixes[rand]);
 						container.fillByCategory(100, 2, "weapon");
 					}
 					break;
 
 				case DESERT:
 					if (Randy.nextInt(101) < desertChance) {
-						container = new Container(containerNames[Randy.nextInt(containerNames.length)]);
+						container = new Container(containerNames[rand], containerPrefixes[rand]);
 						container.fillByCategory(100, 2, "outfit");
 					}
 					break;
 
 				case SWAMP:
 					if (Randy.nextInt(101) < swampChance) {
-						container = new Container(containerNames[Randy.nextInt(containerNames.length)]);
+						container = new Container(containerNames[rand], containerPrefixes[rand]);
 						container.fillByCategory(100, 2, "food");
 					}
 					break;
 
 				case MOUNTAINS:
 					if (Randy.nextInt(101) < mountainsChance) {
-						container = new Container(containerNames[Randy.nextInt(containerNames.length)]);
+						container = new Container(containerNames[rand], containerPrefixes[rand]);
 						container.fill(100, 2);
 					}
 					break;

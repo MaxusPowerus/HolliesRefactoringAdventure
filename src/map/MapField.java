@@ -1,5 +1,6 @@
 package map;
 
+import utilities.Challenge;
 import utilities.Container;
 import utilities.Coordinate;
 
@@ -8,6 +9,7 @@ public class MapField {
 	private Coordinate coordinate;
 	private boolean disabled;
 	private Biom biom;
+	private Challenge challenge;
 
 	private Container container = null;
 	private Map subMap;
@@ -59,10 +61,17 @@ public class MapField {
 	}
 
 	public String getText() {
-		String text = "Das ist das erste Mal, dass der kleine Max alleine in die freie Welt gelassen wurde. Doch was er da sah, uebertraf all' seine Erwartungen.\n"
-				+ "Ein grosser Elefant stand ploetzlich vor ihm! Was soll er jetzt tun?";
+		String text = "Das ist ein tooooler Text, hihihaha.";
 
 		return text;
+	}
+
+	public void setChallenge(Challenge challenge) {
+		this.challenge = challenge;
+	}
+
+	public Challenge getChallenge() {
+		return challenge;
 	}
 
 }

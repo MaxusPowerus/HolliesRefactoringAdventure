@@ -1,7 +1,5 @@
 package entities;
 
-import java.util.ArrayList;
-
 import basic.Config;
 import map.Direction;
 import map.Map;
@@ -9,30 +7,30 @@ import map.MapField;
 import utilities.Coordinate;
 import utilities.Experience;
 import utilities.Inventory;
-import utilities.Skill;
+import utilities.SkillSet;
 
 public class Player {
 
 	private String name;
 	private double health;
 	private Inventory inventory;
-	private ArrayList<Skill> skills;
 	private Experience experience;
 	private int daysAlive;
 	private Map currentMap;
 	private MapField currentMapField;
 	private Time time;
+	private SkillSet skillSet;
 
 	public Player(String name, Map mainMap) {
 		this.name = name;
 		this.health = Config.PLAYER_HEALTH;
 		this.inventory = new Inventory();
-		this.skills = new ArrayList<Skill>();
 		this.experience = new Experience();
 		this.daysAlive = 0;
 		this.currentMap = mainMap;
 		this.currentMapField = mainMap.getMapFieldByCoordinate(Config.MAP_SIZEX / 2, Config.MAP_SIZEY / 2);
 		this.time = new Time(0);
+		this.skillSet = new SkillSet();
 	}
 
 	public double getHealth() {
@@ -59,10 +57,6 @@ public class Player {
 		return inventory;
 	}
 
-	public ArrayList<Skill> getSkills() {
-		return skills;
-	}
-
 	public Experience getExperience() {
 		return experience;
 	}
@@ -79,6 +73,10 @@ public class Player {
 		return time;
 	}
 
+	public SkillSet getSkillSet() {
+		return skillSet;
+	}
+
 	public boolean canGo(Direction direction) {
 		MapField currentField = this.currentMapField;
 		Coordinate coordinate = currentField.getCoordinate();
@@ -87,13 +85,13 @@ public class Player {
 		int posY = coordinate.getPosY();
 
 		if (direction == Direction.NORTH)
-			posX -= 1;
-		if (direction == Direction.EAST)
-			posY += 1;
-		if (direction == Direction.SOUTH)
-			posX += 1;
-		if (direction == Direction.WEST)
 			posY -= 1;
+		if (direction == Direction.EAST)
+			posX += 1;
+		if (direction == Direction.SOUTH)
+			posY += 1;
+		if (direction == Direction.WEST)
+			posX -= 1;
 
 		Coordinate newCoordinate = new Coordinate(posX, posY);
 		MapField newField = this.currentMap.getMapFieldByCoordinate(newCoordinate);

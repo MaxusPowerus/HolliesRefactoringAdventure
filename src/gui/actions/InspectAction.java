@@ -28,9 +28,9 @@ public class InspectAction implements ActionListener {
 			container.setFound(true);
 
 			JLabel containerFound = new JLabel("<html><p>Du hast ein(e) " + container.getName()
-					+ " mit folgendem Inhalt gefunden:<br>" + container.stringifyItems(true) + "</p></html>");
+					+ " mit folgendem Inhalt gefunden:<br>" + container.stringifyItems() + "</p></html>");
 			this.mainPanel.clearMainDialog();
-			this.mainPanel.getMainDialog().add(containerFound, BorderLayout.CENTER);
+			this.mainPanel.getMain().add(containerFound, BorderLayout.CENTER);
 			this.mainPanel.repaintMainDialog();
 
 			// add items to player
