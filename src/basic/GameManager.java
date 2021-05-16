@@ -5,8 +5,11 @@ import gui.ActionPanel;
 import gui.GUIManager;
 import gui.PlayerInfoPanel;
 import gui.WorldInfoPanel;
+import gui.buttons.LootButton;
 import map.Map;
 import map.MapGenerator;
+import utilities.Challenge;
+import utilities.Container;
 
 public class GameManager {
 
@@ -46,6 +49,31 @@ public class GameManager {
 		PlayerInfoPanel.update();
 		WorldInfoPanel.update();
 		ActionPanel.update();
+
+		this.execMainLogic();
+	}
+
+	public void execMainLogic() {
+		// clear fields
+		this.guiManager.getFieldInfos().removeAll();
+		this.guiManager.getActionButtonPanel().removeAll();
+
+		// execute challenge
+		Challenge challenge = player.getCurrentMapField().getChallenge();
+		if (!challenge.isChallengeCompleted()) {
+			switch (challenge.getChallangeType()) {
+			case 0:
+				Container container = challenge.getContainer();
+				this.guiManager.addFieldInfo("Du hast " + container.toString() + " gefunden");
+
+				LootButton lootButton = new LootButton(challenge, player, this);
+				this.guiManager.getActionButtonPanel().add(lootButton);
+				break;
+			}
+		}
+
+		this.guiManager.getFrame().revalidate();
+		this.guiManager.getFrame().repaint();
 	}
 
 	public GUIManager getGuiManager() {
