@@ -4,7 +4,8 @@ import java.util.Random;
 
 public enum Biom {
 
-	MEADOW(0, "WI", 60), FOREST(1, "WA", 80), DESERT(2, "WU", 1), SWAMP(3, "SU", 15), MOUNTAINS(4, "GE", 10);
+	MEADOW(0, "Wiese", 60), FOREST(1, "Wald", 80), DESERT(2, "Wueste", 1), SWAMP(3, "Sumpf", 15),
+	MOUNTAINS(4, "Gebirge", 10);
 
 	private int id;
 	private String name;
