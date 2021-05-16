@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import basic.GameManager;
 import entities.Player;
 import utilities.Challenge;
+import utilities.Container;
 
 public class InspectButton extends JButton implements ActionListener {
 
@@ -29,6 +30,12 @@ public class InspectButton extends JButton implements ActionListener {
 		this.setEnabled(false);
 
 		gameManager.getGuiManager().addFieldInfo("Du hast " + this.challenge.getContainer().getName() + " gefunden");
+
+		// set container found when available
+		Container container = this.challenge.getContainer();
+		if (container != null && !container.getFound()) {
+			System.out.println("container found");
+		}
 
 		LootButton lootButton = new LootButton(challenge, player, this.gameManager);
 		this.gameManager.getGuiManager().getActionButtonPanel().add(lootButton);

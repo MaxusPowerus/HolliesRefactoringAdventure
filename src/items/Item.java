@@ -62,6 +62,10 @@ public class Item {
 		this.discount = discount;
 	}
 
+	public int getValue() {
+		return value;
+	}
+
 	public Item clone() {
 		Item item = null;
 		if (this instanceof Weapon) {
