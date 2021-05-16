@@ -1,8 +1,10 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 
+import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -52,6 +54,8 @@ public class GUIManager {
 	private JLabel intelligenceValue;
 	private JLabel skillValue;
 	private JLabel luckValue;
+	private JPanel fieldInfos;
+	private JPanel actionButtonPanel;
 
 	public GUIManager() {
 		initialize();
@@ -111,6 +115,18 @@ public class GUIManager {
 										GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)))
 				.addContainerGap()));
 
+		fieldInfos = new JPanel();
+		fieldInfos.setBackground(Color.WHITE);
+		GroupLayout gl_fieldInfoPanel = new GroupLayout(fieldInfoPanel);
+		gl_fieldInfoPanel.setHorizontalGroup(gl_fieldInfoPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_fieldInfoPanel.createSequentialGroup().addContainerGap()
+						.addComponent(fieldInfos, GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE).addContainerGap()));
+		gl_fieldInfoPanel.setVerticalGroup(gl_fieldInfoPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_fieldInfoPanel.createSequentialGroup().addContainerGap()
+						.addComponent(fieldInfos, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE).addContainerGap()));
+		fieldInfos.setLayout(new BoxLayout(fieldInfos, BoxLayout.Y_AXIS));
+		fieldInfoPanel.setLayout(gl_fieldInfoPanel);
+
 		currentFieldBiomLabel = new JLabel("[BIOM]");
 
 		challengeState = new JLabel("[CHALLENGE_STATE]");
@@ -126,7 +142,9 @@ public class GUIManager {
 						.addContainerGap(93, Short.MAX_VALUE)));
 		mapInfoPanel.setLayout(gl_mapInfoPanel);
 
-		JPanel actionButtonPanel = new JPanel();
+		actionButtonPanel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) actionButtonPanel.getLayout();
+		actionButtonPanel.setBackground(Color.WHITE);
 
 		btnInventar = new JButton("Inventar");
 
@@ -142,61 +160,35 @@ public class GUIManager {
 		goWestButton = new JButton("W");
 		goWestButton.addActionListener(new NavigationButtonAction(Direction.WEST));
 		GroupLayout gl_actionPanel = new GroupLayout(actionPanel);
-		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING).addGroup(gl_actionPanel
-				.createSequentialGroup()
-				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_actionPanel.createSequentialGroup()
-								.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_actionPanel.createSequentialGroup().addGap(111)
-												.addComponent(goWestButton).addGap(38).addComponent(goEastButton))
-										.addGroup(gl_actionPanel.createSequentialGroup().addGap(154)
-												.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-														.addComponent(goSouthButton).addComponent(goNorthButton))))
-								.addPreferredGap(ComponentPlacement.RELATED, 262, Short.MAX_VALUE).addComponent(
-										actionButtonPanel, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_actionPanel.createSequentialGroup().addContainerGap().addComponent(btnInventar)))
-				.addContainerGap()));
-		gl_actionPanel.setVerticalGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING).addGroup(gl_actionPanel
-				.createSequentialGroup().addContainerGap().addComponent(btnInventar)
-				.addPreferredGap(ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_actionPanel.createSequentialGroup().addComponent(goNorthButton)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_actionPanel.createParallelGroup(Alignment.BASELINE)
-										.addComponent(goWestButton).addComponent(goEastButton))
-								.addPreferredGap(ComponentPlacement.RELATED).addComponent(goSouthButton))
-						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE))
-				.addGap(24)));
-
-		JButton action1Button = new JButton("Aktion 1");
-		actionButtonPanel.add(action1Button);
-
-		JButton action2Button = new JButton("Aktion 2");
-		actionButtonPanel.add(action2Button);
-
-		JButton action3Button = new JButton("Aktion 3");
-		actionButtonPanel.add(action3Button);
-		actionPanel.setLayout(gl_actionPanel);
-
-		JLabel lblNewLabel = new JLabel("Du bist in...");
-
-		JLabel lblDuSiehst = new JLabel("Du siehst...");
-
-		JLabel lblDirGelingt = new JLabel("Dir gelingt...");
-		GroupLayout gl_fieldInfoPanel = new GroupLayout(fieldInfoPanel);
-		gl_fieldInfoPanel.setHorizontalGroup(gl_fieldInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_fieldInfoPanel.createSequentialGroup().addContainerGap()
-						.addGroup(gl_fieldInfoPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblDuSiehst, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
-								.addComponent(lblDirGelingt, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
-								.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE))
+		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_actionPanel.createSequentialGroup()
+						.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_actionPanel.createSequentialGroup().addGap(111).addComponent(goWestButton)
+										.addGap(38).addComponent(goEastButton))
+								.addGroup(gl_actionPanel.createSequentialGroup().addGap(154)
+										.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
+												.addComponent(goSouthButton).addComponent(goNorthButton)))
+								.addGroup(gl_actionPanel.createSequentialGroup().addContainerGap()
+										.addComponent(btnInventar)))
+						.addPreferredGap(ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
+						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap()));
-		gl_fieldInfoPanel.setVerticalGroup(gl_fieldInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_fieldInfoPanel.createSequentialGroup().addContainerGap().addComponent(lblNewLabel)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblDuSiehst)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblDirGelingt)
-						.addContainerGap(104, Short.MAX_VALUE)));
-		fieldInfoPanel.setLayout(gl_fieldInfoPanel);
+		gl_actionPanel
+				.setVerticalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_actionPanel.createSequentialGroup().addContainerGap()
+								.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_actionPanel.createSequentialGroup()
+												.addComponent(actionButtonPanel, GroupLayout.DEFAULT_SIZE, 201,
+														Short.MAX_VALUE)
+												.addContainerGap())
+										.addGroup(gl_actionPanel.createSequentialGroup().addComponent(btnInventar)
+												.addPreferredGap(ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+												.addComponent(goNorthButton).addPreferredGap(ComponentPlacement.RELATED)
+												.addGroup(gl_actionPanel.createParallelGroup(Alignment.BASELINE)
+														.addComponent(goWestButton).addComponent(goEastButton))
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(goSouthButton)
+												.addGap(37)))));
+		actionPanel.setLayout(gl_actionPanel);
 
 		JLabel leftPanelHeadline = new JLabel("Map");
 		leftPanelHeadline.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -453,6 +445,21 @@ public class GUIManager {
 
 	public JLabel getLuckValue() {
 		return luckValue;
+	}
+
+	public JPanel getFieldInfos() {
+		return fieldInfos;
+	}
+
+	public JPanel getActionButtonPanel() {
+		return actionButtonPanel;
+	}
+
+	public void addFieldInfo(String info) {
+		this.fieldInfos.add(new JLabel(info));
+
+		this.frame.revalidate();
+		this.frame.repaint();
 	}
 
 }

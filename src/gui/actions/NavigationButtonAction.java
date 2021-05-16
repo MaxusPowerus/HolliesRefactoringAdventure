@@ -27,6 +27,8 @@ public class NavigationButtonAction implements ActionListener {
 
 		WorldInfoPanel.update();
 		ActionPanel.update();
+
+		gameManager.execMainLogic();
 	}
 
 }

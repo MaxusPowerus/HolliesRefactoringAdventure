@@ -106,6 +106,15 @@ public class Container {
 		return inventory;
 	}
 
+	public String getPrefix() {
+		return prefix;
+	}
+
+	@Override
+	public String toString() {
+		return this.prefix + " " + this.name;
+	}
+
 	public String stringifyItems() {
 		StringBuilder builder = new StringBuilder();
 		for (Item item : this.inventory.getAllItems()) {
