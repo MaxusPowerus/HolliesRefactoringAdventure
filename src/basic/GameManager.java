@@ -46,7 +46,6 @@ public class GameManager {
 		PlayerInfoPanel.update();
 		WorldInfoPanel.update();
 		ActionPanel.update();
-
 	}
 
 	public GUIManager getGuiManager() {

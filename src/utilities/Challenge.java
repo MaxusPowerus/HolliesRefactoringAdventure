@@ -7,7 +7,7 @@ import map.Biom;
 
 public class Challenge {
 
-	private boolean challengeActive;
+	private boolean challengeCompleted;
 	private NPC npc = null;
 	private Container container = null;
 	int challangeType;
@@ -16,22 +16,23 @@ public class Challenge {
 	int containerChance = 0;
 
 	public Challenge(Biom biom) {
+		this.challengeCompleted = true;
 		this.biom = biom;
 		switch (biom) {
 		case MEADOW:
-			containerChance = 50;
+			containerChance = 100;
 			break;
 		case FOREST:
-			containerChance = 60;
+			containerChance = 100;
 			break;
 		case DESERT:
-			containerChance = 5;
+			containerChance = 100;
 			break;
 		case SWAMP:
-			containerChance = 55;
+			containerChance = 100;
 			break;
 		case MOUNTAINS:
-			containerChance = 30;
+			containerChance = 100;
 			break;
 		}
 
@@ -58,8 +59,8 @@ public class Challenge {
 		return true;
 	}
 
-	public boolean getChallengeActive() {
-		return challengeActive;
+	public boolean isChallengeCompleted() {
+		return challengeCompleted;
 	}
 
 	public NPC getNpc() {
