@@ -4,8 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import basic.GameManager;
-import gui.GUIHelper;
+import gui.ActionPanel;
 import gui.GUIManager;
+import gui.WorldInfoPanel;
 import map.Direction;
 
 public class NavigationButtonAction implements ActionListener {
@@ -24,13 +25,8 @@ public class NavigationButtonAction implements ActionListener {
 
 		GUIManager guiManager = GameManager.getInstance().getGuiManager();
 
-		GUIHelper.resetPanel(guiManager.getMainPanel());
-		GUIHelper.resetPanel(guiManager.getPlayerInfoPanel());
-		GUIHelper.resetPanel(guiManager.getWorldInfoPanel());
-
-		guiManager.getMainPanel().setMainView();
-		guiManager.getPlayerInfoPanel().updateView();
-		guiManager.getWorldInfoPanel().updateView();
+		WorldInfoPanel.update();
+		ActionPanel.update();
 	}
 
 }

@@ -1,7 +1,10 @@
 package basic;
 
 import entities.Player;
+import gui.ActionPanel;
 import gui.GUIManager;
+import gui.PlayerInfoPanel;
+import gui.WorldInfoPanel;
 import map.Map;
 import map.MapGenerator;
 
@@ -30,6 +33,7 @@ public class GameManager {
 		player = new Player(Config.PLAYER_NAME, mainMap);
 
 		this.guiManager = new GUIManager();
+		guiManager.getFrame().setVisible(true);
 
 		this.startGame();
 	}
@@ -38,13 +42,11 @@ public class GameManager {
 		return player;
 	}
 
-	public void restart() {
-		this.guiManager.destroy();
-		this.prepareGame();
-	}
-
 	private void startGame() {
-		this.guiManager.updateAllViews();
+		PlayerInfoPanel.update();
+		WorldInfoPanel.update();
+		ActionPanel.update();
+
 	}
 
 	public GUIManager getGuiManager() {
