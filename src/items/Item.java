@@ -61,4 +61,20 @@ public class Item {
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
+
+	public Item clone() {
+		Item item = null;
+		if (this instanceof Weapon) {
+			item = new Weapon(this.uniqueName, this.name, this.value, ((Weapon) this).getDamage());
+		} else if (this instanceof Food) {
+			item = new Weapon(this.uniqueName, this.name, this.value, ((Food) this).getEnergy());
+		} else if (this instanceof Outfit) {
+			item = new Weapon(this.uniqueName, this.name, this.value, ((Outfit) this).getArmor());
+		} else {
+			item = new Item(this.uniqueName, this.name, this.value);
+		}
+		item.setCount(this.count);
+		item.setDiscount(this.discount);
+		return item;
+	}
 }

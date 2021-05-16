@@ -203,13 +203,12 @@ public class GUIManager {
 		gl_leftMainPanel.setHorizontalGroup(gl_leftMainPanel.createParallelGroup(Alignment.LEADING)
 				.addComponent(leftPanelHeadline, GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
 				.addGroup(gl_leftMainPanel.createSequentialGroup().addGap(10)
-						.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
-						.addContainerGap()));
+						.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE).addGap(10)));
 		gl_leftMainPanel.setVerticalGroup(gl_leftMainPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_leftMainPanel.createSequentialGroup()
 						.addComponent(leftPanelHeadline, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
 						.addContainerGap()));
 		leftContentPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		leftMainPanel.setLayout(gl_leftMainPanel);

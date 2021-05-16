@@ -87,7 +87,7 @@ public class GameManager {
 				break;
 			}
 		} else {
-			this.guiManager.addFieldInfo("Du hast hier bereits alle Aufgaben erledigt");
+			this.guiManager.addFieldInfo("Du siehst nichts außer deinen Fußspuren");
 		}
 
 		this.update();

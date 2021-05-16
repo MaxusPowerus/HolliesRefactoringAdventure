@@ -9,4 +9,8 @@ public class Outfit extends Item {
 		this.armor = armor;
 	}
 
+	public int getArmor() {
+		return armor;
+	}
+
 }

@@ -9,4 +9,8 @@ public class Food extends Item {
 		this.energy = energy;
 	}
 
+	public int getEnergy() {
+		return energy;
+	}
+
 }

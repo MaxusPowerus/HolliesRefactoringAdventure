@@ -37,15 +37,15 @@ public class ResourceManager {
 			FileReader fileReader = new FileReader("resources\\items.json");
 			JSONParser parser = new JSONParser();
 
-			JSONObject items = (JSONObject) parser.parse(fileReader);
-			items = (JSONObject) items.get("Categories");
-			Set<Map> set = items.keySet();
+			JSONObject itemObj = (JSONObject) parser.parse(fileReader);
+			itemObj = (JSONObject) itemObj.get("Categories");
+			Set<Map> set = itemObj.keySet();
 			Iterator<Map> itr = set.iterator();
 
-			for (Object key : items.keySet()) {
-				Object value = items.get(key);
+			for (Object key : itemObj.keySet()) {
+				Object value = itemObj.get(key);
 
-				JSONObject category = (JSONObject) items.get(itr.next());
+				JSONObject category = (JSONObject) itemObj.get(itr.next());
 				Set<Map> categoryItem = category.keySet();
 				Iterator<Map> itemItr = categoryItem.iterator();
 

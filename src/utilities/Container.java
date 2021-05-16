@@ -41,7 +41,8 @@ public class Container {
 		Random Randy = new Random();
 		if (Randy.nextInt(101) < chance) {
 			chance = chance / div;
-			inventory.add(items.get(Randy.nextInt(items.size() - 1)));
+			Item item = items.get(Randy.nextInt(items.size() - 1));
+			inventory.add(item.clone());
 			fill(chance, div);
 		}
 	}
@@ -83,7 +84,8 @@ public class Container {
 		Random Randy = new Random();
 		if (Randy.nextInt(101) < chance) {
 			chance = chance / div;
-			inventory.add(catItems.get(Randy.nextInt(catItems.size() - 1)));
+			Item item = catItems.get(Randy.nextInt(catItems.size() - 1)).clone();
+			inventory.add(item);
 			fill(chance, div);
 		}
 	}
