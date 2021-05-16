@@ -17,7 +17,6 @@ public class MyRandom {
 
 		Random Randy = new Random();
 		int littleRandy = Randy.nextInt(sumOfChances);
-		System.out.println("littleRandy: " + littleRandy);
 		for (int i = 0; i < chances.length; i++) {
 			int prev = 0;
 			if (i == 0) {

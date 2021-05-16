@@ -128,7 +128,14 @@ public class ResourceManager {
 					case "Enemy":
 						npc = new Enemy(label, innerEntity.get("prefix").toString(),
 								Double.valueOf(innerEntity.get("damage").toString()),
-								Double.valueOf(innerEntity.get("health").toString()));
+								Double.valueOf(innerEntity.get("health").toString()),
+								Integer.valueOf(innerEntity.get("st").toString()),
+								Integer.valueOf(innerEntity.get("pe").toString()),
+								Integer.valueOf(innerEntity.get("en").toString()),
+								Integer.valueOf(innerEntity.get("ch").toString()),
+								Integer.valueOf(innerEntity.get("in").toString()),
+								Integer.valueOf(innerEntity.get("ag").toString()),
+								Integer.valueOf(innerEntity.get("lk").toString()));
 
 						Inventory enemyInv = new Inventory();
 

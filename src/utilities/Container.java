@@ -27,7 +27,9 @@ public class Container {
 			int littleRandy = Randy.nextInt(containerNames.length);
 			this.name = containerNames[littleRandy];
 			this.prefix = containerPrefixes[littleRandy];
-			found = Randy.nextBoolean();
+			if (Randy.nextInt(100) % 2 == 0) {
+				found = true;
+			}
 		}
 
 		inventory = new Inventory();

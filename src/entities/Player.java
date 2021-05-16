@@ -1,12 +1,15 @@
 package entities;
 
 import basic.Config;
+import basic.GameManager;
+import items.Weapon;
 import map.Direction;
 import map.Map;
 import map.MapField;
 import utilities.Coordinate;
 import utilities.Experience;
 import utilities.Inventory;
+import utilities.Skill;
 import utilities.SkillSet;
 
 public class Player {
@@ -14,6 +17,8 @@ public class Player {
 	private String name;
 	private double health;
 	private Inventory inventory;
+	private Inventory equipped;
+
 	private Experience experience;
 	private int daysAlive;
 	private Map currentMap;
@@ -25,12 +30,16 @@ public class Player {
 		this.name = name;
 		this.health = Config.PLAYER_HEALTH;
 		this.inventory = new Inventory();
+		this.equipped = new Inventory();
 		this.experience = new Experience();
 		this.daysAlive = 0;
 		this.currentMap = mainMap;
 		this.currentMapField = mainMap.getMapFieldByCoordinate(Config.MAP_SIZEX / 2, Config.MAP_SIZEY / 2);
 		this.time = new Time(0);
 		this.skillSet = new SkillSet();
+
+		this.inventory.add(GameManager.getInstance().getResourceManager().getItemByUniqueName("Stick"));
+		this.equipped.add(GameManager.getInstance().getResourceManager().getItemByUniqueName("Stick"));
 	}
 
 	public double getHealth() {
@@ -75,6 +84,17 @@ public class Player {
 
 	public SkillSet getSkillSet() {
 		return skillSet;
+	}
+
+	public Weapon equippedWeapon() {
+
+		for (int i = 0; i < equipped.getAllItems().size(); i++) {
+			if (equipped.getAllItems().get(i) instanceof Weapon) {
+				return (Weapon) equipped.getAllItems().get(i);
+			}
+
+		}
+		return null;
 	}
 
 	public boolean canGo(Direction direction) {
@@ -127,6 +147,45 @@ public class Player {
 		} else {
 			System.out.println("no move");
 		}
+	}
+
+	public boolean fight(Enemy enemy) {
+		int playerFight = skillSet.getSkillValue(Skill.STRENGTH) + skillSet.getSkillValue(Skill.AGILITY);
+		int enemyFight = enemy.getSkillSet().getSkillValue(Skill.STRENGTH)
+				+ enemy.getSkillSet().getSkillValue(Skill.AGILITY);
+		double playerDmg = 1;
+		if (equippedWeapon() != null)
+			playerDmg = equippedWeapon().getDamage();
+		double enemyDmg = enemy.getDamage();
+		double dmgFac = 1;
+		double enemyHealth = enemy.getHealth();
+
+		while (true) {
+			// Player ist am Zug
+			if ((playerFight - enemyFight) <= 0)
+				dmgFac = playerFight - enemyFight;
+
+			enemyHealth -= dmgFac * playerDmg;
+			if (this.health <= 0)
+				break;
+
+			// Enemy ist am Zug
+			if ((enemyFight - playerFight) <= 0)
+				dmgFac = enemyFight - playerFight;
+
+			this.health -= dmgFac * enemyDmg;
+			if (enemyHealth <= 0)
+				break;
+		}
+		if (health > 0) {
+			for (int i = 0; i < enemy.getInventory().getAllItems().size(); i++) {
+				inventory.add(enemy.getInventory().getAllItems().get(i));
+			}
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 }
