@@ -7,7 +7,7 @@ import map.Biom;
 
 public class Challenge {
 
-	private boolean challengeActive;
+	private boolean;
 	private NPC npc = null;
 	private Container container = null;
 	int challangeType;
