@@ -255,7 +255,7 @@ public class MapGenerator {
 		for (int y = 0; y < Config.MAP_SIZEY; y++) {
 			for (int x = 0; x < Config.MAP_SIZEX; x++) {
 				Challenge challenge = new Challenge(map.getMapFieldByCoordinate(x, y).getBiom());
-
+				map.getMapFieldByCoordinate(x, y).setChallenge(challenge);
 			}
 		}
 	}

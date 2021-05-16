@@ -27,7 +27,6 @@ public class GUIManager {
 	private JPanel fieldInfoPanel;
 	private JPanel playerInfoPanel;
 	private JLabel challengeState;
-	private JButton inspectButton;
 	private JLabel healthLabel;
 	private JProgressBar healthBar;
 	private JLabel levelLabel;
@@ -39,6 +38,20 @@ public class GUIManager {
 	private JButton goWestButton;
 	private JLabel currentFieldBiomLabel;
 	private JLabel lblSkills;
+	private JLabel lblSt;
+	private JLabel lblWa;
+	private JLabel lblAu;
+	private JLabel lblCh;
+	private JLabel lblIn;
+	private JLabel lblGe;
+	private JLabel lblGl;
+	private JLabel strengthValue;
+	private JLabel perceptionValue;
+	private JLabel perseveranceValue;
+	private JLabel charismaValue;
+	private JLabel intelligenceValue;
+	private JLabel skillValue;
+	private JLabel luckValue;
 
 	public GUIManager() {
 		initialize();
@@ -101,24 +114,16 @@ public class GUIManager {
 		currentFieldBiomLabel = new JLabel("[BIOM]");
 
 		challengeState = new JLabel("[CHALLENGE_STATE]");
-
-		inspectButton = new JButton("Untersuchen");
 		GroupLayout gl_mapInfoPanel = new GroupLayout(mapInfoPanel);
 		gl_mapInfoPanel.setHorizontalGroup(gl_mapInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_mapInfoPanel.createSequentialGroup().addContainerGap()
 						.addGroup(gl_mapInfoPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(currentFieldBiomLabel)
-								.addGroup(gl_mapInfoPanel.createSequentialGroup().addComponent(challengeState)
-										.addPreferredGap(ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
-										.addComponent(inspectButton)))
-						.addContainerGap()));
-		gl_mapInfoPanel
-				.setVerticalGroup(gl_mapInfoPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_mapInfoPanel.createSequentialGroup().addContainerGap()
-								.addComponent(currentFieldBiomLabel).addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_mapInfoPanel.createParallelGroup(Alignment.BASELINE)
-										.addComponent(challengeState).addComponent(inspectButton))
-								.addContainerGap(51, Short.MAX_VALUE)));
+								.addComponent(currentFieldBiomLabel).addComponent(challengeState))
+						.addContainerGap(447, Short.MAX_VALUE)));
+		gl_mapInfoPanel.setVerticalGroup(gl_mapInfoPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_mapInfoPanel.createSequentialGroup().addContainerGap().addComponent(currentFieldBiomLabel)
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(challengeState)
+						.addContainerGap(93, Short.MAX_VALUE)));
 		mapInfoPanel.setLayout(gl_mapInfoPanel);
 
 		JPanel actionButtonPanel = new JPanel();
@@ -225,15 +230,15 @@ public class GUIManager {
 		skillPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		skillPanel.setBackground(Color.WHITE);
 		GroupLayout gl_playerInfoPanel = new GroupLayout(playerInfoPanel);
-		gl_playerInfoPanel.setHorizontalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
+		gl_playerInfoPanel.setHorizontalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.TRAILING)
 				.addComponent(playerInfoHeadline, GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
 				.addGroup(gl_playerInfoPanel.createSequentialGroup().addGap(10)
 						.addComponent(playerBarPanel, GroupLayout.PREFERRED_SIZE, 575, Short.MAX_VALUE)
 						.addContainerGap())
-				.addGroup(Alignment.TRAILING,
-						gl_playerInfoPanel.createSequentialGroup().addContainerGap(361, Short.MAX_VALUE)
-								.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap()));
+				.addGroup(Alignment.LEADING,
+						gl_playerInfoPanel.createSequentialGroup().addContainerGap()
+								.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap(336, Short.MAX_VALUE)));
 		gl_playerInfoPanel.setVerticalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_playerInfoPanel.createSequentialGroup()
 						.addComponent(playerInfoHeadline, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
@@ -245,30 +250,94 @@ public class GUIManager {
 		lblSkills = new JLabel("Skills");
 		lblSkills.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
 		lblSkills.setHorizontalAlignment(SwingConstants.CENTER);
+
+		lblSt = new JLabel("ST");
+
+		lblWa = new JLabel("WA");
+
+		lblAu = new JLabel("AU");
+
+		lblCh = new JLabel("CH");
+
+		lblIn = new JLabel("IN");
+
+		lblGe = new JLabel("GE");
+
+		lblGl = new JLabel("GL");
+
+		strengthValue = new JLabel("xx");
+
+		perceptionValue = new JLabel("xx");
+
+		perseveranceValue = new JLabel("xx");
+
+		charismaValue = new JLabel("xx");
+
+		intelligenceValue = new JLabel("xx");
+
+		skillValue = new JLabel("xx");
+
+		luckValue = new JLabel("xx");
 		GroupLayout gl_skillPanel = new GroupLayout(skillPanel);
-		gl_skillPanel.setHorizontalGroup(gl_skillPanel.createParallelGroup(Alignment.LEADING).addComponent(lblSkills,
-				GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE));
-		gl_skillPanel.setVerticalGroup(gl_skillPanel.createParallelGroup(Alignment.LEADING).addGroup(
-				gl_skillPanel.createSequentialGroup().addComponent(lblSkills).addContainerGap(78, Short.MAX_VALUE)));
+		gl_skillPanel.setHorizontalGroup(gl_skillPanel.createParallelGroup(Alignment.LEADING)
+				.addComponent(lblSkills, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+				.addGroup(gl_skillPanel.createSequentialGroup().addContainerGap()
+						.addGroup(gl_skillPanel.createParallelGroup(Alignment.LEADING).addComponent(lblSt).addComponent(
+								strengthValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addPreferredGap(ComponentPlacement.RELATED).addGroup(
+								gl_skillPanel.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_skillPanel.createSequentialGroup()
+												.addComponent(perceptionValue, GroupLayout.PREFERRED_SIZE, 17,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(perseveranceValue, GroupLayout.PREFERRED_SIZE, 14,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(charismaValue, GroupLayout.PREFERRED_SIZE, 14,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(intelligenceValue)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(skillValue, GroupLayout.PREFERRED_SIZE, 13,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(17)
+												.addComponent(luckValue, GroupLayout.DEFAULT_SIZE,
+														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addGap(96))
+										.addGroup(gl_skillPanel.createSequentialGroup().addComponent(lblWa)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblAu)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblCh)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblIn)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblGe)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblGl)
+												.addContainerGap(108, Short.MAX_VALUE)))));
+		gl_skillPanel.setVerticalGroup(gl_skillPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_skillPanel
+				.createSequentialGroup().addComponent(lblSkills).addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_skillPanel.createParallelGroup(Alignment.BASELINE).addComponent(lblSt).addComponent(lblWa)
+						.addComponent(lblAu).addComponent(lblCh).addComponent(lblIn).addComponent(lblGe)
+						.addComponent(lblGl))
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_skillPanel.createParallelGroup(Alignment.BASELINE).addComponent(strengthValue)
+						.addComponent(perceptionValue).addComponent(perseveranceValue).addComponent(charismaValue)
+						.addComponent(intelligenceValue).addComponent(luckValue).addComponent(skillValue))
+				.addContainerGap(38, Short.MAX_VALUE)));
 		skillPanel.setLayout(gl_skillPanel);
 
 		healthLabel = new JLabel("HP (xxx)");
 
 		healthBar = new JProgressBar();
+		healthBar.setToolTipText("");
 
 		levelLabel = new JLabel("Level X");
 
 		levelBar = new JProgressBar();
 		GroupLayout gl_playerBarPanel = new GroupLayout(playerBarPanel);
-		gl_playerBarPanel.setHorizontalGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_playerBarPanel.createSequentialGroup().addContainerGap().addComponent(healthLabel)
-						.addPreferredGap(ComponentPlacement.RELATED)
+		gl_playerBarPanel.setHorizontalGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING).addGroup(
+				gl_playerBarPanel.createSequentialGroup().addContainerGap().addComponent(healthLabel).addGap(50)
 						.addComponent(healthBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 								GroupLayout.PREFERRED_SIZE)
 						.addGap(108).addComponent(levelLabel).addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(levelBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(81)));
+						.addComponent(levelBar, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE).addGap(81)));
 		gl_playerBarPanel
 				.setVerticalGroup(
 						gl_playerBarPanel.createParallelGroup(Alignment.LEADING)
@@ -338,10 +407,6 @@ public class GUIManager {
 		return challengeState;
 	}
 
-	public JButton getInspectButton() {
-		return inspectButton;
-	}
-
 	public JButton getBtnInventar() {
 		return btnInventar;
 	}
@@ -360,6 +425,34 @@ public class GUIManager {
 
 	public JButton getGoWestButton() {
 		return goWestButton;
+	}
+
+	public JLabel getStrengthValue() {
+		return strengthValue;
+	}
+
+	public JLabel getPerceptionValue() {
+		return perceptionValue;
+	}
+
+	public JLabel getPerseveranceValue() {
+		return perseveranceValue;
+	}
+
+	public JLabel getCharismaValue() {
+		return charismaValue;
+	}
+
+	public JLabel getIntelligenceValue() {
+		return intelligenceValue;
+	}
+
+	public JLabel getSkillValue() {
+		return skillValue;
+	}
+
+	public JLabel getLuckValue() {
+		return luckValue;
 	}
 
 }
