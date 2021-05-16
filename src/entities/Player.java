@@ -9,6 +9,7 @@ import map.MapField;
 import utilities.Coordinate;
 import utilities.Experience;
 import utilities.Inventory;
+import utilities.Skill;
 import utilities.SkillSet;
 
 public class Player {
@@ -146,6 +147,45 @@ public class Player {
 		} else {
 			System.out.println("no move");
 		}
+	}
+
+	public boolean fight(Enemy enemy) {
+		int playerFight = skillSet.getSkillValue(Skill.STRENGTH) + skillSet.getSkillValue(Skill.AGILITY);
+		int enemyFight = enemy.getSkillSet().getSkillValue(Skill.STRENGTH)
+				+ enemy.getSkillSet().getSkillValue(Skill.AGILITY);
+		double playerDmg = 1;
+		if (equippedWeapon() != null)
+			playerDmg = equippedWeapon().getDamage();
+		double enemyDmg = enemy.getDamage();
+		double dmgFac = 1;
+		double enemyHealth = enemy.getHealth();
+
+		while (true) {
+			// Player ist am Zug
+			if ((playerFight - enemyFight) <= 0)
+				dmgFac = playerFight - enemyFight;
+
+			enemyHealth -= dmgFac * playerDmg;
+			if (this.health <= 0)
+				break;
+
+			// Enemy ist am Zug
+			if ((enemyFight - playerFight) <= 0)
+				dmgFac = enemyFight - playerFight;
+
+			this.health -= dmgFac * enemyDmg;
+			if (enemyHealth <= 0)
+				break;
+		}
+		if (health > 0) {
+			for (int i = 0; i < enemy.getInventory().getAllItems().size(); i++) {
+				inventory.add(enemy.getInventory().getAllItems().get(i));
+			}
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 }

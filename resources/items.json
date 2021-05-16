@@ -4,8 +4,7 @@
             "Sword": { "label": "Schwert", "damage": 15, "value": 100 },
             "Axe": { "label": "Axt", "damage": 10, "value": 20},
             "Spear": { "label": "Speer", "damage": 5, "value": 10},
-            "Stick": { "label": "Stock", "damage": 3, "value": 1000},
-            "Mace": {"label": "Keule", "damage": 1, "value": 1}
+            "Stick": { "label": "Stock", "damage": 3, "value": 1000}
         },
         "Outfits": {
             "UnicornCostume": {"label": "Einhorn-Kostüm", "armor": 0, "value": 50},
