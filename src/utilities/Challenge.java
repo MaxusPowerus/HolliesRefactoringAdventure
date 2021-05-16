@@ -10,6 +10,7 @@ public class Challenge {
 	private boolean challengeActive;
 	private NPC npc = null;
 	private Container container = null;
+	int challangeType;
 	private Biom biom;
 
 	int containerChance = 0;
@@ -46,7 +47,7 @@ public class Challenge {
 		}
 
 		int[] challengeTypes = new int[] { containerChance };
-		int challangeType = Chan.pickRandom(challengeTypes);
+		this.challangeType = Chan.pickRandom(challengeTypes);
 
 		switch (challangeType) {
 		case 1:
