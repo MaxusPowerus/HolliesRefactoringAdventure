@@ -19,10 +19,20 @@ public class Container {
 	public Container(String name, String prefix) {
 		this.name = name;
 		this.prefix = prefix;
+
+		if (name == "random") {
+			String[] containerNames = { "Truhe", "Geldbeutel", "Leiche", "Kühlschrank" };
+			String[] containerPrefixes = { "eine", "einen", "eine", "einen" };
+			Random Randy = new Random();
+			int littleRandy = Randy.nextInt(containerNames.length);
+			this.name = containerNames[littleRandy];
+			this.prefix = containerPrefixes[littleRandy];
+		}
+
 		inventory = new Inventory();
 	}
 
-	public void fill(int chance, int div) {
+	public void fill(double chance, double div) {
 		ArrayList<Item> items = GameManager.getInstance().getResourceManager().getAllItems();
 
 		Random Randy = new Random();
@@ -33,7 +43,7 @@ public class Container {
 		}
 	}
 
-	public void fillByCategory(int chance, int div, String category) {
+	public void fillByCategory(double chance, double div, String category) {
 		ArrayList<Item> items = GameManager.getInstance().getResourceManager().getAllItems();
 		ArrayList<Item> catItems = new ArrayList<Item>();
 

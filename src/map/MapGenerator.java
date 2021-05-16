@@ -3,7 +3,7 @@ package map;
 import java.util.Random;
 
 import basic.Config;
-import utilities.Container;
+import utilities.Challenge;
 import utilities.Coordinate;
 
 public class MapGenerator {
@@ -248,58 +248,14 @@ public class MapGenerator {
 		return map;
 	}
 
-	public void generateContainer(int meadowChance, int forestChance, int desertChance, int swampChance,
-			int mountainsChance) {
-		String[] containerNames = { "Truhe", "Geldbeutel", "Leiche", "Kühlschrank" };
-		String[] containerPrefixes = { "eine", "einen", "eine", "einen" };
+	public void generateChallenge() {
+
 		Random Randy = new Random();
 
 		for (int y = 0; y < Config.MAP_SIZEY; y++) {
 			for (int x = 0; x < Config.MAP_SIZEX; x++) {
-				Container container = null;
-				Biom biom = map.getMapFieldByCoordinate(x, y).getBiom();
+				Challenge challenge = new Challenge(map.getMapFieldByCoordinate(x, y).getBiom());
 
-				int rand = Randy.nextInt(containerNames.length);
-
-				switch (biom) {
-				case MEADOW:
-					if (Randy.nextInt(101) < meadowChance) {
-						container = new Container(containerNames[rand], containerPrefixes[rand]);
-						container.fill(100, 2);
-					}
-					break;
-
-				case FOREST:
-					if (Randy.nextInt(101) < forestChance) {
-						container = new Container(containerNames[rand], containerPrefixes[rand]);
-						container.fillByCategory(100, 2, "weapon");
-					}
-					break;
-
-				case DESERT:
-					if (Randy.nextInt(101) < desertChance) {
-						container = new Container(containerNames[rand], containerPrefixes[rand]);
-						container.fillByCategory(100, 2, "outfit");
-					}
-					break;
-
-				case SWAMP:
-					if (Randy.nextInt(101) < swampChance) {
-						container = new Container(containerNames[rand], containerPrefixes[rand]);
-						container.fillByCategory(100, 2, "food");
-					}
-					break;
-
-				case MOUNTAINS:
-					if (Randy.nextInt(101) < mountainsChance) {
-						container = new Container(containerNames[rand], containerPrefixes[rand]);
-						container.fill(100, 2);
-					}
-					break;
-
-				}
-
-				map.getMapFieldByCoordinate(x, y).setContainer(container);
 			}
 		}
 	}
@@ -318,7 +274,7 @@ public class MapGenerator {
 		map = flatForestDesertBorder();
 		System.out.println("Flater01 Done");
 
-		generateContainer(100, 100, 10, 30, 25);
+		generateChallenge();
 		System.out.println("Container Done");
 
 		// map.printMapDebug("");
