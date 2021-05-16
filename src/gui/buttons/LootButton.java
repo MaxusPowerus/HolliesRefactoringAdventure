@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import basic.GameManager;
 import entities.Player;
 import gui.WorldInfoPanel;
+import gui.actions.InventoryShowAction;
 import utilities.Challenge;
 
 public class LootButton extends JButton implements ActionListener {
@@ -31,9 +32,14 @@ public class LootButton extends JButton implements ActionListener {
 
 		this.player.getInventory().add(this.challenge.getContainer());
 		gameManager.getGuiManager()
-				.addFieldInfo("Du hast " + this.challenge.getContainer().stringifyItems() + " aufgesammelt");
+				.addFieldInfo("Du hast folgende Items eingesammelt: " + this.challenge.getContainer().stringifyItems());
 
 		this.challenge.setChallengeCompleted(true);
 		WorldInfoPanel.update();
+
+		// update inventory when opened
+		if (this.gameManager.getGuiManager().getLeftPanelHeadline().getText() == "Inventar") {
+			new InventoryShowAction(this.gameManager).initialize();
+		}
 	}
 }
