@@ -39,12 +39,12 @@ public class GameManager {
 	}
 
 	public void restart() {
-		this.guiManager.destroy();
+//		this.guiManager.destroy();
 		this.prepareGame();
 	}
 
 	private void startGame() {
-		this.guiManager.updateAllViews();
+//		this.guiManager.updateAllViews();
 	}
 
 	public GUIManager getGuiManager() {
