@@ -5,6 +5,9 @@ import gui.ActionPanel;
 import gui.GUIManager;
 import gui.PlayerInfoPanel;
 import gui.WorldInfoPanel;
+import gui.actions.InventoryShowAction;
+import gui.actions.MapShowAction;
+import gui.buttons.InspectButton;
 import gui.buttons.LootButton;
 import map.Map;
 import map.MapGenerator;
@@ -50,6 +53,12 @@ public class GameManager {
 		WorldInfoPanel.update();
 		ActionPanel.update();
 
+		// show map for default
+		new MapShowAction(this).initialize();
+
+		// add inv handler
+		this.guiManager.getOpenInvButton().addActionListener(new InventoryShowAction(this));
+
 		this.execMainLogic();
 	}
 
@@ -64,14 +73,27 @@ public class GameManager {
 			switch (challenge.getChallangeType()) {
 			case 0:
 				Container container = challenge.getContainer();
-				this.guiManager.addFieldInfo("Du hast " + container.toString() + " gefunden");
+				if (container.getFound()) {
+					this.guiManager.addFieldInfo("Du hast " + container.toString() + " gefunden");
 
-				LootButton lootButton = new LootButton(challenge, player, this);
-				this.guiManager.getActionButtonPanel().add(lootButton);
+					LootButton lootButton = new LootButton(challenge, player, this);
+					this.guiManager.getActionButtonPanel().add(lootButton);
+				} else {
+					this.guiManager.addFieldInfo("Es scheint nichts los zu sein...");
+					InspectButton button = new InspectButton(challenge, player, this);
+					this.guiManager.getActionButtonPanel().add(button);
+				}
+
 				break;
 			}
+		} else {
+			this.guiManager.addFieldInfo("Du hast hier bereits alle Aufgaben erledigt");
 		}
 
+		this.update();
+	}
+
+	public void update() {
 		this.guiManager.getFrame().revalidate();
 		this.guiManager.getFrame().repaint();
 	}

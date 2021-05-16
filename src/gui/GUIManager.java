@@ -23,22 +23,19 @@ import map.Direction;
 public class GUIManager {
 
 	private JFrame frame;
-	private JPanel mapInfoPanel;
+	private JPanel leftInfoPanel;
 	private JPanel leftMainPanel;
 	private JPanel actionPanel;
 	private JPanel fieldInfoPanel;
 	private JPanel playerInfoPanel;
-	private JLabel challengeState;
 	private JLabel healthLabel;
 	private JProgressBar healthBar;
 	private JLabel levelLabel;
-	private JProgressBar levelBar;
-	private JButton btnInventar;
+	private JButton openInvButton;
 	private JButton goNorthButton;
 	private JButton goEastButton;
 	private JButton goSouthButton;
 	private JButton goWestButton;
-	private JLabel currentFieldBiomLabel;
 	private JLabel lblSkills;
 	private JLabel lblSt;
 	private JLabel lblWa;
@@ -54,8 +51,12 @@ public class GUIManager {
 	private JLabel intelligenceValue;
 	private JLabel skillValue;
 	private JLabel luckValue;
-	private JPanel fieldInfos;
 	private JPanel actionButtonPanel;
+	private JPanel leftContentPanel;
+	private JLabel leftPanelHeadline;
+	private JProgressBar levelBar;
+	private JPanel leftInfoContentPanel;
+	private JPanel fieldInfos;
 
 	public GUIManager() {
 		initialize();
@@ -75,9 +76,9 @@ public class GUIManager {
 		playerInfoPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		playerInfoPanel.setBackground(Color.WHITE);
 
-		mapInfoPanel = new JPanel();
-		mapInfoPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		mapInfoPanel.setBackground(Color.WHITE);
+		leftInfoPanel = new JPanel();
+		leftInfoPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		leftInfoPanel.setBackground(Color.WHITE);
 
 		actionPanel = new JPanel();
 		actionPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
@@ -90,7 +91,7 @@ public class GUIManager {
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(mapInfoPanel, GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+								.addComponent(leftInfoPanel, GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
 								.addComponent(leftMainPanel, GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE))
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -103,7 +104,7 @@ public class GUIManager {
 				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
 								.addComponent(leftMainPanel, GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
-								.addPreferredGap(ComponentPlacement.RELATED).addComponent(mapInfoPanel,
+								.addPreferredGap(ComponentPlacement.RELATED).addComponent(leftInfoPanel,
 										GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 								.addComponent(playerInfoPanel, GroupLayout.PREFERRED_SIZE, 178,
@@ -115,38 +116,38 @@ public class GUIManager {
 										GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)))
 				.addContainerGap()));
 
+		leftInfoContentPanel = new JPanel();
+		leftInfoContentPanel.setBackground(Color.WHITE);
+		GroupLayout gl_leftInfoPanel = new GroupLayout(leftInfoPanel);
+		gl_leftInfoPanel.setHorizontalGroup(gl_leftInfoPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_leftInfoPanel.createSequentialGroup().addContainerGap()
+						.addComponent(leftInfoContentPanel, GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+						.addContainerGap()));
+		gl_leftInfoPanel.setVerticalGroup(gl_leftInfoPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_leftInfoPanel.createSequentialGroup().addContainerGap()
+						.addComponent(leftInfoContentPanel, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+						.addContainerGap()));
+		leftInfoContentPanel.setLayout(new BoxLayout(leftInfoContentPanel, BoxLayout.Y_AXIS));
+		leftInfoPanel.setLayout(gl_leftInfoPanel);
+
 		fieldInfos = new JPanel();
 		fieldInfos.setBackground(Color.WHITE);
 		GroupLayout gl_fieldInfoPanel = new GroupLayout(fieldInfoPanel);
 		gl_fieldInfoPanel.setHorizontalGroup(gl_fieldInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_fieldInfoPanel.createSequentialGroup().addContainerGap()
+				.addGroup(Alignment.TRAILING, gl_fieldInfoPanel.createSequentialGroup().addContainerGap()
 						.addComponent(fieldInfos, GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE).addContainerGap()));
 		gl_fieldInfoPanel.setVerticalGroup(gl_fieldInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_fieldInfoPanel.createSequentialGroup().addContainerGap()
-						.addComponent(fieldInfos, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE).addContainerGap()));
+						.addComponent(fieldInfos, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(194, Short.MAX_VALUE)));
 		fieldInfos.setLayout(new BoxLayout(fieldInfos, BoxLayout.Y_AXIS));
 		fieldInfoPanel.setLayout(gl_fieldInfoPanel);
-
-		currentFieldBiomLabel = new JLabel("[BIOM]");
-
-		challengeState = new JLabel("[CHALLENGE_STATE]");
-		GroupLayout gl_mapInfoPanel = new GroupLayout(mapInfoPanel);
-		gl_mapInfoPanel.setHorizontalGroup(gl_mapInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_mapInfoPanel.createSequentialGroup().addContainerGap()
-						.addGroup(gl_mapInfoPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(currentFieldBiomLabel).addComponent(challengeState))
-						.addContainerGap(447, Short.MAX_VALUE)));
-		gl_mapInfoPanel.setVerticalGroup(gl_mapInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_mapInfoPanel.createSequentialGroup().addContainerGap().addComponent(currentFieldBiomLabel)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(challengeState)
-						.addContainerGap(93, Short.MAX_VALUE)));
-		mapInfoPanel.setLayout(gl_mapInfoPanel);
 
 		actionButtonPanel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) actionButtonPanel.getLayout();
 		actionButtonPanel.setBackground(Color.WHITE);
 
-		btnInventar = new JButton("Inventar");
+		openInvButton = new JButton("[INV_BTN]");
 
 		goNorthButton = new JButton("N");
 		goNorthButton.addActionListener(new NavigationButtonAction(Direction.NORTH));
@@ -169,7 +170,7 @@ public class GUIManager {
 										.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
 												.addComponent(goSouthButton).addComponent(goNorthButton)))
 								.addGroup(gl_actionPanel.createSequentialGroup().addContainerGap()
-										.addComponent(btnInventar)))
+										.addComponent(openInvButton)))
 						.addPreferredGap(ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
 						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap()));
@@ -181,7 +182,7 @@ public class GUIManager {
 												.addComponent(actionButtonPanel, GroupLayout.DEFAULT_SIZE, 201,
 														Short.MAX_VALUE)
 												.addContainerGap())
-										.addGroup(gl_actionPanel.createSequentialGroup().addComponent(btnInventar)
+										.addGroup(gl_actionPanel.createSequentialGroup().addComponent(openInvButton)
 												.addPreferredGap(ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
 												.addComponent(goNorthButton).addPreferredGap(ComponentPlacement.RELATED)
 												.addGroup(gl_actionPanel.createParallelGroup(Alignment.BASELINE)
@@ -190,24 +191,27 @@ public class GUIManager {
 												.addGap(37)))));
 		actionPanel.setLayout(gl_actionPanel);
 
-		JLabel leftPanelHeadline = new JLabel("Map");
+		leftPanelHeadline = new JLabel("[HEADLINE1]");
+		leftPanelHeadline.setBackground(new Color(0, 0, 0));
 		leftPanelHeadline.setFont(new Font("Tahoma", Font.BOLD, 12));
 		leftPanelHeadline.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
 		leftPanelHeadline.setHorizontalAlignment(SwingConstants.CENTER);
 
-		JPanel mapPanel = new JPanel();
-		mapPanel.setBackground(new Color(107, 142, 35));
+		leftContentPanel = new JPanel();
+		leftContentPanel.setBackground(Color.WHITE);
 		GroupLayout gl_leftMainPanel = new GroupLayout(leftMainPanel);
 		gl_leftMainPanel.setHorizontalGroup(gl_leftMainPanel.createParallelGroup(Alignment.LEADING)
 				.addComponent(leftPanelHeadline, GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
-				.addGroup(gl_leftMainPanel.createSequentialGroup().addGap(40)
-						.addComponent(mapPanel, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE)
-						.addGap(31)));
+				.addGroup(gl_leftMainPanel.createSequentialGroup().addGap(10)
+						.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+						.addContainerGap()));
 		gl_leftMainPanel.setVerticalGroup(gl_leftMainPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_leftMainPanel.createSequentialGroup()
 						.addComponent(leftPanelHeadline, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addGap(39).addComponent(mapPanel, GroupLayout.PREFERRED_SIZE, 471, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(46, Short.MAX_VALUE)));
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+						.addContainerGap()));
+		leftContentPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		leftMainPanel.setLayout(gl_leftMainPanel);
 
 		JLabel playerInfoHeadline = new JLabel(">>> Die kleine Holly <<<");
@@ -222,15 +226,15 @@ public class GUIManager {
 		skillPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		skillPanel.setBackground(Color.WHITE);
 		GroupLayout gl_playerInfoPanel = new GroupLayout(playerInfoPanel);
-		gl_playerInfoPanel.setHorizontalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.TRAILING)
-				.addComponent(playerInfoHeadline, GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
-				.addGroup(gl_playerInfoPanel.createSequentialGroup().addGap(10)
-						.addComponent(playerBarPanel, GroupLayout.PREFERRED_SIZE, 575, Short.MAX_VALUE)
-						.addContainerGap())
-				.addGroup(Alignment.LEADING,
-						gl_playerInfoPanel.createSequentialGroup().addContainerGap()
-								.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(336, Short.MAX_VALUE)));
+		gl_playerInfoPanel
+				.setHorizontalGroup(
+						gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(playerInfoHeadline, GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+								.addGroup(gl_playerInfoPanel.createSequentialGroup().addContainerGap()
+										.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 249,
+												GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(336, Short.MAX_VALUE))
+								.addComponent(playerBarPanel, GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE));
 		gl_playerInfoPanel.setVerticalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_playerInfoPanel.createSequentialGroup()
 						.addComponent(playerInfoHeadline, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
@@ -323,13 +327,17 @@ public class GUIManager {
 		levelLabel = new JLabel("Level X");
 
 		levelBar = new JProgressBar();
+		levelBar.setToolTipText("");
 		GroupLayout gl_playerBarPanel = new GroupLayout(playerBarPanel);
-		gl_playerBarPanel.setHorizontalGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING).addGroup(
-				gl_playerBarPanel.createSequentialGroup().addContainerGap().addComponent(healthLabel).addGap(50)
+		gl_playerBarPanel.setHorizontalGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_playerBarPanel.createSequentialGroup().addContainerGap().addComponent(healthLabel)
+						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(healthBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 								GroupLayout.PREFERRED_SIZE)
-						.addGap(108).addComponent(levelLabel).addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(levelBar, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE).addGap(81)));
+						.addGap(54).addComponent(levelLabel).addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(levelBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(155, Short.MAX_VALUE)));
 		gl_playerBarPanel
 				.setVerticalGroup(
 						gl_playerBarPanel.createParallelGroup(Alignment.LEADING)
@@ -368,7 +376,7 @@ public class GUIManager {
 	}
 
 	public JPanel getMapInfoPanel() {
-		return mapInfoPanel;
+		return leftInfoPanel;
 	}
 
 	public JPanel getMapPanel() {
@@ -387,20 +395,12 @@ public class GUIManager {
 		return playerInfoPanel;
 	}
 
-	public JLabel getCurrentFieldBiomLabel() {
-		return currentFieldBiomLabel;
-	}
-
 	public JPanel getLeftMainPanel() {
 		return leftMainPanel;
 	}
 
-	public JLabel getChallengeState() {
-		return challengeState;
-	}
-
 	public JButton getBtnInventar() {
-		return btnInventar;
+		return openInvButton;
 	}
 
 	public JButton getGoNorthButton() {
@@ -455,11 +455,26 @@ public class GUIManager {
 		return actionButtonPanel;
 	}
 
+	public JButton getOpenInvButton() {
+		return openInvButton;
+	}
+
+	public JPanel getLeftContentPanel() {
+		return leftContentPanel;
+	}
+
+	public JLabel getLeftPanelHeadline() {
+		return leftPanelHeadline;
+	}
+
+	public JPanel getLeftInfoContentPanel() {
+		return leftInfoContentPanel;
+	}
+
 	public void addFieldInfo(String info) {
 		this.fieldInfos.add(new JLabel(info));
 
 		this.frame.revalidate();
 		this.frame.repaint();
 	}
-
 }
