@@ -1,6 +1,8 @@
 package entities;
 
 import basic.Config;
+import basic.GameManager;
+import items.Weapon;
 import map.Direction;
 import map.Map;
 import map.MapField;
@@ -14,6 +16,8 @@ public class Player {
 	private String name;
 	private double health;
 	private Inventory inventory;
+	private Inventory equipped;
+
 	private Experience experience;
 	private int daysAlive;
 	private Map currentMap;
@@ -25,12 +29,16 @@ public class Player {
 		this.name = name;
 		this.health = Config.PLAYER_HEALTH;
 		this.inventory = new Inventory();
+		this.equipped = new Inventory();
 		this.experience = new Experience();
 		this.daysAlive = 0;
 		this.currentMap = mainMap;
 		this.currentMapField = mainMap.getMapFieldByCoordinate(Config.MAP_SIZEX / 2, Config.MAP_SIZEY / 2);
 		this.time = new Time(0);
 		this.skillSet = new SkillSet();
+
+		this.inventory.add(GameManager.getInstance().getResourceManager().getItemByUniqueName("Stick"));
+		this.equipped.add(GameManager.getInstance().getResourceManager().getItemByUniqueName("Stick"));
 	}
 
 	public double getHealth() {
@@ -75,6 +83,17 @@ public class Player {
 
 	public SkillSet getSkillSet() {
 		return skillSet;
+	}
+
+	public Weapon equippedWeapon() {
+
+		for (int i = 0; i < equipped.getAllItems().size(); i++) {
+			if (equipped.getAllItems().get(i) instanceof Weapon) {
+				return (Weapon) equipped.getAllItems().get(i);
+			}
+
+		}
+		return null;
 	}
 
 	public boolean canGo(Direction direction) {

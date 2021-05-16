@@ -4,7 +4,7 @@
 			"AngryCat": {
                 "label": "Wütende Katze",
                 "prefix": "eine",
-                "damage": 100,
+                "damage": 5,
                 "health": 20,
                 "items": {
                     "Apple": {

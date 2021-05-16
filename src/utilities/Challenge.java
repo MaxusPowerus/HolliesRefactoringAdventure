@@ -10,7 +10,7 @@ public class Challenge {
 	private boolean challengeCompleted;
 	private NPC npc = null;
 	private Container container = null;
-	int challangeType;
+	private int challangeType;
 	private Biom biom;
 
 	int containerChance = 0;
@@ -39,7 +39,7 @@ public class Challenge {
 		chooseChallenge(100, 100);
 	}
 
-	public boolean chooseChallenge(int challangeChance, int containerChance) {
+	private boolean chooseChallenge(int challangeChance, int containerChance) {
 		Random Randy = new Random();
 		MyRandom Chan = new MyRandom();
 
@@ -51,7 +51,7 @@ public class Challenge {
 		this.challangeType = Chan.pickRandom(challengeTypes);
 
 		switch (challangeType) {
-		case 1:
+		case 0:
 			container = new Container("random", "");
 			container.fill(100, 1.5);
 			break;
@@ -71,4 +71,7 @@ public class Challenge {
 		return container;
 	}
 
+	public int getCallengeType() {
+		return challangeType;
+	}
 }
