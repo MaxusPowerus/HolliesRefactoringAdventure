@@ -39,19 +39,29 @@ public class Map {
 			file.delete();
 			file.createNewFile();
 			FileWriter writer = new FileWriter(file, true);
+			int count = 0;
 
 			for (int y = 0; y < Config.MAP_SIZEY; y++) {
 				for (int x = 0; x < Config.MAP_SIZEX; x++) {
+
 					String out = getMapFieldByCoordinate(x, y).getBiom().getName() + ",";
-					// System.out.print(out);
+					String out2 = "Fail!";
+					if (getMapFieldByCoordinate(x, y).getChallenge().getNpc() != null) {
+						out2 = "FieldCount: " + count + " Biom: " + getMapFieldByCoordinate(x, y).getBiom().getName()
+								+ " Gegner: " + getMapFieldByCoordinate(x, y).getChallenge().getNpc().getName();
+					}
+					count++;
+					System.out.print(out2 + "\n");
+
 					writer.write(out);
 				}
-				// System.out.print("\n");
+				System.out.print("\n");
 				writer.write("\n");
 			}
 			// System.out.println(parameter);
 			writer.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

@@ -25,23 +25,23 @@ public class Challenge {
 		this.biom = biom;
 		switch (biom) {
 		case MEADOW:
-			containerChance = 100;
+			containerChance = 0;
 			enemyChance = 100;
 			break;
 		case FOREST:
-			containerChance = 100;
+			containerChance = 0;
 			enemyChance = 100;
 			break;
 		case DESERT:
-			containerChance = 100;
+			containerChance = 0;
 			enemyChance = 100;
 			break;
 		case SWAMP:
-			containerChance = 100;
+			containerChance = 0;
 			enemyChance = 100;
 			break;
 		case MOUNTAINS:
-			containerChance = 100;
+			containerChance = 0;
 			enemyChance = 100;
 			break;
 		}
@@ -57,7 +57,7 @@ public class Challenge {
 			return false;
 		}
 
-		int[] challengeTypes = new int[] { containerChance };
+		int[] challengeTypes = new int[] { containerChance, enemyChance };
 		this.challengeType = Chan.pickRandom(challengeTypes);
 
 		switch (challengeType) {
@@ -69,10 +69,11 @@ public class Challenge {
 
 		case 1:
 			ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-			int length = GameManager.getInstance().getResourceManager().getNpcs().size();
+			int length = GameManager.getInstance().getResourceManager().getEnemies().size();
 			for (int i = 0; i < length; i++) {
-				if (GameManager.getInstance().getResourceManager().getNpcs().get(i) instanceof Enemy) {
-					enemies.add((Enemy) GameManager.getInstance().getResourceManager().getNpcs().get(i));
+				if (GameManager.getInstance().getResourceManager().getEnemies().get(i).getBiom() == null
+						|| GameManager.getInstance().getResourceManager().getEnemies().get(i).getBiom() == biom) {
+					enemies.add(GameManager.getInstance().getResourceManager().getEnemies().get(i));
 				}
 			}
 			npc = enemies.get(Randy.nextInt(enemies.size()));
@@ -99,6 +100,10 @@ public class Challenge {
 
 	public void setChallengeCompleted(boolean challengeCompleted) {
 		this.challengeCompleted = challengeCompleted;
+	}
+
+	public Biom getBiom() {
+		return biom;
 	}
 
 }

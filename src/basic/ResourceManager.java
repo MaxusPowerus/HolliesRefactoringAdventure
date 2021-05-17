@@ -90,6 +90,36 @@ public class ResourceManager {
 		return items;
 	}
 
+	public ArrayList<Weapon> getWeapons() {
+		ArrayList<Weapon> out = new ArrayList<Weapon>();
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i) instanceof Weapon) {
+				out.add((Weapon) items.get(i));
+			}
+		}
+		return out;
+	}
+
+	public ArrayList<Outfit> getOutfit() {
+		ArrayList<Outfit> out = new ArrayList<Outfit>();
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i) instanceof Outfit) {
+				out.add((Outfit) items.get(i));
+			}
+		}
+		return out;
+	}
+
+	public ArrayList<Food> getFood() {
+		ArrayList<Food> out = new ArrayList<Food>();
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i) instanceof Food) {
+				out.add((Food) items.get(i));
+			}
+		}
+		return out;
+	}
+
 	public Item getItemByUniqueName(String uniqueName) {
 
 		for (int i = 0; i < items.size(); i++) {
@@ -155,7 +185,8 @@ public class ResourceManager {
 
 						break;
 					case "Friend":
-						npc = new Friend(label, innerEntity.get("prefix").toString());
+						npc = new Friend(label, innerEntity.get("prefix").toString(),
+								innerEntity.get("biom").toString());
 
 						Inventory friendInv = new Inventory();
 
@@ -176,7 +207,7 @@ public class ResourceManager {
 
 						break;
 					default:
-						npc = new NPC(label, innerEntity.get("prefix").toString());
+						npc = new NPC(label, innerEntity.get("prefix").toString(), innerEntity.get("biom").toString());
 						break;
 					}
 
@@ -190,5 +221,15 @@ public class ResourceManager {
 
 	public ArrayList<NPC> getNpcs() {
 		return npcs;
+	}
+
+	public ArrayList<Enemy> getEnemies() {
+		ArrayList<Enemy> out = new ArrayList<Enemy>();
+		for (int i = 0; i < npcs.size(); i++) {
+			if (npcs.get(i) instanceof Enemy) {
+				out.add((Enemy) npcs.get(i));
+			}
+		}
+		return out;
 	}
 }

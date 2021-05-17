@@ -1,5 +1,6 @@
 package entities;
 
+import map.Biom;
 import utilities.Inventory;
 
 public class NPC {
@@ -8,11 +9,38 @@ public class NPC {
 	private String prefix;
 	private Inventory inventory;
 	private boolean discovered;
+	private Biom biom;
 
-	public NPC(String name, String prefix) {
+	public NPC(String name, String prefix, String biom) {
 		this.name = name;
 		this.prefix = prefix;
 		this.discovered = false;
+
+		switch (biom) {
+		case "all":
+			this.biom = null;
+			break;
+
+		case "meadow":
+			this.biom = Biom.MEADOW;
+			break;
+
+		case "forest":
+			this.biom = Biom.FOREST;
+			break;
+
+		case "desert":
+			this.biom = Biom.DESERT;
+			break;
+
+		case "swamp":
+			this.biom = Biom.SWAMP;
+			break;
+
+		case "mountains":
+			this.biom = Biom.MOUNTAINS;
+			break;
+		}
 	}
 
 	public String getName() {
@@ -21,6 +49,10 @@ public class NPC {
 
 	public String getPrefix() {
 		return prefix;
+	}
+
+	public Biom getBiom() {
+		return biom;
 	}
 
 	public void setInventory(Inventory inventory) {

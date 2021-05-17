@@ -277,6 +277,8 @@ public class MapGenerator {
 		generateChallenge();
 		System.out.println("Container Done");
 
+		map.printMapDebug("");
+
 		// map.printMapDebug("");
 		return map;
 	}
