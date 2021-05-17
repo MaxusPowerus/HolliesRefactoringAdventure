@@ -7,10 +7,10 @@
             "Stick": { "label": "Stock", "damage": 3, "value": 1000}
         },
         "Outfits": {
-            "UnicornCostume": {"label": "Einhorn-Kostüm", "armor": 0, "value": 50},
-            "LetherArmor": {"label": "Einhorn-Kostüm", "armor": 5, "value": 50},
-            "ChainMail": {"label": "Kettenrüstung", "armor": 10, "value": 100},
-            "IronArmor": {"label": "Eisenrüstung", "armor": 15, "value": 150},
+            "UnicornCostume": {"label": "Einhorn-KostÃ¼m", "armor": 0, "value": 50},
+            "LetherArmor": {"label": "Einhorn-KostÃ¼m", "armor": 5, "value": 50},
+            "ChainMail": {"label": "KettenrÃ¼stung", "armor": 10, "value": 100},
+            "IronArmor": {"label": "EisenrÃ¼stung", "armor": 15, "value": 150},
             "NobelDress": {"label": "Feine Kleidung", "armor": 0, "value": 30},
             "NormalDress": {"label": "Kleidung", "armor": 0, "value": 10},
             "rags": {"label": "Lumpen", "armor": 0, "value": 3}
