@@ -1,5 +1,8 @@
 package basic;
 
+import java.awt.Color;
+
+import entities.Enemy;
 import entities.Player;
 import gui.ActionPanel;
 import gui.GUIManager;
@@ -7,8 +10,11 @@ import gui.PlayerInfoPanel;
 import gui.WorldInfoPanel;
 import gui.actions.InventoryShowAction;
 import gui.actions.MapShowAction;
+import gui.buttons.AttackButton;
+import gui.buttons.EscapeButton;
 import gui.buttons.InspectButton;
 import gui.buttons.LootButton;
+import map.Biom;
 import map.Map;
 import map.MapGenerator;
 import utilities.Challenge;
@@ -67,6 +73,20 @@ public class GameManager {
 		this.guiManager.getFieldInfos().removeAll();
 		this.guiManager.getActionButtonPanel().removeAll();
 
+		// switch biome
+		this.guiManager.addFieldInfo("Du bist " + player.getCurrentMapField().getBiom().toString() + ":");
+		if (player.getCurrentMapField().getBiom() == Biom.DESERT) {
+			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#F7E0A9"));
+		} else if (player.getCurrentMapField().getBiom() == Biom.FOREST) {
+			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#196130"));
+		} else if (player.getCurrentMapField().getBiom() == Biom.MOUNTAINS) {
+			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#71817B"));
+		} else if (player.getCurrentMapField().getBiom() == Biom.SWAMP) {
+			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#6D610D"));
+		} else if (player.getCurrentMapField().getBiom() == Biom.MEADOW) {
+			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#16b91e"));
+		}
+
 		// execute challenge
 		Challenge challenge = player.getCurrentMapField().getChallenge();
 		if (!challenge.isChallengeCompleted()) {
@@ -86,7 +106,15 @@ public class GameManager {
 
 				break;
 			case 1:
-				this.guiManager.addFieldInfo("Ein Monster ist erschienen");
+				Enemy enemy = (Enemy) challenge.getNpc();
+				this.guiManager.addFieldInfo(enemy.toString() + " ist erschienen");
+
+				AttackButton attackButton = new AttackButton(challenge, player, this);
+				this.guiManager.getActionButtonPanel().add(attackButton);
+
+				EscapeButton escapeButton = new EscapeButton(challenge, player, this);
+				this.guiManager.getActionButtonPanel().add(escapeButton);
+
 				break;
 			case 2:
 				this.guiManager.addFieldInfo("Du hast einen Händler entdeckt");
