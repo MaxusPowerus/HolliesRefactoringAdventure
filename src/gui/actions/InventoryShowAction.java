@@ -13,9 +13,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
 
 import basic.GameManager;
 import gui.GUIHelper;
@@ -72,10 +70,6 @@ public class InventoryShowAction implements ActionListener {
 		panel.setMaximumSize(new Dimension(32767, 50));
 		this.gameManager.getGuiManager().getLeftContentPanel().add(panel);
 
-		JRadioButton selectButton = new JRadioButton("");
-		selectButton.setHorizontalAlignment(SwingConstants.LEFT);
-		selectButton.setVerticalAlignment(SwingConstants.CENTER);
-
 		JLabel name = new JLabel(item.getName() + " (" + item.getCount() + " Stück)");
 		name.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
@@ -100,19 +94,18 @@ public class InventoryShowAction implements ActionListener {
 
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap()
-						.addComponent(selectButton, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_panel.createSequentialGroup().addContainerGap().addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(name, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE).addGap(10)
 						.addComponent(button, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE).addContainerGap()));
 		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup().addContainerGap()
 						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(name, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-								.addComponent(selectButton, GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
 								.addComponent(button, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
 						.addContainerGap()));
 		panel.setLayout(gl_panel);
+
+		panel.addMouseListener(new InventoryItemHover(this.gameManager, item));
 
 		return panel;
 	}
