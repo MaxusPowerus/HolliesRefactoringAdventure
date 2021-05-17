@@ -153,9 +153,16 @@ public class Player {
 		int playerFight = skillSet.getSkillValue(Skill.STRENGTH) + skillSet.getSkillValue(Skill.AGILITY);
 		int enemyFight = enemy.getSkillSet().getSkillValue(Skill.STRENGTH)
 				+ enemy.getSkillSet().getSkillValue(Skill.AGILITY);
-		double playerDmg = 1;
+		double playerDmg = 0;
 		if (equippedWeapon() != null)
 			playerDmg = equippedWeapon().getDamage();
+		if (equippedWeapon() == null) {
+			playerDmg = skillSet.getSkillValue(Skill.STRENGTH) / 2;
+			if (playerDmg <= 0) {
+				playerDmg = 1;
+			}
+
+		}
 		double enemyDmg = enemy.getDamage();
 		double dmgFac = 1;
 		double enemyHealth = enemy.getHealth();
@@ -184,6 +191,15 @@ public class Player {
 			return true;
 		} else {
 			return false;
+		}
+
+	}
+
+	public boolean flee(Enemy enemy) {
+		if (enemy.getSkillSet().getSkillValue(Skill.AGILITY) < skillSet.getSkillValue(Skill.AGILITY)) {
+			return false;
+		} else {
+			return true;
 		}
 
 	}
