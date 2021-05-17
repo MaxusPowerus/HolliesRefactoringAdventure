@@ -43,11 +43,13 @@ public class Inventory {
 
 	public void remove(Item item) {
 		Item itemInInv = this.getItem(item);
-		if (itemInInv != null) {
-			itemInInv.decrementCount();
-			return;
+		itemInInv.decrementCount();
+		System.out.println(itemInInv.getCount());
+		if (itemInInv.getCount() == 0) {
+			items.remove(itemInInv);
+			System.out.println("remove");
 		}
-		items.remove(itemInInv);
+
 	}
 
 	private Item getItem(Item item) {

@@ -37,5 +37,8 @@ public class LootButton extends JButton implements ActionListener {
 		if (this.gameManager.getGuiManager().getLeftPanelHeadline().getText() == "Inventar") {
 			new InventoryShowAction(this.gameManager).initialize();
 		}
+
+		this.challenge.getContainer().setFound(true);
+		this.challenge.setChallengeCompleted(true);
 	}
 }

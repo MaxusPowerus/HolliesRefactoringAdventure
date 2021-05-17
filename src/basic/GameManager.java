@@ -73,7 +73,7 @@ public class GameManager {
 			switch (challenge.getChallangeType()) {
 			case 0:
 				Container container = challenge.getContainer();
-				if (container.getFound()) {
+				if (!container.getFound()) {
 					this.guiManager.addFieldInfo("Du hast " + container.toString() + " gefunden");
 
 					LootButton lootButton = new LootButton(challenge, player, this);
@@ -84,6 +84,12 @@ public class GameManager {
 					this.guiManager.getActionButtonPanel().add(button);
 				}
 
+				break;
+			case 1:
+				this.guiManager.addFieldInfo("Ein Monster ist erschienen");
+				break;
+			case 2:
+				this.guiManager.addFieldInfo("Du hast einen Händler entdeckt");
 				break;
 			}
 		} else {

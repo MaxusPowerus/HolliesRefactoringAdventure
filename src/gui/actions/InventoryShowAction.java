@@ -1,6 +1,7 @@
 package gui.actions;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -68,6 +69,7 @@ public class InventoryShowAction implements ActionListener {
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(500, 50));
 		panel.setMaximumSize(new Dimension(32767, 50));
+		panel.setBackground(Color.LIGHT_GRAY);
 		this.gameManager.getGuiManager().getLeftContentPanel().add(panel);
 
 		JLabel name = new JLabel(item.getName() + " (" + item.getCount() + " Stück)");
@@ -75,7 +77,6 @@ public class InventoryShowAction implements ActionListener {
 
 		// TODO
 		Icon itemIcon = Icon.getByName(item.getUniqueName());
-		System.out.println(item.getUniqueName());
 		if (itemIcon != null) {
 			GUIHelper.setIcon(name, itemIcon, 30, 30);
 		}
@@ -92,6 +93,8 @@ public class InventoryShowAction implements ActionListener {
 			button.setText("anziehen");
 		}
 
+		button.addActionListener(new UseItemAction(this.gameManager, item));
+
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup().addContainerGap().addPreferredGap(ComponentPlacement.RELATED)
@@ -105,7 +108,7 @@ public class InventoryShowAction implements ActionListener {
 						.addContainerGap()));
 		panel.setLayout(gl_panel);
 
-		panel.addMouseListener(new InventoryItemHover(this.gameManager, item));
+		panel.addMouseListener(new InventoryItemHover(panel, this.gameManager, item));
 
 		return panel;
 	}

@@ -23,13 +23,9 @@ public class Item {
 		count++;
 	}
 
-	public boolean decrementCount() {
-		count--;
-		if (count >= 1) {
-			return true;
-		} else {
-			return false;
-		}
+	public void decrementCount() {
+		if (count > 0)
+			count--;
 	}
 
 	@Override
@@ -71,9 +67,9 @@ public class Item {
 		if (this instanceof Weapon) {
 			item = new Weapon(this.uniqueName, this.name, this.value, ((Weapon) this).getDamage());
 		} else if (this instanceof Food) {
-			item = new Weapon(this.uniqueName, this.name, this.value, ((Food) this).getEnergy());
+			item = new Food(this.uniqueName, this.name, this.value, ((Food) this).getEnergy());
 		} else if (this instanceof Outfit) {
-			item = new Weapon(this.uniqueName, this.name, this.value, ((Outfit) this).getArmor());
+			item = new Outfit(this.uniqueName, this.name, this.value, ((Outfit) this).getArmor());
 		} else {
 			item = new Item(this.uniqueName, this.name, this.value);
 		}

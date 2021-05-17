@@ -51,9 +51,7 @@ public class Container {
 		ArrayList<Item> items = GameManager.getInstance().getResourceManager().getAllItems();
 		ArrayList<Item> catItems = new ArrayList<Item>();
 
-		category.toLowerCase();
-
-		switch (category) {
+		switch (category.toLowerCase()) {
 
 		case "weapon":
 			for (int i = 0; i < items.size(); i++) {
@@ -124,6 +122,7 @@ public class Container {
 		for (Item item : this.inventory.getAllItems()) {
 			builder.append(item.getName()).append(", ");
 		}
-		return builder.substring(0, builder.toString().lastIndexOf(',')).toString();
+		return builder.substring(0, builder.toString().lastIndexOf(',') > -1 ? builder.toString().lastIndexOf(',') : 0)
+				.toString();
 	}
 }
