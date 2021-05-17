@@ -1,5 +1,6 @@
 package entities;
 
+import basic.HelperFunctions;
 import map.Biom;
 import utilities.Inventory;
 
@@ -69,6 +70,11 @@ public class NPC {
 
 	public void setDiscovered(boolean discovered) {
 		this.discovered = discovered;
+	}
+
+	@Override
+	public String toString() {
+		return HelperFunctions.firstLetter2Upper(prefix) + " " + HelperFunctions.firstLetter2Lower(name);
 	}
 
 }
