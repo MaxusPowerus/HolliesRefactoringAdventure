@@ -39,10 +39,11 @@ public class Inventory {
 
 	private void add(Inventory inventory) {
 		ArrayList<Item> items = inventory.getAllItems();
-		this.add(items);
+		this.add(items, inventory.getGold());
 	}
 
-	private void add(ArrayList<Item> items) {
+	private void add(ArrayList<Item> items, int gold) {
+		this.gold += gold;
 		for (int i = 0; i < items.size(); i++) {
 			this.add(items.get(i));
 		}

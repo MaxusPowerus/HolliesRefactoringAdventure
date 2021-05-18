@@ -114,6 +114,10 @@ public class InventoryShowAction implements ActionListener {
 				}
 			});
 
+			// add gold tab
+			inventoryTabPane.addTab("Gold: " + this.gameManager.getPlayer().getInventory().getGold(), null);
+			inventoryTabPane.setBackgroundAt(5, Color.decode("#FFD700"));
+
 			this.gameManager.getGuiManager().getLeftContentPanel().add(inventoryTabPane);
 		}
 
