@@ -9,7 +9,7 @@
                 }
             },
 			"Rabbit": {
-                "label": "Feldhase", "prefix": "ein", "damage": 0, "health": 5, "st": 1, "pe": 6, "en": 2, "ch": 8, "in": 1, "ag": 5, "lk": 3, "biom": "desert", 
+                "label": "Feldhase", "prefix": "ein", "damage": 0, "health": 5, "st": 1, "pe": 6, "en": 2, "ch": 8, "in": 1, "ag": 5, "lk": 3, "biom": "meadow", 
                 "items": {
                     "Flesh": { "amount": 1 }
                 }
@@ -27,13 +27,15 @@
                 }
             },
 			"SwampMonster": {
-                "label": "Sumpfmonster", "prefix": "ein", "damage": 12, "health": 25, "st": 7, "pe": 4, "en": 5, "ch": 1, "in": 1, "ag": 4, "lk": 5, "biom": "desert", 
+                "label": "Sumpfmonster", "prefix": "ein", "damage": 12, "health": 25, "st": 7, "pe": 4, "en": 5, "ch": 1, "in": 1, "ag": 4, "lk": 5, "biom": "swamp", 
                 "items": {
                     "Flesh": { "amount": 1 }
                 }
             },
 			"CaveTroll": {
-                "label": "Höhlentroll", "prefix": "ein", "damage": 12, "health": 30, "st": 10, "pe": 3, "en": 2, "ch": 1, "in": 1, "ag": 3, "lk": 3, "biom": "desert", 
+
+                "label": "Höhlentroll", "prefix": "ein", "damage": 12, "health": 30, "st": 10, "pe": 3, "en": 2, "ch": 1, "in": 1, "ag": 3, "lk": 3, "biom": "mountains", 
+
                 "items": {
                     "Flesh": { "amount": 1 }
                 }
