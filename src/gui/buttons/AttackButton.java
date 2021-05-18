@@ -30,14 +30,14 @@ public class AttackButton extends JButton implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		this.setEnabled(false);
 
+		this.gameManager.getGuiManager().getActionButtonPanel().removeAll();
+
 		double healthBeforeFight = this.player.getHealth();
 
 		boolean attackSucceed = this.player.fight((Enemy) this.challenge.getNpc());
 		if (attackSucceed) {
 			this.gameManager.getGuiManager().addFieldInfo("In einem epischen Kampf besiegst du <b>"
 					+ this.challenge.getNpc().getPrefix() + " " + this.challenge.getNpc().getName() + "</b>");
-			this.challenge.setChallengeCompleted(true);
-			this.gameManager.getGuiManager().getActionButtonPanel().removeAll();
 
 			LootButton lootButton = new LootButton(this.challenge, this.gameManager,
 					this.challenge.getNpc().getInventory());
@@ -50,6 +50,8 @@ public class AttackButton extends JButton implements ActionListener {
 		} else {
 			this.gameManager.getGuiManager().addFieldInfo("GAME OVER");
 		}
+
+		this.challenge.setChallengeCompleted(true);
 
 		PlayerInfoPanel.update();
 		this.gameManager.update();

@@ -42,6 +42,7 @@ public class Player {
 		this.skillSet = new SkillSet();
 
 		// Set StartInventory
+<<<<<<< HEAD
 		Weapon startWeapon = new Weapon("Stick", "Stock", 1, 1);
 		Outfit startOutfit = new Outfit("HolliesDress", "Hollys Lieblingskleid", 0, 10);
 		Food startFood = new Food("StewGrandmaStyle", "Eintopf nach Omas Art", 25, 1);
@@ -49,6 +50,14 @@ public class Player {
 				"Hey Holly!\nTriff mich heute Abend im Wald!\nIch habe eine Überraschung für dich!\nDein Holger <3", 0);
 		Other startOther = new Other("HolliesTeddy", "SchrimplyPipples",
 				"Hollies ältester und wichtigster Begleiter: Ein alter abgenutzter Teddybär!", 0);
+=======
+		Weapon startWeapon = new Weapon("Stick", "Stock", 1, 0);
+		Outfit startOutfit = new Outfit("HolliesDress", "Hollys Lieblingskleid", 0, 10);
+		Food startFood = new Food("StewGrandmaStyle", "Eintopf nach Omas Art", 25, 1);
+		Note startNote = new Note("LetterFromHolger01", "Nachricht von Holger",
+				"Hey Holly!<br>Triff mich heute Abend im Wald!<br>Ich habe eine Überraschung für dich!<br>Dein Holger <3",
+				0);
+>>>>>>> a2336b140edc7b0a4b9a7c17ead4ce5825b83358
 
 		inventory.add(startWeapon);
 		inventory.add(startOutfit);

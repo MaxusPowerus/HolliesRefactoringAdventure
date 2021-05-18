@@ -19,7 +19,10 @@ import gui.GUIHelper;
 import gui.Icon;
 import items.Food;
 import items.Item;
+import items.Note;
+import items.Other;
 import items.Outfit;
+import items.QuestItem;
 import items.Weapon;
 
 public class InventoryItemHover implements MouseListener {
@@ -86,27 +89,43 @@ public class InventoryItemHover implements MouseListener {
 
 		JLabel name = new JLabel(item.getName());
 		name.setFont(new Font("Dialog", Font.BOLD, 16));
+		name.setForeground(Color.decode("#A33E3C"));
 		name.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
 		itemInfoPanel.add(name);
 
-		JLabel value = new JLabel("Wert: " + item.getValue());
+		JLabel value = new JLabel("<html><b>Wert:</b> " + item.getValue() + " Gold</html>");
 		value.setFont(new Font("Dialog", Font.PLAIN, 14));
 		itemInfoPanel.add(value);
 
 		if (item instanceof Weapon) {
-			JLabel damage = new JLabel("Schaden: " + ((Weapon) item).getDamage());
+			JLabel damage = new JLabel("<html><b>Schaden:</b> " + ((Weapon) item).getDamage() + "</html>");
 			damage.setFont(new Font("Dialog", Font.ITALIC, 14));
 			itemInfoPanel.add(damage);
 		}
 		if (item instanceof Food) {
-			JLabel energy = new JLabel("Energie: " + ((Food) item).getEnergy());
+			JLabel energy = new JLabel("<html><b>Energie:</b> " + ((Food) item).getEnergy() + "</html>");
 			energy.setFont(new Font("Dialog", Font.ITALIC, 14));
 			itemInfoPanel.add(energy);
 		}
 		if (item instanceof Outfit) {
-			JLabel armor = new JLabel("Rüstungspunkte: " + ((Outfit) item).getArmor());
+			JLabel armor = new JLabel("<html><b>Rüstungspunkte:</b> " + ((Outfit) item).getArmor() + "</html>");
 			armor.setFont(new Font("Dialog", Font.ITALIC, 14));
 			itemInfoPanel.add(armor);
+		}
+		if (item instanceof Note) {
+			JLabel text = new JLabel("<html><b>Nachricht:<br></b> " + ((Note) item).getText() + "</html>");
+			text.setFont(new Font("Dialog", Font.ITALIC, 14));
+			itemInfoPanel.add(text);
+		}
+		if (item instanceof Other) {
+			JLabel info = new JLabel("<html><b>Information:</b> " + ((Other) item).getInfo() + "</html>");
+			info.setFont(new Font("Dialog", Font.ITALIC, 14));
+			itemInfoPanel.add(info);
+		}
+		if (item instanceof QuestItem) {
+			JLabel info = new JLabel("<html><b>Information:</b> " + ((QuestItem) item).getInfo() + "</html>");
+			info.setFont(new Font("Dialog", Font.ITALIC, 14));
+			itemInfoPanel.add(info);
 		}
 
 		JLabel icon = new JLabel();
