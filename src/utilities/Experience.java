@@ -6,7 +6,7 @@ public class Experience {
 	private int requiredXp;
 
 	public Experience() {
-		this.level = 0;
+		this.level = 1;
 		this.xp = 0;
 		this.requiredXp = 100;
 	}

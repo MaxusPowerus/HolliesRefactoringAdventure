@@ -50,7 +50,7 @@ public class Player {
 		Outfit startOutfit = new Outfit("HolliesDress", "Hollys Lieblingskleid", 0, 10);
 		Food startFood = new Food("StewGrandmaStyle", "Eintopf nach Omas Art", 25, 1);
 		Note startNote = new Note("LetterFromHolger01", "Nachricht von Holger",
-				"Hey Holly!<br>Triff mich heute Abend im Wald!<br>Ich habe eine Überraschung für dich!<br>Dein Holger <3",
+				"Hey Holly!<br>Triff mich heute Abend im Wald!<br>Ich habe eine Überraschung für dich!<br>Dein Holger ;)",
 				0);
 		Other startOther = new Other("HolliesTeddy", "SchrimplyPipples",
 				"Hollies ältester und wichtigster Begleiter: Ein alter abgenutzter Teddybär!", 0);
@@ -62,7 +62,7 @@ public class Player {
 		inventory.add(startOther);
 
 		inventory.addGold(5);
-		// ==============================================================================================
+		// ================================================================================================================
 	}
 
 	public double getHealth() {
