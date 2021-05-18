@@ -32,6 +32,7 @@ import items.Item;
 import items.Note;
 import items.Other;
 import items.Outfit;
+import items.QuestItem;
 import items.Weapon;
 
 public class InventoryShowAction implements ActionListener {
@@ -71,6 +72,7 @@ public class InventoryShowAction implements ActionListener {
 
 		HashMap<String, ArrayList<Item>> itemCategories = GameManager.getInstance().getPlayer().getInventory()
 				.getItemsByCategory();
+
 		if (itemCategories.isEmpty()) {
 			JPanel itemPanel = new JPanel();
 			itemPanel.setBorder(null);
@@ -117,8 +119,8 @@ public class InventoryShowAction implements ActionListener {
 
 			// add gold tab
 			inventoryTabPane.addTab("Gold: " + this.gameManager.getPlayer().getInventory().getGold(), null);
-			inventoryTabPane.setBackgroundAt(6, Color.decode("#FFD700"));
-			inventoryTabPane.setEnabledAt(6, false);
+			inventoryTabPane.setBackgroundAt(inventoryTabPane.getTabCount() - 1, Color.decode("#FFD700"));
+			inventoryTabPane.setEnabledAt(inventoryTabPane.getTabCount() - 1, false);
 
 			this.gameManager.getGuiManager().getLeftContentPanel().add(inventoryTabPane);
 		}
@@ -138,6 +140,8 @@ public class InventoryShowAction implements ActionListener {
 		JLabel name = new JLabel(item.getName() + " (" + item.getCount() + " Stück)");
 		name.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
+		System.out.println(item.getName() + ": " + item.getCount());
+
 		// TODO
 		Icon itemIcon = Icon.getByName(item.getUniqueName());
 		if (itemIcon != null) {
@@ -145,15 +149,30 @@ public class InventoryShowAction implements ActionListener {
 		}
 
 		JButton button = new JButton();
+		button.setBorder(null);
+
+		button.setBackground(Color.decode("#71F899"));
 
 		if (item instanceof Weapon) {
-			button.setText("ausrüsten");
+			if (this.gameManager.getPlayer().isEquipped(item)) {
+				button.setText("weglegen");
+				button.setBackground(Color.decode("#D21C2D"));
+				button.setForeground(Color.WHITE);
+			} else {
+				button.setText("ausrüsten");
+			}
 		}
 		if (item instanceof Food) {
 			button.setText("snacken");
 		}
 		if (item instanceof Outfit) {
-			button.setText("anziehen");
+			if (this.gameManager.getPlayer().isEquipped(item)) {
+				button.setText("ausziehen");
+				button.setBackground(Color.decode("#D21C2D"));
+				button.setForeground(Color.WHITE);
+			} else {
+				button.setText("anziehen");
+			}
 		}
 		if (item instanceof Note) {
 			button.setText("ansehen");
@@ -165,11 +184,17 @@ public class InventoryShowAction implements ActionListener {
 		button.addActionListener(new UseItemAction(this.gameManager, item));
 		button.addMouseListener(new InventoryItemHover(panel, this.gameManager, item));
 
+		// hide button because there is no action
+		if (item instanceof Note || item instanceof QuestItem) {
+			button.setVisible(false);
+		}
+
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup().addContainerGap().addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(name, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE).addGap(10)
-						.addComponent(button, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE).addContainerGap()));
+						.addComponent(name, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE).addGap(100)
+						.addComponent(button, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap()));
 		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup().addContainerGap()
 						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)

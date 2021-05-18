@@ -40,6 +40,8 @@ public class FleeButton extends JButton implements ActionListener {
 			this.gameManager.getGuiManager().addFieldInfo("GAME OVER");
 		}
 
+		this.gameManager.getGuiManager().setNavigationEnabled(true);
+
 		this.gameManager.update();
 	}
 }

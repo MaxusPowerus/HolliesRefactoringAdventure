@@ -61,6 +61,13 @@ public class GUIManager {
 	private JLabel intelligenceValue;
 	private JLabel agilityValue;
 	private JLabel luckValue;
+	private JPanel equippedPanel;
+	private JLabel lblEquipped;
+	private JPanel innerEquippedPanel;
+	private JLabel lblNewLabel;
+	private JLabel currentWeapon;
+	private JLabel lblRstungkleidung;
+	private JLabel currentOutfit;
 
 	public GUIManager() {
 		initialize();
@@ -158,7 +165,6 @@ public class GUIManager {
 		fieldInfoPanel.setLayout(gl_fieldInfoPanel);
 
 		actionButtonPanel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) actionButtonPanel.getLayout();
 		actionButtonPanel.setBackground(Color.WHITE);
 
 		openInvButton = new JButton("[INV_BTN]");
@@ -180,38 +186,35 @@ public class GUIManager {
 		goWestButton.addActionListener(new NavigationButtonAction(Direction.WEST));
 		GroupLayout gl_actionPanel = new GroupLayout(actionPanel);
 		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_actionPanel
-				.createSequentialGroup()
-				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(gl_actionPanel.createSequentialGroup()
-								.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_actionPanel.createSequentialGroup().addContainerGap()
-												.addComponent(openInvButton))
-										.addGroup(gl_actionPanel.createSequentialGroup().addGap(154)
-												.addGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING)
-														.addComponent(goSouthButton).addComponent(goNorthButton))))
+				.createSequentialGroup().addContainerGap(10, Short.MAX_VALUE)
+				.addGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(gl_actionPanel.createSequentialGroup().addGroup(gl_actionPanel
+								.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_actionPanel.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(openInvButton))
+								.addGroup(gl_actionPanel.createSequentialGroup().addGap(154)
+										.addGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING)
+												.addComponent(goSouthButton).addComponent(goNorthButton))))
 								.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(Alignment.TRAILING,
-								gl_actionPanel.createSequentialGroup()
-										.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(goWestButton).addGap(57)))
-				.addComponent(goEastButton).addPreferredGap(ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
-				.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_actionPanel.createSequentialGroup().addComponent(goWestButton).addGap(57)))
+				.addComponent(goEastButton).addGap(129)
+				.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
 				.addContainerGap()));
-		gl_actionPanel
-				.setVerticalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_actionPanel.createSequentialGroup().addContainerGap()
-								.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_actionPanel.createSequentialGroup()
-												.addComponent(actionButtonPanel, GroupLayout.DEFAULT_SIZE, 225,
-														Short.MAX_VALUE)
-												.addContainerGap())
-										.addGroup(gl_actionPanel.createSequentialGroup().addComponent(openInvButton)
-												.addPreferredGap(ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-												.addComponent(goNorthButton).addPreferredGap(ComponentPlacement.RELATED)
-												.addGroup(gl_actionPanel.createParallelGroup(Alignment.BASELINE)
-														.addComponent(goEastButton).addComponent(goWestButton))
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(goSouthButton)
-												.addGap(37)))));
+		gl_actionPanel.setVerticalGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING).addGroup(gl_actionPanel
+				.createSequentialGroup().addContainerGap()
+				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_actionPanel.createSequentialGroup().addComponent(openInvButton)
+								.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+								.addComponent(goNorthButton).addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_actionPanel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(goEastButton).addComponent(goWestButton))
+								.addPreferredGap(ComponentPlacement.RELATED).addComponent(goSouthButton).addGap(37))
+						.addGroup(
+								gl_actionPanel
+										.createSequentialGroup().addComponent(actionButtonPanel,
+												GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(96, Short.MAX_VALUE)))));
+		actionButtonPanel.setLayout(new GridLayout(5, 1, 0, 0));
 		actionPanel.setLayout(gl_actionPanel);
 
 		leftPanelHeadline = new JLabel("[HEADLINE1]");
@@ -245,23 +248,69 @@ public class GUIManager {
 		JPanel skillPanel = new JPanel();
 		skillPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		skillPanel.setBackground(Color.WHITE);
+
+		equippedPanel = new JPanel();
+		equippedPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		equippedPanel.setBackground(Color.WHITE);
+
+		lblEquipped = new JLabel("Ausr\u00FCstung");
+		lblEquipped.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblEquipped.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEquipped.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+
+		innerEquippedPanel = new JPanel();
+		innerEquippedPanel.setBackground(Color.WHITE);
+		innerEquippedPanel.setLayout(new GridLayout(0, 2, 0, 0));
+		GroupLayout gl_equippedPanel = new GroupLayout(equippedPanel);
+		gl_equippedPanel.setHorizontalGroup(
+				gl_equippedPanel.createParallelGroup(Alignment.LEADING).addGap(0, 226, Short.MAX_VALUE)
+						.addComponent(lblEquipped, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+						.addComponent(innerEquippedPanel, GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE));
+		gl_equippedPanel
+				.setVerticalGroup(gl_equippedPanel.createParallelGroup(Alignment.LEADING).addGap(0, 71, Short.MAX_VALUE)
+						.addGroup(gl_equippedPanel.createSequentialGroup().addComponent(lblEquipped)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(innerEquippedPanel, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)));
+
+		lblNewLabel = new JLabel("Waffe: ");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		innerEquippedPanel.add(lblNewLabel);
+
+		currentWeapon = new JLabel("-");
+		innerEquippedPanel.add(currentWeapon);
+
+		lblRstungkleidung = new JLabel("Kleidung/R\u00FCstung: ");
+		lblRstungkleidung.setHorizontalAlignment(SwingConstants.RIGHT);
+		innerEquippedPanel.add(lblRstungkleidung);
+
+		currentOutfit = new JLabel("-");
+		innerEquippedPanel.add(currentOutfit);
+		equippedPanel.setLayout(gl_equippedPanel);
 		GroupLayout gl_playerInfoPanel = new GroupLayout(playerInfoPanel);
 		gl_playerInfoPanel.setHorizontalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addComponent(playerInfoHeadline, GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
 				.addComponent(playerBarPanel, GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
 				.addGroup(gl_playerInfoPanel.createSequentialGroup().addContainerGap()
 						.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(359, Short.MAX_VALUE)));
+						.addPreferredGap(ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+						.addComponent(equippedPanel, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap()));
 		gl_playerInfoPanel.setVerticalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_playerInfoPanel.createSequentialGroup()
 						.addComponent(playerInfoHeadline, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addComponent(playerBarPanel, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(35, Short.MAX_VALUE)));
+						.addGroup(
+								gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
+										.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 71,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(equippedPanel, GroupLayout.PREFERRED_SIZE, 71,
+												GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
 		lblSkills = new JLabel("Skills");
+		lblSkills.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblSkills.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
 		lblSkills.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -487,6 +536,21 @@ public class GUIManager {
 
 	public JPanel getFieldInfos() {
 		return fieldInfos;
+	}
+
+	public JLabel getCurrentOutfit() {
+		return currentOutfit;
+	}
+
+	public JLabel getCurrentWeapon() {
+		return currentWeapon;
+	}
+
+	public void setNavigationEnabled(boolean enabled) {
+		this.goNorthButton.setEnabled(enabled);
+		this.goEastButton.setEnabled(enabled);
+		this.goSouthButton.setEnabled(enabled);
+		this.goWestButton.setEnabled(enabled);
 	}
 
 	public void addFieldInfo(String info) {
