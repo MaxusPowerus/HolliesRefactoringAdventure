@@ -151,13 +151,4 @@ public class Container {
 		return this.prefix + " " + this.name;
 	}
 
-	public String stringifyItems() {
-		StringBuilder builder = new StringBuilder();
-		for (Item item : this.inventory.getAllItems()) {
-			builder.append(item.getName()).append(", ");
-		}
-		return builder.substring(0, builder.toString().lastIndexOf(',') > -1 ? builder.toString().lastIndexOf(',') : 0)
-				.toString();
-	}
-
 }

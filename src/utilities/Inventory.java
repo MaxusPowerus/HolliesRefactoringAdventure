@@ -182,4 +182,13 @@ public class Inventory {
 		this.selectedIndex = selectedIndex;
 	}
 
+	public String stringifyItems() {
+		StringBuilder builder = new StringBuilder();
+		for (Item item : this.items) {
+			builder.append(item.getCount() + "x " + item.getName()).append(", ");
+		}
+		return builder.substring(0, builder.toString().lastIndexOf(',') > -1 ? builder.toString().lastIndexOf(',') : 0)
+				.toString();
+	}
+
 }

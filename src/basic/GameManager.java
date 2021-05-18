@@ -11,7 +11,7 @@ import gui.WorldInfoPanel;
 import gui.actions.InventoryShowAction;
 import gui.actions.MapShowAction;
 import gui.buttons.AttackButton;
-import gui.buttons.EscapeButton;
+import gui.buttons.FleeButton;
 import gui.buttons.InspectButton;
 import gui.buttons.LootButton;
 import map.Biom;
@@ -93,9 +93,9 @@ public class GameManager {
 			case 0:
 				Container container = challenge.getContainer();
 				if (!container.getFound()) {
-					this.guiManager.addFieldInfo("Du hast " + container.toString() + " gefunden");
+					this.guiManager.addFieldInfo("Du hast <b>" + container.toString() + "</b> gefunden");
 
-					LootButton lootButton = new LootButton(challenge, player, this);
+					LootButton lootButton = new LootButton(challenge, this, challenge.getContainer().getInventory());
 					this.guiManager.getActionButtonPanel().add(lootButton);
 				} else {
 					this.guiManager.addFieldInfo("Es ist ruhig hier...zu ruhig...");
@@ -106,12 +106,12 @@ public class GameManager {
 				break;
 			case 1:
 				Enemy enemy = (Enemy) challenge.getNpc();
-				this.guiManager.addFieldInfo(enemy.toString() + " ist erschienen");
+				this.guiManager.addFieldInfo("<b>" + enemy.toString() + "</b> ist erschienen");
 
 				AttackButton attackButton = new AttackButton(challenge, player, this);
 				this.guiManager.getActionButtonPanel().add(attackButton);
 
-				EscapeButton escapeButton = new EscapeButton(challenge, player, this);
+				FleeButton escapeButton = new FleeButton(challenge, player, this);
 				this.guiManager.getActionButtonPanel().add(escapeButton);
 
 				break;

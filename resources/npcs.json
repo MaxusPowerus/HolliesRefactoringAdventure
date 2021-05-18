@@ -33,7 +33,7 @@
                 }
             },
 			"CaveTroll": {
-                "label": "Höhlentroll", "prefix": "ein", "damage": 12, "health": 30, "st": 10, "pe": 3, "en": 2, "ch": 1, "in": 1, "ag": 3, "lk": 3, "biom": "desert", 
+                "label": "Hoehlentroll", "prefix": "ein", "damage": 12, "health": 30, "st": 10, "pe": 3, "en": 2, "ch": 1, "in": 1, "ag": 3, "lk": 3, "biom": "desert", 
                 "items": {
                     "Flesh": { "amount": 1 }
                 }

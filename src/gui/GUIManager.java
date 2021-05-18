@@ -489,7 +489,7 @@ public class GUIManager {
 	}
 
 	public void addFieldInfo(String info) {
-		JLabel label = new JLabel(info);
+		JLabel label = new JLabel("<html>" + info + "</html>");
 		label.setForeground(Color.WHITE);
 		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
 		this.fieldInfos.add(label);

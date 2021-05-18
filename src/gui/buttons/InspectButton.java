@@ -29,7 +29,8 @@ public class InspectButton extends JButton implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		this.setEnabled(false);
 
-		gameManager.getGuiManager().addFieldInfo("Du hast " + this.challenge.getContainer().getName() + " gefunden");
+		gameManager.getGuiManager()
+				.addFieldInfo("Du hast <b>" + this.challenge.getContainer().getName() + "</b> gefunden");
 
 		// set container found when available
 		Container container = this.challenge.getContainer();
@@ -37,7 +38,8 @@ public class InspectButton extends JButton implements ActionListener {
 			System.out.println("container found");
 		}
 
-		LootButton lootButton = new LootButton(challenge, player, this.gameManager);
+		LootButton lootButton = new LootButton(challenge, this.gameManager,
+				this.challenge.getContainer().getInventory());
 		this.gameManager.getGuiManager().getActionButtonPanel().add(lootButton);
 
 		this.gameManager.update();
