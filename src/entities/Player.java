@@ -38,8 +38,11 @@ public class Player {
 		this.time = new Time(0);
 		this.skillSet = new SkillSet();
 
+		// Set StartInventory
+		this.inventory.setGold(5);
 		this.inventory.add(GameManager.getInstance().getResourceManager().getItemByUniqueName("Stick"));
 		this.equipped.add(GameManager.getInstance().getResourceManager().getItemByUniqueName("Stick"));
+		// ==============================================================================================
 	}
 
 	public double getHealth() {

@@ -25,23 +25,23 @@ public class Challenge {
 		this.biom = biom;
 		switch (biom) {
 		case MEADOW:
-			containerChance = 0;
+			containerChance = 100;
 			enemyChance = 100;
 			break;
 		case FOREST:
-			containerChance = 0;
+			containerChance = 100;
 			enemyChance = 100;
 			break;
 		case DESERT:
-			containerChance = 0;
+			containerChance = 100;
 			enemyChance = 100;
 			break;
 		case SWAMP:
-			containerChance = 0;
+			containerChance = 100;
 			enemyChance = 100;
 			break;
 		case MOUNTAINS:
-			containerChance = 0;
+			containerChance = 100;
 			enemyChance = 100;
 			break;
 		}
@@ -51,7 +51,7 @@ public class Challenge {
 
 	private boolean chooseChallenge(int challangeChance, int containerChance, int enemyChance) {
 		Random Randy = new Random();
-		MyRandom Chan = new MyRandom();
+		SpecialRandom Chan = new SpecialRandom();
 
 		if (Randy.nextInt(101) > challangeChance) {
 			return false;
@@ -60,13 +60,18 @@ public class Challenge {
 		int[] challengeTypes = new int[] { containerChance, enemyChance };
 		this.challengeType = Chan.pickRandom(challengeTypes);
 
-		switch (challengeType) {
+		if (challengeType != 0 && challengeType != 1)
+			System.out.println("Unvalid ChallengeType: " + challengeType);
 
+		switch (challengeType) {
+		// Callange: Container
 		case 0:
 			container = new Container("random", "");
 			container.fill(100, 1.5);
+
 			break;
 
+		// Callenge NPCAngriff
 		case 1:
 			ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 			int length = GameManager.getInstance().getResourceManager().getEnemies().size();
@@ -77,6 +82,7 @@ public class Challenge {
 				}
 			}
 			npc = enemies.get(Randy.nextInt(enemies.size()));
+
 			break;
 		}
 		return true;

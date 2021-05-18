@@ -44,18 +44,33 @@ public class Map {
 			for (int y = 0; y < Config.MAP_SIZEY; y++) {
 				for (int x = 0; x < Config.MAP_SIZEX; x++) {
 
-					String out = getMapFieldByCoordinate(x, y).getBiom().getName() + ",";
-					String out2 = "Fail!";
-					if (getMapFieldByCoordinate(x, y).getChallenge().getNpc() != null) {
-						out2 = "FieldCount: " + count + " Biom: " + getMapFieldByCoordinate(x, y).getBiom().getName()
-								+ " Gegner: " + getMapFieldByCoordinate(x, y).getChallenge().getNpc().getName();
-					}
-					count++;
-					System.out.print(out2 + "\n");
+					Coordinate coordinate = new Coordinate(x, y);
 
-					writer.write(out);
+					String biome = getMapFieldByCoordinate(x, y).getBiom().getName() + ",";
+					String container = "";
+					String enemies = "";
+
+					if (getMapFieldByCoordinate(x, y).getChallenge().getContainer() != null) {
+						container = "Coordinate: " + coordinate + " Continer: "
+								+ getMapFieldByCoordinate(x, y).getChallenge().getContainer().getName();
+					}
+
+					if (getMapFieldByCoordinate(x, y).getChallenge().getNpc() != null) {
+						enemies = "Coordinate: " + coordinate + " Gegner: "
+								+ getMapFieldByCoordinate(x, y).getChallenge().getNpc().getName() + " (Biom: "
+								+ getMapFieldByCoordinate(x, y).getBiom().getName() + ")";
+					}
+
+					if (getMapFieldByCoordinate(x, y).getChallenge().getNpc() == null
+							&& getMapFieldByCoordinate(x, y).getChallenge().getContainer() == null) {
+						System.out.println("Coordinate: " + coordinate + " Fail!");
+					}
+
+					System.out.print(enemies);
+					System.out.println(container);
+					// System.out.print("\n");
+					writer.write(biome);
 				}
-				System.out.print("\n");
 				writer.write("\n");
 			}
 			// System.out.println(parameter);

@@ -4,15 +4,19 @@ import java.util.ArrayList;
 
 import items.Food;
 import items.Item;
+import items.Note;
+import items.Other;
 import items.Outfit;
 import items.Weapon;
 
 public class Inventory {
 
 	private ArrayList<Item> items;
+	private int gold;
 
 	public Inventory() {
 		items = new ArrayList<Item>();
+		gold = 0;
 	}
 
 	public void add(Item item) {
@@ -92,6 +96,42 @@ public class Inventory {
 			}
 		}
 		return food;
+	}
+
+	public ArrayList<Note> getNotes() {
+		ArrayList<Note> note = new ArrayList<Note>();
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i) instanceof Note) {
+				note.add((Note) items.get(i));
+			}
+		}
+		return note;
+	}
+
+	public ArrayList<Other> getOther() {
+		ArrayList<Other> other = new ArrayList<Other>();
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i) instanceof Other) {
+				other.add((Other) items.get(i));
+			}
+		}
+		return other;
+	}
+
+	public int getGold() {
+		return gold;
+	}
+
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+
+	public void addGold(int gold) {
+		this.gold += gold;
+	}
+
+	public void removeGold(int gold) {
+		this.gold -= gold;
 	}
 
 }

@@ -41,7 +41,7 @@ public class Container {
 		Random Randy = new Random();
 		if (Randy.nextInt(101) < chance) {
 			chance = chance / div;
-			Item item = items.get(Randy.nextInt(items.size() - 1));
+			Item item = items.get(Randy.nextInt(items.size()));
 			inventory.add(item.clone());
 			fill(chance, div);
 		}
