@@ -172,25 +172,23 @@ public class Player {
 
 		while (true) {
 			// Player ist am Zug
-			if ((playerFight - enemyFight) <= 0)
-				dmgFac = playerFight - enemyFight;
+			if ((playerFight - enemyFight) > 0)
+				dmgFac = enemyFight - playerFight;
 
 			enemyHealth -= dmgFac * playerDmg;
 			if (this.health <= 0)
 				break;
 
 			// Enemy ist am Zug
-			if ((enemyFight - playerFight) <= 0)
-				dmgFac = enemyFight - playerFight;
+			if ((enemyFight - playerFight) > 0)
+				dmgFac = playerFight - enemyFight;
 
 			this.health -= dmgFac * enemyDmg;
 			if (enemyHealth <= 0)
 				break;
 		}
 		if (health > 0) {
-			for (int i = 0; i < enemy.getInventory().getAllItems().size(); i++) {
-				inventory.add(enemy.getInventory().getAllItems().get(i));
-			}
+			this.inventory.add(enemy.getInventory());
 			return true;
 		} else {
 			return false;
