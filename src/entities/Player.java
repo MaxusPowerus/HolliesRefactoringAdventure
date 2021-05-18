@@ -163,9 +163,9 @@ public class Player {
 	}
 
 	public boolean fight(Enemy enemy) {
-		int playerFight = skillSet.getSkillValue(Skill.STRENGTH) + skillSet.getSkillValue(Skill.AGILITY);
+		int playerFight = skillSet.getSkillValue(Skill.STRENGTH) + skillSet.getSkillValue(Skill.AGILITY) / 2;
 		int enemyFight = enemy.getSkillSet().getSkillValue(Skill.STRENGTH)
-				+ enemy.getSkillSet().getSkillValue(Skill.AGILITY);
+				+ enemy.getSkillSet().getSkillValue(Skill.AGILITY) / 2;
 		double playerDmg = 0;
 		if (equippedWeapon() != null)
 			playerDmg = equippedWeapon().getDamage();
@@ -180,22 +180,35 @@ public class Player {
 		double dmgFac = 1;
 		double enemyHealth = enemy.getHealth();
 
+		int round = 1;
+
+		System.out.println("playerFight: " + playerFight + " playerDmg: " + playerDmg);
+		System.out.println("enemieFight: " + enemyFight + " enemieDmg: " + enemyDmg);
+
 		while (true) {
+			System.out.println("PlayerHP: " + this.health + "EnemyHP:" + enemyHealth);
+			System.out.println("Runde: " + round);
+			dmgFac = 1;
 			// Player ist am Zug
 			if ((playerFight - enemyFight) > 0)
 				dmgFac = playerFight - enemyFight;
 
+			System.out.println("Player - dmgFac: " + dmgFac);
 			enemyHealth -= dmgFac * playerDmg;
 			if (this.health <= 0)
 				break;
 
+			dmgFac = 1;
 			// Enemy ist am Zug
 			if ((enemyFight - playerFight) > 0)
 				dmgFac = enemyFight - playerFight;
 
+			System.out.println("Enemy - dmgFac: " + dmgFac);
+
 			this.health -= dmgFac * enemyDmg;
 			if (enemyHealth <= 0)
 				break;
+			round++;
 		}
 		if (health > 0) {
 			this.inventory.add(enemy.getInventory());
