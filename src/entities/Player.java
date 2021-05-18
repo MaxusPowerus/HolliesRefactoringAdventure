@@ -1,7 +1,9 @@
 package entities;
 
 import basic.Config;
-import basic.GameManager;
+import items.Food;
+import items.Note;
+import items.Outfit;
 import items.Weapon;
 import map.Direction;
 import map.Map;
@@ -39,9 +41,17 @@ public class Player {
 		this.skillSet = new SkillSet();
 
 		// Set StartInventory
-		this.inventory.setGold(5);
-		this.inventory.add(GameManager.getInstance().getResourceManager().getItemByUniqueName("Stick"));
-		this.equipped.add(GameManager.getInstance().getResourceManager().getItemByUniqueName("Stick"));
+		Weapon startWeapon = new Weapon("Stick", "Stock", 1, 0);
+		Outfit startOutfit = new Outfit("HolliesDress", "Hollys Lieblingsleid", 0, 10);
+		Food startFood = new Food("StewGrandmaStyle", "Eintopf nach Omas Art", 25, 1);
+		Note startNote = new Note("LetterFromHolger01", "Nachricht von Holger",
+				"Hey Holly!\nTriff mich heute Abend im Wald!\nIch habe eine Überraschung für dich!\nDein Hogler <3", 0);
+
+		inventory.add(startWeapon);
+		inventory.add(startOutfit);
+		inventory.add(startFood);
+		inventory.add(startNote);
+
 		// ==============================================================================================
 	}
 
@@ -172,7 +182,7 @@ public class Player {
 
 		while (true) {
 			// Player ist am Zug
-			if ((playerFight - enemyFight) <= 0)
+			if ((playerFight - enemyFight) > 0)
 				dmgFac = playerFight - enemyFight;
 
 			enemyHealth -= dmgFac * playerDmg;
@@ -180,7 +190,7 @@ public class Player {
 				break;
 
 			// Enemy ist am Zug
-			if ((enemyFight - playerFight) <= 0)
+			if ((enemyFight - playerFight) > 0)
 				dmgFac = enemyFight - playerFight;
 
 			this.health -= dmgFac * enemyDmg;
