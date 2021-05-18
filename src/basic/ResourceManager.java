@@ -15,6 +15,8 @@ import entities.Friend;
 import entities.NPC;
 import items.Food;
 import items.Item;
+import items.Note;
+import items.Other;
 import items.Outfit;
 import items.Weapon;
 import utilities.Inventory;
@@ -71,6 +73,14 @@ public class ResourceManager {
 								Integer.valueOf(String.valueOf(innerItem.get("value"))),
 								Integer.valueOf(innerItem.get("energy").toString()));
 						break;
+					case "Notes":
+						item = new Note(categoryItem.toArray()[i].toString(), label, innerItem.get("text").toString(),
+								Integer.valueOf(String.valueOf(innerItem.get("value"))));
+						break;
+					case "Other":
+						item = new Other(categoryItem.toArray()[i].toString(), label, innerItem.get("info").toString(),
+								Integer.valueOf(String.valueOf(innerItem.get("value"))));
+						break;
 					default:
 						item = new Item(categoryItem.toArray()[i].toString(), label,
 								Integer.valueOf(String.valueOf(innerItem.get("value"))));
@@ -115,6 +125,26 @@ public class ResourceManager {
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i) instanceof Food) {
 				out.add((Food) items.get(i));
+			}
+		}
+		return out;
+	}
+
+	public ArrayList<Note> getNotes() {
+		ArrayList<Note> out = new ArrayList<Note>();
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i) instanceof Note) {
+				out.add((Note) items.get(i));
+			}
+		}
+		return out;
+	}
+
+	public ArrayList<Other> getOther() {
+		ArrayList<Other> out = new ArrayList<Other>();
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i) instanceof Other) {
+				out.add((Other) items.get(i));
 			}
 		}
 		return out;

@@ -2,8 +2,8 @@ package utilities;
 
 import java.util.Random;
 
-public class MyRandom {
-	public MyRandom() {
+public class SpecialRandom {
+	public SpecialRandom() {
 
 	}
 

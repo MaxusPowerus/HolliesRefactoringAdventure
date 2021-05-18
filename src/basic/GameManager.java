@@ -40,7 +40,6 @@ public class GameManager {
 		MapGenerator mapGenerator = new MapGenerator(mainMap);
 
 		mainMap = mapGenerator.generateMapMK2();
-		mainMap.printMapDebug("");
 
 		player = new Player(Config.PLAYER_NAME, mainMap);
 
