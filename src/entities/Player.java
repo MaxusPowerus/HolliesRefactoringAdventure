@@ -69,6 +69,8 @@ public class Player {
 	}
 
 	public void setHealth(double health) {
+		if (health > 100)
+			health = 100;
 		this.health = health;
 	}
 
@@ -245,6 +247,14 @@ public class Player {
 
 	public boolean isEquipped(Item item) {
 		return item.equals(this.weapon) || item.equals(this.outfit);
+	}
+
+	public boolean isWeaponEquipped() {
+		return this.weapon != null;
+	}
+
+	public boolean isOutfitEquipped() {
+		return this.outfit != null;
 	}
 
 }

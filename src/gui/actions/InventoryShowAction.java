@@ -85,6 +85,7 @@ public class InventoryShowAction implements ActionListener {
 			this.gameManager.getGuiManager().getLeftContentPanel().add(itemPanel);
 		} else {
 
+			int categoryIndex = 0;
 			for (String category : itemCategories.keySet()) {
 
 				JPanel itemPanel = new JPanel();
@@ -107,6 +108,7 @@ public class InventoryShowAction implements ActionListener {
 
 				inventoryTabPane.addTab(category + " (" + itemCategories.get(category).size() + ")", icon, scrollPane,
 						null);
+				inventoryTabPane.setToolTipTextAt(categoryIndex++, category);
 			}
 			inventoryTabPane.setSelectedIndex(this.gameManager.getPlayer().getInventory().getSelectedIndex());
 			inventoryTabPane.addChangeListener(new ChangeListener() {

@@ -34,18 +34,18 @@ public class UseItemAction implements ActionListener {
 				new InventoryShowAction(this.gameManager).initialize();
 			}
 		} else if (this.item instanceof Weapon) {
-			if (player.isEquipped(this.item)) {
+			if (player.isWeaponEquipped() && player.isEquipped(this.item)) {
 				player.dequip(this.item);
 				this.gameManager.getGuiManager().getCurrentWeapon().setText("-");
-			} else {
+			} else if (!player.isWeaponEquipped()) {
 				player.equip(this.item);
 				this.gameManager.getGuiManager().getCurrentWeapon().setText(item.getName());
 			}
 		} else if (this.item instanceof Outfit) {
-			if (player.isEquipped(this.item)) {
+			if (player.isOutfitEquipped() && player.isEquipped(this.item)) {
 				player.dequip(this.item);
 				this.gameManager.getGuiManager().getCurrentOutfit().setText("-");
-			} else {
+			} else if (!player.isOutfitEquipped()) {
 				player.equip(this.item);
 				this.gameManager.getGuiManager().getCurrentOutfit().setText(item.getName());
 			}
