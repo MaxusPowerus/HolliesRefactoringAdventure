@@ -8,8 +8,6 @@
             "Stick": { "label": "Stock", "damage": 3, "value": 1000}
         },
         "Outfits": {
-            
-			
             "UnicornCostume": {"label": "Einhorn-Kostüm", "armor": 0, "value": 50},
             "LetherArmor": {"label": "Einhorn-Kostüm", "armor": 5, "value": 50},
             "ChainMail": {"label": "Kettenrüstung", "armor": 10, "value": 100},
@@ -24,8 +22,6 @@
             "rags": {"label": "Lumpen", "armor": 0, "value": 3}
         },
         "Food": {
-            
-			
             "Catfood": { "label": "Katzenfutter", "energy": 1000, "value": 1},
             "Flesh": { "label": "Fleisch", "energy": 30, "value": 15},
             "Bread": { "label": "Brot", "energy": 25, "value": 5},

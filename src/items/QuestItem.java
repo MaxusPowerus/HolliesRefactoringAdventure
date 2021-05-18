@@ -8,4 +8,8 @@ public class QuestItem extends Item {
 		this.info = info;
 	}
 
+	public String getInfo() {
+		return info;
+	}
+
 }

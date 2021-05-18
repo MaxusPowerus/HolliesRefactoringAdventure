@@ -2,7 +2,7 @@
 	"Categories": {
 		"Enemy": {
 			"AngryCat": {
-                "label": "wuetende Katze", "prefix": "eine", "damage": 5, "health": 15, "st": 3, "pe": 8, "en": 5, "ch": 6, "in": 2, "ag": 7, "lk": 5, "biom": "all", 
+                "label": "wütende Katze", "prefix": "eine", "damage": 5, "health": 15, "st": 3, "pe": 8, "en": 5, "ch": 6, "in": 2, "ag": 7, "lk": 5, "biom": "all", 
                 "items": {
                     "Apple": { "amount": 1 },
                     "Catfood": { "amount": 5 }

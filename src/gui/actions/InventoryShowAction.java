@@ -163,6 +163,7 @@ public class InventoryShowAction implements ActionListener {
 		}
 
 		button.addActionListener(new UseItemAction(this.gameManager, item));
+		button.addMouseListener(new InventoryItemHover(panel, this.gameManager, item));
 
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)

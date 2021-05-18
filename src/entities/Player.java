@@ -42,10 +42,11 @@ public class Player {
 
 		// Set StartInventory
 		Weapon startWeapon = new Weapon("Stick", "Stock", 1, 0);
-		Outfit startOutfit = new Outfit("HolliesDress", "Hollys Lieblingsleid", 0, 10);
+		Outfit startOutfit = new Outfit("HolliesDress", "Hollys Lieblingskleid", 0, 10);
 		Food startFood = new Food("StewGrandmaStyle", "Eintopf nach Omas Art", 25, 1);
 		Note startNote = new Note("LetterFromHolger01", "Nachricht von Holger",
-				"Hey Holly!\nTriff mich heute Abend im Wald!\nIch habe eine Überraschung für dich!\nDein Hogler <3", 0);
+				"Hey Holly!<br>Triff mich heute Abend im Wald!<br>Ich habe eine Überraschung für dich!<br>Dein Holger <3",
+				0);
 
 		inventory.add(startWeapon);
 		inventory.add(startOutfit);

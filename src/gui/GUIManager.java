@@ -112,10 +112,11 @@ public class GUIManager {
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
 						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(leftMainPanel, GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED).addComponent(leftInfoPanel,
-												GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
+								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+										.addComponent(leftMainPanel, GroupLayout.PREFERRED_SIZE, 545,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(leftInfoPanel, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
 								.addGroup(groupLayout.createSequentialGroup()
 										.addComponent(playerInfoPanel, GroupLayout.PREFERRED_SIZE, 154,
 												GroupLayout.PREFERRED_SIZE)
