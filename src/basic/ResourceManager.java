@@ -1,5 +1,6 @@
 package basic;
 
+import java.io.File;
 import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -36,7 +37,9 @@ public class ResourceManager {
 	@SuppressWarnings("unchecked")
 	private void loadItems() {
 		try {
-			FileReader fileReader = new FileReader("resources\\items.json");
+
+			FileReader fileReader = new FileReader(
+					new File(getClass().getClassLoader().getResource("items.json").toURI()));
 			JSONParser parser = new JSONParser();
 
 			JSONObject itemObj = (JSONObject) parser.parse(fileReader);
@@ -167,7 +170,8 @@ public class ResourceManager {
 	@SuppressWarnings("unchecked")
 	private void loadNPCs() {
 		try {
-			FileReader fileReader = new FileReader("resources\\npcs.json");
+			FileReader fileReader = new FileReader(
+					new File(getClass().getClassLoader().getResource("npcs.json").toURI()));
 			JSONParser parser = new JSONParser();
 
 			JSONObject items = (JSONObject) parser.parse(fileReader);

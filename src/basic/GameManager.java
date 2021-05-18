@@ -93,7 +93,7 @@ public class GameManager {
 			case 0:
 				Container container = challenge.getContainer();
 				if (!container.getFound()) {
-					this.guiManager.addFieldInfo("Du hast <b>" + container.toString() + "</b> gefunden");
+					this.guiManager.addFieldInfo("Du hast <b>" + container.toString() + "</b> gefunden, dursuche sie");
 
 					LootButton lootButton = new LootButton(challenge, this, challenge.getContainer().getInventory());
 					this.guiManager.getActionButtonPanel().add(lootButton);
@@ -106,7 +106,8 @@ public class GameManager {
 				break;
 			case 1:
 				Enemy enemy = (Enemy) challenge.getNpc();
-				this.guiManager.addFieldInfo("<b>" + enemy.toString() + "</b> ist erschienen");
+				this.guiManager.addFieldInfo(
+						"<b>" + enemy.toString() + "</b> ist erschienen. Was tust du? Wegrennen oder Kämpfen?");
 
 				this.guiManager.setNavigationEnabled(false);
 

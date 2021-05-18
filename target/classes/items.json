@@ -1,0 +1,44 @@
+{
+
+    "Categories": {
+        "Weapons": {
+            "Sword": { "label": "Schwert", "damage": 15, "value": 100 },
+            "Axe": { "label": "Axt", "damage": 10, "value": 20},
+            "Spear": { "label": "Speer", "damage": 5, "value": 10},
+            "Stick": { "label": "Stock", "damage": 3, "value": 1000}
+        },
+        "Outfits": {
+            "UnicornCostume": {"label": "Einhorn-Kostüm", "armor": 0, "value": 50},
+            "LetherArmor": {"label": "Einhorn-Kostüm", "armor": 5, "value": 50},
+            "ChainMail": {"label": "Kettenrüstung", "armor": 10, "value": 100},
+            "IronArmor": {"label": "Eisenrüstung", "armor": 15, "value": 150},
+			
+            "NobelDressRed": {"label": "Feine Kleidung (rot)", "armor": 0, "value": 30},
+            "NobelDressYellow": {"label": "Feine Kleidung (gelb)", "armor": 0, "value": 30},
+            "NobelDressBlue": {"label": "Feine Kleidung (blau)", "armor": 0, "value": 30},
+            "NobelDressGreen": {"label": "Feine Kleidung (grün)", "armor": 0, "value": 30},
+            "NormalDressBrown": {"label": "Kleidung (brown)", "armor": 0, "value": 10},
+            "NormalDressBeige": {"label": "Kleidung (beige)", "armor": 0, "value": 10},
+            "rags": {"label": "Lumpen", "armor": 0, "value": 3}
+        },
+        "Food": {
+            "Catfood": { "label": "Katzenfutter", "energy": 1000, "value": 1},
+            "Flesh": { "label": "Fleisch", "energy": 30, "value": 15},
+            "Bread": { "label": "Brot", "energy": 25, "value": 5},
+            "Apple": { "label": "Apfel", "energy": 5, "value": 3},
+            "Beer": {"label": "Bier", "energy": 10, "value": 5}, 
+            "Wine": {"label": "Wein", "energy": 10, "value": 10},
+        },
+		"Notes": {
+			"CakeRecipe": {"label": "Kuchenrezeot", "text": "Kuchen:>Mehl: 2 \n>Eier 1\n>wasser 1/2 ", "value": 0}
+		},
+		"Other": {
+			"Stone": {"label": "Stein", "info": "Schlägt Schere", "value": 0},
+			"Paper": {"label": "Papier", "info": "Schlägt Stein" "value": 1},
+			"Scissors": {"label": "Schere", "info": "Schlägt Papier" "value": 1}
+		},
+		"QuestItem": {
+			"GiftForHolger": {"label": "Geschenk für Holger", "info": "SexTape", "value": 1}
+		}
+	}
+}

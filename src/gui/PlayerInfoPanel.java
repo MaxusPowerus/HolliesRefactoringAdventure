@@ -32,13 +32,15 @@ public class PlayerInfoPanel {
 		guiManager.getLuckValue().setText((int) player.getSkillSet().getSkillValue(Skill.LUCK) + "");
 
 		if (player.isOutfitEquipped()) {
-			guiManager.getCurrentOutfit().setText(player.getOutfit().getName());
+			guiManager.getCurrentOutfit()
+					.setText(player.getOutfit().getName() + " (" + player.getOutfit().getArmor() + ")");
 		} else {
 			guiManager.getCurrentOutfit().setText("-");
 		}
 
 		if (player.isWeaponEquipped()) {
-			guiManager.getCurrentWeapon().setText(player.getWeapon().getName());
+			guiManager.getCurrentWeapon()
+					.setText(player.getWeapon().getName() + " (" + player.getWeapon().getDamage() + ")");
 		} else {
 			guiManager.getCurrentWeapon().setText("-");
 		}
