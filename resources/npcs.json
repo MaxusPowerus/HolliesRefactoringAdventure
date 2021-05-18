@@ -2,39 +2,39 @@
 	"Categories": {
 		"Enemy": {
 			"AngryCat": {
-                "label": "wuetende Katze", "prefix": "eine", "damage": 5, "health": 15, "st": 3, "pe": 8, "en": 5, "ch": 6, "in": 2, "ag": 7, "lk": 5, "biom": "all", 
+                "label": "wuetende Katze", "prefix": "eine", "damage": 5, "health": 15, "st": 3, "pe": 8, "en": 5, "ch": 6, "in": 2, "ag": 7, "lk": 5, "biom": "all","xp": 5, 
                 "items": {
                     "Apple": { "amount": 1 },
                     "Catfood": { "amount": 5 }
                 }
             },
 			"Rabbit": {
-                "label": "Feldhase", "prefix": "ein", "damage": 0, "health": 5, "st": 1, "pe": 6, "en": 2, "ch": 8, "in": 1, "ag": 5, "lk": 3, "biom": "meadow", 
+                "label": "Feldhase", "prefix": "ein", "damage": 0, "health": 5, "st": 1, "pe": 6, "en": 2, "ch": 8, "in": 1, "ag": 5, "lk": 3, "biom": "meadow","xp": 5 ,
                 "items": {
                     "Flesh": { "amount": 1 }
                 }
             },
             "Wolf": {
-                "label": "Wolf", "prefix": "ein", "damage": 10, "health": 20, "st": 5, "pe": 9, "en": 6, "ch": 5, "in": 4, "ag": 6, "lk": 5, "biom": "forest", 
+                "label": "Wolf", "prefix": "ein", "damage": 10, "health": 20, "st": 5, "pe": 9, "en": 6, "ch": 5, "in": 4, "ag": 6, "lk": 5, "biom": "forest", "xp": 15,
                 "items": {
                     "Flesh": { "amount": 1 }
                 }
             },
 			"RattleSnake": {
-                "label": "Klapperschlange", "prefix": "eine", "damage": 10, "health": 9, "st": 1, "pe": 8, "en": 2, "ch": 1, "in": 1, "ag": 6, "lk": 3, "biom": "desert", 
+                "label": "Klapperschlange", "prefix": "eine", "damage": 10, "health": 9, "st": 1, "pe": 8, "en": 2, "ch": 1, "in": 1, "ag": 6, "lk": 3, "biom": "desert","xp": 10, 
                 "items": {
                     "Flesh": { "amount": 1 }
                 }
             },
 			"SwampMonster": {
-                "label": "Sumpfmonster", "prefix": "ein", "damage": 12, "health": 25, "st": 7, "pe": 4, "en": 5, "ch": 1, "in": 1, "ag": 4, "lk": 5, "biom": "swamp", 
+                "label": "Sumpfmonster", "prefix": "ein", "damage": 12, "health": 25, "st": 7, "pe": 4, "en": 5, "ch": 1, "in": 1, "ag": 4, "lk": 5, "biom": "swamp","xp": 20, 
                 "items": {
                     "Flesh": { "amount": 1 }
                 }
             },
 			"CaveTroll": {
 
-                "label": "Höhlentroll", "prefix": "ein", "damage": 12, "health": 30, "st": 10, "pe": 3, "en": 2, "ch": 1, "in": 1, "ag": 3, "lk": 3, "biom": "mountains", 
+                "label": "Höhlentroll", "prefix": "ein", "damage": 12, "health": 30, "st": 10, "pe": 3, "en": 2, "ch": 1, "in": 1, "ag": 3, "lk": 3, "biom": "mountains","xp": 20, 
 
                 "items": {
                     "Flesh": { "amount": 1 }

@@ -3,6 +3,7 @@ package entities;
 import basic.Config;
 import items.Food;
 import items.Note;
+import items.Other;
 import items.Outfit;
 import items.Weapon;
 import map.Direction;
@@ -41,16 +42,22 @@ public class Player {
 		this.skillSet = new SkillSet();
 
 		// Set StartInventory
-		Weapon startWeapon = new Weapon("Stick", "Stock", 1, 0);
-		Outfit startOutfit = new Outfit("HolliesDress", "Hollys Lieblingsleid", 0, 10);
+		Weapon startWeapon = new Weapon("Stick", "Stock", 1, 1);
+		Outfit startOutfit = new Outfit("HolliesDress", "Hollys Lieblingskleid", 0, 10);
 		Food startFood = new Food("StewGrandmaStyle", "Eintopf nach Omas Art", 25, 1);
 		Note startNote = new Note("LetterFromHolger01", "Nachricht von Holger",
-				"Hey Holly!\nTriff mich heute Abend im Wald!\nIch habe eine Überraschung für dich!\nDein Hogler <3", 0);
+				"Hey Holly!\nTriff mich heute Abend im Wald!\nIch habe eine Überraschung für dich!\nDein Holger <3", 0);
+		Other startOther = new Other("HolliesTeddy", "SchrimplyPipples",
+				"Hollies ältester und wichtigster Begleiter: Ein alter abgenutzter Teddybär!", 0);
 
 		inventory.add(startWeapon);
 		inventory.add(startOutfit);
 		inventory.add(startFood);
 		inventory.add(startNote);
+		inventory.add(startOther);
+		;
+
+		inventory.addGold(5);
 
 		// ==============================================================================================
 	}
