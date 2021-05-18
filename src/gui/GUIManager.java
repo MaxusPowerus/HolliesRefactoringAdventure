@@ -86,23 +86,23 @@ public class GUIManager {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		leftMainPanel = new JPanel();
-		leftMainPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		leftMainPanel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
 		leftMainPanel.setBackground(Color.WHITE);
 
 		playerInfoPanel = new JPanel();
-		playerInfoPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		playerInfoPanel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
 		playerInfoPanel.setBackground(Color.WHITE);
 
 		leftInfoPanel = new JPanel();
-		leftInfoPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		leftInfoPanel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
 		leftInfoPanel.setBackground(Color.WHITE);
 
 		actionPanel = new JPanel();
-		actionPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		actionPanel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
 		actionPanel.setBackground(Color.WHITE);
 
 		fieldInfoPanel = new JPanel();
-		fieldInfoPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		fieldInfoPanel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
 		fieldInfoPanel.setBackground(Color.WHITE);
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -273,6 +273,7 @@ public class GUIManager {
 								.addComponent(innerEquippedPanel, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)));
 
 		lblNewLabel = new JLabel("Waffe: ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		innerEquippedPanel.add(lblNewLabel);
 
@@ -280,6 +281,7 @@ public class GUIManager {
 		innerEquippedPanel.add(currentWeapon);
 
 		lblRstungkleidung = new JLabel("Kleidung/R\u00FCstung: ");
+		lblRstungkleidung.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblRstungkleidung.setHorizontalAlignment(SwingConstants.RIGHT);
 		innerEquippedPanel.add(lblRstungkleidung);
 
@@ -288,11 +290,11 @@ public class GUIManager {
 		equippedPanel.setLayout(gl_equippedPanel);
 		GroupLayout gl_playerInfoPanel = new GroupLayout(playerInfoPanel);
 		gl_playerInfoPanel.setHorizontalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(playerInfoHeadline, GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
-				.addComponent(playerBarPanel, GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+				.addComponent(playerInfoHeadline, GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+				.addComponent(playerBarPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 				.addGroup(gl_playerInfoPanel.createSequentialGroup().addContainerGap()
 						.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
 						.addComponent(equippedPanel, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap()));
 		gl_playerInfoPanel.setVerticalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
@@ -327,30 +329,37 @@ public class GUIManager {
 		innerSkillPanel.setLayout(new GridLayout(0, 7, 0, 0));
 
 		lblSt = new JLabel("ST");
+		lblSt.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblSt.setHorizontalAlignment(SwingConstants.CENTER);
 		innerSkillPanel.add(lblSt);
 
 		lblWa = new JLabel("WA");
+		lblWa.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblWa.setHorizontalAlignment(SwingConstants.CENTER);
 		innerSkillPanel.add(lblWa);
 
 		lblAu = new JLabel("AU");
+		lblAu.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblAu.setHorizontalAlignment(SwingConstants.CENTER);
 		innerSkillPanel.add(lblAu);
 
 		lblCh = new JLabel("CH");
+		lblCh.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCh.setHorizontalAlignment(SwingConstants.CENTER);
 		innerSkillPanel.add(lblCh);
 
 		lblIn = new JLabel("IN");
+		lblIn.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblIn.setHorizontalAlignment(SwingConstants.CENTER);
 		innerSkillPanel.add(lblIn);
 
 		lblGe = new JLabel("GE");
+		lblGe.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblGe.setHorizontalAlignment(SwingConstants.CENTER);
 		innerSkillPanel.add(lblGe);
 
 		lblGl = new JLabel("GL");
+		lblGl.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblGl.setHorizontalAlignment(SwingConstants.CENTER);
 		innerSkillPanel.add(lblGl);
 
@@ -383,7 +392,7 @@ public class GUIManager {
 		innerSkillPanel.add(luckValue);
 		skillPanel.setLayout(gl_skillPanel);
 
-		healthLabel = new JLabel("HP (xxx)");
+		healthLabel = new JLabel("Lebenspunkte");
 
 		healthBar = new JProgressBar();
 
@@ -395,24 +404,20 @@ public class GUIManager {
 		gl_playerBarPanel.setHorizontalGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_playerBarPanel.createSequentialGroup().addContainerGap().addComponent(healthLabel)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(healthBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(54).addComponent(levelLabel).addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(levelBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(155, Short.MAX_VALUE)));
-		gl_playerBarPanel
-				.setVerticalGroup(
-						gl_playerBarPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_playerBarPanel.createSequentialGroup().addGap(5)
-										.addGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING)
-												.addComponent(levelBar, GroupLayout.PREFERRED_SIZE,
-														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(levelLabel)
-												.addComponent(healthBar, GroupLayout.PREFERRED_SIZE,
-														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(healthLabel))
-										.addContainerGap()));
+						.addComponent(healthBar, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED, 133, Short.MAX_VALUE).addComponent(levelLabel)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(levelBar, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap()));
+		gl_playerBarPanel.setVerticalGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_playerBarPanel.createSequentialGroup().addGap(5)
+						.addGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(levelBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(healthBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(levelLabel).addComponent(healthLabel))
+						.addContainerGap()));
 		playerBarPanel.setLayout(gl_playerBarPanel);
 		playerInfoPanel.setLayout(gl_playerInfoPanel);
 		frame.getContentPane().setLayout(groupLayout);

@@ -36,18 +36,14 @@ public class UseItemAction implements ActionListener {
 		} else if (this.item instanceof Weapon) {
 			if (player.isWeaponEquipped() && player.isEquipped(this.item)) {
 				player.dequip(this.item);
-				this.gameManager.getGuiManager().getCurrentWeapon().setText("-");
 			} else if (!player.isWeaponEquipped()) {
 				player.equip(this.item);
-				this.gameManager.getGuiManager().getCurrentWeapon().setText(item.getName());
 			}
 		} else if (this.item instanceof Outfit) {
 			if (player.isOutfitEquipped() && player.isEquipped(this.item)) {
 				player.dequip(this.item);
-				this.gameManager.getGuiManager().getCurrentOutfit().setText("-");
 			} else if (!player.isOutfitEquipped()) {
 				player.equip(this.item);
-				this.gameManager.getGuiManager().getCurrentOutfit().setText(item.getName());
 			}
 		} else {
 			System.out.println("Use item");

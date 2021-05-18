@@ -33,7 +33,6 @@ public class FleeButton extends JButton implements ActionListener {
 		if (fleeSucced) {
 			this.gameManager.getGuiManager().addFieldInfo(
 					"Du rennt vor <b>" + this.challenge.getNpc().toString() + "</b> davon. Es gelingt dir!");
-			this.challenge.setChallengeCompleted(true);
 
 			this.gameManager.getGuiManager().getActionButtonPanel().removeAll();
 		} else {

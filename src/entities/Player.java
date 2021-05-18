@@ -259,4 +259,12 @@ public class Player {
 		return this.outfit != null;
 	}
 
+	public Weapon getWeapon() {
+		return weapon;
+	}
+
+	public Outfit getOutfit() {
+		return outfit;
+	}
+
 }
