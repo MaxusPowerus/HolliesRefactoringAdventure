@@ -27,8 +27,9 @@
 			"LetterFromHolger01": {"label": "Nachricht von Holger", "text": "Hey Holly!\nTriff mich heute Abend im Wald!\nIch habe eine Überraschung für dich!\nDein Hogler <3", "value": 0}
 		},
 		"Other": {
-			"Stone": {"label": "Stein", "info": "Ein kleiner Stein, geeignet um jemanden am Kopf zu treffen!", "value": 0},
-			"Paper": {"label": "Pepier", "info": "---", "value": 1}
+			"Stone": {"label": "Stein", "info": "Schlägt Schere", "value": 0},
+			"Paper": {"label": "Papier", "info": "Schlägt Stein" "value": 1},
+			"Scissors": {"label": "Schere", "info": "Schlägt Papier" "value": 1}
 		},
 		"QuestItem": {
 			"GiftForHolger": {"label": "Geschenk fuer Holger", "info": "SexTape", "value": 1}
