@@ -199,7 +199,8 @@ public class ResourceManager {
 								Integer.valueOf(innerEntity.get("ch").toString()),
 								Integer.valueOf(innerEntity.get("in").toString()),
 								Integer.valueOf(innerEntity.get("ag").toString()),
-								Integer.valueOf(innerEntity.get("lk").toString()), innerEntity.get("biom").toString());
+								Integer.valueOf(innerEntity.get("lk").toString()), innerEntity.get("biom").toString(),
+								Integer.valueOf(innerEntity.get("xp").toString()));
 
 						Inventory enemyInv = new Inventory();
 
