@@ -6,22 +6,26 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import basic.GameManager;
-import entities.Player;
 import gui.actions.InventoryShowAction;
 import utilities.Challenge;
+import utilities.Inventory;
 
 public class LootButton extends JButton implements ActionListener {
 
 	private Challenge challenge;
-	private Player player;
 	private GameManager gameManager;
+	private Inventory inventory;
 
-	public LootButton(Challenge challenge, Player player, GameManager fieldInfos) {
+	public LootButton(Challenge challenge, GameManager gameManager, Inventory inventory) {
 		this.challenge = challenge;
-		this.player = player;
-		this.gameManager = fieldInfos;
+		this.gameManager = gameManager;
+		this.inventory = inventory;
 
-		this.setText(this.challenge.getContainer().getName() + " looten");
+		if (this.challenge.getContainer() != null) { // when container on field
+			this.setText(this.challenge.getContainer().getName() + " durchsuchen");
+		} else { // loot killed enemy
+			this.setText(this.challenge.getNpc().getName() + " ausnehmen");
+		}
 		this.addActionListener(this);
 	}
 
@@ -29,17 +33,17 @@ public class LootButton extends JButton implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		this.setEnabled(false);
 
-		this.player.getInventory().add(this.challenge.getContainer());
+		this.gameManager.getPlayer().getInventory().add(this.inventory);
 
 		int itemCount = this.challenge.getContainer().getInventory().getAllItems().size();
 		if (itemCount > 0) {
 			gameManager.getGuiManager().addFieldInfo(
-					"Du hast folgende Items eingesammelt: " + this.challenge.getContainer().stringifyItems());
+					"Du hast folgende Items eingesammelt: <b>" + this.inventory.stringifyItems() + "</b>");
 		}
 
-		int gold = this.challenge.getContainer().getInventory().getGold();
+		int gold = this.inventory.getGold();
 		if (gold > 0) {
-			gameManager.getGuiManager().addFieldInfo("Du hast " + gold + " Gold gefunden");
+			gameManager.getGuiManager().addFieldInfo("Du hast <b>" + gold + " Gold</b> gefunden");
 		}
 
 		// update inventory when opened

@@ -2,7 +2,7 @@
 	"Categories": {
 		"Enemy": {
 			"AngryCat": {
-                "label": "Wuetende Katze", "prefix": "eine", "damage": 5, "health": 15, "st": 3, "pe": 8, "en": 5, "ch": 6, "in": 2, "ag": 7, "lk": 5, "biom": "all", 
+                "label": "wuetende Katze", "prefix": "eine", "damage": 5, "health": 15, "st": 3, "pe": 8, "en": 5, "ch": 6, "in": 2, "ag": 7, "lk": 5, "biom": "all", 
                 "items": {
                     "Apple": { "amount": 1 },
                     "Catfood": { "amount": 5 }
@@ -33,7 +33,7 @@
                 }
             },
 			"CaveTroll": {
-                "label": "Höhlentroll", "prefix": "ein", "damage": 12, "health": 30, "st": 10, "pe": 3, "en": 2, "ch": 1, "in": 1, "ag": 3, "lk": 3, "biom": "desert", 
+                "label": "HÃ¶hlentroll", "prefix": "ein", "damage": 12, "health": 30, "st": 10, "pe": 3, "en": 2, "ch": 1, "in": 1, "ag": 3, "lk": 3, "biom": "desert", 
                 "items": {
                     "Flesh": { "amount": 1 }
                 }
@@ -42,7 +42,7 @@
 		},
 		"Friend": {
 			"NiceCat": {
-                "label": "Freundliche Katze",
+                "label": "freundliche Katze",
                 "prefix": "eine", "biom": "all",
                 "items": {
                     "Sword": {

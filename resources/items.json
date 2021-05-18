@@ -32,7 +32,7 @@
 			"Scissors": {"label": "Schere", "info": "Schlägt Papier" "value": 1}
 		},
 		"QuestItem": {
-			"GiftForHolger": {"label": "Geschenk fuer Holger", "info": "SexTape", "value": 1}
+			"GiftForHolger": {"label": "Geschenk für Holger", "info": "SexTape", "value": 1}
 		}
 	}
 }

@@ -74,7 +74,7 @@ public class NPC {
 
 	@Override
 	public String toString() {
-		return HelperFunctions.firstLetter2Upper(prefix) + " " + HelperFunctions.firstLetter2Lower(name);
+		return HelperFunctions.firstLetter2Upper(prefix) + " " + name;
 	}
 
 }

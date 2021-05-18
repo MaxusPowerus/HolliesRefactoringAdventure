@@ -30,17 +30,28 @@ public class AttackButton extends JButton implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		this.setEnabled(false);
 
+		double healthBeforeFight = this.player.getHealth();
+
 		boolean attackSucceed = this.player.fight((Enemy) this.challenge.getNpc());
 		if (attackSucceed) {
-			this.gameManager.getGuiManager()
-					.addFieldInfo("In einem epischen Kampf besiegst du " + this.challenge.getNpc().toString());
+			this.gameManager.getGuiManager().addFieldInfo("In einem epischen Kampf besiegst du <b>"
+					+ this.challenge.getNpc().getPrefix() + " " + this.challenge.getNpc().getName() + "</b>");
+			this.challenge.setChallengeCompleted(true);
+			this.gameManager.getGuiManager().getActionButtonPanel().removeAll();
+
+			LootButton lootButton = new LootButton(this.challenge, this.gameManager,
+					this.challenge.getNpc().getInventory());
+			this.gameManager.getGuiManager().getActionButtonPanel().add(lootButton);
+
+			double healthAfterFight = this.player.getHealth();
+			this.gameManager.getGuiManager().addFieldInfo("Im Kampf hast du <b>"
+					+ Math.abs((int) healthBeforeFight - healthAfterFight) + " Lebenspunkte</b> verloren");
+
 		} else {
-			this.gameManager.getGuiManager().addFieldInfo(
-					"Du gibst alles was du kannst, aber " + this.challenge.getNpc().toString() + " tötet dich");
+			this.gameManager.getGuiManager().addFieldInfo("GAME OVER");
 		}
 
 		PlayerInfoPanel.update();
-
 		this.gameManager.update();
 	}
 }
