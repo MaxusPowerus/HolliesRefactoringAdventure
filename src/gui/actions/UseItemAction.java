@@ -8,6 +8,8 @@ import entities.Player;
 import gui.PlayerInfoPanel;
 import items.Food;
 import items.Item;
+import items.Outfit;
+import items.Weapon;
 
 public class UseItemAction implements ActionListener {
 
@@ -31,11 +33,28 @@ public class UseItemAction implements ActionListener {
 			if (this.gameManager.getGuiManager().getLeftPanelHeadline().getText() == "Inventar") {
 				new InventoryShowAction(this.gameManager).initialize();
 			}
+		} else if (this.item instanceof Weapon) {
+			if (player.isEquipped(this.item)) {
+				player.dequip(this.item);
+				this.gameManager.getGuiManager().getCurrentWeapon().setText("-");
+			} else {
+				player.equip(this.item);
+				this.gameManager.getGuiManager().getCurrentWeapon().setText(item.getName());
+			}
+		} else if (this.item instanceof Outfit) {
+			if (player.isEquipped(this.item)) {
+				player.dequip(this.item);
+				this.gameManager.getGuiManager().getCurrentOutfit().setText("-");
+			} else {
+				player.equip(this.item);
+				this.gameManager.getGuiManager().getCurrentOutfit().setText(item.getName());
+			}
 		} else {
 			System.out.println("Use item");
 		}
 
 		PlayerInfoPanel.update();
+		new InventoryShowAction(this.gameManager).initialize();
 	}
 
 }

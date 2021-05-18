@@ -108,6 +108,8 @@ public class GameManager {
 				Enemy enemy = (Enemy) challenge.getNpc();
 				this.guiManager.addFieldInfo("<b>" + enemy.toString() + "</b> ist erschienen");
 
+				this.guiManager.setNavigationEnabled(false);
+
 				AttackButton attackButton = new AttackButton(challenge, player, this);
 				this.guiManager.getActionButtonPanel().add(attackButton);
 

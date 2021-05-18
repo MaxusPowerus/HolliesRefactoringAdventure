@@ -35,7 +35,7 @@ public class LootButton extends JButton implements ActionListener {
 
 		this.gameManager.getPlayer().getInventory().add(this.inventory);
 
-		int itemCount = this.challenge.getContainer().getInventory().getAllItems().size();
+		int itemCount = this.inventory.getAllItems().size();
 		if (itemCount > 0) {
 			gameManager.getGuiManager().addFieldInfo(
 					"Du hast folgende Items eingesammelt: <b>" + this.inventory.stringifyItems() + "</b>");
@@ -51,7 +51,9 @@ public class LootButton extends JButton implements ActionListener {
 			new InventoryShowAction(this.gameManager).initialize();
 		}
 
-		this.challenge.getContainer().setFound(true);
+		if (this.challenge.getContainer() != null)
+			this.challenge.getContainer().setFound(true);
+
 		this.challenge.setChallengeCompleted(true);
 	}
 }

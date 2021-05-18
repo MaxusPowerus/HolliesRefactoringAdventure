@@ -51,6 +51,8 @@ public class AttackButton extends JButton implements ActionListener {
 			this.gameManager.getGuiManager().addFieldInfo("GAME OVER");
 		}
 
+		this.gameManager.getGuiManager().setNavigationEnabled(true);
+
 		this.challenge.setChallengeCompleted(true);
 
 		PlayerInfoPanel.update();

@@ -53,10 +53,8 @@ public class Inventory {
 	public void remove(Item item) {
 		Item itemInInv = this.getItem(item);
 		itemInInv.decrementCount();
-		System.out.println(itemInInv.getCount());
 		if (itemInInv.getCount() == 0) {
 			items.remove(itemInInv);
-			System.out.println("remove");
 		}
 
 	}
@@ -189,6 +187,14 @@ public class Inventory {
 		}
 		return builder.substring(0, builder.toString().lastIndexOf(',') > -1 ? builder.toString().lastIndexOf(',') : 0)
 				.toString();
+	}
+
+	public boolean containsWeapon() {
+		return this.getWeapons().size() > 0;
+	}
+
+	public boolean containsOutfit() {
+		return this.getOutfits().size() > 0;
 	}
 
 }

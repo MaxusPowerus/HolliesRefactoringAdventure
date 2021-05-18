@@ -2,6 +2,7 @@ package entities;
 
 import basic.Config;
 import items.Food;
+import items.Item;
 import items.Note;
 import items.Outfit;
 import items.Weapon;
@@ -19,7 +20,6 @@ public class Player {
 	private String name;
 	private double health;
 	private Inventory inventory;
-	private Inventory equipped;
 
 	private Experience experience;
 	private int daysAlive;
@@ -27,18 +27,21 @@ public class Player {
 	private MapField currentMapField;
 	private Time time;
 	private SkillSet skillSet;
+	private Outfit outfit;
+	private Weapon weapon;
 
 	public Player(String name, Map mainMap) {
 		this.name = name;
 		this.health = Config.PLAYER_HEALTH;
 		this.inventory = new Inventory();
-		this.equipped = new Inventory();
 		this.experience = new Experience();
 		this.daysAlive = 0;
 		this.currentMap = mainMap;
 		this.currentMapField = mainMap.getMapFieldByCoordinate(Config.MAP_SIZEX / 2, Config.MAP_SIZEY / 2);
 		this.time = new Time(0);
 		this.skillSet = new SkillSet();
+		this.outfit = null;
+		this.weapon = null;
 
 		// Set StartInventory
 		Weapon startWeapon = new Weapon("Stick", "Stock", 1, 0);
@@ -100,17 +103,6 @@ public class Player {
 		return skillSet;
 	}
 
-	public Weapon equippedWeapon() {
-
-		for (int i = 0; i < equipped.getAllItems().size(); i++) {
-			if (equipped.getAllItems().get(i) instanceof Weapon) {
-				return (Weapon) equipped.getAllItems().get(i);
-			}
-
-		}
-		return null;
-	}
-
 	public boolean canGo(Direction direction) {
 		MapField currentField = this.currentMapField;
 		Coordinate coordinate = currentField.getCoordinate();
@@ -168,9 +160,9 @@ public class Player {
 		int enemyFight = enemy.getSkillSet().getSkillValue(Skill.STRENGTH)
 				+ enemy.getSkillSet().getSkillValue(Skill.AGILITY) / 2;
 		double playerDmg = 0;
-		if (equippedWeapon() != null)
-			playerDmg = equippedWeapon().getDamage();
-		if (equippedWeapon() == null) {
+		if (this.weapon != null)
+			playerDmg = this.weapon.getDamage();
+		if (this.weapon == null) {
 			playerDmg = skillSet.getSkillValue(Skill.STRENGTH) / 2;
 			if (playerDmg <= 0) {
 				playerDmg = 1;
@@ -226,7 +218,28 @@ public class Player {
 		} else {
 			return true;
 		}
+	}
 
+	public void equip(Item item) {
+		if ((item instanceof Weapon && this.weapon == null)) {
+			this.weapon = (Weapon) item;
+		}
+		if ((item instanceof Outfit && this.outfit == null)) {
+			this.outfit = (Outfit) item;
+		}
+	}
+
+	public void dequip(Item item) {
+		if (item == null)
+			return;
+		if (this.weapon != null && this.weapon.equals(item))
+			this.weapon = null;
+		if (this.outfit != null && this.outfit.equals(item))
+			this.outfit = null;
+	}
+
+	public boolean isEquipped(Item item) {
+		return item.equals(this.weapon) || item.equals(this.outfit);
 	}
 
 }
