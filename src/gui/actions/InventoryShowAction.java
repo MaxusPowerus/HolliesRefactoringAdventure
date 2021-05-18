@@ -12,6 +12,7 @@ import java.util.HashMap;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -55,15 +56,17 @@ public class InventoryShowAction implements ActionListener {
 
 		this.gameManager.getGuiManager().getLeftPanelHeadline().setText("Inventar");
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBackground(Color.WHITE);
+		JTabbedPane inventoryTabPane = new JTabbedPane(JTabbedPane.TOP);
+
+		inventoryTabPane.setBorder(null);
+		inventoryTabPane.setBackground(Color.WHITE);
 		GroupLayout leftContentPanelGroupLayout = new GroupLayout(
 				this.gameManager.getGuiManager().getLeftContentPanel());
 		leftContentPanelGroupLayout
 				.setHorizontalGroup(leftContentPanelGroupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE));
+						.addComponent(inventoryTabPane, GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE));
 		leftContentPanelGroupLayout.setVerticalGroup(leftContentPanelGroupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE));
+				.addComponent(inventoryTabPane, GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE));
 
 		HashMap<String, ArrayList<Item>> itemCategories = GameManager.getInstance().getPlayer().getInventory()
 				.getItemsByCategory();
@@ -93,18 +96,25 @@ public class InventoryShowAction implements ActionListener {
 					itemPanel.add(getItemComponent(item));
 				}
 
-				tabbedPane.addTab(category, null, scrollPane, null);
+				ImageIcon icon = null;
+				if (category == "Nahrung")
+					icon = GUIHelper.getIcon(Icon.BREAD, 25, 25);
+				if (category == "Waffen")
+					icon = GUIHelper.getIcon(Icon.SWORD, 25, 25);
+
+				inventoryTabPane.addTab(category + " (" + itemCategories.get(category).size() + ")", icon, scrollPane,
+						null);
 			}
-			tabbedPane.setSelectedIndex(this.gameManager.getPlayer().getInventory().getSelectedIndex());
-			tabbedPane.addChangeListener(new ChangeListener() {
+			inventoryTabPane.setSelectedIndex(this.gameManager.getPlayer().getInventory().getSelectedIndex());
+			inventoryTabPane.addChangeListener(new ChangeListener() {
 
 				@Override
 				public void stateChanged(ChangeEvent e) {
-					gameManager.getPlayer().getInventory().setSelectedIndex(tabbedPane.getSelectedIndex());
+					gameManager.getPlayer().getInventory().setSelectedIndex(inventoryTabPane.getSelectedIndex());
 				}
 			});
 
-			this.gameManager.getGuiManager().getLeftContentPanel().add(tabbedPane);
+			this.gameManager.getGuiManager().getLeftContentPanel().add(inventoryTabPane);
 		}
 
 		this.gameManager.update();
