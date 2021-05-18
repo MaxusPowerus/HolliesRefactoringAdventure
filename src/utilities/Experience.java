@@ -8,7 +8,7 @@ public class Experience {
 	public Experience() {
 		this.level = 1;
 		this.xp = 0;
-		this.requiredXp = 100;
+		this.requiredXp = 10;
 	}
 
 	public int getLevel() {
@@ -28,7 +28,7 @@ public class Experience {
 	}
 
 	public void addXp(int xp) {
-		this.xp = xp;
+		this.xp += xp;
 		update();
 	}
 

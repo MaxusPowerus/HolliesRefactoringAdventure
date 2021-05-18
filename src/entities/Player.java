@@ -48,7 +48,7 @@ public class Player {
 
 		Weapon startWeapon = new Weapon("Stick", "Stock", 1, 1);
 		Outfit startOutfit = new Outfit("HolliesDress", "Hollys Lieblingskleid", 0, 10);
-		Food startFood = new Food("StewGrandmaStyle", "Eintopf nach Omas Art", 25, 1);
+		Food startFood = new Food("StewGrandmaStyle", "Eintopf nach Omas Art", 1, 25);
 		Note startNote = new Note("LetterFromHolger01", "Nachricht von Holger",
 				"Hey Holly!<br>Triff mich heute Abend im Wald!<br>Ich habe eine Überraschung für dich!<br>Dein Holger ;)",
 				0);
@@ -70,6 +70,8 @@ public class Player {
 	}
 
 	public void setHealth(double health) {
+		if (health > 100)
+			health = 100;
 		this.health = health;
 	}
 
@@ -247,6 +249,14 @@ public class Player {
 
 	public boolean isEquipped(Item item) {
 		return item.equals(this.weapon) || item.equals(this.outfit);
+	}
+
+	public boolean isWeaponEquipped() {
+		return this.weapon != null;
+	}
+
+	public boolean isOutfitEquipped() {
+		return this.outfit != null;
 	}
 
 }
