@@ -45,6 +45,7 @@ public class Player {
 		this.weapon = null;
 
 		// Set StartInventory
+
 		Weapon startWeapon = new Weapon("Stick", "Stock", 1, 1);
 		Outfit startOutfit = new Outfit("HolliesDress", "Hollys Lieblingskleid", 0, 10);
 		Food startFood = new Food("StewGrandmaStyle", "Eintopf nach Omas Art", 25, 1);
@@ -212,6 +213,7 @@ public class Player {
 		}
 		if (health > 0) {
 			this.inventory.add(enemy.getInventory());
+			this.experience.addXp(enemy.getXp());
 			return true;
 		} else {
 			return false;
