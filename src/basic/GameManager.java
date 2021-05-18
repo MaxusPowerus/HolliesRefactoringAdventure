@@ -98,7 +98,7 @@ public class GameManager {
 					LootButton lootButton = new LootButton(challenge, player, this);
 					this.guiManager.getActionButtonPanel().add(lootButton);
 				} else {
-					this.guiManager.addFieldInfo("Es scheint nichts los zu sein...");
+					this.guiManager.addFieldInfo("Es ist ruhig hier...zu ruhig...");
 					InspectButton button = new InspectButton(challenge, player, this);
 					this.guiManager.getActionButtonPanel().add(button);
 				}

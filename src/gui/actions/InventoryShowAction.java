@@ -50,6 +50,7 @@ public class InventoryShowAction implements ActionListener {
 		this.gameManager.getGuiManager().getLeftPanelHeadline().setText("Inventar");
 
 		JPanel itemPanel = new JPanel();
+		itemPanel.setBorder(null);
 		itemPanel.setBackground(Color.WHITE);
 		itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
 
@@ -75,8 +76,8 @@ public class InventoryShowAction implements ActionListener {
 	private JPanel getItemComponent(Item item) {
 
 		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(500, 90));
-		panel.setMaximumSize(new Dimension(32767, 90));
+		panel.setPreferredSize(new Dimension(500, 50));
+		panel.setMaximumSize(new Dimension(32767, 50));
 		panel.setBackground(Color.LIGHT_GRAY);
 		this.gameManager.getGuiManager().getLeftContentPanel().add(panel);
 
