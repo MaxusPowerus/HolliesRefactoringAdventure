@@ -67,7 +67,7 @@ public class Challenge {
 		// Callange: Container
 		case 0:
 			container = new Container("random", "");
-			container.fill(100, 1.5);
+			// container.fill(100, 1.5);
 
 			break;
 

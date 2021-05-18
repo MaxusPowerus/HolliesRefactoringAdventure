@@ -81,6 +81,10 @@ public class ResourceManager {
 						item = new Other(categoryItem.toArray()[i].toString(), label, innerItem.get("info").toString(),
 								Integer.valueOf(String.valueOf(innerItem.get("value"))));
 						break;
+					case "QuestItem":
+						item = new Other(categoryItem.toArray()[i].toString(), label, innerItem.get("info").toString(),
+								Integer.valueOf(String.valueOf(innerItem.get("value"))));
+						break;
 					default:
 						item = new Item(categoryItem.toArray()[i].toString(), label,
 								Integer.valueOf(String.valueOf(innerItem.get("value"))));
@@ -110,7 +114,7 @@ public class ResourceManager {
 		return out;
 	}
 
-	public ArrayList<Outfit> getOutfit() {
+	public ArrayList<Outfit> getOutfits() {
 		ArrayList<Outfit> out = new ArrayList<Outfit>();
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i) instanceof Outfit) {

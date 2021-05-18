@@ -19,20 +19,60 @@ public class Container {
 	public Container(String name, String prefix) {
 		this.name = name;
 		this.prefix = prefix;
-
+		inventory = new Inventory();
 		if (name == "random") {
 			String[] containerNames = { "Truhe", "Geldbeutel", "Leiche", "Kühlschrank" };
-			String[] containerPrefixes = { "eine", "einen", "eine", "einen" };
+			String[] containerPrefixes = { "eine", "einen", "die ", "einen" };
+
 			Random Randy = new Random();
 			int littleRandy = Randy.nextInt(containerNames.length);
 			this.name = containerNames[littleRandy];
 			this.prefix = containerPrefixes[littleRandy];
+
+			System.out.println("Enter THEIF" + this.name);
+			switch (this.name) {
+			case "Truhe":
+				inventory.add(GameManager.getInstance().getResourceManager().getOutfits()
+						.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getOutfits().size()))));
+				inventory.add(GameManager.getInstance().getResourceManager().getOutfits()
+						.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getOutfits().size()))));
+				inventory.add(GameManager.getInstance().getResourceManager().getOther()
+						.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getOther().size()))));
+				break;
+			case "Geldbeutel":
+				inventory.addGold(Randy.nextInt(100));
+				break;
+			case "Leiche":
+				inventory.add(GameManager.getInstance().getResourceManager().getOutfits()
+						.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getOutfits().size()))));
+				inventory.addGold(Randy.nextInt(100));
+				break;
+			case "Kühlschrank":
+				int spawnChance = Randy.nextInt(101);
+				if (spawnChance < 100) {
+					inventory.add(GameManager.getInstance().getResourceManager().getFood()
+							.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getFood().size()))));
+				}
+				if (spawnChance < 80) {
+					inventory.add(GameManager.getInstance().getResourceManager().getFood()
+							.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getFood().size()))));
+				}
+				if (spawnChance < 40) {
+					inventory.add(GameManager.getInstance().getResourceManager().getFood()
+							.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getFood().size()))));
+				}
+				if (spawnChance < 20) {
+					inventory.add(GameManager.getInstance().getResourceManager().getFood()
+							.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getFood().size()))));
+				}
+				break;
+			}
+
 			if (Randy.nextInt(100) % 2 == 0) {
 				found = true;
 			}
 		}
 
-		inventory = new Inventory();
 	}
 
 	public void fill(double chance, double div) {
@@ -125,4 +165,5 @@ public class Container {
 		return builder.substring(0, builder.toString().lastIndexOf(',') > -1 ? builder.toString().lastIndexOf(',') : 0)
 				.toString();
 	}
+
 }

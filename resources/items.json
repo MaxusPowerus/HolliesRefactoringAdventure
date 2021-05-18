@@ -28,6 +28,9 @@
 		},
 		"Other": {
 			"Stone": {"label": "Stein", "info": "Ein kleiner Stein, geeignet um jemanden am Kopf zu treffen!", "value": 0},
+			"Paper": {"label": "Pepier", "info": "---", "value": 1}
+		},
+		"QuestItem": {
 			"GiftForHolger": {"label": "Geschenk fuer Holger", "info": "SexTape", "value": 1}
 		}
 	}
