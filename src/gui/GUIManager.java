@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import basic.Config;
@@ -137,15 +138,16 @@ public class GUIManager {
 		fieldInfos = new JPanel();
 		fieldInfos.setBackground(Color.WHITE);
 		GroupLayout gl_fieldInfoPanel = new GroupLayout(fieldInfoPanel);
-		gl_fieldInfoPanel.setHorizontalGroup(gl_fieldInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_fieldInfoPanel.createSequentialGroup().addContainerGap()
-						.addComponent(fieldInfos, GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE).addContainerGap()));
+		gl_fieldInfoPanel.setHorizontalGroup(gl_fieldInfoPanel.createParallelGroup(Alignment.TRAILING)
+				.addComponent(fieldInfos, GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE));
 		gl_fieldInfoPanel.setVerticalGroup(gl_fieldInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_fieldInfoPanel.createSequentialGroup().addContainerGap()
-						.addComponent(fieldInfos, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(194, Short.MAX_VALUE)));
+						.addComponent(fieldInfos, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE).addContainerGap()));
 		fieldInfos.setLayout(new BoxLayout(fieldInfos, BoxLayout.Y_AXIS));
 		fieldInfoPanel.setLayout(gl_fieldInfoPanel);
+
+		fieldInfos.setBackground(new Color(0, 0, 0, 0.3f));
+		fieldInfos.setBorder(new EmptyBorder(10, 10, 10, 10));
 
 		actionButtonPanel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) actionButtonPanel.getLayout();
@@ -479,7 +481,9 @@ public class GUIManager {
 	}
 
 	public void addFieldInfo(String info) {
-		this.fieldInfos.add(new JLabel(info));
+		JLabel label = new JLabel(info);
+		label.setForeground(Color.WHITE);
+		this.fieldInfos.add(label);
 
 		this.frame.revalidate();
 		this.frame.repaint();

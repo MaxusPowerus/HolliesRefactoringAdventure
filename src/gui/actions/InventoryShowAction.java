@@ -14,7 +14,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ScrollPaneConstants;
 
 import basic.GameManager;
 import gui.GUIHelper;
@@ -47,8 +49,12 @@ public class InventoryShowAction implements ActionListener {
 
 		this.gameManager.getGuiManager().getLeftPanelHeadline().setText("Inventar");
 
-		JPanel itemPanel = this.gameManager.getGuiManager().getLeftContentPanel();
+		JPanel itemPanel = new JPanel();
+		itemPanel.setBackground(Color.WHITE);
 		itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
+
+		JScrollPane scrollPane = new JScrollPane(itemPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 		// load items
 		ArrayList<Item> items = GameManager.getInstance().getPlayer().getInventory().getAllItems();
@@ -61,14 +67,16 @@ public class InventoryShowAction implements ActionListener {
 			}
 		}
 
+		this.gameManager.getGuiManager().getLeftContentPanel().add(scrollPane);
+
 		this.gameManager.update();
 	}
 
 	private JPanel getItemComponent(Item item) {
 
 		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(500, 50));
-		panel.setMaximumSize(new Dimension(32767, 50));
+		panel.setPreferredSize(new Dimension(500, 90));
+		panel.setMaximumSize(new Dimension(32767, 90));
 		panel.setBackground(Color.LIGHT_GRAY);
 		this.gameManager.getGuiManager().getLeftContentPanel().add(panel);
 

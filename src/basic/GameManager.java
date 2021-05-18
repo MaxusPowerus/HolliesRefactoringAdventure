@@ -119,6 +119,10 @@ public class GameManager {
 			case 2:
 				this.guiManager.addFieldInfo("Du hast einen Händler entdeckt");
 				break;
+			default:
+				this.guiManager.addFieldInfo(
+						"Wer das liest ist doof. Spaß. Wer das liest, hat einen Bug entdeckt. :c Bitte kontaktieren Sie Ihren Administrator lul");
+				break;
 			}
 		} else {
 			this.guiManager.addFieldInfo("Du siehst nichts außer deinen Fußspuren");
