@@ -14,6 +14,7 @@ public class Config {
 	// PLAYER
 	public final static double PLAYER_HEALTH = 100;
 	public final static String PLAYER_NAME = "Holly";
+	// startItems
 
 	// MAP
 	public final static int MAP_SIZEX = 25;

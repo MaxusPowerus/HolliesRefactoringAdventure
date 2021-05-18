@@ -29,47 +29,41 @@ public class Container {
 			this.name = containerNames[littleRandy];
 			this.prefix = containerPrefixes[littleRandy];
 
-			System.out.println("Enter THEIF" + this.name);
 			switch (this.name) {
 			case "Truhe":
-				inventory.add(GameManager.getInstance().getResourceManager().getOutfits()
-						.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getOutfits().size()))));
-				inventory.add(GameManager.getInstance().getResourceManager().getOutfits()
-						.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getOutfits().size()))));
-				inventory.add(GameManager.getInstance().getResourceManager().getOther()
-						.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getOther().size()))));
+				for (int i = 0; i < 3; i++) {
+					Outfit outfit = GameManager.getInstance().getResourceManager().getOutfits()
+							.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getOutfits().size())));
+					inventory.add(outfit);
+				}
 				break;
 			case "Geldbeutel":
 				inventory.addGold(Randy.nextInt(100));
 				break;
 			case "Leiche":
-				inventory.add(GameManager.getInstance().getResourceManager().getOutfits()
-						.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getOutfits().size()))));
+				Outfit outfit = GameManager.getInstance().getResourceManager().getOutfits()
+						.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getOutfits().size())));
+				inventory.add(outfit);
 				inventory.addGold(Randy.nextInt(100));
 				break;
 			case "Kühlschrank":
 				int spawnChance = Randy.nextInt(101);
-				if (spawnChance < 100) {
-					inventory.add(GameManager.getInstance().getResourceManager().getFood()
-							.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getFood().size()))));
-				}
-				if (spawnChance < 80) {
-					inventory.add(GameManager.getInstance().getResourceManager().getFood()
-							.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getFood().size()))));
-				}
-				if (spawnChance < 40) {
-					inventory.add(GameManager.getInstance().getResourceManager().getFood()
-							.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getFood().size()))));
-				}
-				if (spawnChance < 20) {
-					inventory.add(GameManager.getInstance().getResourceManager().getFood()
-							.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getFood().size()))));
-				}
-				break;
-			}
 
-			if (Randy.nextInt(100) % 2 == 0) {
-				found = true;
+				for (int i = 0; i < 5; i++) {
+					if (spawnChance > 0) {
+						Food food = GameManager.getInstance().getResourceManager().getFood()
+								.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getFood().size())));
+						inventory.add(food);
+						spawnChance = spawnChance - 10;
+					} else {
+						break;
+					}
+					break;
+				}
+
+				if (Randy.nextInt(100) % 2 == 0) {
+					found = true;
+				}
 			}
 		}
 
