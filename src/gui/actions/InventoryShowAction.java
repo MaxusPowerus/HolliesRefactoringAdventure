@@ -14,7 +14,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ScrollPaneConstants;
 
 import basic.GameManager;
 import gui.GUIHelper;
@@ -47,8 +49,13 @@ public class InventoryShowAction implements ActionListener {
 
 		this.gameManager.getGuiManager().getLeftPanelHeadline().setText("Inventar");
 
-		JPanel itemPanel = this.gameManager.getGuiManager().getLeftContentPanel();
+		JPanel itemPanel = new JPanel();
+		itemPanel.setBorder(null);
+		itemPanel.setBackground(Color.WHITE);
 		itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
+
+		JScrollPane scrollPane = new JScrollPane(itemPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 		// load items
 		ArrayList<Item> items = GameManager.getInstance().getPlayer().getInventory().getAllItems();
@@ -60,6 +67,8 @@ public class InventoryShowAction implements ActionListener {
 				itemPanel.add(this.getItemComponent(item));
 			}
 		}
+
+		this.gameManager.getGuiManager().getLeftContentPanel().add(scrollPane);
 
 		this.gameManager.update();
 	}

@@ -98,7 +98,7 @@ public class GameManager {
 					LootButton lootButton = new LootButton(challenge, player, this);
 					this.guiManager.getActionButtonPanel().add(lootButton);
 				} else {
-					this.guiManager.addFieldInfo("Es scheint nichts los zu sein...");
+					this.guiManager.addFieldInfo("Es ist ruhig hier...zu ruhig...");
 					InspectButton button = new InspectButton(challenge, player, this);
 					this.guiManager.getActionButtonPanel().add(button);
 				}
@@ -117,6 +117,10 @@ public class GameManager {
 				break;
 			case 2:
 				this.guiManager.addFieldInfo("Du hast einen H‰ndler entdeckt");
+				break;
+			default:
+				this.guiManager.addFieldInfo(
+						"Wer das liest ist doof. Spaﬂ. Wer das liest, hat einen Bug entdeckt. :c Bitte kontaktieren Sie Ihren Administrator lul");
 				break;
 			}
 		} else {
