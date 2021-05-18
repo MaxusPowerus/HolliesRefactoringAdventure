@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -116,7 +117,8 @@ public class InventoryShowAction implements ActionListener {
 
 			// add gold tab
 			inventoryTabPane.addTab("Gold: " + this.gameManager.getPlayer().getInventory().getGold(), null);
-			inventoryTabPane.setBackgroundAt(5, Color.decode("#FFD700"));
+			inventoryTabPane.setBackgroundAt(6, Color.decode("#FFD700"));
+			inventoryTabPane.setEnabledAt(6, false);
 
 			this.gameManager.getGuiManager().getLeftContentPanel().add(inventoryTabPane);
 		}
@@ -128,8 +130,9 @@ public class InventoryShowAction implements ActionListener {
 
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(500, 50));
+		panel.setBackground(Color.WHITE);
 		panel.setMaximumSize(new Dimension(32767, 50));
-		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY));
 		this.gameManager.getGuiManager().getLeftContentPanel().add(panel);
 
 		JLabel name = new JLabel(item.getName() + " (" + item.getCount() + " Stück)");

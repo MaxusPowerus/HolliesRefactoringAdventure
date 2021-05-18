@@ -8,6 +8,7 @@ import items.Item;
 import items.Note;
 import items.Other;
 import items.Outfit;
+import items.QuestItem;
 import items.Weapon;
 
 public class Inventory {
@@ -37,7 +38,7 @@ public class Inventory {
 		this.add(inv);
 	}
 
-	private void add(Inventory inventory) {
+	public void add(Inventory inventory) {
 		ArrayList<Item> items = inventory.getAllItems();
 		this.add(items, inventory.getGold());
 	}
@@ -130,6 +131,7 @@ public class Inventory {
 		ArrayList<Item> others = new ArrayList<Item>();
 		ArrayList<Item> outfits = new ArrayList<Item>();
 		ArrayList<Item> weapons = new ArrayList<Item>();
+		ArrayList<Item> questItems = new ArrayList<Item>();
 
 		for (Item item : this.items) {
 			if (item instanceof Food)
@@ -142,6 +144,8 @@ public class Inventory {
 				outfits.add(item);
 			if (item instanceof Weapon)
 				weapons.add(item);
+			if (item instanceof QuestItem)
+				questItems.add(item);
 		}
 
 		itemCategories.put("Nahrung", food);
@@ -149,6 +153,7 @@ public class Inventory {
 		itemCategories.put("Sonstiges", others);
 		itemCategories.put("Kleidung/Rüstung", outfits);
 		itemCategories.put("Waffen", weapons);
+		itemCategories.put("Quest-Items", questItems);
 
 		return itemCategories;
 	}

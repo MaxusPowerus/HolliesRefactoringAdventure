@@ -198,9 +198,7 @@ public class Player {
 				break;
 		}
 		if (health > 0) {
-			for (int i = 0; i < enemy.getInventory().getAllItems().size(); i++) {
-				inventory.add(enemy.getInventory().getAllItems().get(i));
-			}
+			this.inventory.add(enemy.getInventory());
 			return true;
 		} else {
 			return false;

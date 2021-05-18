@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 
 import basic.Config;
@@ -66,6 +67,12 @@ public class GUIManager {
 	}
 
 	private void initialize() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		frame = new JFrame();
 		frame.setTitle(Config.GAME_TITLE);
 		frame.setBounds(100, 100, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
@@ -156,43 +163,52 @@ public class GUIManager {
 		openInvButton = new JButton("[INV_BTN]");
 
 		goNorthButton = new JButton("N");
+		goNorthButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		goNorthButton.addActionListener(new NavigationButtonAction(Direction.NORTH));
 
 		goEastButton = new JButton("O");
+		goEastButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		goEastButton.addActionListener(new NavigationButtonAction(Direction.EAST));
 
 		goSouthButton = new JButton("S");
+		goSouthButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		goSouthButton.addActionListener(new NavigationButtonAction(Direction.SOUTH));
 
 		goWestButton = new JButton("W");
+		goWestButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		goWestButton.addActionListener(new NavigationButtonAction(Direction.WEST));
 		GroupLayout gl_actionPanel = new GroupLayout(actionPanel);
-		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_actionPanel.createSequentialGroup()
-						.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_actionPanel.createSequentialGroup().addGap(111).addComponent(goWestButton)
-										.addGap(38).addComponent(goEastButton))
-								.addGroup(gl_actionPanel.createSequentialGroup().addGap(154)
-										.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-												.addComponent(goSouthButton).addComponent(goNorthButton)))
-								.addGroup(gl_actionPanel.createSequentialGroup().addContainerGap()
-										.addComponent(openInvButton)))
-						.addPreferredGap(ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
-						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap()));
+		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_actionPanel
+				.createSequentialGroup()
+				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_actionPanel.createSequentialGroup()
+								.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_actionPanel.createSequentialGroup().addContainerGap()
+												.addComponent(openInvButton))
+										.addGroup(gl_actionPanel.createSequentialGroup().addGap(154)
+												.addGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING)
+														.addComponent(goSouthButton).addComponent(goNorthButton))))
+								.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(Alignment.TRAILING,
+								gl_actionPanel.createSequentialGroup()
+										.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(goWestButton).addGap(57)))
+				.addComponent(goEastButton).addPreferredGap(ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+				.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+				.addContainerGap()));
 		gl_actionPanel
 				.setVerticalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_actionPanel.createSequentialGroup().addContainerGap()
 								.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_actionPanel.createSequentialGroup()
-												.addComponent(actionButtonPanel, GroupLayout.DEFAULT_SIZE, 201,
+												.addComponent(actionButtonPanel, GroupLayout.DEFAULT_SIZE, 225,
 														Short.MAX_VALUE)
 												.addContainerGap())
 										.addGroup(gl_actionPanel.createSequentialGroup().addComponent(openInvButton)
-												.addPreferredGap(ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+												.addPreferredGap(ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
 												.addComponent(goNorthButton).addPreferredGap(ComponentPlacement.RELATED)
 												.addGroup(gl_actionPanel.createParallelGroup(Alignment.BASELINE)
-														.addComponent(goWestButton).addComponent(goEastButton))
+														.addComponent(goEastButton).addComponent(goWestButton))
 												.addPreferredGap(ComponentPlacement.RELATED).addComponent(goSouthButton)
 												.addGap(37)))));
 		actionPanel.setLayout(gl_actionPanel);
@@ -208,14 +224,12 @@ public class GUIManager {
 		GroupLayout gl_leftMainPanel = new GroupLayout(leftMainPanel);
 		gl_leftMainPanel.setHorizontalGroup(gl_leftMainPanel.createParallelGroup(Alignment.LEADING)
 				.addComponent(leftPanelHeadline, GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
-				.addGroup(gl_leftMainPanel.createSequentialGroup().addGap(10)
-						.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE).addGap(10)));
+				.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE));
 		gl_leftMainPanel.setVerticalGroup(gl_leftMainPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_leftMainPanel.createSequentialGroup()
 						.addComponent(leftPanelHeadline, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
-						.addContainerGap()));
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)));
 		leftContentPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		leftMainPanel.setLayout(gl_leftMainPanel);
 
@@ -322,7 +336,6 @@ public class GUIManager {
 		healthLabel = new JLabel("HP (xxx)");
 
 		healthBar = new JProgressBar();
-		healthBar.setToolTipText("");
 
 		levelLabel = new JLabel("Level X");
 

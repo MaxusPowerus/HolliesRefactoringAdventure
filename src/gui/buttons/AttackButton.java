@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import basic.GameManager;
+import entities.Enemy;
 import entities.Player;
+import gui.PlayerInfoPanel;
 import utilities.Challenge;
 
 public class AttackButton extends JButton implements ActionListener {
@@ -28,7 +30,16 @@ public class AttackButton extends JButton implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		this.setEnabled(false);
 
-		// TODO
+		boolean attackSucceed = this.player.fight((Enemy) this.challenge.getNpc());
+		if (attackSucceed) {
+			this.gameManager.getGuiManager()
+					.addFieldInfo("In einem epischen Kampf besiegst du " + this.challenge.getNpc().toString());
+		} else {
+			this.gameManager.getGuiManager().addFieldInfo(
+					"Du gibst alles was du kannst, aber " + this.challenge.getNpc().toString() + " tötet dich");
+		}
+
+		PlayerInfoPanel.update();
 
 		this.gameManager.update();
 	}

@@ -119,7 +119,7 @@ public class InventoryItemHover implements MouseListener {
 		this.gameManager.getGuiManager().getLeftInfoContentPanel().setLayout(gl_leftInfoContentPanel);
 		this.gameManager.getGuiManager().getLeftInfoPanel().setLayout(gl_leftInfoPanel);
 
-		this.itemPanel.setBackground(Color.GRAY);
+		this.itemPanel.setBackground(Color.LIGHT_GRAY);
 
 		this.gameManager.update();
 	}
@@ -128,7 +128,7 @@ public class InventoryItemHover implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 		this.gameManager.getGuiManager().getLeftInfoContentPanel().removeAll();
 
-		this.itemPanel.setBackground(Color.LIGHT_GRAY);
+		this.itemPanel.setBackground(Color.WHITE);
 
 		this.gameManager.update();
 	}

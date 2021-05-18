@@ -12,7 +12,8 @@ public class PlayerInfoPanel {
 		Player player = gameManager.getPlayer();
 
 		guiManager.getHealthBar().setValue((int) player.getHealth());
-		guiManager.getHealthLabel().setText("HP (" + player.getHealth() + ")");
+		guiManager.getHealthLabel().setText("HP");
+		guiManager.getHealthBar().setToolTipText(player.getHealth() + "");
 
 		guiManager.getStrengthValue().setText((int) player.getSkillSet().getSkillValue(Skill.STRENGTH) + "");
 		guiManager.getPerceptionValue().setText((int) player.getSkillSet().getSkillValue(Skill.PERCEPTION) + "");
