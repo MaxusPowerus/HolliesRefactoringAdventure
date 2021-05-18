@@ -1,6 +1,7 @@
 package utilities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import items.Food;
 import items.Item;
@@ -13,8 +14,10 @@ public class Inventory {
 
 	private ArrayList<Item> items;
 	private int gold;
+	private int selectedIndex;
 
 	public Inventory() {
+		this.selectedIndex = 0;
 		items = new ArrayList<Item>();
 		gold = 0;
 	}
@@ -36,10 +39,11 @@ public class Inventory {
 
 	private void add(Inventory inventory) {
 		ArrayList<Item> items = inventory.getAllItems();
-		this.add(items);
+		this.add(items, inventory.getGold());
 	}
 
-	private void add(ArrayList<Item> items) {
+	private void add(ArrayList<Item> items, int gold) {
+		this.gold += gold;
 		for (int i = 0; i < items.size(); i++) {
 			this.add(items.get(i));
 		}
@@ -118,6 +122,37 @@ public class Inventory {
 		return other;
 	}
 
+	public HashMap<String, ArrayList<Item>> getItemsByCategory() {
+		HashMap<String, ArrayList<Item>> itemCategories = new HashMap<String, ArrayList<Item>>();
+
+		ArrayList<Item> food = new ArrayList<Item>();
+		ArrayList<Item> notes = new ArrayList<Item>();
+		ArrayList<Item> others = new ArrayList<Item>();
+		ArrayList<Item> outfits = new ArrayList<Item>();
+		ArrayList<Item> weapons = new ArrayList<Item>();
+
+		for (Item item : this.items) {
+			if (item instanceof Food)
+				food.add(item);
+			if (item instanceof Note)
+				notes.add(item);
+			if (item instanceof Other)
+				others.add(item);
+			if (item instanceof Outfit)
+				outfits.add(item);
+			if (item instanceof Weapon)
+				weapons.add(item);
+		}
+
+		itemCategories.put("Nahrung", food);
+		itemCategories.put("Notizen", notes);
+		itemCategories.put("Sonstiges", others);
+		itemCategories.put("Kleidung/Rüstung", outfits);
+		itemCategories.put("Waffen", weapons);
+
+		return itemCategories;
+	}
+
 	public int getGold() {
 		return gold;
 	}
@@ -132,6 +167,14 @@ public class Inventory {
 
 	public void removeGold(int gold) {
 		this.gold -= gold;
+	}
+
+	public int getSelectedIndex() {
+		return selectedIndex;
+	}
+
+	public void setSelectedIndex(int selectedIndex) {
+		this.selectedIndex = selectedIndex;
 	}
 
 }

@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 
 public class GUIHelper {
 
-	private static ImageIcon getIcon(Icon icon, int width, int height) {
+	public static ImageIcon getIcon(Icon icon, int width, int height) {
 		return new ImageIcon(
 				new ImageIcon(icon.getPath()).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
 	}

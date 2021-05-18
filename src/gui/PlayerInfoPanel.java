@@ -16,10 +16,10 @@ public class PlayerInfoPanel {
 
 		guiManager.getStrengthValue().setText((int) player.getSkillSet().getSkillValue(Skill.STRENGTH) + "");
 		guiManager.getPerceptionValue().setText((int) player.getSkillSet().getSkillValue(Skill.PERCEPTION) + "");
-		guiManager.getPerseveranceValue().setText((int) player.getSkillSet().getSkillValue(Skill.ENDURANCE) + "");
+		guiManager.getEnduranceValue().setText((int) player.getSkillSet().getSkillValue(Skill.ENDURANCE) + "");
 		guiManager.getCharismaValue().setText((int) player.getSkillSet().getSkillValue(Skill.CHARISMA) + "");
 		guiManager.getIntelligenceValue().setText((int) player.getSkillSet().getSkillValue(Skill.INTELLIGENCE) + "");
-		guiManager.getSkillValue().setText((int) player.getSkillSet().getSkillValue(Skill.AGILITY) + "");
+		guiManager.getAgilityValue().setText((int) player.getSkillSet().getSkillValue(Skill.AGILITY) + "");
 		guiManager.getLuckValue().setText((int) player.getSkillSet().getSkillValue(Skill.LUCK) + "");
 	}
 

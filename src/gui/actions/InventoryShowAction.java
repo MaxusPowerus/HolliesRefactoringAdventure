@@ -7,22 +7,29 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import basic.GameManager;
 import gui.GUIHelper;
 import gui.Icon;
 import items.Food;
 import items.Item;
+import items.Note;
+import items.Other;
 import items.Outfit;
 import items.Weapon;
 
@@ -49,26 +56,70 @@ public class InventoryShowAction implements ActionListener {
 
 		this.gameManager.getGuiManager().getLeftPanelHeadline().setText("Inventar");
 
-		JPanel itemPanel = new JPanel();
-		itemPanel.setBorder(null);
-		itemPanel.setBackground(Color.WHITE);
-		itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
+		JTabbedPane inventoryTabPane = new JTabbedPane(JTabbedPane.TOP);
 
-		JScrollPane scrollPane = new JScrollPane(itemPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		inventoryTabPane.setBorder(null);
+		inventoryTabPane.setBackground(Color.WHITE);
+		GroupLayout leftContentPanelGroupLayout = new GroupLayout(
+				this.gameManager.getGuiManager().getLeftContentPanel());
+		leftContentPanelGroupLayout
+				.setHorizontalGroup(leftContentPanelGroupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(inventoryTabPane, GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE));
+		leftContentPanelGroupLayout.setVerticalGroup(leftContentPanelGroupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(inventoryTabPane, GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE));
 
-		// load items
-		ArrayList<Item> items = GameManager.getInstance().getPlayer().getInventory().getAllItems();
-		if (items.isEmpty()) {
+		HashMap<String, ArrayList<Item>> itemCategories = GameManager.getInstance().getPlayer().getInventory()
+				.getItemsByCategory();
+		if (itemCategories.isEmpty()) {
+			JPanel itemPanel = new JPanel();
+			itemPanel.setBorder(null);
+			itemPanel.setBackground(Color.WHITE);
+			itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
+
 			JLabel empty = new JLabel("Dein Rucksack ist leer");
 			itemPanel.add(empty);
-		} else {
-			for (Item item : items) {
-				itemPanel.add(this.getItemComponent(item));
-			}
-		}
 
-		this.gameManager.getGuiManager().getLeftContentPanel().add(scrollPane);
+			this.gameManager.getGuiManager().getLeftContentPanel().add(itemPanel);
+		} else {
+
+			for (String category : itemCategories.keySet()) {
+
+				JPanel itemPanel = new JPanel();
+				itemPanel.setBorder(null);
+				itemPanel.setBackground(Color.WHITE);
+				itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
+
+				JScrollPane scrollPane = new JScrollPane(itemPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+						ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+				for (Item item : itemCategories.get(category)) {
+					itemPanel.add(getItemComponent(item));
+				}
+
+				ImageIcon icon = null;
+				if (category == "Nahrung")
+					icon = GUIHelper.getIcon(Icon.BREAD, 25, 25);
+				if (category == "Waffen")
+					icon = GUIHelper.getIcon(Icon.SWORD, 25, 25);
+
+				inventoryTabPane.addTab(category + " (" + itemCategories.get(category).size() + ")", icon, scrollPane,
+						null);
+			}
+			inventoryTabPane.setSelectedIndex(this.gameManager.getPlayer().getInventory().getSelectedIndex());
+			inventoryTabPane.addChangeListener(new ChangeListener() {
+
+				@Override
+				public void stateChanged(ChangeEvent e) {
+					gameManager.getPlayer().getInventory().setSelectedIndex(inventoryTabPane.getSelectedIndex());
+				}
+			});
+
+			// add gold tab
+			inventoryTabPane.addTab("Gold: " + this.gameManager.getPlayer().getInventory().getGold(), null);
+			inventoryTabPane.setBackgroundAt(5, Color.decode("#FFD700"));
+
+			this.gameManager.getGuiManager().getLeftContentPanel().add(inventoryTabPane);
+		}
 
 		this.gameManager.update();
 	}
@@ -100,6 +151,12 @@ public class InventoryShowAction implements ActionListener {
 		}
 		if (item instanceof Outfit) {
 			button.setText("anziehen");
+		}
+		if (item instanceof Note) {
+			button.setText("ansehen");
+		}
+		if (item instanceof Other) {
+			button.setText("nutzen");
 		}
 
 		button.addActionListener(new UseItemAction(this.gameManager, item));
