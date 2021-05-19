@@ -69,7 +69,16 @@ public class ResourceManager {
 						item = new Outfit(categoryItem.toArray()[i].toString(), label,
 								Integer.valueOf(String.valueOf(innerItem.get("value"))),
 								Integer.valueOf(innerItem.get("armor").toString()),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
+								Integer.valueOf(String.valueOf(innerItem.get("chance"))),
+								Integer.valueOf(innerItem.get("st").toString()),
+								Integer.valueOf(innerItem.get("pe").toString()),
+								Integer.valueOf(innerItem.get("en").toString()),
+								Integer.valueOf(innerItem.get("ch").toString()),
+								Integer.valueOf(innerItem.get("in").toString()),
+								Integer.valueOf(innerItem.get("ag").toString()),
+								Integer.valueOf(innerItem.get("lk").toString())
+
+						);
 						break;
 
 					case "Food":
