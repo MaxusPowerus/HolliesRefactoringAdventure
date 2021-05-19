@@ -31,7 +31,7 @@ public class Container {
 
 			switch (this.name) {
 			case "Truhe":
-				for (int i = 0; i < 3; i++) {
+				for (int i = 0; i < 5; i++) {
 					Outfit outfit = GameManager.getInstance().getResourceManager().getOutfits()
 							.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getOutfits().size())));
 					inventory.add(outfit);

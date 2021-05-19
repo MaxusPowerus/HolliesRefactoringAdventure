@@ -61,33 +61,46 @@ public class ResourceManager {
 					case "Weapons":
 						item = new Weapon(categoryItem.toArray()[i].toString(), label,
 								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(innerItem.get("value").toString()));
+								Integer.valueOf(innerItem.get("damage").toString()),
+								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
 						break;
+
 					case "Outfits":
 						item = new Outfit(categoryItem.toArray()[i].toString(), label,
 								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(innerItem.get("armor").toString()));
+								Integer.valueOf(innerItem.get("armor").toString()),
+								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
 						break;
+
 					case "Food":
 						item = new Food(categoryItem.toArray()[i].toString(), label,
 								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(innerItem.get("energy").toString()));
+								Integer.valueOf(innerItem.get("energy").toString()),
+								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
 						break;
+
 					case "Notes":
 						item = new Note(categoryItem.toArray()[i].toString(), label, innerItem.get("text").toString(),
-								Integer.valueOf(String.valueOf(innerItem.get("value"))));
+								Integer.valueOf(String.valueOf(innerItem.get("value"))),
+								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
 						break;
+
 					case "Other":
 						item = new Other(categoryItem.toArray()[i].toString(), label, innerItem.get("info").toString(),
-								Integer.valueOf(String.valueOf(innerItem.get("value"))));
+								Integer.valueOf(String.valueOf(innerItem.get("value"))),
+								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
 						break;
+
 					case "QuestItem":
 						item = new Other(categoryItem.toArray()[i].toString(), label, innerItem.get("info").toString(),
-								Integer.valueOf(String.valueOf(innerItem.get("value"))));
+								Integer.valueOf(String.valueOf(innerItem.get("value"))),
+								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
 						break;
+
 					default:
 						item = new Item(categoryItem.toArray()[i].toString(), label,
-								Integer.valueOf(String.valueOf(innerItem.get("value"))));
+								Integer.valueOf(String.valueOf(innerItem.get("value"))),
+								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
 						break;
 					}
 
