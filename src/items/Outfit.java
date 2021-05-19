@@ -11,7 +11,13 @@ public class Outfit extends Item {
 			int chFx, int inFx, int alFx, int lkFx) {
 		super(uniqueName, name, value, spwanChance);
 		this.armor = armor;
-		outfitFx = new OutfitEffect(stFx, peFx, enFx, chFx, inFx, alFx, lkFx);
+		this.outfitFx = new OutfitEffect(stFx, peFx, enFx, chFx, inFx, alFx, lkFx);
+	}
+
+	public Outfit(String uniqueName, String name, int value, int armor, int spwanChance, OutfitEffect outfitFx) {
+		super(uniqueName, name, value, spwanChance);
+		this.armor = armor;
+		this.outfitFx = outfitFx;
 	}
 
 	public int getArmor() {

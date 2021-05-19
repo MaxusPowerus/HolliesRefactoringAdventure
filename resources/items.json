@@ -10,18 +10,18 @@
         "Outfits": {
             
 			
-            "UnicornCostume": {"label": "Einhorn-Kostüm", "armor": 0, "value": 50, "chance": 5, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
-            "LetherArmor": {"label": "Einhorn-Kostüm", "armor": 5, "value": 50, "chance": 35, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
-            "ChainMail": {"label": "Kettenrüstung", "armor": 10, "value": 100, "chance": 25, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
-            "IronArmor": {"label": "Eisenrüstung", "armor": 15, "value": 150, "chance": 15, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
+            "UnicornCostume": {"label": "Einhorn-Kostüm", "armor": 0, "value": 50, "chance": 5, "st": 5, "pe": 5, "en": 5, "ch": 5, "in": 5, "ag": 5, "lk": 5},
+            "LetherArmor": {"label": "Lederrüstung", "armor": 5, "value": 50, "chance": 35, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": -1, "lk": 0},
+            "ChainMail": {"label": "Kettenrüstung", "armor": 10, "value": 100, "chance": 25, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": -3, "lk": 0},
+            "IronArmor": {"label": "Eisenrüstung", "armor": 15, "value": 150, "chance": 15, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": -5, "lk": 0},
 			
-            "NobelDressRed": {"label": "Feine Kleidung (rot)", "armor": 0, "value": 30, "chance": 40, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
-            "NobelDressYellow": {"label": "Feine Kleidung (gelb)", "armor": 0, "value": 30, "chance": 40, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
-            "NobelDressBlue": {"label": "Feine Kleidung (blau)", "armor": 0, "value": 30, "chance": 40, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
+            "NobelDressRed": {"label": "Feine Kleidung (rot)", "armor": 0, "value": 30, "chance": 40, "st": 0, "pe": 0, "en": 0, "ch": 3, "in": 0, "ag": 0, "lk": 0},
+            "NobelDressYellow": {"label": "Feine Kleidung (gelb)", "armor": 0, "value": 30, "chance": 40, "st": 0, "pe": 0, "en": 0, "ch": 3, "in": 0, "ag": 0, "lk": 0},
+            "NobelDressBlue": {"label": "Feine Kleidung (blau)", "armor": 0, "value": 30, "chance": 40, "st": 0, "pe": 0, "en": 0, "ch": 3, "in": 0, "ag": 0, "lk": 0},
             "NobelDressGreen": {"label": "Feine Kleidung (grün)", "armor": 0, "value": 30, "chance": 40, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
             "NormalDressBrown": {"label": "Kleidung (brown)", "armor": 0, "value": 10, "chance": 95, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
             "NormalDressBeige": {"label": "Kleidung (beige)", "armor": 0, "value": 10, "chance": 95, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
-            "rags": {"label": "Lumpen", "armor": 0, "value": 3, "chance": 100, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0}
+            "rags": {"label": "Lumpen", "armor": 0, "value": 3, "chance": 100, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 1}
         },
         "Food": {
             

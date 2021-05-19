@@ -76,8 +76,8 @@ public class Item {
 		} else if (this instanceof Food) {
 			item = new Food(this.uniqueName, this.name, this.value, ((Food) this).getEnergy(), this.getSpawnChance());
 		} else if (this instanceof Outfit) {
-			item = new Outfit(this.uniqueName, this.name, this.value, ((Outfit) this).getArmor(),
-					this.getSpawnChance());
+			item = new Outfit(this.uniqueName, this.name, this.value, ((Outfit) this).getArmor(), this.getSpawnChance(),
+					((Outfit) this).getOutfitFx());
 		} else {
 			item = new Item(this.uniqueName, this.name, this.value, this.getSpawnChance());
 		}
