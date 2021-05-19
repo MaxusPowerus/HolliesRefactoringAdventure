@@ -13,6 +13,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager;
 
 import basic.GameManager;
 import gui.GUIHelper;
@@ -56,7 +57,8 @@ public class InventoryItemHover implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		this.gameManager.getGuiManager().getLeftInfoContentPanel().removeAll();
 
-		this.gameManager.getGuiManager().getLeftInfoContentPanel().setBackground(Color.WHITE);
+		this.gameManager.getGuiManager().getLeftInfoContentPanel()
+				.setBackground(UIManager.getColor("Desktop.background"));
 		GroupLayout gl_leftInfoPanel = new GroupLayout(this.gameManager.getGuiManager().getLeftInfoPanel());
 		gl_leftInfoPanel.setHorizontalGroup(gl_leftInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_leftInfoPanel.createSequentialGroup().addContainerGap()
@@ -70,10 +72,10 @@ public class InventoryItemHover implements MouseListener {
 						.addContainerGap()));
 
 		JPanel itemInfoPanel = new JPanel();
-		itemInfoPanel.setBackground(Color.WHITE);
+		itemInfoPanel.setBackground(UIManager.getColor("Desktop.background"));
 
 		JPanel itemIconPanel = new JPanel();
-		itemIconPanel.setBackground(Color.WHITE);
+		itemIconPanel.setBackground(UIManager.getColor("Desktop.background"));
 		itemIconPanel.setLayout(new BorderLayout());
 		GroupLayout gl_leftInfoContentPanel = new GroupLayout(
 				this.gameManager.getGuiManager().getLeftInfoContentPanel());
