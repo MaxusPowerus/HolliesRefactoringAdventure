@@ -234,6 +234,7 @@ public class Player {
 		}
 		if ((item instanceof Outfit && this.outfit == null)) {
 			this.outfit = (Outfit) item;
+			((Outfit) item).getOutfitFx().onEquipping(this);
 		}
 	}
 
@@ -242,8 +243,10 @@ public class Player {
 			return;
 		if (this.weapon != null && this.weapon.equals(item))
 			this.weapon = null;
-		if (this.outfit != null && this.outfit.equals(item))
+		if (this.outfit != null && this.outfit.equals(item)) {
 			this.outfit = null;
+			((Outfit) item).getOutfitFx().onDequipping(this);
+		}
 	}
 
 	public boolean isEquipped(Item item) {

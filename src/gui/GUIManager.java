@@ -311,27 +311,26 @@ public class GUIManager {
 		innerEquippedPanel.add(currentOutfit);
 		equippedPanel.setLayout(gl_equippedPanel);
 		GroupLayout gl_playerInfoPanel = new GroupLayout(playerInfoPanel);
-		gl_playerInfoPanel.setHorizontalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(playerInfoHeadline, GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+		gl_playerInfoPanel.setHorizontalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.TRAILING)
+				.addComponent(playerInfoHeadline, GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
 				.addComponent(playerBarPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addGroup(gl_playerInfoPanel.createSequentialGroup().addContainerGap()
-						.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
-						.addComponent(equippedPanel, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap()));
+				.addGroup(Alignment.LEADING,
+						gl_playerInfoPanel.createSequentialGroup().addContainerGap()
+								.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 286, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(equippedPanel, GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+								.addContainerGap()));
 		gl_playerInfoPanel.setVerticalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_playerInfoPanel.createSequentialGroup()
 						.addComponent(playerInfoHeadline, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addComponent(playerBarPanel, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(
-								gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
-										.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 71,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(equippedPanel, GroupLayout.PREFERRED_SIZE, 71,
-												GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+						.addGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+								.addComponent(equippedPanel, GroupLayout.PREFERRED_SIZE, 71,
+										GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(8, Short.MAX_VALUE)));
 
 		lblSkills = new JLabel("Skills");
 		lblSkills.setFont(new Font("Tahoma", Font.BOLD, 11));
