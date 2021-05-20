@@ -31,15 +31,15 @@
             "Bread": { "label": "Brot", "energy": 25, "value": 5, "chance": 95},
             "Apple": { "label": "Apfel", "energy": 5, "value": 3, "chance": 95},
             "Beer": {"label": "Bier", "energy": 10, "value": 5, "chance": 75}, 
-            "Wine": {"label": "Wein", "energy": 10, "value": 10, "chance": 25},
+            "Wine": {"label": "Wein", "energy": 10, "value": 10, "chance": 25}
         },
 		"Notes": {
 			"CakeRecipe": {"label": "Kuchenrezeot", "text": "Kuchen:>Mehl: 2 \n>Eier 1\n>wasser 1/2 ", "value": 0, "chance": 85}
 		},
 		"Other": {
 			"Stone": {"label": "Stein", "info": "Schlägt Schere", "value": 0, "chance": 95},
-			"Paper": {"label": "Papier", "info": "Schlägt Stein" "value": 1, "chance": 95},
-			"Scissors": {"label": "Schere", "info": "Schlägt Papier" "value": 1, "chance": 95}
+			"Paper": {"label": "Papier", "info": "Schlägt Stein", "value": 1, "chance": 95},
+			"Scissors": {"label": "Schere", "info": "Schlägt Papier", "value": 1, "chance": 95}
 		},
 		"QuestItem": {
 			"GiftForHolger": {"label": "Geschenk für Holger", "info": "SexTape", "value": 1, "chance": 95}
