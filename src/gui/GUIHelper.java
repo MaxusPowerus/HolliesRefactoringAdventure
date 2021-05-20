@@ -21,9 +21,6 @@ public class GUIHelper {
 
 		int height = (int) (width * ratio);
 
-		System.out.println(width);
-		System.out.println(height);
-
 		return new ImageIcon(icon.getImage().getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING));
 	}
 

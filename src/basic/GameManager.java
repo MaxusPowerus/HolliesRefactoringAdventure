@@ -84,7 +84,7 @@ public class GameManager {
 
 		String path = "";
 		if (player.getCurrentMapField().getBiom() == Biom.DESERT) {
-			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#F7E0A9"));
+			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#c28370"));
 //			path = "resources\\images\\backgrounds\\forest.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.FOREST) {
 			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#196130"));

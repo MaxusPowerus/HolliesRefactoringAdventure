@@ -134,7 +134,6 @@ public class Player {
 	}
 
 	public void go(Direction direction) {
-		System.out.println("Gehe nach " + direction.getName());
 
 		MapField currentField = this.currentMapField;
 		Coordinate coordinate = currentField.getCoordinate();
@@ -158,8 +157,6 @@ public class Player {
 			this.currentMapField = newField;
 			this.currentMapField.getCoordinate().print();
 			this.time.addHours(2);
-		} else {
-			System.out.println("no move");
 		}
 	}
 
@@ -183,18 +180,18 @@ public class Player {
 
 		int round = 1;
 
-		System.out.println("playerFight: " + playerFight + " playerDmg: " + playerDmg);
-		System.out.println("enemieFight: " + enemyFight + " enemieDmg: " + enemyDmg);
+		// System.out.println("playerFight: " + playerFight + " playerDmg: " + playerDmg);
+		// System.out.println("enemieFight: " + enemyFight + " enemieDmg: " + enemyDmg);
 
 		while (true) {
-			System.out.println("PlayerHP: " + this.health + "EnemyHP:" + enemyHealth);
-			System.out.println("Runde: " + round);
+			// System.out.println("PlayerHP: " + this.health + "EnemyHP:" + enemyHealth);
+			// System.out.println("Runde: " + round);
 			dmgFac = 1;
 			// Player ist am Zug
 			if ((playerFight - enemyFight) > 0)
 				dmgFac = playerFight - enemyFight;
 
-			System.out.println("Player - dmgFac: " + dmgFac);
+			// System.out.println("Player - dmgFac: " + dmgFac);
 			enemyHealth -= dmgFac * playerDmg;
 			if (this.health <= 0)
 				break;
@@ -204,7 +201,7 @@ public class Player {
 			if ((enemyFight - playerFight) > 0)
 				dmgFac = enemyFight - playerFight;
 
-			System.out.println("Enemy - dmgFac: " + dmgFac);
+			// System.out.println("Enemy - dmgFac: " + dmgFac);
 
 			this.health -= dmgFac * enemyDmg;
 			if (enemyHealth <= 0)

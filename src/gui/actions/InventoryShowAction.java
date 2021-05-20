@@ -142,7 +142,7 @@ public class InventoryShowAction implements ActionListener {
 		JLabel name = new JLabel(item.getName() + " (" + item.getCount() + " Stück)");
 		name.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		System.out.println(item.getName() + ": " + item.getCount());
+		// System.out.println(item.getName() + ": " + item.getCount());
 
 		// TODO
 		Icon itemIcon = Icon.getByName(item.getUniqueName());

@@ -34,9 +34,6 @@ public class InspectButton extends JButton implements ActionListener {
 
 		// set container found when available
 		Container container = this.challenge.getContainer();
-		if (container != null && !container.getFound()) {
-			System.out.println("container found");
-		}
 
 		LootButton lootButton = new LootButton(challenge, this.gameManager,
 				this.challenge.getContainer().getInventory());

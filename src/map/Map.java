@@ -60,14 +60,6 @@ public class Map {
 								+ getMapFieldByCoordinate(x, y).getChallenge().getNpc().getName() + " (Biom: "
 								+ getMapFieldByCoordinate(x, y).getBiom().getName() + ")";
 					}
-
-					if (getMapFieldByCoordinate(x, y).getChallenge().getNpc() == null
-							&& getMapFieldByCoordinate(x, y).getChallenge().getContainer() == null) {
-						System.out.println("Coordinate: " + coordinate + " Fail!");
-					}
-
-					System.out.print(enemies);
-					System.out.println(container);
 					// System.out.print("\n");
 					writer.write(biome);
 				}
