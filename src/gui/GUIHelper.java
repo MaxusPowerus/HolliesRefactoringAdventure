@@ -14,6 +14,19 @@ public class GUIHelper {
 				new ImageIcon(icon.getPath()).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
 	}
 
+	public static ImageIcon scaleIcon(ImageIcon icon, int width) {
+		int iconWidth = icon.getIconWidth();
+		int iconHeight = icon.getIconHeight();
+		double ratio = Math.abs((double) iconHeight / (double) iconWidth);
+
+		int height = (int) (width * ratio);
+
+		System.out.println(width);
+		System.out.println(height);
+
+		return new ImageIcon(icon.getImage().getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING));
+	}
+
 	public static void setIcon(JComponent component, Icon icon) {
 		GUIHelper.setIcon(component, icon, 80, 80);
 	}
