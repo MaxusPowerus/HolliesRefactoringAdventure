@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import entities.Enemy;
-import entities.Friend;
+import entities.Merchant;
 import entities.NPC;
 import items.Food;
 import items.Item;
@@ -248,7 +248,7 @@ public class ResourceManager {
 
 						break;
 					case "Friend":
-						npc = new Friend(label, innerEntity.get("prefix").toString(),
+						npc = new Merchant(label, innerEntity.get("prefix").toString(),
 								innerEntity.get("biom").toString());
 
 						Inventory friendInv = new Inventory();

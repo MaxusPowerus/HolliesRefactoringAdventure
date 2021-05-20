@@ -25,6 +25,7 @@ public class OutfitEffect {
 		if (skillBoost.getSkillValue(Skill.STRENGTH) != 0) {
 			player.getSkillSet().setSkillValue(Skill.STRENGTH,
 					player.getSkillSet().getSkillValue(Skill.STRENGTH) + skillBoost.getSkillValue(Skill.STRENGTH));
+
 		}
 
 		if (skillBoost.getSkillValue(Skill.PERCEPTION) != 0) {
