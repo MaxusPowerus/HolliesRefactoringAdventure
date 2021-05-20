@@ -34,7 +34,7 @@ public class Container {
 				for (int i = 0; i < 5; i++) {
 					Outfit outfit = GameManager.getInstance().getResourceManager().getOutfits()
 							.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getOutfits().size())));
-					inventory.add(outfit);
+					inventory.add(outfit.clone());
 				}
 				break;
 			case "Geldbeutel":
@@ -43,7 +43,7 @@ public class Container {
 			case "Leiche":
 				Outfit outfit = GameManager.getInstance().getResourceManager().getOutfits()
 						.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getOutfits().size())));
-				inventory.add(outfit);
+				inventory.add(outfit.clone());
 				inventory.addGold(Randy.nextInt(100));
 				break;
 			case "Kühlschrank":
@@ -53,7 +53,7 @@ public class Container {
 					if (spawnChance > 0) {
 						Food food = GameManager.getInstance().getResourceManager().getFood()
 								.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getFood().size())));
-						inventory.add(food);
+						inventory.add(food.clone());
 						spawnChance = spawnChance - 10;
 					} else {
 						break;
@@ -116,8 +116,8 @@ public class Container {
 		Random Randy = new Random();
 		if (Randy.nextInt(101) < chance) {
 			chance = chance / div;
-			Item item = catItems.get(Randy.nextInt(catItems.size() - 1)).clone();
-			inventory.add(item);
+			Item item = catItems.get(Randy.nextInt(catItems.size() - 1));
+			inventory.add(item.clone());
 			fill(chance, div);
 		}
 	}

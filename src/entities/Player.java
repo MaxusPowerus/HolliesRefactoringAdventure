@@ -212,7 +212,6 @@ public class Player {
 			round++;
 		}
 		if (health > 0) {
-			this.inventory.add(enemy.getInventory());
 			this.experience.addXp(enemy.getXp());
 			return true;
 		} else {

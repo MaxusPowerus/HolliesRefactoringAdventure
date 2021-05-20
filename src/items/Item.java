@@ -9,7 +9,7 @@ public class Item {
 	private int count;
 	private double discount;
 
-	public Item(String uniqueName, String name, int value, int spwanChance) {
+	public Item(String uniqueName, String name, int value, int spawnChance) {
 		this.uniqueName = uniqueName;
 		this.name = name;
 		this.value = value;

@@ -52,7 +52,7 @@ public class InventoryShowAction implements ActionListener {
 		this.gameManager.getGuiManager().getLeftContentPanel().removeAll();
 		this.gameManager.getGuiManager().getLeftContentPanel().setLayout(new BorderLayout());
 
-		this.gameManager.getGuiManager().getOpenInvButton().setText("Inventar schlieﬂen");
+		this.gameManager.getGuiManager().getOpenInvButton().setText("Map");
 		this.gameManager.getGuiManager().getOpenInvButton().removeActionListener(this);
 		this.gameManager.getGuiManager().getOpenInvButton().addActionListener(new MapShowAction(this.gameManager));
 

@@ -33,12 +33,13 @@ public class LootButton extends JButton implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		this.setEnabled(false);
 
+		String itemsString = this.inventory.stringifyItems();
+
 		this.gameManager.getPlayer().getInventory().add(this.inventory);
 
 		int itemCount = this.inventory.getAllItems().size();
 		if (itemCount > 0) {
-			gameManager.getGuiManager().addFieldInfo(
-					"Du hast folgende Items eingesammelt: <b>" + this.inventory.stringifyItems() + "</b>");
+			gameManager.getGuiManager().addFieldInfo("Du hast folgende Items eingesammelt: <b>" + itemsString + "</b>");
 		}
 
 		int gold = this.inventory.getGold();

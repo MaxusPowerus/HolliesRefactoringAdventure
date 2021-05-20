@@ -124,14 +124,19 @@ public class ResourceManager {
 	}
 
 	public ArrayList<Item> getAllItems() {
-		return items;
+		ArrayList<Item> cloned = new ArrayList<Item>();
+		for (Item item : this.items) {
+			cloned.add(item);
+		}
+
+		return cloned;
 	}
 
 	public ArrayList<Weapon> getWeapons() {
 		ArrayList<Weapon> out = new ArrayList<Weapon>();
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i) instanceof Weapon) {
-				out.add((Weapon) items.get(i));
+				out.add((Weapon) items.get(i).clone());
 			}
 		}
 		return out;
@@ -141,7 +146,7 @@ public class ResourceManager {
 		ArrayList<Outfit> out = new ArrayList<Outfit>();
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i) instanceof Outfit) {
-				out.add((Outfit) items.get(i));
+				out.add((Outfit) items.get(i).clone());
 			}
 		}
 		return out;
@@ -151,7 +156,7 @@ public class ResourceManager {
 		ArrayList<Food> out = new ArrayList<Food>();
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i) instanceof Food) {
-				out.add((Food) items.get(i));
+				out.add((Food) items.get(i).clone());
 			}
 		}
 		return out;
@@ -161,7 +166,7 @@ public class ResourceManager {
 		ArrayList<Note> out = new ArrayList<Note>();
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i) instanceof Note) {
-				out.add((Note) items.get(i));
+				out.add((Note) items.get(i).clone());
 			}
 		}
 		return out;
@@ -171,7 +176,7 @@ public class ResourceManager {
 		ArrayList<Other> out = new ArrayList<Other>();
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i) instanceof Other) {
-				out.add((Other) items.get(i));
+				out.add((Other) items.get(i).clone());
 			}
 		}
 		return out;
@@ -181,7 +186,7 @@ public class ResourceManager {
 
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i).getUniqueName().equalsIgnoreCase(uniqueName)) {
-				return items.get(i);
+				return items.get(i).clone();
 			}
 		}
 		return null;
@@ -236,7 +241,7 @@ public class ResourceManager {
 
 							Item item = this.getItemByUniqueName(enemiesItems.toArray()[i].toString());
 							item.setCount(Integer.valueOf(enemiesItem.get("amount").toString()));
-							enemyInv.add(item);
+							enemyInv.add(item.clone());
 						}
 
 						npc.setInventory(enemyInv);
@@ -258,7 +263,7 @@ public class ResourceManager {
 							Item item = this.getItemByUniqueName(friendsItems.toArray()[i].toString());
 							item.setCount(Integer.valueOf(friendsItem.get("amount").toString()));
 							item.setDiscount(Double.valueOf(friendsItem.get("discount").toString()));
-							friendInv.add(item);
+							friendInv.add(item.clone());
 						}
 
 						npc.setInventory(friendInv);
