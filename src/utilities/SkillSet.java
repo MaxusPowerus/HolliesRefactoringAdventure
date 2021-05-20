@@ -33,5 +33,4 @@ public class SkillSet {
 	public void setSkillValue(Skill skill, int value) {
 		this.skills.put(skill, value);
 	}
-
 }
