@@ -1,5 +1,8 @@
 package items;
 
+import entities.Player;
+import utilities.Skill;
+
 public class Item {
 
 	private String uniqueName;
@@ -66,6 +69,14 @@ public class Item {
 
 	public int getValue() {
 		return value;
+	}
+
+	public int getSpecific(Player player) {
+		double specificValue = this.value;
+		double fac = player.getSkillSet().getSkillValue(Skill.CHARISMA);
+		fac = (fac * 2) / 10;
+		specificValue *= fac;
+		return (int) specificValue;
 	}
 
 	public Item clone() {
