@@ -1,6 +1,5 @@
 package basic;
 
-import java.io.File;
 import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -37,9 +36,7 @@ public class ResourceManager {
 	@SuppressWarnings("unchecked")
 	private void loadItems() {
 		try {
-
-			FileReader fileReader = new FileReader(
-					new File(getClass().getClassLoader().getResource("items.json").toURI()));
+			FileReader fileReader = new FileReader("resources\\items.json");
 			JSONParser parser = new JSONParser();
 
 			JSONObject itemObj = (JSONObject) parser.parse(fileReader);
@@ -64,55 +61,33 @@ public class ResourceManager {
 					case "Weapons":
 						item = new Weapon(categoryItem.toArray()[i].toString(), label,
 								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(innerItem.get("damage").toString()),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
+								Integer.valueOf(innerItem.get("value").toString()));
 						break;
-
 					case "Outfits":
 						item = new Outfit(categoryItem.toArray()[i].toString(), label,
 								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(innerItem.get("armor").toString()),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))),
-								Integer.valueOf(innerItem.get("st").toString()),
-								Integer.valueOf(innerItem.get("pe").toString()),
-								Integer.valueOf(innerItem.get("en").toString()),
-								Integer.valueOf(innerItem.get("ch").toString()),
-								Integer.valueOf(innerItem.get("in").toString()),
-								Integer.valueOf(innerItem.get("ag").toString()),
-								Integer.valueOf(innerItem.get("lk").toString())
-
-						);
+								Integer.valueOf(innerItem.get("armor").toString()));
 						break;
-
 					case "Food":
 						item = new Food(categoryItem.toArray()[i].toString(), label,
 								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(innerItem.get("energy").toString()),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
+								Integer.valueOf(innerItem.get("energy").toString()));
 						break;
-
 					case "Notes":
 						item = new Note(categoryItem.toArray()[i].toString(), label, innerItem.get("text").toString(),
-								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
+								Integer.valueOf(String.valueOf(innerItem.get("value"))));
 						break;
-
 					case "Other":
 						item = new Other(categoryItem.toArray()[i].toString(), label, innerItem.get("info").toString(),
-								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
+								Integer.valueOf(String.valueOf(innerItem.get("value"))));
 						break;
-
 					case "QuestItem":
 						item = new Other(categoryItem.toArray()[i].toString(), label, innerItem.get("info").toString(),
-								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
+								Integer.valueOf(String.valueOf(innerItem.get("value"))));
 						break;
-
 					default:
 						item = new Item(categoryItem.toArray()[i].toString(), label,
-								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
+								Integer.valueOf(String.valueOf(innerItem.get("value"))));
 						break;
 					}
 
@@ -192,8 +167,7 @@ public class ResourceManager {
 	@SuppressWarnings("unchecked")
 	private void loadNPCs() {
 		try {
-			FileReader fileReader = new FileReader(
-					new File(getClass().getClassLoader().getResource("npcs.json").toURI()));
+			FileReader fileReader = new FileReader("resources\\npcs.json");
 			JSONParser parser = new JSONParser();
 
 			JSONObject items = (JSONObject) parser.parse(fileReader);
