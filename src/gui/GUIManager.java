@@ -416,6 +416,7 @@ public class GUIManager {
 		healthLabel = new JLabel("Lebenspunkte");
 
 		healthBar = new JProgressBar();
+		healthBar.setForeground(Color.RED);
 
 		levelLabel = new JLabel("Level X");
 

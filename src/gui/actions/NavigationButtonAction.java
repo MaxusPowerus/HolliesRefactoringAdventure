@@ -26,7 +26,6 @@ public class NavigationButtonAction implements ActionListener {
 		ActionPanel.update();
 
 		new MapShowAction(gameManager).initialize();
-		;
 
 		gameManager.execMainLogic();
 	}
