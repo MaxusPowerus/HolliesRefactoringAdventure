@@ -43,20 +43,12 @@
             }
 			
 		},
-		"Friend": {
-			"NiceCat": {
+		"Merchant": {
+			"Blacksmith": {
                 "label": "freundliche Katze",
                 "prefix": "eine", "biom": "all",
-                "items": {
-                    "Sword": {
-                        "amount": 1,
-                        "discount": 0.5
-                    },
-                    "Axe": {
-                        "amount": 2,
-                        "discount": 0.1
-                    }
-                }
+                "type": "Schied",
+				"size": 5
             }
 		}
 	}

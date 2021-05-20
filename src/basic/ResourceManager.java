@@ -247,26 +247,10 @@ public class ResourceManager {
 						npc.setInventory(enemyInv);
 
 						break;
-					case "Friend":
+					case "Merchant":
 						npc = new Merchant(label, innerEntity.get("prefix").toString(),
-								innerEntity.get("biom").toString());
-
-						Inventory friendInv = new Inventory();
-
-						JSONObject friendsItemList = (JSONObject) innerEntity.get("items");
-						Set<Map> friendsItems = friendsItemList.keySet();
-						Iterator<Map> friendsItemItr = friendsItems.iterator();
-
-						for (int i = 0; i < friendsItemList.size(); i++) {
-							JSONObject friendsItem = (JSONObject) friendsItemList.get(friendsItemItr.next());
-
-							Item item = this.getItemByUniqueName(friendsItems.toArray()[i].toString());
-							item.setCount(Integer.valueOf(friendsItem.get("amount").toString()));
-							item.setDiscount(Double.valueOf(friendsItem.get("discount").toString()));
-							friendInv.add(item.clone());
-						}
-
-						npc.setInventory(friendInv);
+								innerEntity.get("biom").toString(), innerEntity.get("type").toString(),
+								Integer.valueOf(innerEntity.get("size").toString()));
 
 						break;
 					default:
