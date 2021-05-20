@@ -70,6 +70,7 @@ public class GUIManager {
 	private JLabel currentWeapon;
 	private JLabel lblRstungkleidung;
 	private JLabel currentOutfit;
+	private JLabel fieldBackground;
 
 	public GUIManager() {
 		initialize();
@@ -157,18 +158,18 @@ public class GUIManager {
 				gl_leftInfoContentPanel.createParallelGroup(Alignment.LEADING).addGap(0, 125, Short.MAX_VALUE));
 		leftInfoContentPanel.setLayout(gl_leftInfoContentPanel);
 		leftInfoPanel.setLayout(gl_leftInfoPanel);
+		fieldInfoPanel.setLayout(null);
 
 		fieldInfos = new JPanel();
+		fieldInfos.setBounds(16, 16, 568, 296);
 		fieldInfos.setBackground(new Color(0, 0, 0, 0.3f));
 		fieldInfos.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		GroupLayout gl_fieldInfoPanel = new GroupLayout(fieldInfoPanel);
-		gl_fieldInfoPanel.setHorizontalGroup(gl_fieldInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(fieldInfos, GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE));
-		gl_fieldInfoPanel.setVerticalGroup(gl_fieldInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_fieldInfoPanel.createSequentialGroup().addContainerGap()
-						.addComponent(fieldInfos, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE).addContainerGap()));
 		fieldInfos.setLayout(new BoxLayout(fieldInfos, BoxLayout.Y_AXIS));
-		fieldInfoPanel.setLayout(gl_fieldInfoPanel);
+		fieldInfoPanel.add(fieldInfos);
+
+		fieldBackground = new JLabel("");
+		fieldBackground.setBounds(0, 0, 599, 329);
+		fieldInfoPanel.add(fieldBackground);
 
 		actionButtonPanel = new JPanel();
 		actionButtonPanel.setBackground(Color.WHITE);
@@ -575,6 +576,10 @@ public class GUIManager {
 
 	public JLabel getCurrentWeapon() {
 		return currentWeapon;
+	}
+
+	public JLabel getFieldBackground() {
+		return fieldBackground;
 	}
 
 	public void setNavigationEnabled(boolean enabled) {

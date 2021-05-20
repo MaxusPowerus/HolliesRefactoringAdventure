@@ -1,10 +1,17 @@
 package basic;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import entities.Enemy;
 import entities.Player;
 import gui.ActionPanel;
+import gui.GUIHelper;
 import gui.GUIManager;
 import gui.PlayerInfoPanel;
 import gui.WorldInfoPanel;
@@ -74,16 +81,34 @@ public class GameManager {
 
 		// switch biome
 		this.guiManager.addFieldInfo("Du bist " + player.getCurrentMapField().getBiom().toString() + ":");
+
+		String path = "";
 		if (player.getCurrentMapField().getBiom() == Biom.DESERT) {
 			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#F7E0A9"));
+//			path = "resources\\images\\backgrounds\\forest.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.FOREST) {
 			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#196130"));
+			path = "resources\\images\\backgrounds\\forest.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.MOUNTAINS) {
 			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#71817B"));
+//			path = "resources\\images\\backgrounds\\forest.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.SWAMP) {
 			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#6D610D"));
+//			path = "resources\\images\\backgrounds\\forest.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.MEADOW) {
 			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#16b91e"));
+//			path = "resources\\images\\backgrounds\\forest.png";
+		}
+
+		if (path != "") {
+			try {
+				BufferedImage image = ImageIO.read(new File(path));
+				this.guiManager.getFieldBackground().setIcon(GUIHelper.scaleIcon(new ImageIcon(image), 650));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			this.guiManager.getFieldBackground().setIcon(null);
 		}
 
 		// execute challenge
