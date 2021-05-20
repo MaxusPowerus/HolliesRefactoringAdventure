@@ -17,7 +17,7 @@ public class Config {
 	// startItems
 
 	// MAP
-	public final static int MAP_SIZEX = 25;
-	public final static int MAP_SIZEY = 25;
+	public final static int MAP_SIZEX = 50;
+	public final static int MAP_SIZEY = 50;
 
 }

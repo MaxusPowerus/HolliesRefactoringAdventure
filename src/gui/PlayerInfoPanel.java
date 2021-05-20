@@ -18,7 +18,6 @@ public class PlayerInfoPanel {
 		guiManager.getHealthBar().setToolTipText((int) player.getHealth() + " Lebenspunkte");
 
 		double levelProgress = (100 / player.getExperience().getRequiredXp()) * player.getExperience().getXp();
-		System.out.println(player.getExperience().getXp() + ":" + levelProgress);
 		int level = player.getExperience().getLevel();
 		guiManager.getLevelBar().setValue((int) levelProgress);
 		guiManager.getLevelLabel().setText("Level " + level);
