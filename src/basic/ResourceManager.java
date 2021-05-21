@@ -23,101 +23,39 @@ import utilities.Inventory;
 
 public class ResourceManager {
 
-	private ArrayList<Item> items;
+	private ArrayList<Food> food;
+
 	private ArrayList<NPC> npcs;
 
 	public ResourceManager() {
-		this.items = new ArrayList<Item>();
+		this.food = new ArrayList<Food>();
+
 		this.npcs = new ArrayList<NPC>();
-		this.loadItems();
-		this.loadNPCs();
+		this.loadFood();
+//		this.loadNPCs();
 	}
 
 	@SuppressWarnings("unchecked")
-	private void loadItems() {
+	private void loadFood() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\items.json");
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Food.json");
 			JSONParser parser = new JSONParser();
+			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
-			JSONObject itemObj = (JSONObject) parser.parse(fileReader);
-			itemObj = (JSONObject) itemObj.get("Categories");
-			Set<Map> set = itemObj.keySet();
-			Iterator<Map> itr = set.iterator();
+			Set<String> labels = jsonItems.keySet();
 
-			for (Object key : itemObj.keySet()) {
-				Object value = itemObj.get(key);
+			for (String label : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
 
-				JSONObject category = (JSONObject) itemObj.get(itr.next());
-				Set<Map> categoryItem = category.keySet();
-				Iterator<Map> itemItr = categoryItem.iterator();
+				Food item = new Food(label, jsonItem.get("label").toString(),
+						Integer.valueOf(jsonItem.get("value").toString()),
+						Integer.valueOf(jsonItem.get("energy").toString()),
+						Integer.valueOf(jsonItem.get("chance").toString()));
 
-				for (int i = 0; i < categoryItem.size(); i++) {
-					JSONObject innerItem = (JSONObject) category.get(itemItr.next());
-					Item item = null;
-
-					String label = new String(innerItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
-
-					switch (key.toString()) {
-					case "Weapons":
-						item = new Weapon(categoryItem.toArray()[i].toString(), label,
-								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(innerItem.get("damage").toString()),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
-						break;
-
-					case "Outfits":
-						item = new Outfit(categoryItem.toArray()[i].toString(), label,
-								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(innerItem.get("armor").toString()),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))),
-								Integer.valueOf(innerItem.get("st").toString()),
-								Integer.valueOf(innerItem.get("pe").toString()),
-								Integer.valueOf(innerItem.get("en").toString()),
-								Integer.valueOf(innerItem.get("ch").toString()),
-								Integer.valueOf(innerItem.get("in").toString()),
-								Integer.valueOf(innerItem.get("ag").toString()),
-								Integer.valueOf(innerItem.get("lk").toString())
-
-						);
-						break;
-
-					case "Food":
-						item = new Food(categoryItem.toArray()[i].toString(), label,
-								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(innerItem.get("energy").toString()),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
-						break;
-
-					case "Notes":
-						item = new Note(categoryItem.toArray()[i].toString(), label, innerItem.get("text").toString(),
-								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
-						break;
-
-					case "Other":
-						item = new Other(categoryItem.toArray()[i].toString(), label, innerItem.get("info").toString(),
-								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
-						break;
-
-					case "QuestItem":
-						item = new Other(categoryItem.toArray()[i].toString(), label, innerItem.get("info").toString(),
-								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
-						break;
-
-					default:
-						item = new Item(categoryItem.toArray()[i].toString(), label,
-								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(String.valueOf(innerItem.get("chance"))));
-						break;
-					}
-
-					this.items.add(item);
-
-				}
+				this.food.add(item);
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
