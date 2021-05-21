@@ -50,8 +50,8 @@ public class ResourceManager {
 		this.loadOthers();
 		this.loadQuestItems();
 
-		// this.loadEnemies();
-		// this.loadMerchants();
+		this.loadEnemies();
+		this.loadMerchants();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -64,10 +64,10 @@ public class ResourceManager {
 
 			Set<String> labels = jsonItems.keySet();
 
-			for (String label : labels) {
-				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
+			for (String keyName : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
 
-				Weapon item = new Weapon(label, jsonItem.get("label").toString(),
+				Weapon item = new Weapon(keyName, jsonItem.get("label").toString(),
 						Integer.valueOf(jsonItem.get("damage").toString()),
 						Integer.valueOf(jsonItem.get("value").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()));
@@ -89,10 +89,10 @@ public class ResourceManager {
 
 			Set<String> labels = jsonItems.keySet();
 
-			for (String label : labels) {
-				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
+			for (String keyName : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
 
-				Food item = new Food(label, jsonItem.get("label").toString(),
+				Food item = new Food(keyName, jsonItem.get("label").toString(),
 						Integer.valueOf(jsonItem.get("energy").toString()),
 						Integer.valueOf(jsonItem.get("value").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()));
@@ -115,10 +115,10 @@ public class ResourceManager {
 
 			Set<String> labels = jsonItems.keySet();
 
-			for (String label : labels) {
-				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
+			for (String keyName : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
 
-				Outfit item = new Outfit(label, jsonItem.get("label").toString(),
+				Outfit item = new Outfit(keyName, jsonItem.get("label").toString(),
 						Integer.valueOf(jsonItem.get("armor").toString()),
 						Integer.valueOf(jsonItem.get("value").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()),
@@ -145,10 +145,10 @@ public class ResourceManager {
 
 			Set<String> labels = jsonItems.keySet();
 
-			for (String label : labels) {
-				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
+			for (String keyName : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
 
-				Note item = new Note(label, jsonItem.get("label").toString(), jsonItem.get("text").toString(),
+				Note item = new Note(keyName, jsonItem.get("label").toString(), jsonItem.get("text").toString(),
 						Integer.valueOf(jsonItem.get("value").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()));
 
@@ -170,10 +170,10 @@ public class ResourceManager {
 
 			Set<String> labels = jsonItems.keySet();
 
-			for (String label : labels) {
-				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
+			for (String keyName : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
 
-				Other item = new Other(label, jsonItem.get("label").toString(), jsonItem.get("info").toString(),
+				Other item = new Other(keyName, jsonItem.get("label").toString(), jsonItem.get("info").toString(),
 						Integer.valueOf(jsonItem.get("value").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()));
 
@@ -194,11 +194,11 @@ public class ResourceManager {
 
 			Set<String> labels = jsonItems.keySet();
 
-			for (String label : labels) {
-				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
+			for (String keyName : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
 
-				QuestItem item = new QuestItem(label, jsonItem.get("label").toString(), jsonItem.get("info").toString(),
-						Integer.valueOf(jsonItem.get("value").toString()),
+				QuestItem item = new QuestItem(keyName, jsonItem.get("label").toString(),
+						jsonItem.get("info").toString(), Integer.valueOf(jsonItem.get("value").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()));
 
 				this.questItems.add(item);
@@ -255,30 +255,29 @@ public class ResourceManager {
 	}
 
 	public Item getItemByUniqueName(String uniqueName) {
-		ArrayList<Item> cloned = new ArrayList<Item>();
 
 		for (Item item : this.food) {
-			if (item.getUniqueName() == uniqueName)
+			if (item.getUniqueName().equalsIgnoreCase(uniqueName))
 				return item;
 		}
 		for (Item item : this.notes) {
-			if (item.getUniqueName() == uniqueName)
+			if (item.getUniqueName().equalsIgnoreCase(uniqueName))
 				return item;
 		}
 		for (Item item : this.others) {
-			if (item.getUniqueName() == uniqueName)
+			if (item.getUniqueName().equalsIgnoreCase(uniqueName))
 				return item;
 		}
 		for (Item item : this.outfits) {
-			if (item.getUniqueName() == uniqueName)
+			if (item.getUniqueName().equalsIgnoreCase(uniqueName))
 				return item;
 		}
 		for (Item item : this.questItems) {
-			if (item.getUniqueName() == uniqueName)
+			if (item.getUniqueName().equalsIgnoreCase(uniqueName))
 				return item;
 		}
 		for (Item item : this.weapons) {
-			if (item.getUniqueName() == uniqueName)
+			if (item.getUniqueName().equalsIgnoreCase(uniqueName))
 				return item;
 		}
 
@@ -295,10 +294,10 @@ public class ResourceManager {
 
 			Set<String> labels = jsonNPCs.keySet();
 
-			for (String label : labels) {
-				JSONObject jsonNPC = (JSONObject) jsonNPCs.get(label);
+			for (String keyName : labels) {
+				JSONObject jsonNPC = (JSONObject) jsonNPCs.get(keyName);
 
-				Enemy enemy = new Enemy(label, jsonNPC.get("prefix").toString(),
+				Enemy enemy = new Enemy(jsonNPC.get("label").toString(), jsonNPC.get("prefix").toString(),
 						Double.valueOf(jsonNPC.get("damage").toString()),
 						Double.valueOf(jsonNPC.get("health").toString()), Integer.valueOf(jsonNPC.get("st").toString()),
 						Integer.valueOf(jsonNPC.get("pe").toString()), Integer.valueOf(jsonNPC.get("en").toString()),
@@ -340,28 +339,12 @@ public class ResourceManager {
 
 			Set<String> labels = jsonNPCs.keySet();
 
-			for (String label : labels) {
-				JSONObject jsonNPC = (JSONObject) jsonNPCs.get(label);
+			for (String keyName : labels) {
+				JSONObject jsonNPC = (JSONObject) jsonNPCs.get(keyName);
 
-				Merchant merchant = new Merchant(label, jsonNPC.get("prefix").toString(),
+				Merchant merchant = new Merchant(jsonNPC.get("label").toString(), jsonNPC.get("prefix").toString(),
 						jsonNPC.get("biom").toString(), jsonNPC.get("type").toString(),
 						Integer.valueOf(jsonNPC.get("size").toString()));
-
-				Inventory enemyInv = new Inventory();
-
-				JSONObject enemiesItemList = (JSONObject) jsonNPC.get("items");
-				Set<Map> enemiesItems = enemiesItemList.keySet();
-				Iterator<Map> enemiesItemItr = enemiesItems.iterator();
-
-				for (int i = 0; i < enemiesItemList.size(); i++) {
-					JSONObject enemiesItem = (JSONObject) enemiesItemList.get(enemiesItemItr.next());
-
-					Item item = this.getItemByUniqueName(enemiesItems.toArray()[i].toString());
-					item.setCount(Integer.valueOf(enemiesItem.get("amount").toString()));
-					enemyInv.add(item.clone());
-				}
-
-				merchant.setInventory(enemyInv);
 
 				this.merchants.add(merchant);
 			}
