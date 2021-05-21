@@ -1,7 +1,6 @@
 package basic;
 
 import java.io.FileReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -12,7 +11,6 @@ import org.json.simple.parser.JSONParser;
 
 import entities.Enemy;
 import entities.Merchant;
-import entities.NPC;
 import items.Food;
 import items.Item;
 import items.Note;
@@ -31,7 +29,8 @@ public class ResourceManager {
 	private ArrayList<QuestItem> questItems;
 	private ArrayList<Weapon> weapons;
 
-	private ArrayList<NPC> npcs;
+	private ArrayList<Enemy> enemies;
+	private ArrayList<Merchant> merchants;
 
 	public ResourceManager() {
 		this.food = new ArrayList<Food>();
@@ -41,16 +40,25 @@ public class ResourceManager {
 		this.questItems = new ArrayList<QuestItem>();
 		this.weapons = new ArrayList<Weapon>();
 
-		this.npcs = new ArrayList<NPC>();
+		this.enemies = new ArrayList<Enemy>();
+		this.merchants = new ArrayList<Merchant>();
+
+		this.loadWeapons();
+		this.loadOutfits();
 		this.loadFood();
-		this.loadNPCs();
+		this.loadNotes();
+		this.loadOthers();
+		this.loadQuestItems();
+
+		// this.loadEnemies();
+		// this.loadMerchants();
 	}
 
 	@SuppressWarnings("unchecked")
-	private void loadWeapon() {
+	private void loadWeapons() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Food.json");
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Weapons.json");
 			JSONParser parser = new JSONParser();
 			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
@@ -72,11 +80,36 @@ public class ResourceManager {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	private void loadOutfit() {
+	private void loadFood() {
 		try {
 
 			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Food.json");
+			JSONParser parser = new JSONParser();
+			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
+
+			Set<String> labels = jsonItems.keySet();
+
+			for (String label : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
+
+				Food item = new Food(label, jsonItem.get("label").toString(),
+						Integer.valueOf(jsonItem.get("energy").toString()),
+						Integer.valueOf(jsonItem.get("value").toString()),
+						Integer.valueOf(jsonItem.get("chance").toString()));
+
+				this.food.add(item);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private void loadOutfits() {
+		try {
+
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Outfits.json");
 			JSONParser parser = new JSONParser();
 			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
@@ -89,13 +122,10 @@ public class ResourceManager {
 						Integer.valueOf(jsonItem.get("armor").toString()),
 						Integer.valueOf(jsonItem.get("value").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()),
-						Integer.valueOf(jsonItem.get("st").toString()),
-						Integer.valueOf(jsonItem.get("pe").toString()),
-						Integer.valueOf(jsonItem.get("en").toString()),
-						Integer.valueOf(jsonItem.get("ch").toString()),
-						Integer.valueOf(jsonItem.get("in").toString()),
-						Integer.valueOf(jsonItem.get("ag").toString()),
-						Integer.valueOf(jsonItem.get("lk").toString());
+						Integer.valueOf(jsonItem.get("st").toString()), Integer.valueOf(jsonItem.get("pe").toString()),
+						Integer.valueOf(jsonItem.get("en").toString()), Integer.valueOf(jsonItem.get("ch").toString()),
+						Integer.valueOf(jsonItem.get("in").toString()), Integer.valueOf(jsonItem.get("ag").toString()),
+						Integer.valueOf(jsonItem.get("lk").toString()));
 
 				this.outfits.add(item);
 			}
@@ -109,7 +139,7 @@ public class ResourceManager {
 	private void loadNotes() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Food.json");
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Notes.json");
 			JSONParser parser = new JSONParser();
 			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
@@ -118,7 +148,7 @@ public class ResourceManager {
 			for (String label : labels) {
 				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
 
-				Note item = new Note(label, jsonItem.get("label").toString(), jsonItem.get("label").toString("text"),
+				Note item = new Note(label, jsonItem.get("label").toString(), jsonItem.get("text").toString(),
 						Integer.valueOf(jsonItem.get("value").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()));
 
@@ -131,10 +161,10 @@ public class ResourceManager {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void loadOther() {
+	private void loadOthers() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Food.json");
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Others.json");
 			JSONParser parser = new JSONParser();
 			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
@@ -155,10 +185,10 @@ public class ResourceManager {
 		}
 	}
 
-	private void loadQuestItem() {
+	private void loadQuestItems() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Food.json");
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\QuestItems.json");
 			JSONParser parser = new JSONParser();
 			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
@@ -181,158 +211,171 @@ public class ResourceManager {
 
 	public ArrayList<Item> getAllItems() {
 		ArrayList<Item> cloned = new ArrayList<Item>();
-		for (Item item : this.items) {
-			cloned.add(item);
+
+		for (Item item : this.food) {
+			cloned.add(item.clone());
+		}
+		for (Item item : this.notes) {
+			cloned.add(item.clone());
+		}
+		for (Item item : this.others) {
+			cloned.add(item.clone());
+		}
+		for (Item item : this.outfits) {
+			cloned.add(item.clone());
+		}
+		for (Item item : this.questItems) {
+			cloned.add(item.clone());
+		}
+		for (Item item : this.weapons) {
+			cloned.add(item.clone());
 		}
 
 		return cloned;
 	}
 
 	public ArrayList<Weapon> getWeapons() {
-		ArrayList<Weapon> out = new ArrayList<Weapon>();
-		for (int i = 0; i < items.size(); i++) {
-			if (items.get(i) instanceof Weapon) {
-				out.add((Weapon) items.get(i).clone());
-			}
-		}
-		return out;
+		return this.weapons;
 	}
 
 	public ArrayList<Outfit> getOutfits() {
-		ArrayList<Outfit> out = new ArrayList<Outfit>();
-		for (int i = 0; i < items.size(); i++) {
-			if (items.get(i) instanceof Outfit) {
-				out.add((Outfit) items.get(i).clone());
-			}
-		}
-		return out;
+		return this.outfits;
 	}
 
 	public ArrayList<Food> getFood() {
-		ArrayList<Food> out = new ArrayList<Food>();
-		for (int i = 0; i < items.size(); i++) {
-			if (items.get(i) instanceof Food) {
-				out.add((Food) items.get(i).clone());
-			}
-		}
-		return out;
+		return this.food;
 	}
 
 	public ArrayList<Note> getNotes() {
-		ArrayList<Note> out = new ArrayList<Note>();
-		for (int i = 0; i < items.size(); i++) {
-			if (items.get(i) instanceof Note) {
-				out.add((Note) items.get(i).clone());
-			}
-		}
-		return out;
+		return this.notes;
 	}
 
-	public ArrayList<Other> getOther() {
-		ArrayList<Other> out = new ArrayList<Other>();
-		for (int i = 0; i < items.size(); i++) {
-			if (items.get(i) instanceof Other) {
-				out.add((Other) items.get(i).clone());
-			}
-		}
-		return out;
+	public ArrayList<Other> getOthers() {
+		return this.others;
 	}
 
 	public Item getItemByUniqueName(String uniqueName) {
+		ArrayList<Item> cloned = new ArrayList<Item>();
 
-		for (int i = 0; i < items.size(); i++) {
-			if (items.get(i).getUniqueName().equalsIgnoreCase(uniqueName)) {
-				return items.get(i).clone();
-			}
+		for (Item item : this.food) {
+			if (item.getUniqueName() == uniqueName)
+				return item;
 		}
+		for (Item item : this.notes) {
+			if (item.getUniqueName() == uniqueName)
+				return item;
+		}
+		for (Item item : this.others) {
+			if (item.getUniqueName() == uniqueName)
+				return item;
+		}
+		for (Item item : this.outfits) {
+			if (item.getUniqueName() == uniqueName)
+				return item;
+		}
+		for (Item item : this.questItems) {
+			if (item.getUniqueName() == uniqueName)
+				return item;
+		}
+		for (Item item : this.weapons) {
+			if (item.getUniqueName() == uniqueName)
+				return item;
+		}
+
 		return null;
 	}
 
 	@SuppressWarnings("unchecked")
-	private void loadNPCs() {
+	private void loadEnemies() {
 		try {
-			FileReader fileReader = new FileReader("resources\\npcs.json");
+
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Npc\\Enemy.json");
 			JSONParser parser = new JSONParser();
+			JSONObject jsonNPCs = (JSONObject) parser.parse(fileReader);
 
-			JSONObject items = (JSONObject) parser.parse(fileReader);
-			items = (JSONObject) items.get("Categories");
-			Set<Map> set = items.keySet();
-			Iterator<Map> itr = set.iterator();
+			Set<String> labels = jsonNPCs.keySet();
 
-			for (Object key : items.keySet()) {
-				Object value = items.get(key);
+			for (String label : labels) {
+				JSONObject jsonNPC = (JSONObject) jsonNPCs.get(label);
 
-				JSONObject category = (JSONObject) items.get(itr.next());
-				Set<Map> entity = category.keySet();
-				Iterator<Map> entityItr = entity.iterator();
+				Enemy enemy = new Enemy(label, jsonNPC.get("prefix").toString(),
+						Double.valueOf(jsonNPC.get("damage").toString()),
+						Double.valueOf(jsonNPC.get("health").toString()), Integer.valueOf(jsonNPC.get("st").toString()),
+						Integer.valueOf(jsonNPC.get("pe").toString()), Integer.valueOf(jsonNPC.get("en").toString()),
+						Integer.valueOf(jsonNPC.get("ch").toString()), Integer.valueOf(jsonNPC.get("in").toString()),
+						Integer.valueOf(jsonNPC.get("ag").toString()), Integer.valueOf(jsonNPC.get("lk").toString()),
+						jsonNPC.get("biom").toString(), Integer.valueOf(jsonNPC.get("xp").toString()));
 
-				while (entityItr.hasNext()) {
-					JSONObject innerEntity = (JSONObject) category.get(entityItr.next());
-					NPC npc;
+				Inventory enemyInv = new Inventory();
 
-					String label = new String(innerEntity.get("label").toString().getBytes(), StandardCharsets.UTF_8);
+				JSONObject enemiesItemList = (JSONObject) jsonNPC.get("items");
+				Set<Map> enemiesItems = enemiesItemList.keySet();
+				Iterator<Map> enemiesItemItr = enemiesItems.iterator();
 
-					switch (key.toString()) {
-					case "Enemy":
-						npc = new Enemy(label, innerEntity.get("prefix").toString(),
-								Double.valueOf(innerEntity.get("damage").toString()),
-								Double.valueOf(innerEntity.get("health").toString()),
-								Integer.valueOf(innerEntity.get("st").toString()),
-								Integer.valueOf(innerEntity.get("pe").toString()),
-								Integer.valueOf(innerEntity.get("en").toString()),
-								Integer.valueOf(innerEntity.get("ch").toString()),
-								Integer.valueOf(innerEntity.get("in").toString()),
-								Integer.valueOf(innerEntity.get("ag").toString()),
-								Integer.valueOf(innerEntity.get("lk").toString()), innerEntity.get("biom").toString(),
-								Integer.valueOf(innerEntity.get("xp").toString()));
+				for (int i = 0; i < enemiesItemList.size(); i++) {
+					JSONObject enemiesItem = (JSONObject) enemiesItemList.get(enemiesItemItr.next());
 
-						Inventory enemyInv = new Inventory();
-
-						JSONObject enemiesItemList = (JSONObject) innerEntity.get("items");
-						Set<Map> enemiesItems = enemiesItemList.keySet();
-						Iterator<Map> enemiesItemItr = enemiesItems.iterator();
-
-						for (int i = 0; i < enemiesItemList.size(); i++) {
-							JSONObject enemiesItem = (JSONObject) enemiesItemList.get(enemiesItemItr.next());
-
-							Item item = this.getItemByUniqueName(enemiesItems.toArray()[i].toString());
-							item.setCount(Integer.valueOf(enemiesItem.get("amount").toString()));
-							enemyInv.add(item.clone());
-						}
-
-						npc.setInventory(enemyInv);
-
-						break;
-					case "Merchant":
-						npc = new Merchant(label, innerEntity.get("prefix").toString(),
-								innerEntity.get("biom").toString(), innerEntity.get("type").toString(),
-								Integer.valueOf(innerEntity.get("size").toString()));
-
-						break;
-					default:
-						npc = new NPC(label, innerEntity.get("prefix").toString(), innerEntity.get("biom").toString());
-						break;
-					}
-
-					this.npcs.add(npc);
+					Item item = this.getItemByUniqueName(enemiesItems.toArray()[i].toString());
+					item.setCount(Integer.valueOf(enemiesItem.get("amount").toString()));
+					enemyInv.add(item.clone());
 				}
+
+				enemy.setInventory(enemyInv);
+
+				this.enemies.add(enemy);
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public ArrayList<NPC> getNpcs() {
-		return npcs;
+	@SuppressWarnings("unchecked")
+	private void loadMerchants() {
+		try {
+
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Npc\\Merchant.json");
+			JSONParser parser = new JSONParser();
+			JSONObject jsonNPCs = (JSONObject) parser.parse(fileReader);
+
+			Set<String> labels = jsonNPCs.keySet();
+
+			for (String label : labels) {
+				JSONObject jsonNPC = (JSONObject) jsonNPCs.get(label);
+
+				Merchant merchant = new Merchant(label, jsonNPC.get("prefix").toString(),
+						jsonNPC.get("biom").toString(), jsonNPC.get("type").toString(),
+						Integer.valueOf(jsonNPC.get("size").toString()));
+
+				Inventory enemyInv = new Inventory();
+
+				JSONObject enemiesItemList = (JSONObject) jsonNPC.get("items");
+				Set<Map> enemiesItems = enemiesItemList.keySet();
+				Iterator<Map> enemiesItemItr = enemiesItems.iterator();
+
+				for (int i = 0; i < enemiesItemList.size(); i++) {
+					JSONObject enemiesItem = (JSONObject) enemiesItemList.get(enemiesItemItr.next());
+
+					Item item = this.getItemByUniqueName(enemiesItems.toArray()[i].toString());
+					item.setCount(Integer.valueOf(enemiesItem.get("amount").toString()));
+					enemyInv.add(item.clone());
+				}
+
+				merchant.setInventory(enemyInv);
+
+				this.merchants.add(merchant);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public ArrayList<Merchant> getMerchants() {
+		return this.merchants;
 	}
 
 	public ArrayList<Enemy> getEnemies() {
-		ArrayList<Enemy> out = new ArrayList<Enemy>();
-		for (int i = 0; i < npcs.size(); i++) {
-			if (npcs.get(i) instanceof Enemy) {
-				out.add((Enemy) npcs.get(i));
-			}
-		}
-		return out;
+		return this.enemies;
 	}
 }
