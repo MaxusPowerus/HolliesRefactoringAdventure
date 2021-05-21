@@ -60,12 +60,6 @@ public class MapField {
 		}
 	}
 
-	public String getText() {
-		String text = "Das ist ein tooooler Text, hihihaha.";
-
-		return text;
-	}
-
 	public void setChallenge(Challenge challenge) {
 		this.challenge = challenge;
 	}

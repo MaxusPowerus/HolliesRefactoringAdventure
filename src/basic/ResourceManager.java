@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import entities.Enemy;
-import entities.Friend;
+import entities.Merchant;
 import entities.NPC;
 import items.Food;
 import items.Item;
@@ -23,92 +23,58 @@ import utilities.Inventory;
 
 public class ResourceManager {
 
-	private ArrayList<Item> items;
+	private ArrayList<Food> food;
+
 	private ArrayList<NPC> npcs;
 
 	public ResourceManager() {
-		this.items = new ArrayList<Item>();
+		this.food = new ArrayList<Food>();
+
 		this.npcs = new ArrayList<NPC>();
-		this.loadItems();
-		this.loadNPCs();
+		this.loadFood();
+//		this.loadNPCs();
 	}
 
 	@SuppressWarnings("unchecked")
-	private void loadItems() {
+	private void loadFood() {
 		try {
-			FileReader fileReader = new FileReader("resources\\items.json");
+
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Food.json");
 			JSONParser parser = new JSONParser();
+			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
-			JSONObject itemObj = (JSONObject) parser.parse(fileReader);
-			itemObj = (JSONObject) itemObj.get("Categories");
-			Set<Map> set = itemObj.keySet();
-			Iterator<Map> itr = set.iterator();
+			Set<String> labels = jsonItems.keySet();
 
-			for (Object key : itemObj.keySet()) {
-				Object value = itemObj.get(key);
+			for (String label : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
 
-				JSONObject category = (JSONObject) itemObj.get(itr.next());
-				Set<Map> categoryItem = category.keySet();
-				Iterator<Map> itemItr = categoryItem.iterator();
+				Food item = new Food(label, jsonItem.get("label").toString(),
+						Integer.valueOf(jsonItem.get("value").toString()),
+						Integer.valueOf(jsonItem.get("energy").toString()),
+						Integer.valueOf(jsonItem.get("chance").toString()));
 
-				for (int i = 0; i < categoryItem.size(); i++) {
-					JSONObject innerItem = (JSONObject) category.get(itemItr.next());
-					Item item = null;
-
-					String label = new String(innerItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
-
-					switch (key.toString()) {
-					case "Weapons":
-						item = new Weapon(categoryItem.toArray()[i].toString(), label,
-								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(innerItem.get("value").toString()));
-						break;
-					case "Outfits":
-						item = new Outfit(categoryItem.toArray()[i].toString(), label,
-								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(innerItem.get("armor").toString()));
-						break;
-					case "Food":
-						item = new Food(categoryItem.toArray()[i].toString(), label,
-								Integer.valueOf(String.valueOf(innerItem.get("value"))),
-								Integer.valueOf(innerItem.get("energy").toString()));
-						break;
-					case "Notes":
-						item = new Note(categoryItem.toArray()[i].toString(), label, innerItem.get("text").toString(),
-								Integer.valueOf(String.valueOf(innerItem.get("value"))));
-						break;
-					case "Other":
-						item = new Other(categoryItem.toArray()[i].toString(), label, innerItem.get("info").toString(),
-								Integer.valueOf(String.valueOf(innerItem.get("value"))));
-						break;
-					case "QuestItem":
-						item = new Other(categoryItem.toArray()[i].toString(), label, innerItem.get("info").toString(),
-								Integer.valueOf(String.valueOf(innerItem.get("value"))));
-						break;
-					default:
-						item = new Item(categoryItem.toArray()[i].toString(), label,
-								Integer.valueOf(String.valueOf(innerItem.get("value"))));
-						break;
-					}
-
-					this.items.add(item);
-
-				}
+				this.food.add(item);
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public ArrayList<Item> getAllItems() {
-		return items;
+		ArrayList<Item> cloned = new ArrayList<Item>();
+		for (Item item : this.items) {
+			cloned.add(item);
+		}
+
+		return cloned;
 	}
 
 	public ArrayList<Weapon> getWeapons() {
 		ArrayList<Weapon> out = new ArrayList<Weapon>();
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i) instanceof Weapon) {
-				out.add((Weapon) items.get(i));
+				out.add((Weapon) items.get(i).clone());
 			}
 		}
 		return out;
@@ -118,7 +84,7 @@ public class ResourceManager {
 		ArrayList<Outfit> out = new ArrayList<Outfit>();
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i) instanceof Outfit) {
-				out.add((Outfit) items.get(i));
+				out.add((Outfit) items.get(i).clone());
 			}
 		}
 		return out;
@@ -128,7 +94,7 @@ public class ResourceManager {
 		ArrayList<Food> out = new ArrayList<Food>();
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i) instanceof Food) {
-				out.add((Food) items.get(i));
+				out.add((Food) items.get(i).clone());
 			}
 		}
 		return out;
@@ -138,7 +104,7 @@ public class ResourceManager {
 		ArrayList<Note> out = new ArrayList<Note>();
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i) instanceof Note) {
-				out.add((Note) items.get(i));
+				out.add((Note) items.get(i).clone());
 			}
 		}
 		return out;
@@ -148,7 +114,7 @@ public class ResourceManager {
 		ArrayList<Other> out = new ArrayList<Other>();
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i) instanceof Other) {
-				out.add((Other) items.get(i));
+				out.add((Other) items.get(i).clone());
 			}
 		}
 		return out;
@@ -158,7 +124,7 @@ public class ResourceManager {
 
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i).getUniqueName().equalsIgnoreCase(uniqueName)) {
-				return items.get(i);
+				return items.get(i).clone();
 			}
 		}
 		return null;
@@ -213,32 +179,16 @@ public class ResourceManager {
 
 							Item item = this.getItemByUniqueName(enemiesItems.toArray()[i].toString());
 							item.setCount(Integer.valueOf(enemiesItem.get("amount").toString()));
-							enemyInv.add(item);
+							enemyInv.add(item.clone());
 						}
 
 						npc.setInventory(enemyInv);
 
 						break;
-					case "Friend":
-						npc = new Friend(label, innerEntity.get("prefix").toString(),
-								innerEntity.get("biom").toString());
-
-						Inventory friendInv = new Inventory();
-
-						JSONObject friendsItemList = (JSONObject) innerEntity.get("items");
-						Set<Map> friendsItems = friendsItemList.keySet();
-						Iterator<Map> friendsItemItr = friendsItems.iterator();
-
-						for (int i = 0; i < friendsItemList.size(); i++) {
-							JSONObject friendsItem = (JSONObject) friendsItemList.get(friendsItemItr.next());
-
-							Item item = this.getItemByUniqueName(friendsItems.toArray()[i].toString());
-							item.setCount(Integer.valueOf(friendsItem.get("amount").toString()));
-							item.setDiscount(Double.valueOf(friendsItem.get("discount").toString()));
-							friendInv.add(item);
-						}
-
-						npc.setInventory(friendInv);
+					case "Merchant":
+						npc = new Merchant(label, innerEntity.get("prefix").toString(),
+								innerEntity.get("biom").toString(), innerEntity.get("type").toString(),
+								Integer.valueOf(innerEntity.get("size").toString()));
 
 						break;
 					default:

@@ -46,14 +46,14 @@ public class Player {
 
 		// Set StartInventory
 
-		Weapon startWeapon = new Weapon("Stick", "Stock", 1, 1);
-		Outfit startOutfit = new Outfit("HolliesDress", "Hollys Lieblingskleid", 0, 10);
-		Food startFood = new Food("StewGrandmaStyle", "Eintopf nach Omas Art", 1, 25);
+		Weapon startWeapon = new Weapon("Stick", "Stock", 1, 1, 0);
+		Outfit startOutfit = new Outfit("HolliesDress", "Hollys Lieblingskleid", 10, 0, 0, 0, 0, 0, 1, 0, 0, 1);
+		Food startFood = new Food("StewGrandmaStyle", "Eintopf nach Omas Art", 1, 25, 0);
 		Note startNote = new Note("LetterFromHolger01", "Nachricht von Holger",
 				"Hey Holly!<br>Triff mich heute Abend im Wald!<br>Ich habe eine Überraschung für dich!<br>Dein Holger ;)",
-				0);
+				0, 0);
 		Other startOther = new Other("HolliesTeddy", "SchrimplyPipples",
-				"Hollies ältester und wichtigster Begleiter: Ein alter abgenutzter Teddybär!", 0);
+				"Hollies ältester und wichtigster Begleiter: Ein alter abgenutzter Teddybär!", 0, 0);
 
 		inventory.add(startWeapon);
 		inventory.add(startOutfit);
@@ -62,6 +62,9 @@ public class Player {
 		inventory.add(startOther);
 
 		inventory.addGold(5);
+
+		this.equip(startWeapon);
+		this.equip(startOutfit);
 		// ================================================================================================================
 	}
 
@@ -134,7 +137,6 @@ public class Player {
 	}
 
 	public void go(Direction direction) {
-		System.out.println("Gehe nach " + direction.getName());
 
 		MapField currentField = this.currentMapField;
 		Coordinate coordinate = currentField.getCoordinate();
@@ -158,8 +160,6 @@ public class Player {
 			this.currentMapField = newField;
 			this.currentMapField.getCoordinate().print();
 			this.time.addHours(2);
-		} else {
-			System.out.println("no move");
 		}
 	}
 
@@ -183,18 +183,19 @@ public class Player {
 
 		int round = 1;
 
-		System.out.println("playerFight: " + playerFight + " playerDmg: " + playerDmg);
-		System.out.println("enemieFight: " + enemyFight + " enemieDmg: " + enemyDmg);
+		// System.out.println("playerFight: " + playerFight + " playerDmg: " +
+		// playerDmg);
+		// System.out.println("enemieFight: " + enemyFight + " enemieDmg: " + enemyDmg);
 
 		while (true) {
-			System.out.println("PlayerHP: " + this.health + "EnemyHP:" + enemyHealth);
-			System.out.println("Runde: " + round);
+			// System.out.println("PlayerHP: " + this.health + "EnemyHP:" + enemyHealth);
+			// System.out.println("Runde: " + round);
 			dmgFac = 1;
 			// Player ist am Zug
 			if ((playerFight - enemyFight) > 0)
 				dmgFac = playerFight - enemyFight;
 
-			System.out.println("Player - dmgFac: " + dmgFac);
+			// System.out.println("Player - dmgFac: " + dmgFac);
 			enemyHealth -= dmgFac * playerDmg;
 			if (this.health <= 0)
 				break;
@@ -204,7 +205,7 @@ public class Player {
 			if ((enemyFight - playerFight) > 0)
 				dmgFac = enemyFight - playerFight;
 
-			System.out.println("Enemy - dmgFac: " + dmgFac);
+			// System.out.println("Enemy - dmgFac: " + dmgFac);
 
 			this.health -= dmgFac * enemyDmg;
 			if (enemyHealth <= 0)
@@ -212,7 +213,6 @@ public class Player {
 			round++;
 		}
 		if (health > 0) {
-			this.inventory.add(enemy.getInventory());
 			this.experience.addXp(enemy.getXp());
 			return true;
 		} else {
@@ -235,6 +235,7 @@ public class Player {
 		}
 		if ((item instanceof Outfit && this.outfit == null)) {
 			this.outfit = (Outfit) item;
+			((Outfit) item).getOutfitFx().onEquipping(this);
 		}
 	}
 
@@ -243,8 +244,10 @@ public class Player {
 			return;
 		if (this.weapon != null && this.weapon.equals(item))
 			this.weapon = null;
-		if (this.outfit != null && this.outfit.equals(item))
+		if (this.outfit != null && this.outfit.equals(item)) {
 			this.outfit = null;
+			((Outfit) item).getOutfitFx().onDequipping(this);
+		}
 	}
 
 	public boolean isEquipped(Item item) {

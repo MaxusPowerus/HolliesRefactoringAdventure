@@ -13,6 +13,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager;
 
 import basic.GameManager;
 import gui.GUIHelper;
@@ -24,6 +25,7 @@ import items.Other;
 import items.Outfit;
 import items.QuestItem;
 import items.Weapon;
+import utilities.Skill;
 
 public class InventoryItemHover implements MouseListener {
 
@@ -56,7 +58,8 @@ public class InventoryItemHover implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		this.gameManager.getGuiManager().getLeftInfoContentPanel().removeAll();
 
-		this.gameManager.getGuiManager().getLeftInfoContentPanel().setBackground(Color.WHITE);
+		this.gameManager.getGuiManager().getLeftInfoContentPanel()
+				.setBackground(UIManager.getColor("Desktop.background"));
 		GroupLayout gl_leftInfoPanel = new GroupLayout(this.gameManager.getGuiManager().getLeftInfoPanel());
 		gl_leftInfoPanel.setHorizontalGroup(gl_leftInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_leftInfoPanel.createSequentialGroup().addContainerGap()
@@ -70,10 +73,10 @@ public class InventoryItemHover implements MouseListener {
 						.addContainerGap()));
 
 		JPanel itemInfoPanel = new JPanel();
-		itemInfoPanel.setBackground(Color.WHITE);
+		itemInfoPanel.setBackground(UIManager.getColor("Desktop.background"));
 
 		JPanel itemIconPanel = new JPanel();
-		itemIconPanel.setBackground(Color.WHITE);
+		itemIconPanel.setBackground(UIManager.getColor("Desktop.background"));
 		itemIconPanel.setLayout(new BorderLayout());
 		GroupLayout gl_leftInfoContentPanel = new GroupLayout(
 				this.gameManager.getGuiManager().getLeftInfoContentPanel());
@@ -111,6 +114,50 @@ public class InventoryItemHover implements MouseListener {
 			JLabel armor = new JLabel("<html><b>Rüstungspunkte:</b> " + ((Outfit) item).getArmor() + "</html>");
 			armor.setFont(new Font("Dialog", Font.ITALIC, 14));
 			itemInfoPanel.add(armor);
+
+			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.STRENGTH) != 0) {
+				JLabel stFx = new JLabel("<html><b>Effekt auf Stärke:</b> "
+						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.STRENGTH) + "</html>");
+				stFx.setFont(new Font("Dialog", Font.ITALIC, 14));
+				itemInfoPanel.add(stFx);
+			}
+			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.PERCEPTION) != 0) {
+				JLabel peFx = new JLabel("<html><b>Effekt auf Wahrnehmung:</b> "
+						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.PERCEPTION) + "</html>");
+				peFx.setFont(new Font("Dialog", Font.ITALIC, 14));
+				itemInfoPanel.add(peFx);
+			}
+			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.ENDURANCE) != 0) {
+				JLabel enFx = new JLabel("<html><b>Effekt auf Ausdauer:</b> "
+						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.ENDURANCE) + "</html>");
+				enFx.setFont(new Font("Dialog", Font.ITALIC, 14));
+				itemInfoPanel.add(enFx);
+			}
+			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.CHARISMA) != 0) {
+				JLabel chFx = new JLabel("<html><b>Effekt auf Charisma:</b> "
+						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.CHARISMA) + "</html>");
+				chFx.setFont(new Font("Dialog", Font.ITALIC, 14));
+				itemInfoPanel.add(chFx);
+			}
+			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.INTELLIGENCE) != 0) {
+				JLabel inFx = new JLabel("<html><b>Effekt auf Intelligenz:</b> "
+						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.INTELLIGENCE) + "</html>");
+				inFx.setFont(new Font("Dialog", Font.ITALIC, 14));
+				itemInfoPanel.add(inFx);
+			}
+			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.AGILITY) != 0) {
+				JLabel agFx = new JLabel("<html><b>Effekt auf Gewandtheit:</b> "
+						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.AGILITY) + "</html>");
+				agFx.setFont(new Font("Dialog", Font.ITALIC, 14));
+				itemInfoPanel.add(agFx);
+			}
+			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.LUCK) != 0) {
+				JLabel lkFx = new JLabel("<html><b>Effekt auf Glück:</b> "
+						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.LUCK) + "</html>");
+				lkFx.setFont(new Font("Dialog", Font.ITALIC, 14));
+				itemInfoPanel.add(lkFx);
+			}
+
 		}
 		if (item instanceof Note) {
 			JLabel text = new JLabel("<html><b>Nachricht:<br></b> " + ((Note) item).getText() + "</html>");

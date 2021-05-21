@@ -45,8 +45,6 @@ public class UseItemAction implements ActionListener {
 			} else if (!player.isOutfitEquipped()) {
 				player.equip(this.item);
 			}
-		} else {
-			System.out.println("Use item");
 		}
 
 		PlayerInfoPanel.update();

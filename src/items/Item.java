@@ -1,18 +1,23 @@
 package items;
 
+import entities.Player;
+import utilities.Skill;
+
 public class Item {
 
 	private String uniqueName;
 	private String name;
 	private int value;
+	private int spawnChance;
 	private int count;
 	private double discount;
 
-	public Item(String uniqueName, String name, int value) {
+	public Item(String uniqueName, String name, int value, int spawnChance) {
 		this.uniqueName = uniqueName;
 		this.name = name;
 		this.value = value;
 		this.count = 1;
+		this.spawnChance = spawnChance;
 	}
 
 	public String getName() {
@@ -42,6 +47,10 @@ public class Item {
 		return count;
 	}
 
+	public int getSpawnChance() {
+		return spawnChance;
+	}
+
 	public double getDiscount() {
 		return discount;
 	}
@@ -62,16 +71,26 @@ public class Item {
 		return value;
 	}
 
+	public int getSpecificValue(Player player) {
+		double specificValue = this.value;
+		double fac = player.getSkillSet().getSkillValue(Skill.CHARISMA);
+		fac = (fac * 2) / 10;
+		specificValue *= fac;
+		return (int) specificValue;
+	}
+
 	public Item clone() {
 		Item item = null;
 		if (this instanceof Weapon) {
-			item = new Weapon(this.uniqueName, this.name, this.value, ((Weapon) this).getDamage());
+			item = new Weapon(this.uniqueName, this.name, this.value, ((Weapon) this).getDamage(),
+					this.getSpawnChance());
 		} else if (this instanceof Food) {
-			item = new Food(this.uniqueName, this.name, this.value, ((Food) this).getEnergy());
+			item = new Food(this.uniqueName, this.name, this.value, ((Food) this).getEnergy(), this.getSpawnChance());
 		} else if (this instanceof Outfit) {
-			item = new Outfit(this.uniqueName, this.name, this.value, ((Outfit) this).getArmor());
+			item = new Outfit(this.uniqueName, this.name, this.value, ((Outfit) this).getArmor(), this.getSpawnChance(),
+					((Outfit) this).getOutfitFx());
 		} else {
-			item = new Item(this.uniqueName, this.name, this.value);
+			item = new Item(this.uniqueName, this.name, this.value, this.getSpawnChance());
 		}
 		item.setCount(this.count);
 		item.setDiscount(this.discount);

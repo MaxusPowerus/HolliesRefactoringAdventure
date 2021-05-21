@@ -61,7 +61,7 @@ public class Challenge {
 		this.challengeType = Chan.pickRandom(challengeTypes);
 
 		if (challengeType != 0 && challengeType != 1)
-			System.out.println("Unvalid ChallengeType: " + challengeType);
+			System.out.println("Invalid ChallengeType: " + challengeType);
 
 		switch (challengeType) {
 		// Callange: Container

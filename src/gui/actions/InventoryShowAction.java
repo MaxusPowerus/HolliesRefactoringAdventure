@@ -52,7 +52,7 @@ public class InventoryShowAction implements ActionListener {
 		this.gameManager.getGuiManager().getLeftContentPanel().removeAll();
 		this.gameManager.getGuiManager().getLeftContentPanel().setLayout(new BorderLayout());
 
-		this.gameManager.getGuiManager().getOpenInvButton().setText("Inventar schließen");
+		this.gameManager.getGuiManager().getOpenInvButton().setText("Map");
 		this.gameManager.getGuiManager().getOpenInvButton().removeActionListener(this);
 		this.gameManager.getGuiManager().getOpenInvButton().addActionListener(new MapShowAction(this.gameManager));
 
@@ -142,7 +142,7 @@ public class InventoryShowAction implements ActionListener {
 		JLabel name = new JLabel(item.getName() + " (" + item.getCount() + " Stück)");
 		name.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		System.out.println(item.getName() + ": " + item.getCount());
+		// System.out.println(item.getName() + ": " + item.getCount());
 
 		// TODO
 		Icon itemIcon = Icon.getByName(item.getUniqueName());

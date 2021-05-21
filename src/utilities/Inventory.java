@@ -30,7 +30,7 @@ public class Inventory {
 			return;
 		}
 
-		items.add(item);
+		items.add(item.clone());
 	}
 
 	public void add(Container container) {

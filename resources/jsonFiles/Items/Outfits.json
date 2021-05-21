@@ -1,13 +1,4 @@
 {
-
-    "Categories": {
-        "Weapons": {
-            "Sword": { "label": "Schwert", "damage": 15, "value": 100, "chance": 5 },
-            "Axe": { "label": "Axt", "damage": 10, "value": 20, "chance": 15},
-            "Spear": { "label": "Speer", "damage": 5, "value": 10, "chance": 50},
-            "Stick": { "label": "Stock", "damage": 3, "value": 0, "chance": 5}
-        },
-        "Outfits": {
             
 			
             "UnicornCostume": {"label": "Einhorn-Kostüm", "armor": 0, "value": 50, "chance": 5, "st": 5, "pe": 5, "en": 5, "ch": 5, "in": 5, "ag": 5, "lk": 5},
@@ -22,27 +13,4 @@
             "NormalDressBrown": {"label": "Kleidung (brown)", "armor": 0, "value": 10, "chance": 95, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
             "NormalDressBeige": {"label": "Kleidung (beige)", "armor": 0, "value": 10, "chance": 95, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
             "rags": {"label": "Lumpen", "armor": 0, "value": 3, "chance": 100, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 1}
-        },
-        "Food": {
-            
-			
-            "Catfood": { "label": "Katzenfutter", "energy": 1000, "value": 1, "chance": 5},
-            "Flesh": { "label": "Fleisch", "energy": 30, "value": 15, "chance": 50},
-            "Bread": { "label": "Brot", "energy": 25, "value": 5, "chance": 95},
-            "Apple": { "label": "Apfel", "energy": 5, "value": 3, "chance": 95},
-            "Beer": {"label": "Bier", "energy": 10, "value": 5, "chance": 75}, 
-            "Wine": {"label": "Wein", "energy": 10, "value": 10, "chance": 25}
-        },
-		"Notes": {
-			"CakeRecipe": {"label": "Kuchenrezeot", "text": "Kuchen:>Mehl: 2 \n>Eier 1\n>wasser 1/2 ", "value": 0, "chance": 85}
-		},
-		"Other": {
-			"Stone": {"label": "Stein", "info": "Schlägt Schere", "value": 0, "chance": 95},
-			"Paper": {"label": "Papier", "info": "Schlägt Stein", "value": 1, "chance": 95},
-			"Scissors": {"label": "Schere", "info": "Schlägt Papier", "value": 1, "chance": 95}
-		},
-		"QuestItem": {
-			"GiftForHolger": {"label": "Geschenk für Holger", "info": "SexTape", "value": 1, "chance": 95}
-		}
-	}
-}
+        }

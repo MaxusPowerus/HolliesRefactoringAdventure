@@ -19,6 +19,8 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 import basic.Config;
 import gui.actions.NavigationButtonAction;
 import map.Direction;
@@ -68,6 +70,7 @@ public class GUIManager {
 	private JLabel currentWeapon;
 	private JLabel lblRstungkleidung;
 	private JLabel currentOutfit;
+	private JLabel fieldBackground;
 
 	public GUIManager() {
 		initialize();
@@ -75,7 +78,11 @@ public class GUIManager {
 
 	private void initialize() {
 		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			FlatLightLaf.install();
+//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+			UIManager.setLookAndFeel(new FlatLightLaf());
+			UIManager.getLookAndFeelDefaults().put("Desktop.background", Color.decode("#FFFFFF"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -108,30 +115,30 @@ public class GUIManager {
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(leftInfoPanel, GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
-								.addComponent(leftMainPanel, GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE))
+								.addComponent(leftMainPanel, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+								.addComponent(leftInfoPanel, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE))
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(actionPanel, GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
-								.addComponent(playerInfoPanel, GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
-								.addComponent(fieldInfoPanel, GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
+								.addComponent(actionPanel, GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+								.addComponent(playerInfoPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)
+								.addComponent(fieldInfoPanel, GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE))
 						.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-										.addComponent(leftMainPanel, GroupLayout.PREFERRED_SIZE, 545,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(leftInfoPanel, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
-								.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(playerInfoPanel, GroupLayout.PREFERRED_SIZE, 154,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(fieldInfoPanel, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(actionPanel, GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)))
-						.addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+				.createSequentialGroup().addContainerGap()
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(leftMainPanel, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(leftInfoPanel, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE).addGap(0))
+						.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(playerInfoPanel, GroupLayout.PREFERRED_SIZE, 154,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(fieldInfoPanel, GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(actionPanel, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)))
+				.addContainerGap()));
 
 		leftInfoContentPanel = new JPanel();
 		leftInfoContentPanel.setBackground(Color.WHITE);
@@ -151,69 +158,84 @@ public class GUIManager {
 				gl_leftInfoContentPanel.createParallelGroup(Alignment.LEADING).addGap(0, 125, Short.MAX_VALUE));
 		leftInfoContentPanel.setLayout(gl_leftInfoContentPanel);
 		leftInfoPanel.setLayout(gl_leftInfoPanel);
+		fieldInfoPanel.setLayout(null);
 
 		fieldInfos = new JPanel();
+		fieldInfos.setBounds(16, 16, 568, 296);
 		fieldInfos.setBackground(new Color(0, 0, 0, 0.3f));
 		fieldInfos.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		GroupLayout gl_fieldInfoPanel = new GroupLayout(fieldInfoPanel);
-		gl_fieldInfoPanel.setHorizontalGroup(gl_fieldInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(fieldInfos, GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE));
-		gl_fieldInfoPanel.setVerticalGroup(gl_fieldInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_fieldInfoPanel.createSequentialGroup().addContainerGap()
-						.addComponent(fieldInfos, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE).addContainerGap()));
 		fieldInfos.setLayout(new BoxLayout(fieldInfos, BoxLayout.Y_AXIS));
-		fieldInfoPanel.setLayout(gl_fieldInfoPanel);
+		fieldInfoPanel.add(fieldInfos);
+
+		fieldBackground = new JLabel("");
+		fieldBackground.setBounds(0, 0, 599, 329);
+		fieldInfoPanel.add(fieldBackground);
 
 		actionButtonPanel = new JPanel();
 		actionButtonPanel.setBackground(Color.WHITE);
 
 		openInvButton = new JButton("[INV_BTN]");
 
-		goNorthButton = new JButton("N");
-		goNorthButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		goNorthButton.addActionListener(new NavigationButtonAction(Direction.NORTH));
-
-		goEastButton = new JButton("O");
-		goEastButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		goEastButton.addActionListener(new NavigationButtonAction(Direction.EAST));
-
-		goSouthButton = new JButton("S");
-		goSouthButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		goSouthButton.addActionListener(new NavigationButtonAction(Direction.SOUTH));
-
-		goWestButton = new JButton("W");
-		goWestButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		goWestButton.addActionListener(new NavigationButtonAction(Direction.WEST));
+		JPanel navigationPanel = new JPanel();
+		navigationPanel.setBackground(Color.WHITE);
 		GroupLayout gl_actionPanel = new GroupLayout(actionPanel);
 		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_actionPanel
-				.createSequentialGroup().addContainerGap(10, Short.MAX_VALUE)
-				.addGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING, false)
-						.addGroup(gl_actionPanel.createSequentialGroup().addGroup(gl_actionPanel
-								.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_actionPanel.createSequentialGroup()
-										.addPreferredGap(ComponentPlacement.RELATED).addComponent(openInvButton))
-								.addGroup(gl_actionPanel.createSequentialGroup().addGap(154)
-										.addGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING)
-												.addComponent(goSouthButton).addComponent(goNorthButton))))
-								.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(gl_actionPanel.createSequentialGroup().addComponent(goWestButton).addGap(57)))
-				.addComponent(goEastButton).addGap(129)
+				.createSequentialGroup()
+				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_actionPanel.createSequentialGroup().addGap(10).addComponent(openInvButton)
+								.addPreferredGap(ComponentPlacement.RELATED, 273, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING,
+								gl_actionPanel.createSequentialGroup().addContainerGap()
+										.addComponent(navigationPanel, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addGap(114)))
 				.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
 				.addContainerGap()));
 		gl_actionPanel.setVerticalGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING).addGroup(gl_actionPanel
 				.createSequentialGroup().addContainerGap()
-				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_actionPanel.createSequentialGroup().addComponent(openInvButton)
-								.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-								.addComponent(goNorthButton).addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_actionPanel.createParallelGroup(Alignment.BASELINE)
-										.addComponent(goEastButton).addComponent(goWestButton))
-								.addPreferredGap(ComponentPlacement.RELATED).addComponent(goSouthButton).addGap(37))
-						.addGroup(
-								gl_actionPanel
-										.createSequentialGroup().addComponent(actionButtonPanel,
-												GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(96, Short.MAX_VALUE)))));
+				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addComponent(openInvButton)
+						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
+				.addContainerGap(104, Short.MAX_VALUE))
+				.addGroup(gl_actionPanel
+						.createSequentialGroup().addContainerGap(84, Short.MAX_VALUE).addComponent(navigationPanel,
+								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGap(46)));
+		navigationPanel.setLayout(new GridLayout(3, 3, 0, 0));
+
+		JLabel label = new JLabel("");
+		navigationPanel.add(label);
+
+		goNorthButton = new JButton("N");
+		navigationPanel.add(goNorthButton);
+		goNorthButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
+
+		JLabel lblNewLabel_1 = new JLabel("");
+		navigationPanel.add(lblNewLabel_1);
+
+		goWestButton = new JButton("W");
+		navigationPanel.add(goWestButton);
+		goWestButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
+
+		JLabel label_2 = new JLabel("");
+		navigationPanel.add(label_2);
+
+		goEastButton = new JButton("O");
+		navigationPanel.add(goEastButton);
+		goEastButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		goEastButton.addActionListener(new NavigationButtonAction(Direction.EAST));
+
+		JLabel label_3 = new JLabel("");
+		navigationPanel.add(label_3);
+
+		goSouthButton = new JButton("S");
+		navigationPanel.add(goSouthButton);
+		goSouthButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		goSouthButton.addActionListener(new NavigationButtonAction(Direction.SOUTH));
+
+		JLabel label_1 = new JLabel("");
+		navigationPanel.add(label_1);
+		goWestButton.addActionListener(new NavigationButtonAction(Direction.WEST));
+		goNorthButton.addActionListener(new NavigationButtonAction(Direction.NORTH));
 		actionButtonPanel.setLayout(new GridLayout(5, 1, 0, 0));
 		actionPanel.setLayout(gl_actionPanel);
 
@@ -289,27 +311,26 @@ public class GUIManager {
 		innerEquippedPanel.add(currentOutfit);
 		equippedPanel.setLayout(gl_equippedPanel);
 		GroupLayout gl_playerInfoPanel = new GroupLayout(playerInfoPanel);
-		gl_playerInfoPanel.setHorizontalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(playerInfoHeadline, GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+		gl_playerInfoPanel.setHorizontalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.TRAILING)
+				.addComponent(playerInfoHeadline, GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
 				.addComponent(playerBarPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addGroup(gl_playerInfoPanel.createSequentialGroup().addContainerGap()
-						.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
-						.addComponent(equippedPanel, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap()));
+				.addGroup(Alignment.LEADING,
+						gl_playerInfoPanel.createSequentialGroup().addContainerGap()
+								.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 286, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(equippedPanel, GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+								.addContainerGap()));
 		gl_playerInfoPanel.setVerticalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_playerInfoPanel.createSequentialGroup()
 						.addComponent(playerInfoHeadline, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addComponent(playerBarPanel, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(
-								gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
-										.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 71,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(equippedPanel, GroupLayout.PREFERRED_SIZE, 71,
-												GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+						.addGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+								.addComponent(equippedPanel, GroupLayout.PREFERRED_SIZE, 71,
+										GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(8, Short.MAX_VALUE)));
 
 		lblSkills = new JLabel("Skills");
 		lblSkills.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -395,6 +416,7 @@ public class GUIManager {
 		healthLabel = new JLabel("Lebenspunkte");
 
 		healthBar = new JProgressBar();
+		healthBar.setForeground(Color.RED);
 
 		levelLabel = new JLabel("Level X");
 
@@ -404,19 +426,24 @@ public class GUIManager {
 		gl_playerBarPanel.setHorizontalGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_playerBarPanel.createSequentialGroup().addContainerGap().addComponent(healthLabel)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(healthBar, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 133, Short.MAX_VALUE).addComponent(levelLabel)
+						.addComponent(healthBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED, 127, Short.MAX_VALUE).addComponent(levelLabel)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(levelBar, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap()));
 		gl_playerBarPanel.setVerticalGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_playerBarPanel.createSequentialGroup().addGap(5)
-						.addGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(levelBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(healthBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(levelLabel).addComponent(healthLabel))
+				.addGroup(gl_playerBarPanel.createSequentialGroup().addGap(5).addGroup(gl_playerBarPanel
+						.createParallelGroup(Alignment.LEADING)
+						.addComponent(healthBar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE)
+						.addGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(levelLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(healthLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(levelBar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)))
 						.addContainerGap()));
 		playerBarPanel.setLayout(gl_playerBarPanel);
 		playerInfoPanel.setLayout(gl_playerInfoPanel);
@@ -551,6 +578,10 @@ public class GUIManager {
 		return currentWeapon;
 	}
 
+	public JLabel getFieldBackground() {
+		return fieldBackground;
+	}
+
 	public void setNavigationEnabled(boolean enabled) {
 		this.goNorthButton.setEnabled(enabled);
 		this.goEastButton.setEnabled(enabled);
@@ -561,7 +592,8 @@ public class GUIManager {
 	public void addFieldInfo(String info) {
 		JLabel label = new JLabel("<html>" + info + "</html>");
 		label.setForeground(Color.WHITE);
-		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+		label.setFont(new Font("Dialog", Font.PLAIN, 16));
+		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 3, 0));
 		this.fieldInfos.add(label);
 
 		this.frame.revalidate();
