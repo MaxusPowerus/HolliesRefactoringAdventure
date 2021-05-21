@@ -18,25 +18,36 @@ import items.Item;
 import items.Note;
 import items.Other;
 import items.Outfit;
+import items.QuestItem;
 import items.Weapon;
 import utilities.Inventory;
 
 public class ResourceManager {
 
 	private ArrayList<Food> food;
+	private ArrayList<Note> notes;
+	private ArrayList<Other> others;
+	private ArrayList<Outfit> outfits;
+	private ArrayList<QuestItem> questItems;
+	private ArrayList<Weapon> weapons;
 
 	private ArrayList<NPC> npcs;
 
 	public ResourceManager() {
 		this.food = new ArrayList<Food>();
+		this.notes = new ArrayList<Note>();
+		this.others = new ArrayList<Other>();
+		this.outfits = new ArrayList<Outfit>();
+		this.questItems = new ArrayList<QuestItem>();
+		this.weapons = new ArrayList<Weapon>();
 
 		this.npcs = new ArrayList<NPC>();
 		this.loadFood();
-//		this.loadNPCs();
+		this.loadNPCs();
 	}
 
 	@SuppressWarnings("unchecked")
-	private void loadFood() {
+	private void loadWeapon() {
 		try {
 
 			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Food.json");
@@ -48,12 +59,119 @@ public class ResourceManager {
 			for (String label : labels) {
 				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
 
-				Food item = new Food(label, jsonItem.get("label").toString(),
+				Weapon item = new Weapon(label, jsonItem.get("label").toString(),
+						Integer.valueOf(jsonItem.get("damage").toString()),
 						Integer.valueOf(jsonItem.get("value").toString()),
-						Integer.valueOf(jsonItem.get("energy").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()));
 
-				this.food.add(item);
+				this.weapons.add(item);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private void loadOutfit() {
+		try {
+
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Food.json");
+			JSONParser parser = new JSONParser();
+			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
+
+			Set<String> labels = jsonItems.keySet();
+
+			for (String label : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
+
+				Outfit item = new Outfit(label, jsonItem.get("label").toString(),
+						Integer.valueOf(jsonItem.get("armor").toString()),
+						Integer.valueOf(jsonItem.get("value").toString()),
+						Integer.valueOf(jsonItem.get("chance").toString()),
+						Integer.valueOf(jsonItem.get("st").toString()),
+						Integer.valueOf(jsonItem.get("pe").toString()),
+						Integer.valueOf(jsonItem.get("en").toString()),
+						Integer.valueOf(jsonItem.get("ch").toString()),
+						Integer.valueOf(jsonItem.get("in").toString()),
+						Integer.valueOf(jsonItem.get("ag").toString()),
+						Integer.valueOf(jsonItem.get("lk").toString());
+
+				this.outfits.add(item);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private void loadNotes() {
+		try {
+
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Food.json");
+			JSONParser parser = new JSONParser();
+			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
+
+			Set<String> labels = jsonItems.keySet();
+
+			for (String label : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
+
+				Note item = new Note(label, jsonItem.get("label").toString(), jsonItem.get("label").toString("text"),
+						Integer.valueOf(jsonItem.get("value").toString()),
+						Integer.valueOf(jsonItem.get("chance").toString()));
+
+				this.notes.add(item);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private void loadOther() {
+		try {
+
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Food.json");
+			JSONParser parser = new JSONParser();
+			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
+
+			Set<String> labels = jsonItems.keySet();
+
+			for (String label : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
+
+				Other item = new Other(label, jsonItem.get("label").toString(), jsonItem.get("info").toString(),
+						Integer.valueOf(jsonItem.get("value").toString()),
+						Integer.valueOf(jsonItem.get("chance").toString()));
+
+				this.others.add(item);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void loadQuestItem() {
+		try {
+
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Food.json");
+			JSONParser parser = new JSONParser();
+			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
+
+			Set<String> labels = jsonItems.keySet();
+
+			for (String label : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(label);
+
+				QuestItem item = new QuestItem(label, jsonItem.get("label").toString(), jsonItem.get("info").toString(),
+						Integer.valueOf(jsonItem.get("value").toString()),
+						Integer.valueOf(jsonItem.get("chance").toString()));
+
+				this.questItems.add(item);
 			}
 
 		} catch (Exception e) {
