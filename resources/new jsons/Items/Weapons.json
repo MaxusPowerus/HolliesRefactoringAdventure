@@ -1,0 +1,8 @@
+
+       {
+            "Sword": { "label": "Schwert", "damage": 15, "value": 100, "chance": 5 },
+            "Axe": { "label": "Axt", "damage": 10, "value": 20, "chance": 15},
+            "Spear": { "label": "Speer", "damage": 5, "value": 10, "chance": 50},
+            "Stick": { "label": "Stock", "damage": 3, "value": 0, "chance": 5}
+        }
+	
