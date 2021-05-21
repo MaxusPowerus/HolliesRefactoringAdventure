@@ -71,7 +71,7 @@ public class Item {
 		return value;
 	}
 
-	public int getSpecific(Player player) {
+	public int getSpecificValue(Player player) {
 		double specificValue = this.value;
 		double fac = player.getSkillSet().getSkillValue(Skill.CHARISMA);
 		fac = (fac * 2) / 10;
