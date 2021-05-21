@@ -49,8 +49,8 @@ public class InventoryShowAction implements ActionListener {
 	}
 
 	public void initialize() {
-		this.gameManager.getGuiManager().getLeftContentPanel().removeAll();
-		this.gameManager.getGuiManager().getLeftContentPanel().setLayout(new BorderLayout());
+		this.gameManager.getGuiManager().getMapPanel().setVisible(false);
+		this.gameManager.getGuiManager().getInventoryPanel().setLayout(new BorderLayout());
 
 		this.gameManager.getGuiManager().getOpenInvButton().setText("Map");
 		this.gameManager.getGuiManager().getOpenInvButton().removeActionListener(this);
@@ -62,8 +62,7 @@ public class InventoryShowAction implements ActionListener {
 
 		inventoryTabPane.setBorder(null);
 		inventoryTabPane.setBackground(Color.WHITE);
-		GroupLayout leftContentPanelGroupLayout = new GroupLayout(
-				this.gameManager.getGuiManager().getLeftContentPanel());
+		GroupLayout leftContentPanelGroupLayout = new GroupLayout(this.gameManager.getGuiManager().getInventoryPanel());
 		leftContentPanelGroupLayout
 				.setHorizontalGroup(leftContentPanelGroupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(inventoryTabPane, GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE));
@@ -82,7 +81,7 @@ public class InventoryShowAction implements ActionListener {
 			JLabel empty = new JLabel("Dein Rucksack ist leer");
 			itemPanel.add(empty);
 
-			this.gameManager.getGuiManager().getLeftContentPanel().add(itemPanel);
+			this.gameManager.getGuiManager().getInventoryPanel().add(itemPanel);
 		} else {
 
 			int categoryIndex = 0;
@@ -124,7 +123,7 @@ public class InventoryShowAction implements ActionListener {
 			inventoryTabPane.setBackgroundAt(inventoryTabPane.getTabCount() - 1, Color.decode("#FFD700"));
 			inventoryTabPane.setEnabledAt(inventoryTabPane.getTabCount() - 1, false);
 
-			this.gameManager.getGuiManager().getLeftContentPanel().add(inventoryTabPane);
+			this.gameManager.getGuiManager().getInventoryPanel().add(inventoryTabPane);
 		}
 
 		this.gameManager.update();
@@ -137,7 +136,7 @@ public class InventoryShowAction implements ActionListener {
 		panel.setBackground(Color.WHITE);
 		panel.setMaximumSize(new Dimension(32767, 50));
 		panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY));
-		this.gameManager.getGuiManager().getLeftContentPanel().add(panel);
+		this.gameManager.getGuiManager().getInventoryPanel().add(panel);
 
 		JLabel name = new JLabel(item.getName() + " (" + item.getCount() + " Stück)");
 		name.setFont(new Font("Tahoma", Font.PLAIN, 14));

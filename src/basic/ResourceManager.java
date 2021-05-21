@@ -229,7 +229,7 @@ public class ResourceManager {
 
 				merchant.setInventory(enemyInv);
 
-				this.enemies.add(merchant);
+				this.merchants.add(merchant);
 			}
 
 		} catch (Exception e) {

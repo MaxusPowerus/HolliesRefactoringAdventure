@@ -27,8 +27,8 @@ public class MapShowAction implements ActionListener {
 	}
 
 	public void initialize() {
-		this.gameManager.getGuiManager().getLeftContentPanel().removeAll();
-		this.gameManager.getGuiManager().getLeftContentPanel().setLayout(new BorderLayout());
+		this.gameManager.getGuiManager().getInventoryPanel().setVisible(false);
+		this.gameManager.getGuiManager().getMapInfoPanel().setLayout(new BorderLayout());
 
 		this.gameManager.getGuiManager().getOpenInvButton().setText("Inventar");
 		this.gameManager.getGuiManager().getOpenInvButton().removeActionListener(this);
@@ -37,10 +37,10 @@ public class MapShowAction implements ActionListener {
 
 		this.gameManager.getGuiManager().getLeftPanelHeadline().setText("Map");
 
-		this.gameManager.getGuiManager().getLeftContentPanel()
+		this.gameManager.getGuiManager().getMapInfoPanel()
 				.setLayout(new GridLayout(Config.MAP_SIZEX, Config.MAP_SIZEY, 0, 0));
 
-		this.gameManager.getGuiManager().getLeftContentPanel().setVisible(false);
+		this.gameManager.getGuiManager().getMapInfoPanel().setVisible(false);
 
 		int index = 1;
 		for (int y = 0; y < Config.MAP_SIZEY; y++) {
@@ -66,11 +66,11 @@ public class MapShowAction implements ActionListener {
 					p.setBackground(Color.RED);
 				}
 
-				this.gameManager.getGuiManager().getLeftContentPanel().add(p);
+				this.gameManager.getGuiManager().getMapInfoPanel().add(p);
 			}
 		}
 
-		this.gameManager.getGuiManager().getLeftContentPanel().setVisible(true);
+		this.gameManager.getGuiManager().getMapInfoPanel().setVisible(true);
 		this.gameManager.update();
 	}
 

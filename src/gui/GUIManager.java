@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
@@ -71,6 +70,8 @@ public class GUIManager {
 	private JLabel lblRstungkleidung;
 	private JLabel currentOutfit;
 	private JLabel fieldBackground;
+	private JPanel inventoryPanel;
+	private JPanel mapPanel;
 
 	public GUIManager() {
 		initialize();
@@ -256,7 +257,15 @@ public class GUIManager {
 						.addComponent(leftPanelHeadline, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)));
-		leftContentPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		leftContentPanel.setLayout(null);
+
+		mapPanel = new JPanel();
+		mapPanel.setBounds(0, 0, 561, 537);
+		leftContentPanel.add(mapPanel);
+
+		inventoryPanel = new JPanel();
+		inventoryPanel.setBounds(0, 0, 561, 537);
+		leftContentPanel.add(inventoryPanel);
 		leftMainPanel.setLayout(gl_leftMainPanel);
 
 		JLabel playerInfoHeadline = new JLabel(">>> Die kleine Holly <<<");
@@ -580,6 +589,10 @@ public class GUIManager {
 
 	public JLabel getFieldBackground() {
 		return fieldBackground;
+	}
+
+	public JPanel getInventoryPanel() {
+		return inventoryPanel;
 	}
 
 	public void setNavigationEnabled(boolean enabled) {

@@ -88,7 +88,7 @@ public class GameManager {
 //			path = "resources\\images\\backgrounds\\forest.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.FOREST) {
 			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#196130"));
-			path = "resources\\images\\backgrounds\\forest.png";
+			path = "forest_var1.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.MOUNTAINS) {
 			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#71817B"));
 //			path = "resources\\images\\backgrounds\\forest.png";
@@ -97,12 +97,12 @@ public class GameManager {
 //			path = "resources\\images\\backgrounds\\forest.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.MEADOW) {
 			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#16b91e"));
-//			path = "resources\\images\\backgrounds\\forest.png";
+			path = "meadow_var2.png";
 		}
 
 		if (path != "") {
 			try {
-				BufferedImage image = ImageIO.read(new File(path));
+				BufferedImage image = ImageIO.read(new File("resources\\images\\backgrounds\\" + path));
 				this.guiManager.getFieldBackground().setIcon(GUIHelper.scaleIcon(new ImageIcon(image), 650));
 			} catch (IOException e) {
 				e.printStackTrace();
