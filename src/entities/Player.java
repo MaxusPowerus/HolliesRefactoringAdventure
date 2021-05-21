@@ -62,6 +62,9 @@ public class Player {
 		inventory.add(startOther);
 
 		inventory.addGold(5);
+
+		this.equip(startWeapon);
+		this.equip(startOutfit);
 		// ================================================================================================================
 	}
 
@@ -180,7 +183,8 @@ public class Player {
 
 		int round = 1;
 
-		// System.out.println("playerFight: " + playerFight + " playerDmg: " + playerDmg);
+		// System.out.println("playerFight: " + playerFight + " playerDmg: " +
+		// playerDmg);
 		// System.out.println("enemieFight: " + enemyFight + " enemieDmg: " + enemyDmg);
 
 		while (true) {
