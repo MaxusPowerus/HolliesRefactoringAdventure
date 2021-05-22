@@ -1,0 +1,6 @@
+{
+	"armor": {"items": ["IronArmor", "ChainMail", "LetherArmor" , "gold": 0]},
+	"homeless": {"items": ["Rags", "Stone", "gold": 0]},
+	"angryCat": {"items": ["CatFood", "CatFood", "CatFood", "gold": 0]},
+	"basicEnemy": {"items": ["Flesh"], "gold": 0}
+}

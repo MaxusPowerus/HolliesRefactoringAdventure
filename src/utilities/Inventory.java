@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import items.Food;
 import items.Item;
+import items.LootTable;
 import items.Note;
 import items.Other;
 import items.Outfit;
@@ -48,6 +49,10 @@ public class Inventory {
 		for (int i = 0; i < items.size(); i++) {
 			this.add(items.get(i));
 		}
+	}
+
+	public void add(LootTable lootTable) {
+		this.add(lootTable.getItems(), lootTable.getGold());
 	}
 
 	public void remove(Item item) {

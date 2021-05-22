@@ -13,6 +13,7 @@ import entities.Enemy;
 import entities.Merchant;
 import items.Food;
 import items.Item;
+import items.LootTable;
 import items.Note;
 import items.Other;
 import items.Outfit;
@@ -29,6 +30,8 @@ public class ResourceManager {
 	private ArrayList<QuestItem> questItems;
 	private ArrayList<Weapon> weapons;
 
+	private ArrayList<LootTable> lootTables;
+
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Merchant> merchants;
 
@@ -40,6 +43,8 @@ public class ResourceManager {
 		this.questItems = new ArrayList<QuestItem>();
 		this.weapons = new ArrayList<Weapon>();
 
+		lootTables = new ArrayList<LootTable>();
+
 		this.enemies = new ArrayList<Enemy>();
 		this.merchants = new ArrayList<Merchant>();
 
@@ -49,6 +54,8 @@ public class ResourceManager {
 		this.loadNotes();
 		this.loadOthers();
 		this.loadQuestItems();
+
+		this.loadLootTables();
 
 		this.loadEnemies();
 		this.loadMerchants();
@@ -284,6 +291,33 @@ public class ResourceManager {
 		return null;
 	}
 
+	private void loadLootTables() {
+		try {
+
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\LootTables.json");
+			JSONParser parser = new JSONParser();
+			JSONObject jsonNPCs = (JSONObject) parser.parse(fileReader);
+
+			Set<String> labels = jsonNPCs.keySet();
+
+			for (String keyName : labels) {
+				JSONObject jsonNPC = (JSONObject) jsonNPCs.get(keyName);
+
+				LootTable lootTable = new LootTable(jsonNPC.get("label").toString(), (String[]) jsonNPC.get("items"),
+						Integer.valueOf(jsonNPC.get("gold").toString()));
+
+				this.lootTables.add(lootTable);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public ArrayList<LootTable> getLootTables() {
+		return this.lootTables;
+	}
+
 	@SuppressWarnings("unchecked")
 	private void loadEnemies() {
 		try {
@@ -361,4 +395,5 @@ public class ResourceManager {
 	public ArrayList<Enemy> getEnemies() {
 		return this.enemies;
 	}
+
 }

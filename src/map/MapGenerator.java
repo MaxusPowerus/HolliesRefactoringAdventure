@@ -3,6 +3,7 @@ package map;
 import java.util.Random;
 
 import basic.Config;
+import basic.GameManager;
 import utilities.Challenge;
 import utilities.Coordinate;
 
@@ -277,7 +278,10 @@ public class MapGenerator {
 		generateChallenge();
 		// System.out.println("Container Done");
 
-		// map.printMapDebug("");
+		String out;
+		int a = GameManager.getInstance().getResourceManager().getLootTables().size();
+		System.out.println(a);
+		map.printMapDebug("");
 
 		return map;
 	}

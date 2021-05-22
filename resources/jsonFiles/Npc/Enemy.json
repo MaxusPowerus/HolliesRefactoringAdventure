@@ -10,6 +10,7 @@
             },
 			"Rabbit": {
                 "label": "Feldhase", "prefix": "ein", "damage": 0, "health": 5, "st": 1, "pe": 6, "en": 2, "ch": 8, "in": 1, "ag": 5, "lk": 3, "biom": "meadow","xp": 5 ,
+                
                 "items": {
                     "Flesh": { "amount": 1 }
                 }
