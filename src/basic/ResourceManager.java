@@ -2,10 +2,9 @@ package basic;
 
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -291,6 +290,7 @@ public class ResourceManager {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	private void loadLootTables() {
 		try {
 
@@ -303,8 +303,16 @@ public class ResourceManager {
 			for (String keyName : labels) {
 				JSONObject jsonNPC = (JSONObject) jsonNPCs.get(keyName);
 
-				LootTable lootTable = new LootTable(jsonNPC.get("label").toString(), (String[]) jsonNPC.get("items"),
-						Integer.valueOf(jsonNPC.get("gold").toString()));
+				ArrayList<Item> items = new ArrayList<Item>();
+
+				JSONArray itemList = (JSONArray) jsonNPC.get("items");
+
+				itemList.forEach((itemName) -> {
+					Item item = this.getItemByUniqueName(itemName.toString()).clone();
+					items.add(item);
+				});
+
+				LootTable lootTable = new LootTable(keyName, items, Integer.valueOf(jsonNPC.get("gold").toString()));
 
 				this.lootTables.add(lootTable);
 			}
@@ -341,17 +349,9 @@ public class ResourceManager {
 
 				Inventory enemyInv = new Inventory();
 
-				JSONObject enemiesItemList = (JSONObject) jsonNPC.get("items");
-				Set<Map> enemiesItems = enemiesItemList.keySet();
-				Iterator<Map> enemiesItemItr = enemiesItems.iterator();
-
-				for (int i = 0; i < enemiesItemList.size(); i++) {
-					JSONObject enemiesItem = (JSONObject) enemiesItemList.get(enemiesItemItr.next());
-
-					Item item = this.getItemByUniqueName(enemiesItems.toArray()[i].toString());
-					item.setCount(Integer.valueOf(enemiesItem.get("amount").toString()));
-					enemyInv.add(item.clone());
-				}
+				String lootTable = jsonNPC.get("lootTable").toString();
+				LootTable table = this.getLootTableByName(lootTable);
+				enemyInv.add(table.getItems(), table.getGold());
 
 				enemy.setInventory(enemyInv);
 
@@ -394,6 +394,14 @@ public class ResourceManager {
 
 	public ArrayList<Enemy> getEnemies() {
 		return this.enemies;
+	}
+
+	public LootTable getLootTableByName(String name) {
+		for (LootTable table : this.lootTables) {
+			if (table.getName().equalsIgnoreCase(name))
+				return table;
+		}
+		return null;
 	}
 
 }
