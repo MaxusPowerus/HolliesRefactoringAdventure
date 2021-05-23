@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.font.TextAttribute;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -32,11 +34,13 @@ public class InventoryItemHover implements MouseListener {
 	private JPanel itemPanel;
 	private GameManager gameManager;
 	private Item item;
+	boolean buy;
 
-	public InventoryItemHover(JPanel itemPanel, GameManager gameManager, Item item) {
+	public InventoryItemHover(JPanel itemPanel, GameManager gameManager, Item item, boolean buy) {
 		this.itemPanel = itemPanel;
 		this.gameManager = gameManager;
 		this.item = item;
+		this.buy = buy;
 	}
 
 	@Override
@@ -54,6 +58,7 @@ public class InventoryItemHover implements MouseListener {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		this.gameManager.getGuiManager().getLeftInfoContentPanel().removeAll();
@@ -91,10 +96,23 @@ public class InventoryItemHover implements MouseListener {
 		itemInfoPanel.setLayout(new BoxLayout(itemInfoPanel, BoxLayout.Y_AXIS));
 
 		JLabel name = new JLabel(item.getName());
-		name.setFont(new Font("Dialog", Font.BOLD, 16));
-		name.setForeground(Color.decode("#A33E3C"));
+		Font headlineFont = new Font("Dialog", Font.BOLD, 16);
+		Map headlineAttributes = headlineFont.getAttributes();
+		headlineAttributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		name.setFont(headlineFont.deriveFont(headlineAttributes));
+//		name.setForeground(Color.decode("#A33E3C"));
 		name.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
 		itemInfoPanel.add(name);
+
+		if (buy) {
+			Item hasItem = gameManager.getPlayer().getInventory().getItem(item);
+			int itemCount = 0;
+			if (hasItem != null)
+				itemCount = hasItem.getCount();
+			JLabel hasAmount = new JLabel("<html><i>Du besitzt " + itemCount + "</i></html>");
+			hasAmount.setFont(new Font("Dialog", Font.PLAIN, 14));
+			itemInfoPanel.add(hasAmount);
+		}
 
 		JLabel value = new JLabel("<html><b>Wert:</b> " + item.getValue() + " Gold</html>");
 		value.setFont(new Font("Dialog", Font.PLAIN, 14));

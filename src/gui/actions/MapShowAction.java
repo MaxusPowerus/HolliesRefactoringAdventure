@@ -24,6 +24,8 @@ public class MapShowAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		this.gameManager.getGuiManager().getOpenInvButton().setEnabled(false);
+		this.gameManager.getGuiManager().getOpenInvButton().setText("Lade...");
 		initialize();
 	}
 
@@ -34,13 +36,17 @@ public class MapShowAction implements ActionListener {
 
 		this.gameManager.getGuiManager().getOpenInvButton().setText("Inventar");
 		this.gameManager.getGuiManager().getOpenInvButton().removeActionListener(this);
-		this.gameManager.getGuiManager().getOpenInvButton()
-				.addActionListener(new InventoryShowAction(this.gameManager));
+		this.gameManager.getGuiManager().getOpenInvButton().setEnabled(true);
+		this.gameManager.getGuiManager().getOpenInvButton().addActionListener(
+				new InventoryShowAction(this.gameManager, this.gameManager.getPlayer().getInventory()));
 
 		this.gameManager.getGuiManager().getLeftPanelHeadline().setText("Map");
+		this.gameManager.getGuiManager().getOpenInvButton().setVisible(true);
 
+		this.gameManager.getGuiManager().getLeftContentPanel().setBackground(Color.BLACK);
+		this.gameManager.getGuiManager().getMapPanel().setBackground(Color.BLACK);
 		this.gameManager.getGuiManager().getMapPanel()
-				.setLayout(new GridLayout(Config.MAP_SIZEX, Config.MAP_SIZEY, 0, 0));
+				.setLayout(new GridLayout(Config.MAP_SIZEX, Config.MAP_SIZEY, 1, 1));
 
 		// generate when not done
 		if (this.gameManager.getGuiManager().getMapPanel().getComponentCount() == 0) {
@@ -62,8 +68,6 @@ public class MapShowAction implements ActionListener {
 						p.setBackground(Color.decode("#16b91e"));
 					}
 
-					p.setLayout(new GridLayout(1, 1));
-
 					if (this.gameManager.getPlayer().getCurrentMapField().getCoordinate()
 							.isEqual(field.getCoordinate())) {
 						p.setBackground(Color.RED);
@@ -81,6 +85,10 @@ public class MapShowAction implements ActionListener {
 	}
 
 	public void update() {
+		this.update(false);
+	}
+
+	public void update(boolean show) {
 		for (Component p : this.gameManager.getGuiManager().getMapPanel().getComponents()) {
 			String name = p.getName();
 			String[] splitter = name.split(":");
@@ -106,6 +114,10 @@ public class MapShowAction implements ActionListener {
 			if (this.gameManager.getPlayer().getCurrentMapField().getCoordinate().isEqual(field.getCoordinate())) {
 				p.setBackground(Color.RED);
 			}
+		}
+
+		if (show) {
+
 		}
 	}
 

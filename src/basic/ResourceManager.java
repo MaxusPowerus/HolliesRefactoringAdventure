@@ -1,6 +1,7 @@
 package basic;
 
 import java.io.FileReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -73,8 +74,9 @@ public class ResourceManager {
 			for (String keyName : labels) {
 				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
 
-				Weapon item = new Weapon(keyName, jsonItem.get("label").toString(),
-						Integer.valueOf(jsonItem.get("damage").toString()),
+				String label = new String(jsonItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
+
+				Weapon item = new Weapon(keyName, label, Integer.valueOf(jsonItem.get("damage").toString()),
 						Integer.valueOf(jsonItem.get("value").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()));
 
@@ -98,8 +100,9 @@ public class ResourceManager {
 			for (String keyName : labels) {
 				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
 
-				Food item = new Food(keyName, jsonItem.get("label").toString(),
-						Integer.valueOf(jsonItem.get("energy").toString()),
+				String label = new String(jsonItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
+
+				Food item = new Food(keyName, label, Integer.valueOf(jsonItem.get("energy").toString()),
 						Integer.valueOf(jsonItem.get("value").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()));
 
@@ -124,8 +127,9 @@ public class ResourceManager {
 			for (String keyName : labels) {
 				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
 
-				Outfit item = new Outfit(keyName, jsonItem.get("label").toString(),
-						Integer.valueOf(jsonItem.get("armor").toString()),
+				String label = new String(jsonItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
+
+				Outfit item = new Outfit(keyName, label, Integer.valueOf(jsonItem.get("armor").toString()),
 						Integer.valueOf(jsonItem.get("value").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()),
 						Integer.valueOf(jsonItem.get("st").toString()), Integer.valueOf(jsonItem.get("pe").toString()),
@@ -154,7 +158,9 @@ public class ResourceManager {
 			for (String keyName : labels) {
 				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
 
-				Note item = new Note(keyName, jsonItem.get("label").toString(), jsonItem.get("text").toString(),
+				String label = new String(jsonItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
+
+				Note item = new Note(keyName, label, jsonItem.get("text").toString(),
 						Integer.valueOf(jsonItem.get("value").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()));
 
@@ -179,7 +185,9 @@ public class ResourceManager {
 			for (String keyName : labels) {
 				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
 
-				Other item = new Other(keyName, jsonItem.get("label").toString(), jsonItem.get("info").toString(),
+				String label = new String(jsonItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
+
+				Other item = new Other(keyName, label, jsonItem.get("info").toString(),
 						Integer.valueOf(jsonItem.get("value").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()));
 
@@ -203,8 +211,10 @@ public class ResourceManager {
 			for (String keyName : labels) {
 				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
 
-				QuestItem item = new QuestItem(keyName, jsonItem.get("label").toString(),
-						jsonItem.get("info").toString(), Integer.valueOf(jsonItem.get("value").toString()),
+				String label = new String(jsonItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
+
+				QuestItem item = new QuestItem(keyName, label, jsonItem.get("info").toString(),
+						Integer.valueOf(jsonItem.get("value").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()));
 
 				this.questItems.add(item);
@@ -339,7 +349,9 @@ public class ResourceManager {
 			for (String keyName : labels) {
 				JSONObject jsonNPC = (JSONObject) jsonNPCs.get(keyName);
 
-				Enemy enemy = new Enemy(jsonNPC.get("label").toString(), jsonNPC.get("prefix").toString(),
+				String label = new String(jsonNPC.get("label").toString().getBytes(), StandardCharsets.UTF_8);
+
+				Enemy enemy = new Enemy(label, jsonNPC.get("prefix").toString(),
 						Double.valueOf(jsonNPC.get("damage").toString()),
 						Double.valueOf(jsonNPC.get("health").toString()), Integer.valueOf(jsonNPC.get("st").toString()),
 						Integer.valueOf(jsonNPC.get("pe").toString()), Integer.valueOf(jsonNPC.get("en").toString()),
@@ -376,7 +388,9 @@ public class ResourceManager {
 			for (String keyName : labels) {
 				JSONObject jsonNPC = (JSONObject) jsonNPCs.get(keyName);
 
-				Merchant merchant = new Merchant(jsonNPC.get("label").toString(), jsonNPC.get("prefix").toString(),
+				String label = new String(jsonNPC.get("label").toString().getBytes(), StandardCharsets.UTF_8);
+
+				Merchant merchant = new Merchant(label, jsonNPC.get("prefix").toString(),
 						jsonNPC.get("biom").toString(), jsonNPC.get("type").toString(),
 						Integer.valueOf(jsonNPC.get("size").toString()));
 

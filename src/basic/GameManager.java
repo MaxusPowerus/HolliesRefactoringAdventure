@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import entities.Enemy;
+import entities.Merchant;
 import entities.Player;
 import gui.ActionPanel;
 import gui.GUIHelper;
@@ -18,9 +19,11 @@ import gui.WorldInfoPanel;
 import gui.actions.InventoryShowAction;
 import gui.actions.MapShowAction;
 import gui.buttons.AttackButton;
+import gui.buttons.BuyButton;
 import gui.buttons.FleeButton;
 import gui.buttons.InspectButton;
 import gui.buttons.LootButton;
+import gui.buttons.SellButton;
 import map.Biom;
 import map.Map;
 import map.MapGenerator;
@@ -69,7 +72,7 @@ public class GameManager {
 		new MapShowAction(this).initialize();
 
 		// add inv handler
-		this.guiManager.getOpenInvButton().addActionListener(new InventoryShowAction(this));
+		this.guiManager.getOpenInvButton().addActionListener(new InventoryShowAction(this, player.getInventory()));
 
 		this.execMainLogic();
 	}
@@ -144,7 +147,15 @@ public class GameManager {
 
 				break;
 			case 2:
-				this.guiManager.addFieldInfo("Du hast einen Händler entdeckt");
+				Merchant merchant = (Merchant) challenge.getNpc();
+				this.guiManager.addFieldInfo("<b>" + merchant.toString()
+						+ "</b> ist erschienen. Möchtest du mit ihm einen Handel eingehen?");
+
+				BuyButton buyButton = new BuyButton(challenge, player, this);
+				this.guiManager.getActionButtonPanel().add(buyButton);
+
+				SellButton sellButton = new SellButton(challenge, player, this);
+				this.guiManager.getActionButtonPanel().add(sellButton);
 				break;
 			default:
 				this.guiManager.addFieldInfo(

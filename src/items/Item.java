@@ -71,7 +71,15 @@ public class Item {
 		return value;
 	}
 
-	public int getSpecificValue(Player player) {
+	public int getSpecificBuyValue(Player player) {
+		double specificValue = this.value;
+		double fac = player.getSkillSet().getSkillValue(Skill.CHARISMA);
+		fac = (fac * 2) / 10;
+		specificValue *= fac;
+		return (int) specificValue;
+	}
+
+	public int getSpecificSellValue(Player player) {
 		double specificValue = this.value;
 		double fac = player.getSkillSet().getSkillValue(Skill.CHARISMA);
 		fac = (fac * 2) / 10;
@@ -95,5 +103,10 @@ public class Item {
 		item.setCount(this.count);
 		item.setDiscount(this.discount);
 		return item;
+	}
+
+	@Override
+	public String toString() {
+		return this.name;
 	}
 }

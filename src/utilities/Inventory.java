@@ -64,7 +64,7 @@ public class Inventory {
 
 	}
 
-	private Item getItem(Item item) {
+	public Item getItem(Item item) {
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i).getUniqueName() == item.getUniqueName())
 				return items.get(i);
