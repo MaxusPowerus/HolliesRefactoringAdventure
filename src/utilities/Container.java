@@ -38,13 +38,17 @@ public class Container {
 				}
 				break;
 			case "Geldbeutel":
-				inventory.addGold(Randy.nextInt(100));
+				inventory.addGold(Randy.nextInt(20));
 				break;
 			case "Leiche":
-				Outfit outfit = GameManager.getInstance().getResourceManager().getOutfits()
-						.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getOutfits().size())));
-				inventory.add(outfit.clone());
-				inventory.addGold(Randy.nextInt(100));
+				String[] types = { " eines Vagabunden", " eines Kaufmanns", " eines Söldners" };
+				String[] lootTabelsNames = { "homeless", "trader", "mercenary" };
+				int littleRandy2 = Randy.nextInt(types.length);
+				System.out.println("LR:" + littleRandy2);
+				this.name = this.name + types[littleRandy2];
+				inventory.add(GameManager.getInstance().getResourceManager()
+						.getLootTableByName(lootTabelsNames[littleRandy2]));
+
 				break;
 			case "Kühlschrank":
 				int spawnChance = Randy.nextInt(101);

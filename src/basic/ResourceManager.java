@@ -54,7 +54,7 @@ public class ResourceManager {
 		this.loadOthers();
 		this.loadQuestItems();
 
-		// this.loadLootTables();
+		this.loadLootTables();
 
 		this.loadEnemies();
 		this.loadMerchants();
