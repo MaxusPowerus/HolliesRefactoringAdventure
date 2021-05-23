@@ -16,7 +16,6 @@ public class Merchant extends NPC {
 		super(name, prefix, biom);
 		inventory = new Inventory();
 		this.type = type;
-		System.out.println(type);
 
 		Random Randy = new Random();
 

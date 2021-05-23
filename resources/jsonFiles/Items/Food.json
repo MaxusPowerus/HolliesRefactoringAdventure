@@ -4,5 +4,7 @@
     "Bread": { "label": "Brot", "energy": 25, "value": 5, "chance": 95},
     "Apple": { "label": "Apfel", "energy": 5, "value": 3, "chance": 95},
     "Beer": {"label": "Bier", "energy": 10, "value": 5, "chance": 75}, 
-    "Wine": {"label": "Wein", "energy": 10, "value": 10, "chance": 25}
+    "Wine": {"label": "Wein", "energy": 10, "value": 10, "chance": 25},
+	
+    "RaspberryJelly": {"label": "Himbeergelee", "energy": 50, "value": 15, "chance": 0}
 }

@@ -2,7 +2,9 @@ package entities;
 
 public class DialogLine {
 	String npcLine;
-	DialogLine nextLine;
+
+	String answer1;
+	DialogLine nextLine1;
 
 	public DialogLine() {
 

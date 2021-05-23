@@ -6,8 +6,10 @@ import entities.Player;
 import items.Item;
 
 public class EventSolution {
+	private String solutionTry;
 	private String success;
 	private String failure;
+
 	private Skill requiredSkill;
 	private int requiredSkillValue;
 	private ArrayList<Item> requiredItems;
@@ -15,11 +17,14 @@ public class EventSolution {
 	private boolean needItemPermanet;
 	private int rewardXp;
 	private ArrayList<Item> rewardItems;
+	private int rewardGold;
+	private int takeDamage;
 
-	public EventSolution(String success, String failure, Skill requiredSkill, int requiredSkillValue,
-			String[] requiredItems, boolean needOnlyOneItem, boolean needItemPermanet, int rewardXp,
-			ArrayList<Item> rewardItems) {
+	public EventSolution(String solutionTry, String success, String failure, Skill requiredSkill,
+			int requiredSkillValue, String[] requiredItems, boolean needOnlyOneItem, boolean needItemPermanet,
+			int rewardXp, ArrayList<Item> rewardItems, int rewardGold, int takeDamage) {
 
+		this.solutionTry = solutionTry;
 		this.success = success;
 		this.failure = failure;
 		this.requiredSkill = requiredSkill;
@@ -29,6 +34,18 @@ public class EventSolution {
 		this.needItemPermanet = needItemPermanet;
 		this.rewardXp = rewardXp;
 		this.rewardItems = rewardItems;
+		this.rewardGold = rewardGold;
+		this.takeDamage = takeDamage;
+	}
+
+	public void rewardPlayer(Player player) {
+		player.getExperience().addXp(rewardXp);
+		player.getInventory().add(rewardItems, rewardGold);
+
+	}
+
+	public void punishPlayer(Player player) {
+		player.setHealth(player.getHealth() - takeDamage);
 	}
 
 	public boolean tryIt(Player player) {
