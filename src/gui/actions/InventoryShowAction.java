@@ -57,6 +57,7 @@ public class InventoryShowAction implements ActionListener {
 		this.gameManager.getGuiManager().getOpenInvButton().removeActionListener(this);
 		this.gameManager.getGuiManager().getOpenInvButton().addActionListener(new MapShowAction(this.gameManager));
 
+		this.gameManager.getGuiManager().getLeftContentPanel().setBackground(Color.WHITE);
 		this.gameManager.getGuiManager().getLeftPanelHeadline().setText("Inventar");
 
 		JTabbedPane inventoryTabPane = new JTabbedPane(JTabbedPane.TOP);

@@ -39,8 +39,10 @@ public class MapShowAction implements ActionListener {
 
 		this.gameManager.getGuiManager().getLeftPanelHeadline().setText("Map");
 
+		this.gameManager.getGuiManager().getLeftContentPanel().setBackground(Color.BLACK);
+		this.gameManager.getGuiManager().getMapPanel().setBackground(Color.BLACK);
 		this.gameManager.getGuiManager().getMapPanel()
-				.setLayout(new GridLayout(Config.MAP_SIZEX, Config.MAP_SIZEY, 0, 0));
+				.setLayout(new GridLayout(Config.MAP_SIZEX, Config.MAP_SIZEY, 1, 1));
 
 		// generate when not done
 		if (this.gameManager.getGuiManager().getMapPanel().getComponentCount() == 0) {
@@ -61,8 +63,6 @@ public class MapShowAction implements ActionListener {
 					} else if (field.getBiom() == Biom.MEADOW) {
 						p.setBackground(Color.decode("#16b91e"));
 					}
-
-					p.setLayout(new GridLayout(1, 1));
 
 					if (this.gameManager.getPlayer().getCurrentMapField().getCoordinate()
 							.isEqual(field.getCoordinate())) {

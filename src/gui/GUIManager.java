@@ -22,6 +22,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import basic.Config;
 import gui.actions.NavigationButtonAction;
+import gui.actions.ResizeAction;
 import map.Direction;
 
 public class GUIManager {
@@ -92,6 +93,7 @@ public class GUIManager {
 		frame.setTitle(Config.GAME_TITLE);
 		frame.setBounds(100, 100, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addComponentListener(new ResizeAction(this));
 
 		leftMainPanel = new JPanel();
 		leftMainPanel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
@@ -250,16 +252,17 @@ public class GUIManager {
 		leftContentPanel.setBackground(Color.WHITE);
 		GroupLayout gl_leftMainPanel = new GroupLayout(leftMainPanel);
 		gl_leftMainPanel.setHorizontalGroup(gl_leftMainPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(leftPanelHeadline, GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
-				.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE));
+				.addComponent(leftPanelHeadline, GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+				.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE));
 		gl_leftMainPanel.setVerticalGroup(gl_leftMainPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_leftMainPanel.createSequentialGroup()
 						.addComponent(leftPanelHeadline, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)));
+						.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(leftContentPanel, GroupLayout.PREFERRED_SIZE, 545, GroupLayout.PREFERRED_SIZE)));
 		leftContentPanel.setLayout(null);
 
 		mapPanel = new JPanel();
+		mapPanel.setBorder(null);
 		mapPanel.setBackground(Color.WHITE);
 		mapPanel.setBounds(0, 0, 561, 537);
 		leftContentPanel.add(mapPanel);
