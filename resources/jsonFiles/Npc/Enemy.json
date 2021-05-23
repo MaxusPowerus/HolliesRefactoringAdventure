@@ -1,6 +1,6 @@
 {
   "AngryCat":{
-    "label":"wütende Katze",
+    "label":"wÃ¼tende Katze",
     "prefix":"eine",
     "damage":5,
     "health":15,
@@ -80,7 +80,7 @@
     "lootTable":"basicEnemy"
   },
   "CavetTroll":{
-    "label":"Höhlentroll",
+    "label":"HÃ¶hlentroll",
     "prefix":"ein",
     "damage":12,
     "health":30,

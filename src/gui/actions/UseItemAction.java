@@ -30,8 +30,8 @@ public class UseItemAction implements ActionListener {
 			player.getInventory().remove(item);
 
 			// update inventory when opened
-			if (this.gameManager.getGuiManager().getLeftPanelHeadline().getText() == "Inventar") {
-				new InventoryShowAction(this.gameManager).initialize();
+			if (this.gameManager.getGuiManager().getLeftPanelHeadline().getText().contains("Inventar")) {
+				new InventoryShowAction(this.gameManager, this.gameManager.getPlayer().getInventory()).initialize();
 			}
 		} else if (this.item instanceof Weapon) {
 			if (player.isWeaponEquipped() && player.isEquipped(this.item)) {
@@ -48,7 +48,7 @@ public class UseItemAction implements ActionListener {
 		}
 
 		PlayerInfoPanel.update();
-		new InventoryShowAction(this.gameManager).initialize();
+		new InventoryShowAction(this.gameManager, this.gameManager.getPlayer().getInventory()).initialize();
 	}
 
 }

@@ -2,9 +2,7 @@ package entities;
 
 import java.util.Random;
 
-import basic.GameManager;
 import items.Item;
-import items.Weapon;
 import utilities.Inventory;
 
 public class Merchant extends NPC {
@@ -23,13 +21,13 @@ public class Merchant extends NPC {
 	}
 
 	public boolean buy(Player player, Item item) {
-		if (player.getInventory().getGold() >= item.getSpecificValue(player)) {
+		if (player.getInventory().getGold() >= item.getSpecificBuyValue(player)) {
 
 			player.getInventory().add(item);
 			this.getInventory().remove(item);
 
-			player.getInventory().removeGold(item.getSpecificValue(player));
-			this.getInventory().addGold(item.getSpecificValue(player));
+			player.getInventory().removeGold(item.getSpecificBuyValue(player));
+			this.getInventory().addGold(item.getSpecificBuyValue(player));
 
 			return true;
 		} else {
@@ -38,13 +36,13 @@ public class Merchant extends NPC {
 	}
 
 	public boolean sell(Player player, Item item) {
-		if (this.getInventory().getGold() >= item.getSpecificValue(player)) {
+		if (this.getInventory().getGold() >= item.getSpecificSellValue(player)) {
 
 			this.getInventory().add(item);
 			player.getInventory().remove(item);
 
-			this.getInventory().removeGold(item.getSpecificValue(player));
-			player.getInventory().addGold(item.getSpecificValue(player));
+			this.getInventory().removeGold(item.getSpecificSellValue(player));
+			player.getInventory().addGold(item.getSpecificSellValue(player));
 
 			return true;
 		} else {

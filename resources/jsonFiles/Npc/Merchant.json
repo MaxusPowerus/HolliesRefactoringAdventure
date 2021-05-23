@@ -1,13 +1,13 @@
 {
 			"Blacksmith": {
                 "label": "Schmied",
-                "prefix": "eine", "biom": "all",
+                "prefix": "ein", "biom": "all",
                 "type": "blackSmith",
                 "size": 5
             },
 			"Tailor": {
-                "label": "Schmied",
-                "prefix": "eine", "biom": "all",
+                "label": "Schneider",
+                "prefix": "ein", "biom": "all",
                 "type": "tailor",
                 "size": 5
             }

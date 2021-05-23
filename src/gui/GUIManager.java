@@ -182,27 +182,30 @@ public class GUIManager {
 		JPanel navigationPanel = new JPanel();
 		navigationPanel.setBackground(Color.WHITE);
 		GroupLayout gl_actionPanel = new GroupLayout(actionPanel);
-		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_actionPanel
-				.createSequentialGroup()
-				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_actionPanel.createSequentialGroup().addGap(10).addComponent(openInvButton)
-								.addPreferredGap(ComponentPlacement.RELATED, 273, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING,
-								gl_actionPanel.createSequentialGroup().addContainerGap()
+		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_actionPanel.createSequentialGroup()
+						.addGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_actionPanel.createSequentialGroup().addGap(10).addComponent(openInvButton)
+										.addPreferredGap(ComponentPlacement.RELATED, 305, Short.MAX_VALUE))
+								.addGroup(gl_actionPanel.createSequentialGroup().addContainerGap()
 										.addComponent(navigationPanel, GroupLayout.PREFERRED_SIZE,
 												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addGap(114)))
-				.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
-				.addContainerGap()));
-		gl_actionPanel.setVerticalGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING).addGroup(gl_actionPanel
-				.createSequentialGroup().addContainerGap()
-				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addComponent(openInvButton)
-						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
-				.addContainerGap(104, Short.MAX_VALUE))
-				.addGroup(gl_actionPanel
-						.createSequentialGroup().addContainerGap(84, Short.MAX_VALUE).addComponent(navigationPanel,
-								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGap(46)));
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 278, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap()));
+		gl_actionPanel.setVerticalGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_actionPanel.createSequentialGroup().addContainerGap(84, Short.MAX_VALUE)
+						.addComponent(navigationPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addGap(46))
+				.addGroup(Alignment.LEADING,
+						gl_actionPanel.createSequentialGroup().addContainerGap()
+								.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
+										.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 140,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(openInvButton))
+								.addContainerGap(104, Short.MAX_VALUE)));
 		navigationPanel.setLayout(new GridLayout(3, 3, 0, 0));
 
 		JLabel label = new JLabel("");
@@ -268,7 +271,7 @@ public class GUIManager {
 		leftContentPanel.add(mapPanel);
 
 		inventoryPanel = new JPanel();
-		inventoryPanel.setBackground(Color.RED);
+		inventoryPanel.setBackground(Color.WHITE);
 		inventoryPanel.setBounds(0, 0, 561, 537);
 		leftContentPanel.add(inventoryPanel);
 		leftMainPanel.setLayout(gl_leftMainPanel);
@@ -608,6 +611,12 @@ public class GUIManager {
 	}
 
 	public void addFieldInfo(String info) {
+
+		if (this.fieldInfos.getComponents().length > 10) {
+			this.fieldInfos.remove(this.fieldInfos.getComponents()[0]);
+			((JLabel) this.fieldInfos.getComponents()[0]).setText("...");
+		}
+
 		JLabel label = new JLabel("<html>" + info + "</html>");
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("Dialog", Font.PLAIN, 16));
