@@ -44,7 +44,6 @@ public class Container {
 				String[] types = { " eines Vagabunden", " eines Kaufmanns", " eines Söldners" };
 				String[] lootTabelsNames = { "homeless", "trader", "mercenary" };
 				int littleRandy2 = Randy.nextInt(types.length);
-				System.out.println("LR:" + littleRandy2);
 				this.name = this.name + types[littleRandy2];
 				inventory.add(GameManager.getInstance().getResourceManager()
 						.getLootTableByName(lootTabelsNames[littleRandy2]));

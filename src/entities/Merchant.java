@@ -16,19 +16,10 @@ public class Merchant extends NPC {
 		super(name, prefix, biom);
 		inventory = new Inventory();
 		this.type = type;
+		System.out.println(type);
 
 		Random Randy = new Random();
 
-		switch (type) {
-		case "Blacksmith":
-			for (int i = 0; i < size * 3; i++) {
-				Weapon weapon = GameManager.getInstance().getResourceManager().getWeapons()
-						.get(Randy.nextInt((GameManager.getInstance().getResourceManager().getWeapons().size())));
-				inventory.add(weapon.clone());
-				inventory.addGold(Randy.nextInt(100));
-			}
-			break;
-		}
 	}
 
 	public boolean buy(Player player, Item item) {
