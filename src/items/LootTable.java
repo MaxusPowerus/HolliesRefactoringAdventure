@@ -3,15 +3,12 @@ package items;
 import java.util.ArrayList;
 import java.util.Random;
 
-import basic.GameManager;
-
 public class LootTable {
 	private ArrayList<Item> items;
 	private String name;
 	private int gold;
 
-	public LootTable(String name, String[] itemNames, int gold) {
-		items = new ArrayList<Item>();
+	public LootTable(String name, ArrayList<Item> items, int gold) {
 		this.gold = gold;
 		if (gold < 0) {
 			Random Randy = new Random();
@@ -19,9 +16,7 @@ public class LootTable {
 			this.gold = Randy.nextInt(gold * (-1));
 		}
 		this.name = name;
-		for (int i = 0; i < itemNames.length; i++) {
-			items.add(GameManager.getInstance().getResourceManager().getItemByUniqueName(itemNames[i]));
-		}
+		this.items = items;
 	}
 
 	public void fill(Item item) {

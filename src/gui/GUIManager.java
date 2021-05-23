@@ -260,6 +260,7 @@ public class GUIManager {
 		leftContentPanel.setLayout(null);
 
 		mapPanel = new JPanel();
+		mapPanel.setForeground(Color.RED);
 		mapPanel.setBounds(0, 0, 561, 537);
 		leftContentPanel.add(mapPanel);
 

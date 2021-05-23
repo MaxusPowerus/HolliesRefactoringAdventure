@@ -44,7 +44,7 @@ public class Inventory {
 		this.add(items, inventory.getGold());
 	}
 
-	private void add(ArrayList<Item> items, int gold) {
+	public void add(ArrayList<Item> items, int gold) {
 		this.gold += gold;
 		for (int i = 0; i < items.size(); i++) {
 			this.add(items.get(i));
