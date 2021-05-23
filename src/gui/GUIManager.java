@@ -70,8 +70,8 @@ public class GUIManager {
 	private JLabel lblRstungkleidung;
 	private JLabel currentOutfit;
 	private JLabel fieldBackground;
-	private JPanel inventoryPanel;
 	private JPanel mapPanel;
+	private JPanel inventoryPanel;
 
 	public GUIManager() {
 		initialize();
@@ -260,11 +260,12 @@ public class GUIManager {
 		leftContentPanel.setLayout(null);
 
 		mapPanel = new JPanel();
-		mapPanel.setForeground(Color.RED);
+		mapPanel.setBackground(Color.WHITE);
 		mapPanel.setBounds(0, 0, 561, 537);
 		leftContentPanel.add(mapPanel);
 
 		inventoryPanel = new JPanel();
+		inventoryPanel.setBackground(Color.RED);
 		inventoryPanel.setBounds(0, 0, 561, 537);
 		leftContentPanel.add(inventoryPanel);
 		leftMainPanel.setLayout(gl_leftMainPanel);
@@ -484,10 +485,6 @@ public class GUIManager {
 		return leftInfoPanel;
 	}
 
-	public JPanel getMapPanel() {
-		return leftMainPanel;
-	}
-
 	public JPanel getActionPanel() {
 		return actionPanel;
 	}
@@ -594,6 +591,10 @@ public class GUIManager {
 
 	public JPanel getInventoryPanel() {
 		return inventoryPanel;
+	}
+
+	public JPanel getMapPanel() {
+		return mapPanel;
 	}
 
 	public void setNavigationEnabled(boolean enabled) {
