@@ -5,6 +5,7 @@ import java.util.Random;
 
 import basic.GameManager;
 import entities.Enemy;
+import entities.Merchant;
 import entities.NPC;
 import map.Biom;
 
@@ -18,6 +19,7 @@ public class Challenge {
 
 	int containerChance = 0;
 	int enemyChance = 0;
+	int traderChance = 0;
 
 	public Challenge(Biom biom) {
 
@@ -27,29 +29,34 @@ public class Challenge {
 		case MEADOW:
 			containerChance = 100;
 			enemyChance = 100;
+			traderChance = 100;
 			break;
 		case FOREST:
 			containerChance = 100;
 			enemyChance = 100;
+			traderChance = 100;
 			break;
 		case DESERT:
 			containerChance = 100;
 			enemyChance = 100;
+			traderChance = 100;
 			break;
 		case SWAMP:
 			containerChance = 100;
 			enemyChance = 100;
+			traderChance = 100;
 			break;
 		case MOUNTAINS:
 			containerChance = 100;
 			enemyChance = 100;
+			traderChance = 100;
 			break;
 		}
 
-		chooseChallenge(100, containerChance, enemyChance);
+		chooseChallenge(100, containerChance, enemyChance, traderChance);
 	}
 
-	private boolean chooseChallenge(int challangeChance, int containerChance, int enemyChance) {
+	private boolean chooseChallenge(int challangeChance, int containerChance, int enemyChance, int traderChance) {
 		Random Randy = new Random();
 		SpecialRandom Chan = new SpecialRandom();
 
@@ -57,10 +64,10 @@ public class Challenge {
 			return false;
 		}
 
-		int[] challengeTypes = new int[] { containerChance, enemyChance };
+		int[] challengeTypes = new int[] { containerChance, enemyChance, traderChance };
 		this.challengeType = Chan.pickRandom(challengeTypes);
 
-		if (challengeType != 0 && challengeType != 1)
+		if (challengeType != 0 && challengeType != 1 && challengeType != 2)
 			System.out.println("Invalid ChallengeType: " + challengeType);
 
 		switch (challengeType) {
@@ -74,8 +81,8 @@ public class Challenge {
 		// Callenge NPCAngriff
 		case 1:
 			ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-			int length = GameManager.getInstance().getResourceManager().getEnemies().size();
-			for (int i = 0; i < length; i++) {
+			int lengthEnemy = GameManager.getInstance().getResourceManager().getEnemies().size();
+			for (int i = 0; i < lengthEnemy; i++) {
 				if (GameManager.getInstance().getResourceManager().getEnemies().get(i).getBiom() == null
 						|| GameManager.getInstance().getResourceManager().getEnemies().get(i).getBiom() == biom) {
 					enemies.add(GameManager.getInstance().getResourceManager().getEnemies().get(i));
@@ -84,8 +91,22 @@ public class Challenge {
 			npc = enemies.get(Randy.nextInt(enemies.size()));
 
 			break;
+
+		case 2:
+			ArrayList<Merchant> merchants = new ArrayList<Merchant>();
+			int lengthMerchants = GameManager.getInstance().getResourceManager().getMerchants().size();
+			for (int i = 0; i < lengthMerchants; i++) {
+				if (GameManager.getInstance().getResourceManager().getMerchants().get(i).getBiom() == null
+						|| GameManager.getInstance().getResourceManager().getMerchants().get(i).getBiom() == biom) {
+					merchants.add(GameManager.getInstance().getResourceManager().getMerchants().get(i));
+				}
+			}
+			npc = merchants.get(Randy.nextInt(merchants.size()));
+
+			break;
 		}
 		return true;
+
 	}
 
 	public boolean isChallengeCompleted() {

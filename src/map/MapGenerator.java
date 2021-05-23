@@ -278,9 +278,6 @@ public class MapGenerator {
 		generateChallenge();
 		// System.out.println("Container Done");
 
-		String out;
-		int a = GameManager.getInstance().getResourceManager().getLootTables().size();
-		System.out.println(a);
 		map.printMapDebug("");
 
 		return map;

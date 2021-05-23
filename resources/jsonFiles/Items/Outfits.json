@@ -10,7 +10,7 @@
             "NobelDressYellow": {"label": "Feine Kleidung (gelb)", "armor": 0, "value": 30, "chance": 40, "st": 0, "pe": 0, "en": 0, "ch": 3, "in": 0, "ag": 0, "lk": 0},
             "NobelDressBlue": {"label": "Feine Kleidung (blau)", "armor": 0, "value": 30, "chance": 40, "st": 0, "pe": 0, "en": 0, "ch": 3, "in": 0, "ag": 0, "lk": 0},
             "NobelDressGreen": {"label": "Feine Kleidung (grün)", "armor": 0, "value": 30, "chance": 40, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
-            "NormalDressBrown": {"label": "Kleidung (brown)", "armor": 0, "value": 10, "chance": 95, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
+            "NormalDressBrown": {"label": "Kleidung (braun)", "armor": 0, "value": 10, "chance": 95, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
             "NormalDressBeige": {"label": "Kleidung (beige)", "armor": 0, "value": 10, "chance": 95, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 0},
             "rags": {"label": "Lumpen", "armor": 0, "value": 3, "chance": 100, "st": 0, "pe": 0, "en": 0, "ch": 0, "in": 0, "ag": 0, "lk": 1}
         }

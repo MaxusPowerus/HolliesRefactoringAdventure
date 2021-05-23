@@ -380,6 +380,13 @@ public class ResourceManager {
 						jsonNPC.get("biom").toString(), jsonNPC.get("type").toString(),
 						Integer.valueOf(jsonNPC.get("size").toString()));
 
+				Inventory merchantInv = new Inventory();
+
+				String lootTable = jsonNPC.get("type").toString();
+				LootTable table = this.getLootTableByName(lootTable);
+				merchantInv.add(table.getItems(), table.getGold());
+
+				merchant.setInventory(merchantInv);
 				this.merchants.add(merchant);
 			}
 
