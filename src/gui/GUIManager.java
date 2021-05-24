@@ -165,7 +165,7 @@ public class GUIManager {
 
 		fieldInfos = new JPanel();
 		fieldInfos.setBounds(16, 16, 568, 296);
-		fieldInfos.setBackground(new Color(0, 0, 0, 0.3f));
+		fieldInfos.setBackground(new Color(0f, 0f, 0f, 0.4F));
 		fieldInfos.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		fieldInfos.setLayout(new BoxLayout(fieldInfos, BoxLayout.Y_AXIS));
 		fieldInfoPanel.add(fieldInfos);
@@ -619,6 +619,7 @@ public class GUIManager {
 
 		JLabel label = new JLabel("<html>" + info + "</html>");
 		label.setForeground(Color.WHITE);
+		label.setBackground(Color.RED);
 		label.setFont(new Font("Dialog", Font.PLAIN, 16));
 		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 3, 0));
 		this.fieldInfos.add(label);

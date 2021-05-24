@@ -79,6 +79,7 @@ public class EventSolution {
 
 	public void rewardPlayer(Player player) {
 		player.getExperience().addXp(rewardXp);
+		System.out.println(rewardItems.size());
 		player.getInventory().add(rewardItems, rewardGold);
 
 	}
