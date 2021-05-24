@@ -159,7 +159,9 @@ public class InventoryShowAction implements ActionListener {
 				inventoryTabPane.setToolTipTextAt(categoryIndex++, category);
 			}
 
-			inventoryTabPane.setSelectedIndex(this.gameManager.getPlayer().getInventory().getSelectedIndex());
+			if (this.gameManager.getPlayer().getInventory().getSelectedIndex() <= inventoryTabPane.getTabCount()) {
+				inventoryTabPane.setSelectedIndex(this.gameManager.getPlayer().getInventory().getSelectedIndex());
+			}
 			inventoryTabPane.addChangeListener(new ChangeListener() {
 
 				@Override
@@ -246,7 +248,7 @@ public class InventoryShowAction implements ActionListener {
 			// has not enough money
 			if (item.getSpecificBuyValue(gameManager.getPlayer()) > gameManager.getPlayer().getInventory().getGold()) {
 				button.setText("nicht genügend Gold");
-				button.setBackground(Color.decode("#D21C2D"));
+				button.setBackground(Color.decode("#B8B8B8"));
 				button.setForeground(Color.WHITE);
 			} else {
 				button.setText("<html>für <b>" + item.getSpecificBuyValue(gameManager.getPlayer())
@@ -271,7 +273,7 @@ public class InventoryShowAction implements ActionListener {
 			// has not enough money
 			if (item.getSpecificSellValue(gameManager.getPlayer()) > this.merchant.getInventory().getGold()) {
 				button.setText("nicht genügend Gold");
-				button.setBackground(Color.decode("#D21C2D"));
+				button.setBackground(Color.decode("#B8B8B8"));
 				button.setForeground(Color.WHITE);
 			} else {
 				button.setText("<html>für <b>" + item.getSpecificSellValue(gameManager.getPlayer())
@@ -300,7 +302,7 @@ public class InventoryShowAction implements ActionListener {
 			if (item instanceof Weapon) {
 				if (this.gameManager.getPlayer().isEquipped(item)) {
 					button.setText("weglegen");
-					button.setBackground(Color.decode("#D21C2D"));
+					button.setBackground(Color.decode("#ed394a"));
 					button.setForeground(Color.WHITE);
 				} else {
 					button.setText("ausrüsten");
@@ -312,7 +314,7 @@ public class InventoryShowAction implements ActionListener {
 			if (item instanceof Outfit) {
 				if (this.gameManager.getPlayer().isEquipped(item)) {
 					button.setText("ausziehen");
-					button.setBackground(Color.decode("#D21C2D"));
+					button.setBackground(Color.decode("#ed394a"));
 					button.setForeground(Color.WHITE);
 				} else {
 					button.setText("anziehen");

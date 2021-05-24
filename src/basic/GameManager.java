@@ -73,7 +73,6 @@ public class GameManager {
 
 		// add inv handler
 		this.guiManager.getOpenInvButton().addActionListener(new InventoryShowAction(this, player.getInventory()));
-
 		this.execMainLogic();
 	}
 
@@ -83,7 +82,7 @@ public class GameManager {
 		this.guiManager.getActionButtonPanel().removeAll();
 
 		// switch biome
-		this.guiManager.addFieldInfo("Du bist " + player.getCurrentMapField().getBiom().toString() + ":");
+		this.guiManager.addFieldInfo("<i>Du bist " + player.getCurrentMapField().getBiom().toString() + ":</i>");
 
 		String path = "";
 		if (player.getCurrentMapField().getBiom() == Biom.DESERT) {
@@ -121,7 +120,8 @@ public class GameManager {
 			case 0:
 				Container container = challenge.getContainer();
 				if (!container.getFound()) {
-					this.guiManager.addFieldInfo("Du hast <b>" + container.toString() + "</b> gefunden, dursuche sie");
+					this.guiManager.addFieldInfo(
+							"Du hast <b>" + container.toString() + "</b> gefunden. Halte nach Items ausschau.");
 
 					LootButton lootButton = new LootButton(challenge, this, challenge.getContainer().getInventory());
 					this.guiManager.getActionButtonPanel().add(lootButton);
@@ -156,6 +156,9 @@ public class GameManager {
 
 				SellButton sellButton = new SellButton(challenge, player, this);
 				this.guiManager.getActionButtonPanel().add(sellButton);
+				break;
+			case 3:
+
 				break;
 			default:
 				this.guiManager.addFieldInfo(

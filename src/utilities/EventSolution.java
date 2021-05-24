@@ -67,7 +67,7 @@ public class EventSolution {
 
 		if (rewardItems != null) {
 			for (int i = 0; i < requiredItems.size(); i++) {
-				System.out.println("RwardItem " + i + ": " + rewardItems.get(i).getName());
+				System.out.println("RewardItem " + i + ": " + rewardItems.get(i).getName());
 			}
 		} else {
 			System.out.println("RewardItems: >empty<");

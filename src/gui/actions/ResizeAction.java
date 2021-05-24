@@ -14,7 +14,7 @@ public class ResizeAction extends ComponentAdapter {
 	}
 
 	public void componentResized(ComponentEvent e) {
-		System.out.println("w: " + e.getComponent().getWidth() + ", h: " + e.getComponent().getHeight());
+//		System.out.println("w: " + e.getComponent().getWidth() + ", h: " + e.getComponent().getHeight());
 
 		int width = e.getComponent().getWidth();
 		int height = e.getComponent().getHeight();
