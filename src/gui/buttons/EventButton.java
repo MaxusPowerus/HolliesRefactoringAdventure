@@ -2,11 +2,15 @@ package gui.buttons;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 
 import basic.GameManager;
 import entities.Player;
+import gui.GUIHelper;
+import gui.PlayerInfoPanel;
+import items.Item;
 import utilities.Challenge;
 import utilities.EventSolution;
 
@@ -36,12 +40,28 @@ public class EventButton extends JButton implements ActionListener {
 
 		if (this.eventSolution.tryIt(this.player)) {
 			this.gameManager.getGuiManager().addFieldInfo(this.eventSolution.getSuccess());
+
+			int rewardXP = this.eventSolution.getRewardXp();
+			if (rewardXP > 0)
+				this.gameManager.getGuiManager().addFieldInfo("Du erhältst <b>" + rewardXP + " Erfahrungspunkte</b>");
+
+			int rewardGold = this.eventSolution.getRewardGold();
+			if (rewardGold > 0)
+				this.gameManager.getGuiManager().addFieldInfo("Du erhältst <b>" + rewardGold + " Gold</b>");
+
+			ArrayList<Item> rewardItems = this.eventSolution.getRewardItems();
+			if (rewardItems.size() > 0)
+				this.gameManager.getGuiManager().addFieldInfo(
+						"Du erhältst folgende Items: <b>" + GUIHelper.stringifyItemList(rewardItems) + "</b>");
+
 			this.eventSolution.rewardPlayer(this.player);
 		} else {
 			this.gameManager.getGuiManager().addFieldInfo(this.eventSolution.getFailure());
 			this.eventSolution.punishPlayer(this.player);
 		}
+
 		this.challenge.setChallengeCompleted(true);
+		PlayerInfoPanel.update();
 	}
 
 }

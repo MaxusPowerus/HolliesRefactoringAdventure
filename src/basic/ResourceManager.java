@@ -458,7 +458,7 @@ public class ResourceManager {
 
 				ArrayList<Item> rewardItems = new ArrayList<Item>();
 				((JSONArray) jsonItem.get("rewardItems")).forEach((item) -> {
-					requiredItems.add(this.getItemByUniqueName(item.toString()).clone());
+					rewardItems.add(this.getItemByUniqueName(item.toString()).clone());
 				});
 
 				String solutionTry = new String(jsonItem.get("solutionTry").toString().getBytes(),

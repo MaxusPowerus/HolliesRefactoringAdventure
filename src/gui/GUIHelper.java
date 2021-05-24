@@ -1,11 +1,14 @@
 package gui;
 
 import java.awt.Image;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+
+import items.Item;
 
 public class GUIHelper {
 
@@ -39,6 +42,16 @@ public class GUIHelper {
 		} else {
 			System.out.println("[WARN] GUIHelper: Wrong component type");
 		}
+	}
+
+	public static String stringifyItemList(ArrayList<Item> items) {
+		StringBuilder builder = new StringBuilder();
+
+		for (Item item : items) {
+			builder.append(item.getCount() + "x " + item.getName()).append(", ");
+		}
+		return builder.substring(0, builder.toString().lastIndexOf(',') > -1 ? builder.toString().lastIndexOf(',') : 0)
+				.toString();
 	}
 
 }
