@@ -71,10 +71,7 @@ public class ResourceManager {
 		this.loadMerchants();
 
 		this.loadEventSolutions();
-		this.loadEvens();
-
-		eventSolutions.get(0).printParameter();
-		// events.get(0).printParameter();
+		this.loadEvents();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -454,17 +451,23 @@ public class ResourceManager {
 			for (String keyName : labels) {
 				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
 
-				EventSolution eventSolution = new EventSolution(keyName,
+				ArrayList<Item> requiredItems = new ArrayList<Item>();
+				((JSONArray) jsonItem.get("requiredItems")).forEach((item) -> {
+					requiredItems.add(this.getItemByUniqueName(item.toString()).clone());
+				});
 
-						jsonItem.get("solutionTry").toString(), jsonItem.get("success").toString(),
-						jsonItem.get("failure").toString(),
+				ArrayList<Item> rewardItems = new ArrayList<Item>();
+				((JSONArray) jsonItem.get("rewardItems")).forEach((item) -> {
+					requiredItems.add(this.getItemByUniqueName(item.toString()).clone());
+				});
 
+				EventSolution eventSolution = new EventSolution(keyName, jsonItem.get("solutionTry").toString(),
+						jsonItem.get("success").toString(), jsonItem.get("failure").toString(),
 						getSkillByString(jsonItem.get("skill").toString()),
-
-						Integer.valueOf(jsonItem.get("skillValue").toString()), null,
+						Integer.valueOf(jsonItem.get("skillValue").toString()), requiredItems,
 						getBoolByString(jsonItem.get("needOnlyOneItem").toString()),
 						getBoolByString(jsonItem.get("needItemPermanet").toString()),
-						Integer.valueOf(jsonItem.get("rewardXp").toString()), null,
+						Integer.valueOf(jsonItem.get("rewardXp").toString()), rewardItems,
 						Integer.valueOf(jsonItem.get("rewardGold").toString()),
 						Integer.valueOf(jsonItem.get("takeDamage").toString()));
 
@@ -485,7 +488,7 @@ public class ResourceManager {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void loadEvens() {
+	private void loadEvents() {
 		try {
 
 			FileReader fileReader = new FileReader("resources\\jsonFiles\\Events.json");
@@ -497,7 +500,15 @@ public class ResourceManager {
 			for (String keyName : labels) {
 				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
 
-				Event event = new Event(keyName, jsonItem.get("solutionTry").toString(), null);
+				ArrayList<EventSolution> solutions = new ArrayList<EventSolution>();
+
+				JSONArray solutionArray = (JSONArray) jsonItem.get("solutions");
+
+				solutionArray.forEach((solution) -> {
+					solutions.add(this.getEventSolutionByName(solution.toString()));
+				});
+
+				Event event = new Event(keyName, jsonItem.get("task").toString(), solutions);
 
 				this.events.add(event);
 			}

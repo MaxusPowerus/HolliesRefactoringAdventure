@@ -23,7 +23,7 @@ public class EventSolution {
 	private int takeDamage;
 
 	public EventSolution(String name, String solutionTry, String success, String failure, Skill requiredSkill,
-			int requiredSkillValue, String[] requiredItems, boolean needOnlyOneItem, boolean needItemPermanet,
+			int requiredSkillValue, ArrayList<Item> requiredItems, boolean needOnlyOneItem, boolean needItemPermanet,
 			int rewardXp, ArrayList<Item> rewardItems, int rewardGold, int takeDamage) {
 
 		this.name = name;
@@ -32,7 +32,7 @@ public class EventSolution {
 		this.failure = failure;
 		this.requiredSkill = requiredSkill;
 		this.requiredSkillValue = requiredSkillValue;
-		this.requiredItems = getItemsFromStringArrayForArrayList(requiredItems);
+		this.requiredItems = requiredItems;
 		this.needOnlyOneItem = needOnlyOneItem;
 		this.needItemPermanet = needItemPermanet;
 		this.rewardXp = rewardXp;
@@ -127,11 +127,6 @@ public class EventSolution {
 		}
 
 		return true;
-	}
-
-	public ArrayList<Item> getItemsFromStringArrayForArrayList(String[] stringArray) {
-		ArrayList<Item> arrayList = new ArrayList<Item>();
-		return arrayList;
 	}
 
 	public String getSolutionTry() {

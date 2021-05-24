@@ -612,7 +612,7 @@ public class GUIManager {
 
 	public void addFieldInfo(String info) {
 
-		if (this.fieldInfos.getComponents().length > 10) {
+		if (this.fieldInfos.getComponents().length > 8) {
 			this.fieldInfos.remove(this.fieldInfos.getComponents()[0]);
 			((JLabel) this.fieldInfos.getComponents()[0]).setText("...");
 		}
