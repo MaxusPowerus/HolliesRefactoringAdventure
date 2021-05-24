@@ -461,8 +461,12 @@ public class ResourceManager {
 					requiredItems.add(this.getItemByUniqueName(item.toString()).clone());
 				});
 
-				EventSolution eventSolution = new EventSolution(keyName, jsonItem.get("solutionTry").toString(),
-						jsonItem.get("success").toString(), jsonItem.get("failure").toString(),
+				String solutionTry = new String(jsonItem.get("solutionTry").toString().getBytes(),
+						StandardCharsets.UTF_8);
+				String success = new String(jsonItem.get("success").toString().getBytes(), StandardCharsets.UTF_8);
+				String failure = new String(jsonItem.get("failure").toString().getBytes(), StandardCharsets.UTF_8);
+
+				EventSolution eventSolution = new EventSolution(keyName, solutionTry, success, failure,
 						getSkillByString(jsonItem.get("skill").toString()),
 						Integer.valueOf(jsonItem.get("skillValue").toString()), requiredItems,
 						getBoolByString(jsonItem.get("needOnlyOneItem").toString()),
@@ -512,7 +516,9 @@ public class ResourceManager {
 					solutions.add(this.getEventSolutionByName(solution.toString()));
 				});
 
-				Event event = new Event(keyName, jsonItem.get("task").toString(), solutions);
+				String task = new String(jsonItem.get("task").toString().getBytes(), StandardCharsets.UTF_8);
+
+				Event event = new Event(keyName, task, solutions);
 
 				this.events.add(event);
 			}

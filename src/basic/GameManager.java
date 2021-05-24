@@ -20,6 +20,7 @@ import gui.actions.InventoryShowAction;
 import gui.actions.MapShowAction;
 import gui.buttons.AttackButton;
 import gui.buttons.BuyButton;
+import gui.buttons.EventButton;
 import gui.buttons.FleeButton;
 import gui.buttons.InspectButton;
 import gui.buttons.LootButton;
@@ -29,6 +30,8 @@ import map.Map;
 import map.MapGenerator;
 import utilities.Challenge;
 import utilities.Container;
+import utilities.Event;
+import utilities.EventSolution;
 
 public class GameManager {
 
@@ -158,6 +161,19 @@ public class GameManager {
 				this.guiManager.getActionButtonPanel().add(sellButton);
 				break;
 			case 3:
+				Event event = challenge.getEvent();
+				this.guiManager.addFieldInfo(event.getTask());
+
+				int solutionIndex = 1;
+				for (EventSolution solution : event.getEventSolutions()) {
+					this.guiManager
+							.addFieldInfo("<b>Möglichkeit " + solutionIndex + ":</b> " + solution.getSolutionTry());
+
+					EventButton evtButton = new EventButton(solutionIndex, this, challenge, player, solution);
+					this.guiManager.getActionButtonPanel().add(evtButton);
+
+					solutionIndex++;
+				}
 
 				break;
 			default:

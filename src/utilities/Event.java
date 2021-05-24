@@ -2,8 +2,6 @@ package utilities;
 
 import java.util.ArrayList;
 
-import items.Item;
-
 public class Event {
 
 	private String name;
@@ -17,13 +15,12 @@ public class Event {
 		this.solutions = solutions;
 	}
 
-	public ArrayList<Item> getItemsFromStringArrayForArrayList(String[] stringArray) {
-		ArrayList<Item> arrayList = new ArrayList<Item>();
-		return arrayList;
-	}
-
 	public String getName() {
 		return name;
+	}
+
+	public String getTask() {
+		return task;
 	}
 
 	public void printParameter() {
