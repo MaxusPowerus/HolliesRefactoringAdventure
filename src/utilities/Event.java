@@ -32,4 +32,8 @@ public class Event {
 			System.out.println("Solutions " + i + ":" + solutions.get(i).getName());
 		}
 	}
+
+	public ArrayList<EventSolution> getEventSolutions() {
+		return solutions;
+	}
 }
