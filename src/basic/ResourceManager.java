@@ -19,7 +19,10 @@ import items.Other;
 import items.Outfit;
 import items.QuestItem;
 import items.Weapon;
+import utilities.Event;
+import utilities.EventSolution;
 import utilities.Inventory;
+import utilities.Skill;
 
 public class ResourceManager {
 
@@ -35,6 +38,9 @@ public class ResourceManager {
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Merchant> merchants;
 
+	private ArrayList<Event> events;
+	private ArrayList<EventSolution> eventSolutions;
+
 	public ResourceManager() {
 		this.food = new ArrayList<Food>();
 		this.notes = new ArrayList<Note>();
@@ -48,6 +54,10 @@ public class ResourceManager {
 		this.enemies = new ArrayList<Enemy>();
 		this.merchants = new ArrayList<Merchant>();
 
+		this.events = new ArrayList<Event>();
+
+		this.eventSolutions = new ArrayList<EventSolution>();
+
 		this.loadWeapons();
 		this.loadOutfits();
 		this.loadFood();
@@ -59,6 +69,12 @@ public class ResourceManager {
 
 		this.loadEnemies();
 		this.loadMerchants();
+
+		this.loadEventSolutions();
+		this.loadEvens();
+
+		eventSolutions.get(0).printParameter();
+		// events.get(0).printParameter();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -423,6 +439,116 @@ public class ResourceManager {
 				return table;
 		}
 		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	private void loadEventSolutions() {
+		try {
+
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\EventSolutions.json");
+			JSONParser parser = new JSONParser();
+			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
+
+			Set<String> labels = jsonItems.keySet();
+
+			for (String keyName : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
+
+				EventSolution eventSolution = new EventSolution(keyName,
+
+						jsonItem.get("solutionTry").toString(), jsonItem.get("success").toString(),
+						jsonItem.get("failure").toString(),
+
+						getSkillByString(jsonItem.get("skill").toString()),
+
+						Integer.valueOf(jsonItem.get("skillValue").toString()), null,
+						getBoolByString(jsonItem.get("needOnlyOneItem").toString()),
+						getBoolByString(jsonItem.get("needItemPermanet").toString()),
+						Integer.valueOf(jsonItem.get("rewardXp").toString()), null,
+						Integer.valueOf(jsonItem.get("rewardGold").toString()),
+						Integer.valueOf(jsonItem.get("takeDamage").toString()));
+
+				this.eventSolutions.add(eventSolution);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public EventSolution getEventSolutionByName(String name) {
+		for (EventSolution eventSolution : this.eventSolutions) {
+			if (eventSolution.getName().equalsIgnoreCase(name))
+				return eventSolution;
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	private void loadEvens() {
+		try {
+
+			FileReader fileReader = new FileReader("resources\\jsonFiles\\Events.json");
+			JSONParser parser = new JSONParser();
+			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
+
+			Set<String> labels = jsonItems.keySet();
+
+			for (String keyName : labels) {
+				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
+
+				Event event = new Event(keyName, jsonItem.get("solutionTry").toString(), null);
+
+				this.events.add(event);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Event getEventByName(String name) {
+		for (Event event : this.events) {
+			if (event.getName().equalsIgnoreCase(name))
+				return event;
+		}
+		return null;
+	}
+
+	public Skill getSkillByString(String string) {
+		if (string.equalsIgnoreCase("st")) {
+			return Skill.STRENGTH;
+		}
+		if (string.equalsIgnoreCase("pe")) {
+			return Skill.PERCEPTION;
+		}
+		if (string.equalsIgnoreCase("en")) {
+			return Skill.ENDURANCE;
+		}
+		if (string.equalsIgnoreCase("ch")) {
+			return Skill.CHARISMA;
+		}
+		if (string.equalsIgnoreCase("in")) {
+			return Skill.INTELLIGENCE;
+		}
+		if (string.equalsIgnoreCase("ag")) {
+			return Skill.AGILITY;
+		}
+		if (string.equalsIgnoreCase("lk")) {
+			return Skill.LUCK;
+		}
+		return null;
+	}
+
+	public boolean getBoolByString(String string) {
+		if (string.equalsIgnoreCase("true")) {
+			return true;
+		}
+		if (string.equalsIgnoreCase("false")) {
+			return false;
+		}
+
+		return (Boolean) null;
 	}
 
 }

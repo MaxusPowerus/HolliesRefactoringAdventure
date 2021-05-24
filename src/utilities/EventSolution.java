@@ -6,6 +6,8 @@ import entities.Player;
 import items.Item;
 
 public class EventSolution {
+	private String name;
+
 	private String solutionTry;
 	private String success;
 	private String failure;
@@ -20,10 +22,11 @@ public class EventSolution {
 	private int rewardGold;
 	private int takeDamage;
 
-	public EventSolution(String solutionTry, String success, String failure, Skill requiredSkill,
+	public EventSolution(String name, String solutionTry, String success, String failure, Skill requiredSkill,
 			int requiredSkillValue, String[] requiredItems, boolean needOnlyOneItem, boolean needItemPermanet,
 			int rewardXp, ArrayList<Item> rewardItems, int rewardGold, int takeDamage) {
 
+		this.name = name;
 		this.solutionTry = solutionTry;
 		this.success = success;
 		this.failure = failure;
@@ -36,6 +39,41 @@ public class EventSolution {
 		this.rewardItems = rewardItems;
 		this.rewardGold = rewardGold;
 		this.takeDamage = takeDamage;
+	}
+
+	public void printParameter() {
+		System.out.println("solutionTry: " + solutionTry);
+		System.out.println("success: " + success);
+		System.out.println("failure: " + failure);
+		if (requiredSkill != null) {
+			System.out.println(
+					"RequiredSkill: " + requiredSkill.toString() + ", RequiredSkillValue: " + requiredSkillValue);
+		} else {
+			System.out.println("RequiredSkill: " + ">empty< " + ", RequiredSkillValue: " + ">empty<");
+
+		}
+		if (requiredItems != null) {
+			for (int i = 0; i < requiredItems.size(); i++) {
+				System.out.println("RequiredItem " + i + ": " + requiredItems.get(i).getName());
+			}
+		} else {
+			System.out.println("requiredItems: >empty<");
+		}
+
+		System.out.println("needOnlyOneItem: " + needOnlyOneItem);
+		System.out.println("needItemPermanet:" + needItemPermanet);
+
+		System.out.println("rewardXp: " + rewardXp);
+
+		if (rewardItems != null) {
+			for (int i = 0; i < requiredItems.size(); i++) {
+				System.out.println("RwardItem " + i + ": " + rewardItems.get(i).getName());
+			}
+		} else {
+			System.out.println("RewardItems: >empty<");
+		}
+		System.out.println("rewardGold: " + rewardGold);
+		System.out.println("takeDamage: " + takeDamage);
 	}
 
 	public void rewardPlayer(Player player) {
@@ -96,4 +134,55 @@ public class EventSolution {
 		return arrayList;
 	}
 
+	public String getSolutionTry() {
+		return solutionTry;
+	}
+
+	public String getSuccess() {
+		return success;
+	}
+
+	public String getFailure() {
+		return failure;
+	}
+
+	public Skill getRequiredSkill() {
+		return requiredSkill;
+	}
+
+	public int getRequiredSkillValue() {
+		return requiredSkillValue;
+	}
+
+	public ArrayList<Item> getRequiredItems() {
+		return requiredItems;
+	}
+
+	public boolean isNeedOnlyOneItem() {
+		return needOnlyOneItem;
+	}
+
+	public boolean isNeedItemPermanet() {
+		return needItemPermanet;
+	}
+
+	public int getRewardXp() {
+		return rewardXp;
+	}
+
+	public ArrayList<Item> getRewardItems() {
+		return rewardItems;
+	}
+
+	public int getRewardGold() {
+		return rewardGold;
+	}
+
+	public int getTakeDamage() {
+		return takeDamage;
+	}
+
+	public String getName() {
+		return name;
+	}
 }
