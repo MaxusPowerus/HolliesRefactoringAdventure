@@ -7,7 +7,7 @@ import items.Item;
 
 public class EventSolution {
 	private String name;
-
+	private String solutionShort;
 	private String solutionTry;
 	private String success;
 	private String failure;
@@ -22,11 +22,12 @@ public class EventSolution {
 	private int rewardGold;
 	private int takeDamage;
 
-	public EventSolution(String name, String solutionTry, String success, String failure, Skill requiredSkill,
-			int requiredSkillValue, ArrayList<Item> requiredItems, boolean needOnlyOneItem, boolean needItemPermanet,
-			int rewardXp, ArrayList<Item> rewardItems, int rewardGold, int takeDamage) {
+	public EventSolution(String name, String solutionShort, String solutionTry, String success, String failure,
+			Skill requiredSkill, int requiredSkillValue, ArrayList<Item> requiredItems, boolean needOnlyOneItem,
+			boolean needItemPermanet, int rewardXp, ArrayList<Item> rewardItems, int rewardGold, int takeDamage) {
 
 		this.name = name;
+		this.solutionShort = solutionShort;
 		this.solutionTry = solutionTry;
 		this.success = success;
 		this.failure = failure;
@@ -88,43 +89,48 @@ public class EventSolution {
 
 	public boolean tryIt(Player player) {
 
+		return true;
+	}
+
+	public boolean tryIt2(Player player) {
+
 		if (requiredSkill != null) {
 			if (player.getSkillSet().getSkillValue(requiredSkill) < requiredSkillValue) {
 				return false;
 			}
 		}
+
 		if (requiredItems != null) {
-			if (needOnlyOneItem) {
 
-				for (int i = 0; i < requiredItems.size(); i++) {
-					for (int j = 0; j < player.getInventory().getAllItems().size(); j++) {
-						if (requiredItems.get(i).getName()
-								.equals(player.getInventory().getAllItems().get(j).getName())) {
-							if (needItemPermanet)
-								player.getInventory().remove(player.getInventory().getAllItems().get(i));
-							return true;
-						}
-
-					}
-				}
-			} else {
-				boolean found = false;
-				for (int i = 0; i < requiredItems.size(); i++) {
-					found = false;
-					for (int j = 0; j < player.getInventory().getAllItems().size(); j++) {
-						if (requiredItems.get(i).getName()
-								.equals(player.getInventory().getAllItems().get(j).getName())) {
-							found = true;
-							if (needItemPermanet)
-								player.getInventory().remove(player.getInventory().getAllItems().get(i));
-							return true;
-						}
-						if (found == false)
-							return false;
+			for (int i = 0; i < player.getInventory().getAllItems().size(); i++) {
+				for (int j = 0; j < getRequiredItems().size(); j++) {
+					if (player.getInventory().getAllItems().get(i) == getRequiredItems().get(j)) {
+						player.getInventory().remove(player.getInventory().getAllItems().get(i));
+						return true;
 					}
 				}
 			}
 		}
+
+		/*
+		 * if (requiredItems != null) { if (needOnlyOneItem) { for (int i = 0; i <
+		 * requiredItems.size(); i++) { for (int j = 0; j <
+		 * player.getInventory().getAllItems().size(); j++) { if
+		 * (requiredItems.get(i).getName()
+		 * .equals(player.getInventory().getAllItems().get(j).getName())) { if
+		 * (needItemPermanet)
+		 * player.getInventory().remove(player.getInventory().getAllItems().get(i));
+		 * return true; }
+		 * 
+		 * } } } else { boolean found = false; for (int i = 0; i < requiredItems.size();
+		 * i++) { found = false; for (int j = 0; j <
+		 * player.getInventory().getAllItems().size(); j++) { if
+		 * (requiredItems.get(i).getName()
+		 * .equals(player.getInventory().getAllItems().get(j).getName())) { found =
+		 * true; if (needItemPermanet)
+		 * player.getInventory().remove(player.getInventory().getAllItems().get(i));
+		 * return true; } if (found == false) return false; } } } }
+		 */
 
 		return true;
 	}
@@ -171,6 +177,10 @@ public class EventSolution {
 
 	public int getRewardGold() {
 		return rewardGold;
+	}
+
+	public String getSolutionShort() {
+		return solutionShort;
 	}
 
 	public int getTakeDamage() {

@@ -461,12 +461,14 @@ public class ResourceManager {
 					requiredItems.add(this.getItemByUniqueName(item.toString()).clone());
 				});
 
-				String solutionTry = new String(jsonItem.get("solutionTry").toString().getBytes(),
+				String solutionShort = new String(jsonItem.get("solutionTry").toString().getBytes(),
+						StandardCharsets.UTF_8);
+				String solutionTry = new String(jsonItem.get("solutionShort").toString().getBytes(),
 						StandardCharsets.UTF_8);
 				String success = new String(jsonItem.get("success").toString().getBytes(), StandardCharsets.UTF_8);
 				String failure = new String(jsonItem.get("failure").toString().getBytes(), StandardCharsets.UTF_8);
 
-				EventSolution eventSolution = new EventSolution(keyName, solutionTry, success, failure,
+				EventSolution eventSolution = new EventSolution(keyName, solutionShort, solutionTry, success, failure,
 						getSkillByString(jsonItem.get("skill").toString()),
 						Integer.valueOf(jsonItem.get("skillValue").toString()), requiredItems,
 						getBoolByString(jsonItem.get("needOnlyOneItem").toString()),
