@@ -487,6 +487,10 @@ public class ResourceManager {
 		return null;
 	}
 
+	public ArrayList<EventSolution> getEventSolutions() {
+		return eventSolutions;
+	}
+
 	@SuppressWarnings("unchecked")
 	private void loadEvents() {
 		try {
@@ -524,6 +528,10 @@ public class ResourceManager {
 				return event;
 		}
 		return null;
+	}
+
+	public ArrayList<Event> getEvents() {
+		return events;
 	}
 
 	public Skill getSkillByString(String string) {

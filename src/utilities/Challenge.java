@@ -14,12 +14,14 @@ public class Challenge {
 	private boolean challengeCompleted;
 	private NPC npc = null;
 	private Container container = null;
+	private Event event;
 	private int challengeType;
 	private Biom biom;
 
 	int containerChance = 0;
 	int enemyChance = 0;
 	int traderChance = 0;
+	int eventChance = 0;
 
 	public Challenge(Biom biom) {
 
@@ -30,33 +32,42 @@ public class Challenge {
 			containerChance = 100;
 			enemyChance = 100;
 			traderChance = 100;
+			eventChance = 100;
 			break;
 		case FOREST:
 			containerChance = 100;
 			enemyChance = 100;
 			traderChance = 100;
+			eventChance = 100;
 			break;
 		case DESERT:
 			containerChance = 100;
 			enemyChance = 100;
 			traderChance = 100;
+			eventChance = 100;
 			break;
 		case SWAMP:
 			containerChance = 100;
 			enemyChance = 100;
 			traderChance = 100;
+			eventChance = 100;
 			break;
 		case MOUNTAINS:
 			containerChance = 100;
 			enemyChance = 100;
 			traderChance = 100;
+			eventChance = 100;
 			break;
 		}
 
-		chooseChallenge(100, containerChance, enemyChance, traderChance);
+		chooseChallenge(100, containerChance, enemyChance, traderChance, eventChance);
 	}
 
-	private boolean chooseChallenge(int challangeChance, int containerChance, int enemyChance, int traderChance) {
+	private boolean chooseChallenge(int challangeChance, int containerChance, int enemyChance, int traderChance,
+			int eventChance) {
+
+		eventChance *= 100;
+
 		Random Randy = new Random();
 		SpecialRandom Chan = new SpecialRandom();
 
@@ -64,10 +75,10 @@ public class Challenge {
 			return false;
 		}
 
-		int[] challengeTypes = new int[] { containerChance, enemyChance, traderChance };
+		int[] challengeTypes = new int[] { containerChance, enemyChance, traderChance, eventChance };
 		this.challengeType = Chan.pickRandom(challengeTypes);
 
-		if (challengeType != 0 && challengeType != 1 && challengeType != 2)
+		if (challengeType != 0 && challengeType != 1 && challengeType != 2 && challengeType != 3)
 			System.out.println("Invalid ChallengeType: " + challengeType);
 
 		switch (challengeType) {
@@ -104,6 +115,14 @@ public class Challenge {
 			npc = merchants.get(Randy.nextInt(merchants.size()));
 
 			break;
+
+		case 3:
+			ArrayList<Event> events = new ArrayList<Event>();
+			int lengthEvents = GameManager.getInstance().getResourceManager().getMerchants().size();
+
+			event = GameManager.getInstance().getResourceManager().getEvents().get(Randy.nextInt(lengthEvents));
+
+			break;
 		}
 		return true;
 
@@ -131,6 +150,10 @@ public class Challenge {
 
 	public Biom getBiom() {
 		return biom;
+	}
+
+	public Event getEvent() {
+		return event;
 	}
 
 }
