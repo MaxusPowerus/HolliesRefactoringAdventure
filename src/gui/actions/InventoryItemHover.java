@@ -15,7 +15,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.UIManager;
 
 import basic.GameManager;
 import gui.GUIHelper;
@@ -63,8 +62,7 @@ public class InventoryItemHover implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		this.gameManager.getGuiManager().getLeftInfoContentPanel().removeAll();
 
-		this.gameManager.getGuiManager().getLeftInfoContentPanel()
-				.setBackground(UIManager.getColor("Desktop.background"));
+		this.gameManager.getGuiManager().getLeftInfoContentPanel().setBackground(new Color(0, 0, 0, 0));
 		GroupLayout gl_leftInfoPanel = new GroupLayout(this.gameManager.getGuiManager().getLeftInfoPanel());
 		gl_leftInfoPanel.setHorizontalGroup(gl_leftInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_leftInfoPanel.createSequentialGroup().addContainerGap()
@@ -78,10 +76,10 @@ public class InventoryItemHover implements MouseListener {
 						.addContainerGap()));
 
 		JPanel itemInfoPanel = new JPanel();
-		itemInfoPanel.setBackground(UIManager.getColor("Desktop.background"));
+		itemInfoPanel.setBackground(new Color(0, 0, 0, 0));
 
 		JPanel itemIconPanel = new JPanel();
-		itemIconPanel.setBackground(UIManager.getColor("Desktop.background"));
+		itemIconPanel.setBackground(new Color(0, 0, 0, 0));
 		itemIconPanel.setLayout(new BorderLayout());
 		GroupLayout gl_leftInfoContentPanel = new GroupLayout(
 				this.gameManager.getGuiManager().getLeftInfoContentPanel());
@@ -203,7 +201,7 @@ public class InventoryItemHover implements MouseListener {
 		this.gameManager.getGuiManager().getLeftInfoContentPanel().setLayout(gl_leftInfoContentPanel);
 		this.gameManager.getGuiManager().getLeftInfoPanel().setLayout(gl_leftInfoPanel);
 
-		this.itemPanel.setBackground(Color.LIGHT_GRAY);
+		this.itemPanel.setBackground(new Color(0, 0, 0, 0));
 
 		this.gameManager.update();
 	}
@@ -212,7 +210,7 @@ public class InventoryItemHover implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 		this.gameManager.getGuiManager().getLeftInfoContentPanel().removeAll();
 
-		this.itemPanel.setBackground(Color.WHITE);
+		this.itemPanel.setBackground(new Color(0, 0, 0, 0));
 
 		this.gameManager.update();
 	}

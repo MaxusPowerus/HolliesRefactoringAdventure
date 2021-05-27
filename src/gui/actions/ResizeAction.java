@@ -41,5 +41,7 @@ public class ResizeAction extends ComponentAdapter {
 						contentPanelWidth - 20);
 			}
 		}
+
+		// TODO update background images
 	}
 }

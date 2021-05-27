@@ -78,7 +78,7 @@ public class ResourceManager {
 	private void loadWeapons() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Weapons.json");
+			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Weapons.json"));
 			JSONParser parser = new JSONParser();
 			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
@@ -104,7 +104,7 @@ public class ResourceManager {
 	private void loadFood() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Food.json");
+			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Food.json"));
 			JSONParser parser = new JSONParser();
 			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
@@ -131,7 +131,7 @@ public class ResourceManager {
 	private void loadOutfits() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Outfits.json");
+			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Outfits.json"));
 			JSONParser parser = new JSONParser();
 			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
@@ -162,7 +162,7 @@ public class ResourceManager {
 	private void loadNotes() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Notes.json");
+			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Notes.json"));
 			JSONParser parser = new JSONParser();
 			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
@@ -189,7 +189,7 @@ public class ResourceManager {
 	private void loadOthers() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\Others.json");
+			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Others.json"));
 			JSONParser parser = new JSONParser();
 			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
@@ -215,7 +215,7 @@ public class ResourceManager {
 	private void loadQuestItems() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\QuestItems.json");
+			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/QuestItems.json"));
 			JSONParser parser = new JSONParser();
 			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
@@ -317,7 +317,7 @@ public class ResourceManager {
 	private void loadLootTables() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\Items\\LootTables.json");
+			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/LootTables.json"));
 			JSONParser parser = new JSONParser();
 			JSONObject jsonNPCs = (JSONObject) parser.parse(fileReader);
 
@@ -353,7 +353,7 @@ public class ResourceManager {
 	private void loadEnemies() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\Npc\\Enemy.json");
+			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Npc/Enemy.json"));
 			JSONParser parser = new JSONParser();
 			JSONObject jsonNPCs = (JSONObject) parser.parse(fileReader);
 
@@ -392,7 +392,7 @@ public class ResourceManager {
 	private void loadMerchants() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\Npc\\Merchant.json");
+			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Npc/Merchant.json"));
 			JSONParser parser = new JSONParser();
 			JSONObject jsonNPCs = (JSONObject) parser.parse(fileReader);
 
@@ -442,7 +442,7 @@ public class ResourceManager {
 	private void loadEventSolutions() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\EventSolutions.json");
+			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/EventSolutions.json"));
 			JSONParser parser = new JSONParser();
 			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
@@ -501,7 +501,7 @@ public class ResourceManager {
 	private void loadEvents() {
 		try {
 
-			FileReader fileReader = new FileReader("resources\\jsonFiles\\Events.json");
+			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Events.json"));
 			JSONParser parser = new JSONParser();
 			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 

@@ -30,7 +30,7 @@ public class EventButton extends JButton implements ActionListener {
 		this.player = player;
 		this.eventSolution = eventSolution;
 
-		this.setText("Möglichkeit " + solutionIndex);
+		this.setText(eventSolution.getSolutionTry());
 		this.addActionListener(this);
 	}
 

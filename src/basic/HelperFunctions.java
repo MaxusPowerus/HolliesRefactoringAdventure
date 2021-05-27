@@ -10,4 +10,8 @@ public class HelperFunctions {
 		return word.substring(0, 1).toLowerCase() + word.substring(1, word.length());
 	}
 
+	public static String getResource(String path) {
+		return HelperFunctions.class.getClassLoader().getResource(path).getFile();
+	}
+
 }

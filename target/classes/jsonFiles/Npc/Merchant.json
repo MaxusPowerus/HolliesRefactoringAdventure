@@ -1,0 +1,14 @@
+{
+			"Blacksmith": {
+                "label": "Schmied",
+                "prefix": "ein", "biom": "all",
+                "type": "blackSmith",
+                "size": 5
+            },
+			"Tailor": {
+                "label": "Schneider",
+                "prefix": "ein", "biom": "all",
+                "type": "tailor",
+                "size": 5
+            }
+		} 

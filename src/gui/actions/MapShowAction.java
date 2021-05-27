@@ -43,8 +43,8 @@ public class MapShowAction implements ActionListener {
 		this.gameManager.getGuiManager().getLeftPanelHeadline().setText("Map");
 		this.gameManager.getGuiManager().getOpenInvButton().setVisible(true);
 
-		this.gameManager.getGuiManager().getLeftContentPanel().setBackground(Color.BLACK);
-		this.gameManager.getGuiManager().getMapPanel().setBackground(Color.BLACK);
+		this.gameManager.getGuiManager().getLeftContentPanel().setBackground(new Color(0, 0, 0, 0));
+		this.gameManager.getGuiManager().getMapPanel().setBackground(new Color(0, 0, 0, 0));
 		this.gameManager.getGuiManager().getMapPanel()
 				.setLayout(new GridLayout(Config.MAP_SIZEX, Config.MAP_SIZEY, 1, 1));
 

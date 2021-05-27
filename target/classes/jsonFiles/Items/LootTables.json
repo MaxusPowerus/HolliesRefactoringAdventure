@@ -1,0 +1,16 @@
+{
+
+	"armor": {"items": ["IronArmor", "ChainMail", "LetherArmor" ], "gold": 0},
+	
+	"mercenary": {"items": ["LetherArmor", "Axe"], "gold": -30},
+	"trader": {"items": ["NormalDressBrown", "Paper"], "gold": -200},
+	"homeless": {"items": ["Rags", "Stone"], "gold": 0},
+	
+	
+	"blackSmith": {"items": ["IronArmor", "ChainMail", "Sword", "Axe"], "gold": -500},
+	"tailor": {"items": ["NobelDressYellow", "NobelDressRed", "NobelDressBlue", "NobelDressGreen"], "gold": -250},
+	
+	
+	"angryCat": {"items": ["CatFood", "CatFood", "CatFood"], "gold": 0},
+	"basicEnemy": {"items": ["Flesh"], "gold": 0}
+}

@@ -1,12 +1,17 @@
 package basic;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 import entities.Enemy;
 import entities.Merchant;
@@ -40,6 +45,7 @@ public class GameManager {
 	private static GameManager instance;
 	private GUIManager guiManager;
 	private ResourceManager resourceManager;
+	private JPanel backgroundImage;
 
 	public GameManager() {
 		instance = this;
@@ -89,31 +95,35 @@ public class GameManager {
 
 		String path = "";
 		if (player.getCurrentMapField().getBiom() == Biom.DESERT) {
-			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#c28370"));
 //			path = "resources\\images\\backgrounds\\forest.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.FOREST) {
-			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#196130"));
 			path = "forest_var1.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.MOUNTAINS) {
-			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#71817B"));
-//			path = "resources\\images\\backgrounds\\forest.png";
+			path = "mountains_var1.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.SWAMP) {
 			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#6D610D"));
 //			path = "resources\\images\\backgrounds\\forest.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.MEADOW) {
-			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#16b91e"));
 			path = "meadow_var2.png";
 		}
 
+		// remove background image
+		for (Component c : this.guiManager.getFieldInfoPanel().getComponents()) {
+			if (c instanceof ImagePanel)
+				this.guiManager.getFieldInfoPanel().remove(c);
+		}
+
+		// set background image
 		if (path != "") {
 			try {
-				BufferedImage image = ImageIO.read(new File("resources\\images\\backgrounds\\" + path));
-				this.guiManager.getFieldBackground().setIcon(GUIHelper.scaleIcon(new ImageIcon(image), 650));
+				BufferedImage backgroundImageSource = ImageIO
+						.read(new File(HelperFunctions.getResource("images/backgrounds/" + path)));
+				backgroundImage = new ImagePanel(
+						GUIHelper.scaleIcon(new ImageIcon(backgroundImageSource), 650).getImage());
+				this.guiManager.getFieldInfoPanel().add(backgroundImage);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		} else {
-			this.guiManager.getFieldBackground().setIcon(null);
 		}
 
 		// execute challenge
@@ -204,4 +214,28 @@ public class GameManager {
 	public ResourceManager getResourceManager() {
 		return resourceManager;
 	}
+}
+
+class ImagePanel extends JPanel {
+
+	private Image img;
+
+	public ImagePanel(String img) {
+		this(new ImageIcon(img).getImage());
+	}
+
+	public ImagePanel(Image img) {
+		this.img = img;
+		Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+		setPreferredSize(size);
+		setMinimumSize(size);
+		setMaximumSize(size);
+		setSize(size);
+		setLayout(null);
+	}
+
+	public void paintComponent(Graphics g) {
+		g.drawImage(img, 0, 0, null);
+	}
+
 }

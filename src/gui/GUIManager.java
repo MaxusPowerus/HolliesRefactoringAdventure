@@ -2,12 +2,14 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +23,7 @@ import javax.swing.border.MatteBorder;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import basic.Config;
+import basic.HelperFunctions;
 import gui.actions.NavigationButtonAction;
 import gui.actions.ResizeAction;
 import map.Direction;
@@ -95,25 +98,37 @@ public class GUIManager {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addComponentListener(new ResizeAction(this));
 
-		leftMainPanel = new JPanel();
-		leftMainPanel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
-		leftMainPanel.setBackground(Color.WHITE);
+		JLabel backgroundImageLabel = new JLabel(
+				new ImageIcon(HelperFunctions.getResource("images/GUI/UI_Background.png")));
+		backgroundImageLabel.setOpaque(true);
+		frame.setContentPane(backgroundImageLabel);
+
+		leftMainPanel = new JPanel() {
+			protected void paintComponent(Graphics g) {
+				g.setColor(getBackground());
+				g.fillRect(0, 0, getWidth(), getHeight());
+				super.paintComponent(g);
+			}
+		};
+		leftMainPanel.setOpaque(false);
+		leftMainPanel.setBorder(null);
+		leftMainPanel.setBackground(new Color(0, 0, 0, 0));
 
 		playerInfoPanel = new JPanel();
-		playerInfoPanel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
-		playerInfoPanel.setBackground(Color.WHITE);
+		playerInfoPanel.setBorder(null);
+		playerInfoPanel.setBackground(new Color(0, 0, 0, 0));
 
 		leftInfoPanel = new JPanel();
-		leftInfoPanel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
-		leftInfoPanel.setBackground(Color.WHITE);
+		leftInfoPanel.setBorder(null);
+		leftInfoPanel.setBackground(new Color(0, 0, 0, 0));
 
 		actionPanel = new JPanel();
-		actionPanel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
-		actionPanel.setBackground(Color.WHITE);
+		actionPanel.setBorder(null);
+		actionPanel.setBackground(new Color(0, 0, 0, 0));
 
 		fieldInfoPanel = new JPanel();
-		fieldInfoPanel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
-		fieldInfoPanel.setBackground(Color.WHITE);
+		fieldInfoPanel.setBorder(null);
+		fieldInfoPanel.setBackground(new Color(0, 0, 0, 0));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
@@ -128,23 +143,24 @@ public class GUIManager {
 								.addComponent(fieldInfoPanel, GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE))
 						.addContainerGap()));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup().addContainerGap()
+				.createSequentialGroup().addGap(5)
 				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(leftMainPanel, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+								.addComponent(leftMainPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)
 								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(leftInfoPanel, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE).addGap(0))
+								.addComponent(leftInfoPanel, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE).addGap(0))
 						.addGroup(groupLayout.createSequentialGroup()
 								.addComponent(playerInfoPanel, GroupLayout.PREFERRED_SIZE, 154,
 										GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(fieldInfoPanel, GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
 								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(actionPanel, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)))
+								.addComponent(actionPanel, GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)))
 				.addContainerGap()));
 
 		leftInfoContentPanel = new JPanel();
-		leftInfoContentPanel.setBackground(Color.WHITE);
+		leftInfoContentPanel.setBackground(new Color(0, 0, 0, 0));
 		GroupLayout gl_leftInfoPanel = new GroupLayout(leftInfoPanel);
 		gl_leftInfoPanel.setHorizontalGroup(gl_leftInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_leftInfoPanel.createSequentialGroup().addContainerGap()
@@ -162,9 +178,17 @@ public class GUIManager {
 		leftInfoContentPanel.setLayout(gl_leftInfoContentPanel);
 		leftInfoPanel.setLayout(gl_leftInfoPanel);
 		fieldInfoPanel.setLayout(null);
+		fieldInfoPanel.setOpaque(true);
 
-		fieldInfos = new JPanel();
-		fieldInfos.setBounds(16, 16, 568, 296);
+		fieldInfos = new JPanel() {
+			protected void paintComponent(Graphics g) {
+				g.setColor(getBackground());
+				g.fillRect(0, 0, getWidth(), getHeight());
+				super.paintComponent(g);
+			}
+		};
+		fieldInfos.setOpaque(false);
+		fieldInfos.setBounds(6, 16, 589, 296);
 		fieldInfos.setBackground(new Color(0f, 0f, 0f, 0.4F));
 		fieldInfos.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		fieldInfos.setLayout(new BoxLayout(fieldInfos, BoxLayout.Y_AXIS));
@@ -175,12 +199,12 @@ public class GUIManager {
 		fieldInfoPanel.add(fieldBackground);
 
 		actionButtonPanel = new JPanel();
-		actionButtonPanel.setBackground(Color.WHITE);
+		actionButtonPanel.setBackground(new Color(0, 0, 0, 0));
 
 		openInvButton = new JButton("[INV_BTN]");
 
 		JPanel navigationPanel = new JPanel();
-		navigationPanel.setBackground(Color.WHITE);
+		navigationPanel.setBackground(new Color(0, 0, 0, 0));
 		GroupLayout gl_actionPanel = new GroupLayout(actionPanel);
 		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_actionPanel.createSequentialGroup()
@@ -245,14 +269,29 @@ public class GUIManager {
 		actionButtonPanel.setLayout(new GridLayout(5, 1, 0, 0));
 		actionPanel.setLayout(gl_actionPanel);
 
-		leftPanelHeadline = new JLabel("[HEADLINE1]");
-		leftPanelHeadline.setBackground(new Color(0, 0, 0));
+		leftPanelHeadline = new JLabel("[HEADLINE1]") {
+			protected void paintComponent(Graphics g) {
+				g.setColor(getBackground());
+				g.fillRect(0, 0, getWidth(), getHeight());
+				super.paintComponent(g);
+			}
+		};
+		leftPanelHeadline.setOpaque(false);
+		leftPanelHeadline.setBackground(new Color(0, 0, 0, 0.4f));
+		leftPanelHeadline.setForeground(Color.WHITE);
 		leftPanelHeadline.setFont(new Font("Tahoma", Font.BOLD, 12));
-		leftPanelHeadline.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		leftPanelHeadline.setBorder(null);
 		leftPanelHeadline.setHorizontalAlignment(SwingConstants.CENTER);
 
-		leftContentPanel = new JPanel();
-		leftContentPanel.setBackground(Color.WHITE);
+		leftContentPanel = new JPanel() {
+			protected void paintComponent(Graphics g) {
+				g.setColor(getBackground());
+				g.fillRect(0, 0, getWidth(), getHeight());
+				super.paintComponent(g);
+			}
+		};
+		leftContentPanel.setOpaque(false);
+		leftContentPanel.setBackground(new Color(0, 0, 0, 0));
 		GroupLayout gl_leftMainPanel = new GroupLayout(leftMainPanel);
 		gl_leftMainPanel.setHorizontalGroup(gl_leftMainPanel.createParallelGroup(Alignment.LEADING)
 				.addComponent(leftPanelHeadline, GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
@@ -264,33 +303,49 @@ public class GUIManager {
 						.addComponent(leftContentPanel, GroupLayout.PREFERRED_SIZE, 545, GroupLayout.PREFERRED_SIZE)));
 		leftContentPanel.setLayout(null);
 
-		mapPanel = new JPanel();
+		mapPanel = new JPanel() {
+			protected void paintComponent(Graphics g) {
+				g.setColor(getBackground());
+				g.fillRect(0, 0, getWidth(), getHeight());
+				super.paintComponent(g);
+			}
+		};
+		mapPanel.setOpaque(false);
 		mapPanel.setBorder(null);
-		mapPanel.setBackground(Color.WHITE);
+		mapPanel.setBackground(new Color(0, 0, 0, 0));
 		mapPanel.setBounds(0, 0, 561, 537);
 		leftContentPanel.add(mapPanel);
 
 		inventoryPanel = new JPanel();
-		inventoryPanel.setBackground(Color.WHITE);
+		inventoryPanel.setBackground(new Color(0, 0, 0, 0));
 		inventoryPanel.setBounds(0, 0, 561, 537);
 		leftContentPanel.add(inventoryPanel);
 		leftMainPanel.setLayout(gl_leftMainPanel);
 
-		JLabel playerInfoHeadline = new JLabel(">>> Die kleine Holly <<<");
+		JLabel playerInfoHeadline = new JLabel(">>> Die kleine Holly <<<") {
+			protected void paintComponent(Graphics g) {
+				g.setColor(getBackground());
+				g.fillRect(0, 0, getWidth(), getHeight());
+				super.paintComponent(g);
+			}
+		};
+		playerInfoHeadline.setOpaque(false);
+		playerInfoHeadline.setBackground(new Color(0, 0, 0, 0.4f));
+		playerInfoHeadline.setForeground(Color.WHITE);
 		playerInfoHeadline.setFont(new Font("Tahoma", Font.BOLD, 12));
-		playerInfoHeadline.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		playerInfoHeadline.setBorder(null);
 		playerInfoHeadline.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JPanel playerBarPanel = new JPanel();
-		playerBarPanel.setBackground(Color.WHITE);
+		playerBarPanel.setBackground(new Color(0, 0, 0, 0));
 
 		JPanel skillPanel = new JPanel();
 		skillPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		skillPanel.setBackground(Color.WHITE);
+		skillPanel.setBackground(new Color(0, 0, 0, 0));
 
 		equippedPanel = new JPanel();
 		equippedPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		equippedPanel.setBackground(Color.WHITE);
+		equippedPanel.setBackground(new Color(0, 0, 0, 0));
 
 		lblEquipped = new JLabel("Ausr\u00FCstung");
 		lblEquipped.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -298,7 +353,7 @@ public class GUIManager {
 		lblEquipped.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
 
 		innerEquippedPanel = new JPanel();
-		innerEquippedPanel.setBackground(Color.WHITE);
+		innerEquippedPanel.setBackground(new Color(0, 0, 0, 0));
 		innerEquippedPanel.setLayout(new GridLayout(0, 2, 0, 0));
 		GroupLayout gl_equippedPanel = new GroupLayout(equippedPanel);
 		gl_equippedPanel.setHorizontalGroup(
@@ -355,7 +410,7 @@ public class GUIManager {
 		lblSkills.setHorizontalAlignment(SwingConstants.CENTER);
 
 		innerSkillPanel = new JPanel();
-		innerSkillPanel.setBackground(Color.WHITE);
+		innerSkillPanel.setBackground(new Color(0, 0, 0, 0));
 		GroupLayout gl_skillPanel = new GroupLayout(skillPanel);
 		gl_skillPanel.setHorizontalGroup(gl_skillPanel.createParallelGroup(Alignment.LEADING)
 				.addComponent(lblSkills, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
@@ -617,9 +672,17 @@ public class GUIManager {
 			((JLabel) this.fieldInfos.getComponents()[0]).setText("...");
 		}
 
-		JLabel label = new JLabel("<html>" + info + "</html>");
+		JLabel label = new JLabel() {
+			protected void paintComponent(Graphics g) {
+				g.setColor(getBackground());
+				g.fillRect(0, 0, getWidth(), getHeight());
+				super.paintComponent(g);
+			}
+		};
+		label.setOpaque(false);
+		label.setText("<html>" + info + "</html>");
 		label.setForeground(Color.WHITE);
-		label.setBackground(Color.RED);
+		label.setBackground(new Color(0, 0, 0, 0));
 		label.setFont(new Font("Dialog", Font.PLAIN, 16));
 		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 3, 0));
 		this.fieldInfos.add(label);

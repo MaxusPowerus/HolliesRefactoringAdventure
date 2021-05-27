@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -88,7 +89,7 @@ public class InventoryShowAction implements ActionListener {
 		this.gameManager.getGuiManager().getOpenInvButton().setEnabled(true);
 		this.gameManager.getGuiManager().getOpenInvButton().addActionListener(new MapShowAction(this.gameManager));
 
-		this.gameManager.getGuiManager().getLeftContentPanel().setBackground(Color.WHITE);
+		this.gameManager.getGuiManager().getLeftContentPanel().setBackground(new Color(0, 0, 0, 0));
 		this.gameManager.getGuiManager().getLeftPanelHeadline().setText(this.invName);
 
 		if (buy || sell) {
@@ -97,10 +98,16 @@ public class InventoryShowAction implements ActionListener {
 			this.gameManager.getGuiManager().getOpenInvButton().setVisible(true);
 		}
 
-		JTabbedPane inventoryTabPane = new JTabbedPane(JTabbedPane.TOP);
+		JTabbedPane inventoryTabPane = new JTabbedPane(JTabbedPane.TOP) {
+			protected void paintComponent(Graphics g) {
+				g.setColor(getBackground());
+				g.fillRect(0, 0, getWidth(), getHeight());
+				super.paintComponent(g);
+			}
+		};
+		inventoryTabPane.setOpaque(false);
 
 		inventoryTabPane.setBorder(null);
-		inventoryTabPane.setBackground(Color.WHITE);
 		GroupLayout leftContentPanelGroupLayout = new GroupLayout(this.gameManager.getGuiManager().getInventoryPanel());
 		leftContentPanelGroupLayout
 				.setHorizontalGroup(leftContentPanelGroupLayout.createParallelGroup(Alignment.LEADING)
@@ -113,7 +120,7 @@ public class InventoryShowAction implements ActionListener {
 		if (itemCategories.isEmpty()) {
 			JPanel itemPanel = new JPanel();
 			itemPanel.setBorder(null);
-			itemPanel.setBackground(Color.WHITE);
+			itemPanel.setBackground(new Color(0, 0, 0, 0));
 			itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
 
 			JLabel empty = new JLabel("Dein Rucksack ist leer");
@@ -127,13 +134,26 @@ public class InventoryShowAction implements ActionListener {
 				if ((this.buy || this.sell) && category == "Quest-Items")
 					continue;
 
-				JPanel itemPanel = new JPanel();
+				JPanel itemPanel = new JPanel() {
+					protected void paintComponent(Graphics g) {
+						g.setColor(getBackground());
+						g.fillRect(0, 0, getWidth(), getHeight());
+						super.paintComponent(g);
+					}
+				};
+				itemPanel.setOpaque(false);
 				itemPanel.setBorder(null);
-				itemPanel.setBackground(Color.WHITE);
 				itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
 
 				JScrollPane scrollPane = new JScrollPane(itemPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-						ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+						ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER) {
+					protected void paintComponent(Graphics g) {
+						g.setColor(getBackground());
+						g.fillRect(0, 0, getWidth(), getHeight());
+						super.paintComponent(g);
+					}
+				};
+				scrollPane.setOpaque(false);
 
 				for (Item item : itemCategories.get(category)) {
 					itemPanel.add(getItemComponent(item));
@@ -200,7 +220,7 @@ public class InventoryShowAction implements ActionListener {
 
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(500, 50));
-		panel.setBackground(Color.WHITE);
+		panel.setBackground(new Color(0, 0, 0, 0));
 		panel.setMaximumSize(new Dimension(32767, 50));
 		panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY));
 		this.gameManager.getGuiManager().getInventoryPanel().add(panel);

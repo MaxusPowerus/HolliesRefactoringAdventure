@@ -1,6 +1,7 @@
 package gui.actions;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -12,7 +13,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.UIManager;
 
 import basic.GameManager;
 import map.MapField;
@@ -46,8 +46,7 @@ public class MapFieldHoverAction implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		this.gameManager.getGuiManager().getLeftInfoContentPanel().removeAll();
 
-		this.gameManager.getGuiManager().getLeftInfoContentPanel()
-				.setBackground(UIManager.getColor("Desktop.background"));
+		this.gameManager.getGuiManager().getLeftInfoContentPanel().setBackground(new Color(0, 0, 0, 0));
 		GroupLayout gl_leftInfoPanel = new GroupLayout(this.gameManager.getGuiManager().getLeftInfoPanel());
 		gl_leftInfoPanel.setHorizontalGroup(gl_leftInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_leftInfoPanel.createSequentialGroup().addContainerGap()
@@ -61,10 +60,10 @@ public class MapFieldHoverAction implements MouseListener {
 						.addContainerGap()));
 
 		JPanel mapFieldInfoPanel = new JPanel();
-		mapFieldInfoPanel.setBackground(UIManager.getColor("Desktop.background"));
+		mapFieldInfoPanel.setBackground(new Color(0, 0, 0, 0));
 
 		JPanel itemIconPanel = new JPanel();
-		itemIconPanel.setBackground(UIManager.getColor("Desktop.background"));
+		itemIconPanel.setBackground(new Color(0, 0, 0, 0));
 		itemIconPanel.setLayout(new BorderLayout());
 		GroupLayout gl_leftInfoContentPanel = new GroupLayout(
 				this.gameManager.getGuiManager().getLeftInfoContentPanel());
