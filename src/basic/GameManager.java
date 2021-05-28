@@ -2,9 +2,6 @@ package basic;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,11 +14,11 @@ import entities.Enemy;
 import entities.Merchant;
 import entities.Player;
 import gui.ActionPanel;
+import gui.BackgroundImagePanel;
 import gui.GUIHelper;
 import gui.GUIManager;
 import gui.PlayerInfoPanel;
 import gui.WorldInfoPanel;
-import gui.actions.InventoryShowAction;
 import gui.actions.MapShowAction;
 import gui.buttons.AttackButton;
 import gui.buttons.BuyButton;
@@ -46,9 +43,11 @@ public class GameManager {
 	private GUIManager guiManager;
 	private ResourceManager resourceManager;
 	private JPanel backgroundImage;
+	private boolean fullscreen;
 
-	public GameManager() {
+	public GameManager(boolean fullscreen) {
 		instance = this;
+		this.fullscreen = fullscreen;
 		this.prepareGame();
 	}
 
@@ -62,7 +61,7 @@ public class GameManager {
 
 		player = new Player(Config.PLAYER_NAME, mainMap);
 
-		this.guiManager = new GUIManager();
+		this.guiManager = new GUIManager(this.fullscreen);
 		guiManager.getFrame().setVisible(true);
 
 		this.startGame();
@@ -80,8 +79,6 @@ public class GameManager {
 		// show map for default
 		new MapShowAction(this).initialize();
 
-		// add inv handler
-		this.guiManager.getOpenInvButton().addActionListener(new InventoryShowAction(this, player.getInventory()));
 		this.execMainLogic();
 	}
 
@@ -95,21 +92,21 @@ public class GameManager {
 
 		String path = "";
 		if (player.getCurrentMapField().getBiom() == Biom.DESERT) {
-//			path = "resources\\images\\backgrounds\\forest.png";
+			path = "meadow_var1.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.FOREST) {
 			path = "forest_var1.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.MOUNTAINS) {
 			path = "mountains_var1.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.SWAMP) {
 			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#6D610D"));
-//			path = "resources\\images\\backgrounds\\forest.png";
+			path = "meadow_var1.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.MEADOW) {
 			path = "meadow_var2.png";
 		}
 
 		// remove background image
 		for (Component c : this.guiManager.getFieldInfoPanel().getComponents()) {
-			if (c instanceof ImagePanel)
+			if (c instanceof BackgroundImagePanel)
 				this.guiManager.getFieldInfoPanel().remove(c);
 		}
 
@@ -118,9 +115,9 @@ public class GameManager {
 			try {
 				BufferedImage backgroundImageSource = ImageIO
 						.read(new File(HelperFunctions.getResource("images/backgrounds/" + path)));
-				backgroundImage = new ImagePanel(
-						GUIHelper.scaleIcon(new ImageIcon(backgroundImageSource), 650).getImage());
-				this.guiManager.getFieldInfoPanel().add(backgroundImage);
+				this.guiManager.setBackgroundImagePanel(new BackgroundImagePanel(
+						GUIHelper.scaleIcon(new ImageIcon(backgroundImageSource), 650).getImage()));
+				this.guiManager.getFieldInfoPanel().add(this.guiManager.getBackgroundImagePanel());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -214,28 +211,4 @@ public class GameManager {
 	public ResourceManager getResourceManager() {
 		return resourceManager;
 	}
-}
-
-class ImagePanel extends JPanel {
-
-	private Image img;
-
-	public ImagePanel(String img) {
-		this(new ImageIcon(img).getImage());
-	}
-
-	public ImagePanel(Image img) {
-		this.img = img;
-		Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-		setPreferredSize(size);
-		setMinimumSize(size);
-		setMaximumSize(size);
-		setSize(size);
-		setLayout(null);
-	}
-
-	public void paintComponent(Graphics g) {
-		g.drawImage(img, 0, 0, null);
-	}
-
 }

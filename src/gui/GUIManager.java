@@ -76,12 +76,13 @@ public class GUIManager {
 	private JLabel fieldBackground;
 	private JPanel mapPanel;
 	private JPanel inventoryPanel;
+	private JPanel backgroundImagePanel;
 
-	public GUIManager() {
-		initialize();
+	public GUIManager(boolean fullscreen) {
+		initialize(fullscreen);
 	}
 
-	private void initialize() {
+	private void initialize(boolean fullscreen) {
 		try {
 			FlatLightLaf.install();
 //			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -97,6 +98,11 @@ public class GUIManager {
 		frame.setBounds(100, 100, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addComponentListener(new ResizeAction(this));
+
+		if (fullscreen) {
+			frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			frame.setUndecorated(true);
+		}
 
 		JLabel backgroundImageLabel = new JLabel(
 				new ImageIcon(HelperFunctions.getResource("images/GUI/UI_Background.png")));
@@ -294,13 +300,12 @@ public class GUIManager {
 		leftContentPanel.setBackground(new Color(0, 0, 0, 0));
 		GroupLayout gl_leftMainPanel = new GroupLayout(leftMainPanel);
 		gl_leftMainPanel.setHorizontalGroup(gl_leftMainPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(leftPanelHeadline, GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
-				.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE));
+				.addComponent(leftPanelHeadline, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+				.addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE));
 		gl_leftMainPanel.setVerticalGroup(gl_leftMainPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_leftMainPanel.createSequentialGroup()
 						.addComponent(leftPanelHeadline, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(leftContentPanel, GroupLayout.PREFERRED_SIZE, 545, GroupLayout.PREFERRED_SIZE)));
+						.addGap(8).addComponent(leftContentPanel, GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)));
 		leftContentPanel.setLayout(null);
 
 		mapPanel = new JPanel() {
@@ -656,6 +661,14 @@ public class GUIManager {
 
 	public JPanel getMapPanel() {
 		return mapPanel;
+	}
+
+	public JPanel getBackgroundImagePanel() {
+		return backgroundImagePanel;
+	}
+
+	public void setBackgroundImagePanel(JPanel backgroundImagePanel) {
+		this.backgroundImagePanel = backgroundImagePanel;
 	}
 
 	public void setNavigationEnabled(boolean enabled) {

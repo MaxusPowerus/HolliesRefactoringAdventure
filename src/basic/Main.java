@@ -3,13 +3,17 @@ package basic;
 public class Main {
 
 	public static void main(String[] args) {
-		GameManager manager = new GameManager();
+		boolean fullscreen = false;
 
-		if (args.length == 1 && args[0] == "exit_after_time") {
+		if (args.length > 0 && args[0].equalsIgnoreCase("exit_after_time")) {
 			setTimeout(() -> {
 				System.exit(0);
 			}, 1000 * 3);
+		} else if (args.length > 0 && args[0].equalsIgnoreCase("fullscreen")) {
+			fullscreen = true;
 		}
+
+		GameManager manager = new GameManager(fullscreen);
 	}
 
 	public static void setTimeout(Runnable runnable, int delay) {

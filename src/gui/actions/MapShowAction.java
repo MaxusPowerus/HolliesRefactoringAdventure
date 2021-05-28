@@ -37,6 +37,11 @@ public class MapShowAction implements ActionListener {
 		this.gameManager.getGuiManager().getOpenInvButton().setText("Inventar");
 		this.gameManager.getGuiManager().getOpenInvButton().removeActionListener(this);
 		this.gameManager.getGuiManager().getOpenInvButton().setEnabled(true);
+
+		for (ActionListener al : this.gameManager.getGuiManager().getOpenInvButton().getActionListeners()) {
+			this.gameManager.getGuiManager().getOpenInvButton().removeActionListener(al);
+		}
+
 		this.gameManager.getGuiManager().getOpenInvButton().addActionListener(
 				new InventoryShowAction(this.gameManager, this.gameManager.getPlayer().getInventory()));
 

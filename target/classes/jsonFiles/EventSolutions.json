@@ -1,7 +1,7 @@
 {
 	"stealTheGlas":{
 		"solutionTry": "Der (armen) Frau das Glas stehlen!",  
-		"solutionShort": "Stehelen!",
+		"solutionShort": "Stehlen!",
 		"success": "Du nimmst der Frau das Glas weg, versetzt ihr damit einen Schlag und läufst davon ... sie hat keine Chance!", 
 		"failure": "Du ziehst am Glas, sie auch. Schließlich artet die ganze Sache in eine Schlägerei aus, die du verlierst ... gedehmütig ziehst du von dannen!",
 		"skill": "st", "skillValue": 3, "requiredItems": [], "needOnlyOneItem": "false", "needItemPermanet": "false",

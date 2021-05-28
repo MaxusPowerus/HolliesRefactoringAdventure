@@ -94,6 +94,7 @@ public class InventoryItemHover implements MouseListener {
 		itemInfoPanel.setLayout(new BoxLayout(itemInfoPanel, BoxLayout.Y_AXIS));
 
 		JLabel name = new JLabel(item.getName());
+
 		Font headlineFont = new Font("Dialog", Font.BOLD, 16);
 		Map headlineAttributes = headlineFont.getAttributes();
 		headlineAttributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
