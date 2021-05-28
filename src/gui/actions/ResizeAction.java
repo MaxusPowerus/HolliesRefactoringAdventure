@@ -62,11 +62,9 @@ public class ResizeAction extends ComponentAdapter {
 				int borderY = (contentPanelHeight - mapHeight) / 2; // -5 because of the gap to the headline
 
 				if (contentPanelWidth > contentPanelHeight) {
-					this.guiManager.getMapPanel().setBounds(borderX, borderY, contentPanelHeight + 20,
-							contentPanelHeight + 20);
+					this.guiManager.getMapPanel().setBounds(borderX, borderY, contentPanelHeight, contentPanelHeight);
 				} else {
-					this.guiManager.getMapPanel().setBounds(borderX, borderY, contentPanelWidth + 20,
-							contentPanelWidth + 20);
+					this.guiManager.getMapPanel().setBounds(borderX, borderY, contentPanelWidth, contentPanelWidth);
 				}
 			}
 
