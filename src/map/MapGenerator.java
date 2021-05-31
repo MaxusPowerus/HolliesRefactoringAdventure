@@ -270,7 +270,7 @@ public class MapGenerator {
 		// System.out.println("Swamp Done");
 		map = makeMountains(1, 15);
 		// System.out.println("Mountains Done");
-		map = makeOneDesert(1200);
+		map = makeOneDesert(500);
 		// System.out.println("Desert Done");
 		map = flatForestDesertBorder();
 		// System.out.println("Flater01 Done");

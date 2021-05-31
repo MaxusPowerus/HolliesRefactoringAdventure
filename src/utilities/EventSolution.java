@@ -113,25 +113,37 @@ public class EventSolution {
 			}
 		}
 
-		/*
-		 * if (requiredItems != null) { if (needOnlyOneItem) { for (int i = 0; i <
-		 * requiredItems.size(); i++) { for (int j = 0; j <
-		 * player.getInventory().getAllItems().size(); j++) { if
-		 * (requiredItems.get(i).getName()
-		 * .equals(player.getInventory().getAllItems().get(j).getName())) { if
-		 * (needItemPermanet)
-		 * player.getInventory().remove(player.getInventory().getAllItems().get(i));
-		 * return true; }
-		 * 
-		 * } } } else { boolean found = false; for (int i = 0; i < requiredItems.size();
-		 * i++) { found = false; for (int j = 0; j <
-		 * player.getInventory().getAllItems().size(); j++) { if
-		 * (requiredItems.get(i).getName()
-		 * .equals(player.getInventory().getAllItems().get(j).getName())) { found =
-		 * true; if (needItemPermanet)
-		 * player.getInventory().remove(player.getInventory().getAllItems().get(i));
-		 * return true; } if (found == false) return false; } } } }
-		 */
+		if (requiredItems != null) {
+			if (needOnlyOneItem) {
+				for (int i = 0; i < requiredItems.size(); i++) {
+					for (int j = 0; j < player.getInventory().getAllItems().size(); j++) {
+						if (requiredItems.get(i).getName()
+								.equals(player.getInventory().getAllItems().get(j).getName())) {
+							if (needItemPermanet)
+								player.getInventory().remove(player.getInventory().getAllItems().get(i));
+							return true;
+						}
+
+					}
+				}
+			} else {
+				boolean found = false;
+				for (int i = 0; i < requiredItems.size(); i++) {
+					found = false;
+					for (int j = 0; j < player.getInventory().getAllItems().size(); j++) {
+						if (requiredItems.get(i).getName()
+								.equals(player.getInventory().getAllItems().get(j).getName())) {
+							found = true;
+							if (needItemPermanet)
+								player.getInventory().remove(player.getInventory().getAllItems().get(i));
+							return true;
+						}
+						if (found == false)
+							return false;
+					}
+				}
+			}
+		}
 
 		return true;
 	}

@@ -66,7 +66,7 @@ public class Challenge {
 	private boolean chooseChallenge(int challangeChance, int containerChance, int enemyChance, int traderChance,
 			int eventChance) {
 
-		eventChance *= 100;
+		// eventChance *= 100;
 
 		Random Randy = new Random();
 		SpecialRandom Chan = new SpecialRandom();
@@ -82,7 +82,7 @@ public class Challenge {
 			System.out.println("Invalid ChallengeType: " + challengeType);
 
 		switch (challengeType) {
-		// Callange: Container
+		// Callenge: Container
 		case 0:
 			container = new Container("random", "");
 			// container.fill(100, 1.5);
@@ -103,6 +103,7 @@ public class Challenge {
 
 			break;
 
+		// Callenge: Händler
 		case 2:
 			ArrayList<Merchant> merchants = new ArrayList<Merchant>();
 			int lengthMerchants = GameManager.getInstance().getResourceManager().getMerchants().size();

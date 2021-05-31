@@ -72,19 +72,19 @@ public class Item {
 	}
 
 	public int getSpecificBuyValue(Player player) {
+		double fac = 0.2;
 		double specificValue = this.value;
-		double fac = player.getSkillSet().getSkillValue(Skill.CHARISMA);
-		fac = (fac * 2) / 10;
-		specificValue *= fac;
-		return (int) specificValue;
+		double ch = player.getSkillSet().getSkillValue(Skill.CHARISMA);
+
+		return (int) ((10 - ch) * fac * specificValue + 1);
 	}
 
 	public int getSpecificSellValue(Player player) {
+		double fac = 0.17;
 		double specificValue = this.value;
-		double fac = player.getSkillSet().getSkillValue(Skill.CHARISMA);
-		fac = (fac * 2) / 10;
-		specificValue *= fac;
-		return (int) specificValue;
+		double ch = player.getSkillSet().getSkillValue(Skill.CHARISMA);
+
+		return (int) (fac * ch * specificValue + 1);
 	}
 
 	public Item clone() {
