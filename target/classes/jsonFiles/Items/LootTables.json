@@ -9,7 +9,7 @@
 	
 	"blackSmith": {"items": ["IronArmor", "ChainMail", "Sword", "Axe"], "gold": -500},
 	"tailor": {"items": ["NobelDressYellow", "NobelDressRed", "NobelDressBlue", "NobelDressGreen"], "gold": -250},
-	
+	"baker": {"items": ["Bread", "Cake"], "gold": -50},
 	
 	"angryCat": {"items": ["CatFood", "CatFood", "CatFood"], "gold": 0},
 	"basicEnemy": {"items": ["Flesh"], "gold": 0}

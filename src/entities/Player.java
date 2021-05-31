@@ -61,7 +61,7 @@ public class Player {
 		inventory.add(startNote);
 		inventory.add(startOther);
 
-		inventory.addGold(5);
+		inventory.addGold(50);
 
 		this.equip(startWeapon);
 		this.equip(startOutfit);

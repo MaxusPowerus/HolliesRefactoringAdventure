@@ -10,5 +10,11 @@
                 "prefix": "ein", "biom": "all",
                 "type": "tailor",
                 "size": 5
-            }
-		} 
+            },
+			"Baker": {
+				"label": "Bäcker",
+                "prefix": "ein", "biom": "all",
+                "type": "baker",
+                "size": 5
+			}
+} 

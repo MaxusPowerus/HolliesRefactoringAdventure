@@ -231,10 +231,7 @@ public class GUIManager {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
-=======
 		compassBackgroundPanel.setOpaque(false);
->>>>>>> 88000b28be71ce70385a23454320a723aaeef042
 
 		goNorthButton = new JButton();
 		goNorthButton
@@ -243,15 +240,11 @@ public class GUIManager {
 		goNorthButton.setRolloverIcon(
 				new ImageIcon(new ImageIcon(HelperFunctions.getResource("images/GUI/Buttons/Compass_N_Highlighted.png"))
 						.getImage().getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING)));
-<<<<<<< HEAD
-		goNorthButton.setBackground(new Color(0, 0, 0, 0));
-=======
 		goNorthButton.setDisabledIcon(
 				new ImageIcon(new ImageIcon(HelperFunctions.getResource("images/GUI/Buttons/Compass_N_Disabled.png"))
 						.getImage().getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING)));
 		goNorthButton.setBackground(new Color(0, 0, 0, 0));
 		goNorthButton.setContentAreaFilled(false);
->>>>>>> 88000b28be71ce70385a23454320a723aaeef042
 		goNorthButton.setBorder(null);
 		goNorthButton.setBounds(74, 18, 50, 50);
 		compassBackgroundPanel.add(goNorthButton);
@@ -263,15 +256,11 @@ public class GUIManager {
 		goSouthButton.setRolloverIcon(
 				new ImageIcon(new ImageIcon(HelperFunctions.getResource("images/GUI/Buttons/Compass_S_Highlighted.png"))
 						.getImage().getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING)));
-<<<<<<< HEAD
-		goSouthButton.setBackground(new Color(0, 0, 0, 0));
-=======
 		goSouthButton.setDisabledIcon(
 				new ImageIcon(new ImageIcon(HelperFunctions.getResource("images/GUI/Buttons/Compass_S_Disabled.png"))
 						.getImage().getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING)));
 		goSouthButton.setBackground(new Color(0, 0, 0, 0));
 		goSouthButton.setContentAreaFilled(false);
->>>>>>> 88000b28be71ce70385a23454320a723aaeef042
 		goSouthButton.setBorder(null);
 		goSouthButton.setBounds(74, 134, 50, 50);
 		compassBackgroundPanel.add(goSouthButton);
@@ -283,15 +272,11 @@ public class GUIManager {
 		goWestButton.setRolloverIcon(
 				new ImageIcon(new ImageIcon(HelperFunctions.getResource("images/GUI/Buttons/Compass_W_Highlighted.png"))
 						.getImage().getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING)));
-<<<<<<< HEAD
-		goWestButton.setBackground(new Color(0, 0, 0, 0));
-=======
 		goWestButton.setDisabledIcon(
 				new ImageIcon(new ImageIcon(HelperFunctions.getResource("images/GUI/Buttons/Compass_W_Disabled.png"))
 						.getImage().getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING)));
 		goWestButton.setBackground(new Color(0, 0, 0, 0));
 		goWestButton.setContentAreaFilled(false);
->>>>>>> 88000b28be71ce70385a23454320a723aaeef042
 		goWestButton.setBorder(null);
 		goWestButton.setBounds(21, 75, 50, 50);
 		compassBackgroundPanel.add(goWestButton);
@@ -304,15 +289,11 @@ public class GUIManager {
 		goEastButton.setRolloverIcon(
 				new ImageIcon(new ImageIcon(HelperFunctions.getResource("images/GUI/Buttons/Compass_O_Highlighted.png"))
 						.getImage().getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING)));
-<<<<<<< HEAD
-		goEastButton.setBackground(new Color(0, 0, 0, 0));
-=======
 		goEastButton.setDisabledIcon(
 				new ImageIcon(new ImageIcon(HelperFunctions.getResource("images/GUI/Buttons/Compass_O_Disabled.png"))
 						.getImage().getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING)));
 		goEastButton.setBackground(new Color(0, 0, 0, 0));
 		goEastButton.setContentAreaFilled(false);
->>>>>>> 88000b28be71ce70385a23454320a723aaeef042
 		goEastButton.setBorder(null);
 		goEastButton.setBounds(130, 74, 50, 50);
 		compassBackgroundPanel.add(goEastButton);
@@ -324,22 +305,6 @@ public class GUIManager {
 		goNorthButton.addActionListener(new NavigationButtonAction(Direction.NORTH));
 
 		GroupLayout gl_actionPanel = new GroupLayout(actionPanel);
-<<<<<<< HEAD
-		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_actionPanel.createSequentialGroup().addComponent(openInvButton)
-						.addPreferredGap(ComponentPlacement.RELATED, 320, Short.MAX_VALUE)
-						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 278, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_actionPanel
-						.createSequentialGroup().addGap(172).addComponent(compassBackgroundPanel,
-								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(230, Short.MAX_VALUE)));
-		gl_actionPanel.setVerticalGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING).addGroup(gl_actionPanel
-				.createSequentialGroup()
-				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addComponent(openInvButton)
-						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addComponent(compassBackgroundPanel, GroupLayout.PREFERRED_SIZE, 208, GroupLayout.PREFERRED_SIZE)));
-=======
 		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_actionPanel
 				.createSequentialGroup()
 				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
@@ -358,7 +323,6 @@ public class GUIManager {
 								.addComponent(compassBackgroundPanel, GroupLayout.PREFERRED_SIZE, 196, Short.MAX_VALUE))
 						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
 				.addContainerGap(52, GroupLayout.PREFERRED_SIZE)));
->>>>>>> 88000b28be71ce70385a23454320a723aaeef042
 		actionButtonPanel.setLayout(new GridLayout(5, 1, 0, 5));
 		actionPanel.setLayout(gl_actionPanel);
 
@@ -414,7 +378,7 @@ public class GUIManager {
 		leftContentPanel.add(inventoryPanel);
 		leftMainPanel.setLayout(gl_leftMainPanel);
 
-		JLabel playerInfoHeadline = new JLabel("Das ist Holly. Holly ist spielsüchtig.") {
+		JLabel playerInfoHeadline = new JLabel("Das ist Holly. Holly ist spielsï¿½chtig.") {
 			protected void paintComponent(Graphics g) {
 				g.setColor(getBackground());
 				g.fillRect(0, 0, getWidth(), getHeight());

@@ -105,6 +105,14 @@ public class Item {
 		return item;
 	}
 
+	public boolean equals(Item item) {
+		if (uniqueName.equals(item.getUniqueName())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	@Override
 	public String toString() {
 		return this.name;
