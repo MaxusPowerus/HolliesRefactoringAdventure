@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -26,6 +27,8 @@ public class BackgroundImagePanel extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
+		g.setColor(new Color(0, 0, 0, 0));
+		g.fillRect(0, 0, getWidth(), getHeight());
 		g.drawImage(img, 0, 0, null);
 	}
 
