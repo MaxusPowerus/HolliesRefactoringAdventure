@@ -15,7 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import basic.GameManager;
+import entities.Enemy;
+import entities.Merchant;
 import map.MapField;
+import utilities.Challenge;
 
 public class MapFieldHoverAction implements MouseListener {
 
@@ -81,6 +84,38 @@ public class MapFieldHoverAction implements MouseListener {
 		name.setFont(new Font("Dialog", Font.BOLD, 16));
 		name.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
 		mapFieldInfoPanel.add(name);
+
+		JLabel info = new JLabel();
+		info.setFont(new Font("Dialog", Font.PLAIN, 14));
+
+		Challenge challenge = this.mapField.getChallenge();
+		switch (challenge.getChallangeType()) {
+		case 0:
+			if (challenge.isChallengeCompleted()) {
+				info.setText("Du hast diesen Container bereits gefunden");
+			} else {
+				info.setText("Hier gibt es " + challenge.getContainer().toString() + " für dich");
+			}
+			break;
+		case 1:
+			if (challenge.isChallengeCompleted()) {
+				info.setText("Du hast diesen Feind bereits besiegt");
+			} else {
+				info.setText("Achtung, hier erwartet dich " + ((Enemy) challenge.getNpc()).toString());
+			}
+			break;
+		case 2:
+			info.setText("Hier erwartet dich ein Händler: " + ((Merchant) challenge.getNpc()).getName());
+			break;
+		case 3:
+			if (challenge.isChallengeCompleted()) {
+				info.setText("Du hast diese Aufgabe bereits abgeschlossen");
+			} else {
+				info.setText("Hier erwartet dich eine Aufgabe: " + challenge.getEvent().getTask());
+			}
+			break;
+		}
+		mapFieldInfoPanel.add(info);
 
 		this.gameManager.getGuiManager().getLeftInfoContentPanel().setLayout(gl_leftInfoContentPanel);
 		this.gameManager.getGuiManager().getLeftInfoPanel().setLayout(gl_leftInfoPanel);

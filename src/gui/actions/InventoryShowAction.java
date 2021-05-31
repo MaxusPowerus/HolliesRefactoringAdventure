@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -271,7 +272,18 @@ public class InventoryShowAction implements ActionListener {
 
 			// has not enough money
 			if (item.getSpecificBuyValue(gameManager.getPlayer()) > gameManager.getPlayer().getInventory().getGold()) {
-				button.setText("nicht genügend Gold");
+				button.setText("<html>für <b>" + item.getSpecificBuyValue(gameManager.getPlayer())
+						+ "</b> Gold kaufen</html>");
+				button.addMouseListener(new MouseAdapter() {
+					public void mouseEntered(java.awt.event.MouseEvent evt) {
+						button.setText("nicht genügend Gold");
+					}
+
+					public void mouseExited(java.awt.event.MouseEvent evt) {
+						button.setText("<html>für <b>" + item.getSpecificBuyValue(gameManager.getPlayer())
+								+ "</b> Gold kaufen</html>");
+					}
+				});
 				button.setBackground(Color.decode("#B8B8B8"));
 				button.setForeground(Color.WHITE);
 			} else {

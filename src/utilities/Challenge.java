@@ -66,8 +66,6 @@ public class Challenge {
 	private boolean chooseChallenge(int challangeChance, int containerChance, int enemyChance, int traderChance,
 			int eventChance) {
 
-		// eventChance *= 100;
-
 		Random Randy = new Random();
 		SpecialRandom Chan = new SpecialRandom();
 
