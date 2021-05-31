@@ -49,6 +49,8 @@ public class MapFieldHoverAction implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		this.gameManager.getGuiManager().getLeftInfoContentPanel().removeAll();
 
+		this.gameManager.getGuiManager().getLeftInfoPanel().setBackground(new Color(0, 0, 0, 0.4f));
+
 		this.gameManager.getGuiManager().getLeftInfoContentPanel().setBackground(new Color(0, 0, 0, 0));
 		GroupLayout gl_leftInfoPanel = new GroupLayout(this.gameManager.getGuiManager().getLeftInfoPanel());
 		gl_leftInfoPanel.setHorizontalGroup(gl_leftInfoPanel.createParallelGroup(Alignment.LEADING)
@@ -81,11 +83,14 @@ public class MapFieldHoverAction implements MouseListener {
 		mapFieldInfoPanel.setLayout(new BoxLayout(mapFieldInfoPanel, BoxLayout.Y_AXIS));
 
 		JLabel name = new JLabel(this.mapField.getBiom().getName());
-		name.setFont(new Font("Dialog", Font.BOLD, 16));
+		name.setForeground(Color.WHITE);
+		name.setFont(new Font(this.gameManager.getGuiManager().getCustomFont().getFamily(), Font.PLAIN, 40));
+//		name.setFont(new Font("Dialog", Font.BOLD, 16));
 		name.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
 		mapFieldInfoPanel.add(name);
 
 		JLabel info = new JLabel();
+		info.setForeground(Color.WHITE);
 		info.setFont(new Font("Dialog", Font.PLAIN, 14));
 
 		Challenge challenge = this.mapField.getChallenge();

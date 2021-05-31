@@ -50,6 +50,7 @@ public class MapShowAction implements ActionListener {
 
 		this.gameManager.getGuiManager().getLeftContentPanel().setBackground(new Color(0, 0, 0, 0));
 		this.gameManager.getGuiManager().getMapPanel().setBackground(new Color(0, 0, 0, 0));
+		this.gameManager.getGuiManager().getMapPanel().setOpaque(true);
 		this.gameManager.getGuiManager().getMapPanel()
 				.setLayout(new GridLayout(Config.MAP_SIZEX, Config.MAP_SIZEY, 1, 1));
 

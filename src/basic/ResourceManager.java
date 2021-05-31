@@ -142,8 +142,8 @@ public class ResourceManager {
 
 				String label = new String(jsonItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
 
-				Outfit item = new Outfit(keyName, label, Integer.valueOf(jsonItem.get("armor").toString()),
-						Integer.valueOf(jsonItem.get("value").toString()),
+				Outfit item = new Outfit(keyName, label, Integer.valueOf(jsonItem.get("value").toString()),
+						Integer.valueOf(jsonItem.get("armor").toString()),
 						Integer.valueOf(jsonItem.get("chance").toString()),
 						Integer.valueOf(jsonItem.get("st").toString()), Integer.valueOf(jsonItem.get("pe").toString()),
 						Integer.valueOf(jsonItem.get("en").toString()), Integer.valueOf(jsonItem.get("ch").toString()),

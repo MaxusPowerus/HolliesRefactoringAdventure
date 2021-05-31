@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -83,6 +84,7 @@ public class GUIManager {
 	private JPanel inventoryPanel;
 	private JPanel backgroundImagePanel;
 	private BackgroundImagePanel compassBackgroundPanel;
+	private Font customFont;
 
 	public GUIManager(boolean fullscreen) {
 		initialize(fullscreen);
@@ -95,6 +97,12 @@ public class GUIManager {
 //			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 			UIManager.setLookAndFeel(new FlatLightLaf());
 			UIManager.getLookAndFeelDefaults().put("Desktop.background", Color.decode("#FFFFFF"));
+
+			customFont = Font.createFont(Font.TRUETYPE_FONT, new File(HelperFunctions.getResource("Fontasy.ttf")))
+					.deriveFont(70f);
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			ge.registerFont(customFont);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -149,20 +157,19 @@ public class GUIManager {
 		fieldInfoPanel.setBorder(null);
 		fieldInfoPanel.setBackground(new Color(0, 0, 0, 0));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout
-				.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(leftMainPanel, GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
-										.addComponent(leftInfoPanel, GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(fieldInfoPanel, GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
-										.addComponent(actionPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addComponent(playerInfoPanel, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addContainerGap()));
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(leftMainPanel, GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+								.addComponent(leftInfoPanel, GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(playerInfoPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)
+								.addComponent(fieldInfoPanel, GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
+								.addComponent(actionPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE))
+						.addContainerGap()));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup().addGap(5)
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -170,11 +177,11 @@ public class GUIManager {
 										.addComponent(leftMainPanel, GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
 										.addPreferredGap(ComponentPlacement.RELATED)
 										.addComponent(leftInfoPanel, GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
-								.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(playerInfoPanel, GroupLayout.PREFERRED_SIZE, 154,
-												GroupLayout.PREFERRED_SIZE)
+								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+										.addComponent(playerInfoPanel, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(fieldInfoPanel, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+										.addComponent(fieldInfoPanel, GroupLayout.PREFERRED_SIZE, 288,
+												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED).addComponent(actionPanel,
 												GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE)))
 						.addContainerGap()));
@@ -208,14 +215,14 @@ public class GUIManager {
 			}
 		};
 		fieldInfos.setOpaque(false);
-		fieldInfos.setBounds(6, 16, 589, 286);
+		fieldInfos.setBounds(6, 6, 589, 276);
 		fieldInfos.setBackground(new Color(0f, 0f, 0f, 0.4F));
 		fieldInfos.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		fieldInfos.setLayout(new BoxLayout(fieldInfos, BoxLayout.Y_AXIS));
 		fieldInfoPanel.add(fieldInfos);
 
 		fieldBackground = new JLabel("");
-		fieldBackground.setBounds(0, 0, 599, 308);
+		fieldBackground.setBounds(0, 0, 599, 288);
 		fieldInfoPanel.add(fieldBackground);
 
 		actionButtonPanel = new JPanel();
@@ -227,7 +234,7 @@ public class GUIManager {
 		try {
 			compassBackground = ImageIO.read(new File(HelperFunctions.getResource("images/GUI/Compass.png")));
 			compassBackgroundPanel = new BackgroundImagePanel(
-					GUIHelper.scaleIcon(new ImageIcon(compassBackground), 200).getImage());
+					GUIHelper.scaleIcon(new ImageIcon(compassBackground), 250).getImage());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -246,7 +253,7 @@ public class GUIManager {
 		goNorthButton.setBackground(new Color(0, 0, 0, 0));
 		goNorthButton.setContentAreaFilled(false);
 		goNorthButton.setBorder(null);
-		goNorthButton.setBounds(74, 18, 50, 50);
+		goNorthButton.setBounds(100, 42, 50, 50);
 		compassBackgroundPanel.add(goNorthButton);
 
 		goSouthButton = new JButton();
@@ -262,7 +269,7 @@ public class GUIManager {
 		goSouthButton.setBackground(new Color(0, 0, 0, 0));
 		goSouthButton.setContentAreaFilled(false);
 		goSouthButton.setBorder(null);
-		goSouthButton.setBounds(74, 134, 50, 50);
+		goSouthButton.setBounds(100, 158, 50, 50);
 		compassBackgroundPanel.add(goSouthButton);
 
 		goWestButton = new JButton();
@@ -278,7 +285,7 @@ public class GUIManager {
 		goWestButton.setBackground(new Color(0, 0, 0, 0));
 		goWestButton.setContentAreaFilled(false);
 		goWestButton.setBorder(null);
-		goWestButton.setBounds(21, 75, 50, 50);
+		goWestButton.setBounds(47, 99, 50, 50);
 		compassBackgroundPanel.add(goWestButton);
 		goWestButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
 
@@ -295,7 +302,7 @@ public class GUIManager {
 		goEastButton.setBackground(new Color(0, 0, 0, 0));
 		goEastButton.setContentAreaFilled(false);
 		goEastButton.setBorder(null);
-		goEastButton.setBounds(130, 74, 50, 50);
+		goEastButton.setBounds(156, 98, 50, 50);
 		compassBackgroundPanel.add(goEastButton);
 		goEastButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
 
@@ -307,22 +314,19 @@ public class GUIManager {
 		GroupLayout gl_actionPanel = new GroupLayout(actionPanel);
 		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_actionPanel
 				.createSequentialGroup()
-				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_actionPanel.createSequentialGroup().addComponent(openInvButton)
-								.addPreferredGap(ComponentPlacement.RELATED, 240, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING,
-								gl_actionPanel.createSequentialGroup().addContainerGap()
-										.addComponent(compassBackgroundPanel, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addGap(46)))
+				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addComponent(openInvButton)
+						.addGroup(gl_actionPanel.createSequentialGroup().addGap(6).addComponent(compassBackgroundPanel,
+								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+				.addPreferredGap(ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
 				.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 278, GroupLayout.PREFERRED_SIZE)));
 		gl_actionPanel.setVerticalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_actionPanel
 				.createSequentialGroup()
 				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_actionPanel.createSequentialGroup().addComponent(openInvButton).addGap(52)
-								.addComponent(compassBackgroundPanel, GroupLayout.PREFERRED_SIZE, 196, Short.MAX_VALUE))
+						.addGroup(gl_actionPanel.createSequentialGroup().addComponent(openInvButton)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(compassBackgroundPanel, GroupLayout.PREFERRED_SIZE, 242, Short.MAX_VALUE))
 						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
-				.addContainerGap(52, GroupLayout.PREFERRED_SIZE)));
+				.addContainerGap()));
 		actionButtonPanel.setLayout(new GridLayout(5, 1, 0, 5));
 		actionPanel.setLayout(gl_actionPanel);
 
@@ -392,8 +396,8 @@ public class GUIManager {
 		playerInfoHeadline.setBorder(null);
 		playerInfoHeadline.setHorizontalAlignment(SwingConstants.CENTER);
 
-		JPanel playerBarPanel = new JPanel();
-		playerBarPanel.setBackground(new Color(0, 0, 0, 0));
+		JPanel playerBarPanelFirstLine = new JPanel();
+		playerBarPanelFirstLine.setBackground(new Color(0, 0, 0, 0));
 
 		JPanel skillPanel = new JPanel();
 		skillPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
@@ -450,21 +454,22 @@ public class GUIManager {
 		GroupLayout gl_playerInfoPanel = new GroupLayout(playerInfoPanel);
 		gl_playerInfoPanel.setHorizontalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addComponent(playerInfoHeadline, GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
-				.addComponent(playerBarPanel, GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
 				.addGroup(gl_playerInfoPanel.createSequentialGroup()
 						.addComponent(skillPanel, GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE).addGap(30)
-						.addComponent(equippedPanel, GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)));
+						.addComponent(equippedPanel, GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
+				.addComponent(playerBarPanelFirstLine, GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE));
 		gl_playerInfoPanel.setVerticalGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_playerInfoPanel.createSequentialGroup()
 						.addComponent(playerInfoHeadline, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(playerBarPanel, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_playerInfoPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(
+								playerBarPanelFirstLine, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(gl_playerInfoPanel.createParallelGroup(Alignment.TRAILING)
 								.addComponent(skillPanel, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
 								.addComponent(equippedPanel, GroupLayout.PREFERRED_SIZE, 71,
 										GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(12, Short.MAX_VALUE)));
+						.addContainerGap()));
 
 		lblSkills = new JLabel("Skills") {
 			protected void paintComponent(Graphics g) {
@@ -565,28 +570,33 @@ public class GUIManager {
 
 		levelBar = new JProgressBar();
 		levelBar.setToolTipText("");
-		GroupLayout gl_playerBarPanel = new GroupLayout(playerBarPanel);
-		gl_playerBarPanel.setHorizontalGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_playerBarPanel.createSequentialGroup().addContainerGap().addComponent(healthLabel)
+		GroupLayout gl_playerBarPanelFirstLine = new GroupLayout(playerBarPanelFirstLine);
+		gl_playerBarPanelFirstLine.setHorizontalGroup(gl_playerBarPanelFirstLine.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_playerBarPanelFirstLine.createSequentialGroup().addContainerGap()
+						.addGroup(gl_playerBarPanelFirstLine.createParallelGroup(Alignment.LEADING)
+								.addComponent(healthLabel).addComponent(levelLabel))
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(healthBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 131, Short.MAX_VALUE).addComponent(levelLabel)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(levelBar, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap()));
-		gl_playerBarPanel.setVerticalGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_playerBarPanel.createSequentialGroup().addGap(5).addGroup(gl_playerBarPanel
-						.createParallelGroup(Alignment.LEADING)
-						.addComponent(healthLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(healthBar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
-						.addGroup(gl_playerBarPanel.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(levelLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE,
+						.addGroup(gl_playerBarPanelFirstLine.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(levelBar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(healthBar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addContainerGap(370, Short.MAX_VALUE)));
+		gl_playerBarPanelFirstLine.setVerticalGroup(gl_playerBarPanelFirstLine.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_playerBarPanelFirstLine.createSequentialGroup().addGap(5)
+						.addGroup(gl_playerBarPanelFirstLine.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(healthLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(healthBar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_playerBarPanelFirstLine.createParallelGroup(Alignment.TRAILING)
 								.addComponent(levelBar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)))
-						.addContainerGap()));
-		playerBarPanel.setLayout(gl_playerBarPanel);
+										Short.MAX_VALUE)
+								.addComponent(levelLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE))
+						.addGap(10)));
+		playerBarPanelFirstLine.setLayout(gl_playerBarPanelFirstLine);
 		playerInfoPanel.setLayout(gl_playerInfoPanel);
 		frame.getContentPane().setLayout(groupLayout);
 	}
@@ -733,6 +743,10 @@ public class GUIManager {
 
 	public void setBackgroundImagePanel(JPanel backgroundImagePanel) {
 		this.backgroundImagePanel = backgroundImagePanel;
+	}
+
+	public Font getCustomFont() {
+		return customFont;
 	}
 
 	public void setNavigationEnabled(boolean enabled) {
