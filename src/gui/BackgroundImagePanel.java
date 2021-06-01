@@ -36,4 +36,8 @@ public class BackgroundImagePanel extends JPanel {
 		return img;
 	}
 
+	public void setImg(Image img) {
+		this.img = img;
+	}
+
 }
