@@ -16,10 +16,10 @@ public class Inventory {
 
 	private ArrayList<Item> items;
 	private int gold;
-	private int selectedIndex;
+	private String selectedCategory;
 
 	public Inventory() {
-		this.selectedIndex = 0;
+		this.selectedCategory = "";
 		items = new ArrayList<Item>();
 		gold = 0;
 	}
@@ -177,12 +177,12 @@ public class Inventory {
 		this.gold -= gold;
 	}
 
-	public int getSelectedIndex() {
-		return selectedIndex;
+	public String getSelectedCategory() {
+		return selectedCategory;
 	}
 
-	public void setSelectedIndex(int selectedIndex) {
-		this.selectedIndex = selectedIndex;
+	public void setSelectedCategory(String selectedCategory) {
+		this.selectedCategory = selectedCategory;
 	}
 
 	public String stringifyItems() {

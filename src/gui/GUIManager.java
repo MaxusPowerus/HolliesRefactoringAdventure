@@ -375,14 +375,27 @@ public class GUIManager {
 		mapPanel.setBackground(new Color(0, 0, 0, 0));
 		mapPanel.setBounds(0, 0, 561, 537);
 		leftContentPanel.add(mapPanel);
+		GroupLayout gl_mapPanel = new GroupLayout(mapPanel);
+		gl_mapPanel
+				.setHorizontalGroup(gl_mapPanel.createParallelGroup(Alignment.LEADING).addGap(0, 561, Short.MAX_VALUE));
+		gl_mapPanel
+				.setVerticalGroup(gl_mapPanel.createParallelGroup(Alignment.LEADING).addGap(0, 537, Short.MAX_VALUE));
+		mapPanel.setLayout(gl_mapPanel);
 
 		inventoryPanel = new JPanel();
 		inventoryPanel.setBackground(new Color(0, 0, 0, 0));
 		inventoryPanel.setBounds(0, 0, 561, 537);
 		leftContentPanel.add(inventoryPanel);
 		leftMainPanel.setLayout(gl_leftMainPanel);
+		GroupLayout gl_invPanel = new GroupLayout(inventoryPanel);
+		gl_invPanel
+				.setHorizontalGroup(gl_invPanel.createParallelGroup(Alignment.LEADING).addGap(0, 561, Short.MAX_VALUE));
+		gl_invPanel
+				.setVerticalGroup(gl_invPanel.createParallelGroup(Alignment.LEADING).addGap(0, 537, Short.MAX_VALUE));
+		inventoryPanel.setLayout(gl_invPanel);
+		leftMainPanel.setLayout(gl_leftMainPanel);
 
-		JLabel playerInfoHeadline = new JLabel("Das ist Holly. Holly ist spielsï¿½chtig.") {
+		JLabel playerInfoHeadline = new JLabel("Das ist Holly. Holly ist spielsüchtig.") {
 			protected void paintComponent(Graphics g) {
 				g.setColor(getBackground());
 				g.fillRect(0, 0, getWidth(), getHeight());
