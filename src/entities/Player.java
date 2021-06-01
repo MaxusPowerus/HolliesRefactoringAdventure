@@ -1,6 +1,9 @@
 package entities;
 
+import java.util.Random;
+
 import basic.Config;
+import basic.HelperFunctions;
 import items.Food;
 import items.Item;
 import items.Note;
@@ -164,9 +167,12 @@ public class Player {
 	}
 
 	public boolean fight(Enemy enemy) {
-		int playerFight = skillSet.getSkillValue(Skill.STRENGTH) + skillSet.getSkillValue(Skill.AGILITY) / 2;
+
+		Random Randy = new Random();
+
+		int playerFight = skillSet.getSkillValue(Skill.STRENGTH) + skillSet.getSkillValue(Skill.AGILITY);
 		int enemyFight = enemy.getSkillSet().getSkillValue(Skill.STRENGTH)
-				+ enemy.getSkillSet().getSkillValue(Skill.AGILITY) / 2;
+				+ enemy.getSkillSet().getSkillValue(Skill.AGILITY);
 		double playerDmg = 0;
 		if (this.weapon != null)
 			playerDmg = this.weapon.getDamage();
@@ -178,8 +184,16 @@ public class Player {
 
 		}
 		double enemyDmg = enemy.getDamage();
-		double dmgFac = 1;
+		int threshold = 20;
 		double enemyHealth = enemy.getHealth();
+		double dmgFacPlayer = 1;
+		double dmgFacEnemy = 1;
+
+		if (playerFight > enemyFight) {
+			dmgFacPlayer += playerFight - enemyFight;
+		} else {
+			dmgFacEnemy += enemyFight - playerFight;
+		}
 
 		int round = 1;
 
@@ -190,26 +204,26 @@ public class Player {
 		while (true) {
 			// System.out.println("PlayerHP: " + this.health + "EnemyHP:" + enemyHealth);
 			// System.out.println("Runde: " + round);
-			dmgFac = 1;
+
 			// Player ist am Zug
-			if ((playerFight - enemyFight) > 0)
-				dmgFac = playerFight - enemyFight;
+			if (Randy.nextInt(threshold) <= skillSet.getSkillValue(Skill.LUCK)) {
+				enemyHealth -= playerDmg * dmgFacPlayer;
+			}
+			if (enemyHealth <= 0) {
+				break;
+			}
 
 			// System.out.println("Player - dmgFac: " + dmgFac);
-			enemyHealth -= dmgFac * playerDmg;
-			if (this.health <= 0)
-				break;
 
-			dmgFac = 1;
 			// Enemy ist am Zug
-			if ((enemyFight - playerFight) > 0)
-				dmgFac = enemyFight - playerFight;
-
+			if (Randy.nextInt(threshold) <= enemy.getSkillSet().getSkillValue(Skill.LUCK)) {
+				this.health -= enemyDmg * dmgFacEnemy;
+			}
+			if (this.health <= 0) {
+				break;
+			}
 			// System.out.println("Enemy - dmgFac: " + dmgFac);
 
-			this.health -= dmgFac * enemyDmg;
-			if (enemyHealth <= 0)
-				break;
 			round++;
 		}
 		if (health > 0) {
@@ -221,11 +235,69 @@ public class Player {
 
 	}
 
+	public int getFightChance(Enemy enemy) {
+		int chance = 50;
+
+		int playerFight = skillSet.getSkillValue(Skill.STRENGTH) + skillSet.getSkillValue(Skill.AGILITY);
+		int enemyFight = enemy.getSkillSet().getSkillValue(Skill.STRENGTH)
+				+ enemy.getSkillSet().getSkillValue(Skill.AGILITY);
+		double playerDmg = 0;
+		if (this.weapon != null)
+			playerDmg = this.weapon.getDamage();
+		if (this.weapon == null) {
+			playerDmg = skillSet.getSkillValue(Skill.STRENGTH) / 2;
+			if (playerDmg <= 0) {
+				playerDmg = 1;
+			}
+
+		}
+		double enemyDmg = enemy.getDamage();
+		int ChanceFac = 15;
+		double enemyHealth = enemy.getHealth();
+		double dmgFacPlayer = 1;
+		double dmgFacEnemy = 1;
+
+		if (playerFight > enemyFight) {
+			dmgFacPlayer += playerFight - enemyFight;
+		} else {
+			dmgFacEnemy += enemyFight - playerFight;
+		}
+
+		int needRoundsPlayer = (int) (this.health / (enemyDmg * dmgFacEnemy));
+		int needRoundsEnemy = (int) (enemyHealth / (playerDmg * dmgFacPlayer));
+
+		return chance + (needRoundsPlayer - needRoundsEnemy) * ChanceFac;
+	}
+
+	public int getFleeChance(Enemy enemy) {
+		int chance = 100
+				- (enemy.getSkillSet().getSkillValue(Skill.AGILITY) - skillSet.getSkillValue(Skill.AGILITY)) * 15;
+		if (chance > 95) {
+			chance = 95;
+		} else {
+			chance = 5;
+		}
+		return chance;
+	}
+
 	public boolean flee(Enemy enemy) {
+
 		if (enemy.getSkillSet().getSkillValue(Skill.AGILITY) < skillSet.getSkillValue(Skill.AGILITY)) {
-			return false;
+			return saveMe();
 		} else {
 			return true;
+		}
+	}
+
+	public boolean saveMe() {
+		Random Randy = new Random();
+
+		if (Randy.nextInt(10) < skillSet.getSkillValue(Skill.LUCK)) {
+			System.out.println("saveMe +");
+			return true;
+		} else {
+			System.out.println("saveMe -");
+			return false;
 		}
 	}
 

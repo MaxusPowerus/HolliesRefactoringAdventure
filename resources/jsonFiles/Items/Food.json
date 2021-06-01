@@ -54,5 +54,21 @@
       "energy": 50,
       "value": 15,
       "chance": 0
+   },
+   {
+      "uniqueName": "Ointment",
+      "label": "Salbe",
+      "energy": 55,
+      "value": 50,
+      "chance": 0
+   },
+   {
+      "uniqueName": "Medicine",
+      "label": "Medizin",
+      "energy": 100,
+      "value": 100,
+      "chance": 0
    }
 ]
+
+
