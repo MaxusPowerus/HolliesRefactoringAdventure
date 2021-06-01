@@ -20,7 +20,7 @@
 	"solutionTry": "Dem (armen) Mann ein Brot geben!", 
 		"solutionShort": "Helfen!",
 		"success": "Dankbar  nimmt, der alte Mann deine Gabe an!", 
-		"failure": "Du lässt den Mann hungrig zurück, sicher bist du der letzte, der ihn lebend gesehen hat...",
+		"failure": "Du hast kein Brot mehr, also lässt du den Mann hungrig zurück, sicher bist du der letzte, der ihn lebend gesehen hat...",
 		"skill": "", "skillValue": 0, "requiredItems": ["Bread"], "needOnlyOneItem": "true", "needItemPermanet": "true",
 		"rewardXp": "50", "rewardItems": [], "rewardGold": 0, 
 		"takeDamage": 0}
