@@ -147,6 +147,22 @@ public class EventSolution {
 		return false;
 	}
 
+	public int getTryChance() {
+		int chance = 0;
+
+		if (requiredSkill == null && requiredItems.size() == 0) {
+			chance = 100;
+		} else if (requiredSkill != null && requiredItems.size() == 0) {
+
+		} else if (requiredSkill == null && requiredItems.size() > 0) {
+
+		} else {// requiredSkill != null && requiredItems.size() > 0
+
+		}
+
+		return chance;
+	}
+
 	public String getSolutionTry() {
 		return solutionTry;
 	}
