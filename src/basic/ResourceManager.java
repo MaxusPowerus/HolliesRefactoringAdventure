@@ -111,22 +111,15 @@ public class ResourceManager {
 			JSONArray jsonItems = (JSONArray) parser.parse(fileReader);
 			jsonItems.forEach((item) -> {
 				JSONObject itemObj = (JSONObject) item;
-				System.out.println(itemObj.get("uniqueName").toString());
-			});
+				String label = new String(itemObj.get("label").toString().getBytes(), StandardCharsets.UTF_8);
 
-//			Set<String> labels = jsonItems.keySet();
-//
-//			for (String keyName : labels) {
-//				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
-//
-//				String label = new String(jsonItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
-//
-//				Food item = new Food(keyName, label, Integer.valueOf(jsonItem.get("energy").toString()),
-//						Integer.valueOf(jsonItem.get("value").toString()),
-//						Integer.valueOf(jsonItem.get("chance").toString()));
-//
-//				this.food.add(item);
-//			}
+				Food food = new Food(itemObj.get("uniqueName").toString(), label,
+						Integer.valueOf(itemObj.get("energy").toString()),
+						Integer.valueOf(itemObj.get("value").toString()),
+						Integer.valueOf(itemObj.get("chance").toString()));
+				this.food.add(food);
+
+			});
 
 		} catch (Exception e) {
 			e.printStackTrace();
