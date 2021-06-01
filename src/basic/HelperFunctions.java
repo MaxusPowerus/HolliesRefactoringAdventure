@@ -14,4 +14,13 @@ public class HelperFunctions {
 		return HelperFunctions.class.getClassLoader().getResource(path).getFile();
 	}
 
+	public static int betragVon(int i) {
+		if (i < 0) {
+			return i * (-1);
+		} else {
+			return i;
+		}
+
+	}
+
 }

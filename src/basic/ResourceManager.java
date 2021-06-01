@@ -80,21 +80,18 @@ public class ResourceManager {
 
 			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Weapons.json"));
 			JSONParser parser = new JSONParser();
-			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
-			Set<String> labels = jsonItems.keySet();
+			JSONArray jsonItems = (JSONArray) parser.parse(fileReader);
+			jsonItems.forEach((item) -> {
+				JSONObject itemObj = (JSONObject) item;
+				String label = new String(itemObj.get("label").toString().getBytes(), StandardCharsets.UTF_8);
 
-			for (String keyName : labels) {
-				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
-
-				String label = new String(jsonItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
-
-				Weapon item = new Weapon(keyName, label, Integer.valueOf(jsonItem.get("damage").toString()),
-						Integer.valueOf(jsonItem.get("value").toString()),
-						Integer.valueOf(jsonItem.get("chance").toString()));
-
-				this.weapons.add(item);
-			}
+				Weapon weapon = new Weapon(itemObj.get("uniqueName").toString(), label,
+						Integer.valueOf(itemObj.get("damage").toString()),
+						Integer.valueOf(itemObj.get("value").toString()),
+						Integer.valueOf(itemObj.get("chance").toString()));
+				this.weapons.add(weapon);
+			});
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -106,7 +103,6 @@ public class ResourceManager {
 
 			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Food.json"));
 			JSONParser parser = new JSONParser();
-//			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
 			JSONArray jsonItems = (JSONArray) parser.parse(fileReader);
 			jsonItems.forEach((item) -> {
@@ -132,27 +128,26 @@ public class ResourceManager {
 
 			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Outfits.json"));
 			JSONParser parser = new JSONParser();
-			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
-			Set<String> labels = jsonItems.keySet();
+			JSONArray jsonItems = (JSONArray) parser.parse(fileReader);
+			jsonItems.forEach((item) -> {
+				JSONObject itemObj = (JSONObject) item;
+				String label = new String(itemObj.get("label").toString().getBytes(), StandardCharsets.UTF_8);
 
-			for (String keyName : labels) {
-				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
+				Outfit outfit = new Outfit(itemObj.get("uniqueName").toString(), label,
+						Integer.valueOf(itemObj.get("value").toString()),
+						Integer.valueOf(itemObj.get("armor").toString()),
+						Integer.valueOf(itemObj.get("chance").toString()),
+						Integer.valueOf(itemObj.get("st").toString()), Integer.valueOf(itemObj.get("pe").toString()),
+						Integer.valueOf(itemObj.get("en").toString()), Integer.valueOf(itemObj.get("ch").toString()),
+						Integer.valueOf(itemObj.get("in").toString()), Integer.valueOf(itemObj.get("ag").toString()),
+						Integer.valueOf(itemObj.get("lk").toString()));
+				this.outfits.add(outfit);
 
-				String label = new String(jsonItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
+			});
+		} catch (
 
-				Outfit item = new Outfit(keyName, label, Integer.valueOf(jsonItem.get("value").toString()),
-						Integer.valueOf(jsonItem.get("armor").toString()),
-						Integer.valueOf(jsonItem.get("chance").toString()),
-						Integer.valueOf(jsonItem.get("st").toString()), Integer.valueOf(jsonItem.get("pe").toString()),
-						Integer.valueOf(jsonItem.get("en").toString()), Integer.valueOf(jsonItem.get("ch").toString()),
-						Integer.valueOf(jsonItem.get("in").toString()), Integer.valueOf(jsonItem.get("ag").toString()),
-						Integer.valueOf(jsonItem.get("lk").toString()));
-
-				this.outfits.add(item);
-			}
-
-		} catch (Exception e) {
+		Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -163,23 +158,22 @@ public class ResourceManager {
 
 			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Notes.json"));
 			JSONParser parser = new JSONParser();
-			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
-			Set<String> labels = jsonItems.keySet();
+			JSONArray jsonItems = (JSONArray) parser.parse(fileReader);
+			jsonItems.forEach((item) -> {
+				JSONObject itemObj = (JSONObject) item;
+				String label = new String(itemObj.get("label").toString().getBytes(), StandardCharsets.UTF_8);
 
-			for (String keyName : labels) {
-				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
+				Note note = new Note(itemObj.get("uniqueName").toString(), label, itemObj.get("text").toString(),
+						Integer.valueOf(itemObj.get("value").toString()),
+						Integer.valueOf(itemObj.get("chance").toString()));
+				this.notes.add(note);
 
-				String label = new String(jsonItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
+			});
 
-				Note item = new Note(keyName, label, jsonItem.get("text").toString(),
-						Integer.valueOf(jsonItem.get("value").toString()),
-						Integer.valueOf(jsonItem.get("chance").toString()));
+		} catch (
 
-				this.notes.add(item);
-			}
-
-		} catch (Exception e) {
+		Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -190,21 +184,18 @@ public class ResourceManager {
 
 			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Others.json"));
 			JSONParser parser = new JSONParser();
-			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
-			Set<String> labels = jsonItems.keySet();
+			JSONArray jsonItems = (JSONArray) parser.parse(fileReader);
+			jsonItems.forEach((item) -> {
+				JSONObject itemObj = (JSONObject) item;
+				String label = new String(itemObj.get("label").toString().getBytes(), StandardCharsets.UTF_8);
 
-			for (String keyName : labels) {
-				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
+				Other other = new Other(itemObj.get("uniqueName").toString(), label, itemObj.get("info").toString(),
+						Integer.valueOf(itemObj.get("value").toString()),
+						Integer.valueOf(itemObj.get("chance").toString()));
+				this.others.add(other);
 
-				String label = new String(jsonItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
-
-				Other item = new Other(keyName, label, jsonItem.get("info").toString(),
-						Integer.valueOf(jsonItem.get("value").toString()),
-						Integer.valueOf(jsonItem.get("chance").toString()));
-
-				this.others.add(item);
-			}
+			});
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -216,21 +207,18 @@ public class ResourceManager {
 
 			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/QuestItems.json"));
 			JSONParser parser = new JSONParser();
-			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
 
-			Set<String> labels = jsonItems.keySet();
+			JSONArray jsonItems = (JSONArray) parser.parse(fileReader);
+			jsonItems.forEach((item) -> {
+				JSONObject itemObj = (JSONObject) item;
+				String label = new String(itemObj.get("label").toString().getBytes(), StandardCharsets.UTF_8);
 
-			for (String keyName : labels) {
-				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
+				QuestItem questItem = new QuestItem(itemObj.get("uniqueName").toString(), label,
+						itemObj.get("info").toString(), Integer.valueOf(itemObj.get("value").toString()),
+						Integer.valueOf(itemObj.get("chance").toString()));
+				this.questItems.add(questItem);
 
-				String label = new String(jsonItem.get("label").toString().getBytes(), StandardCharsets.UTF_8);
-
-				QuestItem item = new QuestItem(keyName, label, jsonItem.get("info").toString(),
-						Integer.valueOf(jsonItem.get("value").toString()),
-						Integer.valueOf(jsonItem.get("chance").toString()));
-
-				this.questItems.add(item);
-			}
+			});
 
 		} catch (Exception e) {
 			e.printStackTrace();
