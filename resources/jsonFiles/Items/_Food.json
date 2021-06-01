@@ -1,58 +1,11 @@
-[
-   {
-      "uniqueName": "Catfood",
-      "label": "Katzenfutter",
-      "energy": 1000,
-      "value": 1,
-      "chance": 5
-   },
-   {
-      "uniqueName": "Flesh",
-      "label": "Fleisch",
-      "energy": 30,
-      "value": 15,
-      "chance": 50
-   },
-   {
-      "uniqueName": "Bread",
-      "label": "Brot",
-      "energy": 25,
-      "value": 5,
-      "chance": 95
-   },
-   {
-      "uniqueName": "Cake",
-      "label": "Kuchen",
-      "energy": 25,
-      "value": 20,
-      "chance": 95
-   },
-   {
-      "uniqueName": "Apple",
-      "label": "Apfel",
-      "energy": 5,
-      "value": 3,
-      "chance": 95
-   },
-   {
-      "uniqueName": "Beer",
-      "label": "Bier",
-      "energy": 10,
-      "value": 5,
-      "chance": 75
-   },
-   {
-      "uniqueName": "Wine",
-      "label": "Wein",
-      "energy": 10,
-      "value": 10,
-      "chance": 25
-   },
-   {
-      "uniqueName": "RaspberryJelly",
-      "label": "Himbeergelee",
-      "energy": 50,
-      "value": 15,
-      "chance": 0
-   }
-]
+{
+    "Catfood": { "label": "Katzenfutter", "energy": 1000, "value": 1, "chance": 5},
+    "Flesh": { "label": "Fleisch", "energy": 30, "value": 15, "chance": 50},
+    "Bread": { "label": "Brot", "energy": 25, "value": 5, "chance": 95},
+    "Cake": { "label": "Kuchen", "energy": 25, "value": 20, "chance": 95},
+    "Apple": { "label": "Apfel", "energy": 5, "value": 3, "chance": 95},
+    "Beer": {"label": "Bier", "energy": 10, "value": 5, "chance": 75}, 
+    "Wine": {"label": "Wein", "energy": 10, "value": 10, "chance": 25},
+	
+    "RaspberryJelly": {"label": "Himbeergelee", "energy": 50, "value": 15, "chance": 0}
+}
