@@ -147,17 +147,59 @@ public class EventSolution {
 		return false;
 	}
 
-	public int getTryChance() {
+	public int getTryChance(Player player) {
 		int chance = 0;
-
+		int chanceFac = 20;
 		if (requiredSkill == null && requiredItems.size() == 0) {
 			chance = 100;
 		} else if (requiredSkill != null && requiredItems.size() == 0) {
 
+			chance = 100 - (player.getSkillSet().getSkillValue(requiredSkill) - requiredSkillValue) * chanceFac;
+			if (chance < 5) {
+				chance = 5;
+			}
+			if (chance > 95) {
+				chance = 5;
+			}
+			return chance;
 		} else if (requiredSkill == null && requiredItems.size() > 0) {
-
+			for (int i = 0; i < requiredItems.size(); i++) {
+				if (needOnlyOneItem) {
+					if (player.getInventory().getAllItems().contains(requiredItems.get(i))) {
+						return 100;
+					}
+				} else {
+					if (!player.getInventory().getAllItems().contains(requiredItems.get(i))) {
+						return 0;
+					}
+				}
+			}
 		} else {// requiredSkill != null && requiredItems.size() > 0
+			for (int i = 0; i < requiredItems.size(); i++) {
+				if (needOnlyOneItem) {
+					if (player.getInventory().getAllItems().contains(requiredItems.get(i))) {
+						chance = 100;
+						break;
+					} else {
+						chance = 0;
+					}
 
+				} else {
+					if (!player.getInventory().getAllItems().contains(requiredItems.get(i))) {
+						chance = 0;
+					} else {
+						chance = 100;
+					}
+				}
+			}
+
+		}
+		chance = chance - (player.getSkillSet().getSkillValue(requiredSkill) - requiredSkillValue) * (chanceFac / 2);
+		if (chance < 5) {
+			chance = 5;
+		}
+		if (chance > 95) {
+			chance = 5;
 		}
 
 		return chance;
