@@ -168,7 +168,7 @@ public class Player {
 
 	public boolean hunt(Victim victim) {
 		if (skillSet.getSkillValue(Skill.AGILITY) < victim.getSkillSet().getSkillValue(Skill.AGILITY)) {
-			return saveMe(victim);
+			return saveMe();
 		} else {
 			return true;
 		}
