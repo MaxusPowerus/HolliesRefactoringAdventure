@@ -1,0 +1,32 @@
+{
+  "Chicken":{
+    "label":"Huhn",
+    "prefix":"ein",
+    "health":10,
+    "st":2,
+    "pe":6,
+    "en":5,
+    "ch":6,
+    "in":2,
+    "ag":3,
+    "lk":5,
+    "biom":"meadow",
+    "xp":5,
+    "lootTable":"basicEnemy"
+  },
+  "Rabbit":{
+    "label":"Feldhase",
+    "prefix":"ein",
+    "health":5,
+    "st":1,
+    "pe":6,
+    "en":2,
+    "ch":8,
+    "in":1,
+    "ag":8,
+    "lk":3,
+    "biom":"meadow",
+    "xp":5,
+    "lootTable":"basicEnemy"
+  }
+}

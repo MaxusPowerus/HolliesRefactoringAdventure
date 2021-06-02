@@ -11,6 +11,7 @@ import org.json.simple.parser.JSONParser;
 
 import entities.Enemy;
 import entities.Merchant;
+import entities.Victim;
 import items.Food;
 import items.Item;
 import items.LootTable;
@@ -36,6 +37,7 @@ public class ResourceManager {
 	private ArrayList<LootTable> lootTables;
 
 	private ArrayList<Enemy> enemies;
+	private ArrayList<Victim> victims;
 	private ArrayList<Merchant> merchants;
 
 	private ArrayList<Event> events;
@@ -52,6 +54,7 @@ public class ResourceManager {
 		lootTables = new ArrayList<LootTable>();
 
 		this.enemies = new ArrayList<Enemy>();
+		this.victims = new ArrayList<Victim>();
 		this.merchants = new ArrayList<Merchant>();
 
 		this.events = new ArrayList<Event>();
@@ -68,6 +71,7 @@ public class ResourceManager {
 		this.loadLootTables();
 
 		this.loadEnemies();
+		this.loadVictims();
 		this.loadMerchants();
 
 		this.loadEventSolutions();
@@ -375,6 +379,43 @@ public class ResourceManager {
 		}
 	}
 
+	private void loadVictims() {
+		try {
+
+			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Npc/Enemy.json"));
+			JSONParser parser = new JSONParser();
+			JSONObject jsonNPCs = (JSONObject) parser.parse(fileReader);
+
+			Set<String> labels = jsonNPCs.keySet();
+
+			for (String keyName : labels) {
+				JSONObject jsonNPC = (JSONObject) jsonNPCs.get(keyName);
+
+				String label = new String(jsonNPC.get("label").toString().getBytes(), StandardCharsets.UTF_8);
+
+				Victim victim = new Victim(label, jsonNPC.get("prefix").toString(),
+						Double.valueOf(jsonNPC.get("health").toString()), Integer.valueOf(jsonNPC.get("st").toString()),
+						Integer.valueOf(jsonNPC.get("pe").toString()), Integer.valueOf(jsonNPC.get("en").toString()),
+						Integer.valueOf(jsonNPC.get("ch").toString()), Integer.valueOf(jsonNPC.get("in").toString()),
+						Integer.valueOf(jsonNPC.get("ag").toString()), Integer.valueOf(jsonNPC.get("lk").toString()),
+						jsonNPC.get("biom").toString(), Integer.valueOf(jsonNPC.get("xp").toString()));
+
+				Inventory victimInv = new Inventory();
+
+				String lootTable = jsonNPC.get("lootTable").toString();
+				LootTable table = this.getLootTableByName(lootTable);
+				victimInv.add(table.getItems(), table.getGold());
+
+				victim.setInventory(victimInv);
+
+				this.victims.add(victim);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	private void loadMerchants() {
 		try {
@@ -415,6 +456,10 @@ public class ResourceManager {
 
 	public ArrayList<Enemy> getEnemies() {
 		return this.enemies;
+	}
+
+	public ArrayList<Victim> getVictims() {
+		return this.victims;
 	}
 
 	public LootTable getLootTableByName(String name) {

@@ -2,17 +2,20 @@ package utilities;
 
 import java.util.ArrayList;
 
+import map.Biom;
+
 public class Event {
 
 	private String name;
-
 	private String task;
 	private ArrayList<EventSolution> solutions;
+	private Biom biom;
 
-	public Event(String name, String task, ArrayList<EventSolution> solutions) {
+	public Event(String name, String task, ArrayList<EventSolution> solutions, Biom biom) {
 		this.name = name;
 		this.task = task;
 		this.solutions = solutions;
+		this.biom = biom;
 	}
 
 	public String getName() {
@@ -32,5 +35,9 @@ public class Event {
 
 	public ArrayList<EventSolution> getEventSolutions() {
 		return solutions;
+	}
+
+	public Biom getBiom() {
+		return biom;
 	}
 }
