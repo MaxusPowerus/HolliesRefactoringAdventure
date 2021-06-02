@@ -1,5 +1,6 @@
 {
-	"OldLadyInTrouble": {"task": "Du begegnest einer alten Frau, die ihr Glas mit köstlichem Himbeergelee nicht aufbekommt. Willst du ihr helfen?", "solutions": ["stealTheGlas", "openTheGlas"]},
-	"OldManInTrouble": {"task": "Du begegnest einem alten Mann, der dich um ein Stück Brot bittet!", "solutions": ["feetTheMan"]}
-	
+	"OldLadyInTrouble": {"task": "Du begegnest einer alten Frau, die ihr Glas mit köstlichem Himbeergelee nicht aufbekommt. Willst du ihr helfen?", "solutions": ["stealTheGlas", "openTheGlas"], "biom": "all"},
+	"OldManInTrouble": {"task": "Du begegnest einem alten Mann, der dich um ein Stück Brot bittet!", "solutions": ["feetTheMan"], "biom": "all"},
+	"FlussMeadow": {"task": "Du kommst an einen kleinen Fluss in dem es viele Fische gibt!", "solutions": ["fishing", "spearFishing"], "biom": "meadow"},
+	"FlussForest": {"task": "Du kommst an einen kleinen Fluss in dem es viele Fische gibt!", "solutions": ["fishing", "spearFishing"], "biom": "meadow"}
 }

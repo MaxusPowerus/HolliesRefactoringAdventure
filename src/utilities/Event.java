@@ -11,11 +11,37 @@ public class Event {
 	private ArrayList<EventSolution> solutions;
 	private Biom biom;
 
-	public Event(String name, String task, ArrayList<EventSolution> solutions, Biom biom) {
+	public Event(String name, String task, ArrayList<EventSolution> solutions, String biom) {
 		this.name = name;
 		this.task = task;
 		this.solutions = solutions;
-		this.biom = biom;
+
+		switch (biom) {
+		case "all":
+			this.biom = null;
+			break;
+
+		case "meadow":
+			this.biom = Biom.MEADOW;
+			break;
+
+		case "forest":
+			this.biom = Biom.FOREST;
+			break;
+
+		case "desert":
+			this.biom = Biom.DESERT;
+			break;
+
+		case "swamp":
+			this.biom = Biom.SWAMP;
+			break;
+
+		case "mountains":
+			this.biom = Biom.MOUNTAINS;
+			break;
+		}
+
 	}
 
 	public String getName() {

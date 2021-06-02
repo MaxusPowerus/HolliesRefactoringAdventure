@@ -10,7 +10,10 @@
 	
     {"uniqueName": "Axe", "label": "Axt", "damage": 10, "value": 20, "chance": 15},
     {"uniqueName": "Spear", "label": "Speer", "damage": 5, "value": 10, "chance": 50},
-    {"uniqueName": "Stick", "label": "Stock", "damage": 3, "value": 0, "chance": 5}
+    {"uniqueName": "Stick", "label": "Stock", "damage": 3, "value": 0, "chance": 5},
+    {"uniqueName": "Bow", "label": "Bogen", "damage": 5, "value": 10, "chance": 5},
+    {"uniqueName": "CrossBow", "label": "Armbrust", "damage": 7, "value": 15, "chance": 5}
+	
 	
 ]
 	

@@ -166,6 +166,25 @@ public class Player {
 		}
 	}
 
+	public boolean hunt(Victim victim) {
+		if (skillSet.getSkillValue(Skill.AGILITY) < victim.getSkillSet().getSkillValue(Skill.AGILITY)) {
+			return saveMe(victim);
+		} else {
+			return true;
+		}
+	}
+
+	public int getHuntChance(Victim victim) {
+		int chance = 100
+				- (victim.getSkillSet().getSkillValue(Skill.AGILITY) - skillSet.getSkillValue(Skill.AGILITY)) * 15;
+		if (chance > 95) {
+			chance = 95;
+		} else {
+			chance = 5;
+		}
+		return chance;
+	}
+
 	public boolean fight(Enemy enemy) {
 
 		Random Randy = new Random();

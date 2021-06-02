@@ -70,8 +70,10 @@ public class Challenge {
 		chooseChallenge(100, containerChance, enemyChance, victimChance, traderChance, eventChance);
 	}
 
-	private boolean chooseChallenge(int challangeChance, int containerChance, int enemyChance, int victimChance,
-			int traderChance, int eventChance) {
+	private boolean chooseChallenge(int challangeChance, int containerChance, int enemyChance, int traderChance,
+			int eventChance, int victimChance) {
+
+		eventChance *= 1000;
 
 		Random Randy = new Random();
 		SpecialRandom Chan = new SpecialRandom();
@@ -83,7 +85,7 @@ public class Challenge {
 		int[] challengeTypes = new int[] { containerChance, enemyChance, traderChance, eventChance };
 		this.challengeType = Chan.pickRandom(challengeTypes);
 
-		if (challengeType != 0 && challengeType != 1 && challengeType != 2 && challengeType != 3)
+		if (challengeType != 0 && challengeType != 1 && challengeType != 2 && challengeType != 3 && challengeType != 4)
 			System.out.println("Invalid ChallengeType: " + challengeType);
 
 		switch (challengeType) {
@@ -108,21 +110,8 @@ public class Challenge {
 
 			break;
 
-		case 2:
-			ArrayList<Victim> victims = new ArrayList<Victim>();
-			int lengthVictim = GameManager.getInstance().getResourceManager().getVictims().size();
-			for (int i = 0; i < lengthVictim; i++) {
-				if (GameManager.getInstance().getResourceManager().getVictims().get(i).getBiom() == null
-						|| GameManager.getInstance().getResourceManager().getVictims().get(i).getBiom() == biom) {
-					victims.add(GameManager.getInstance().getResourceManager().getVictims().get(i));
-				}
-			}
-			npc = victims.get(Randy.nextInt(victims.size()));
-
-			break;
-
 		// Callenge: Händler
-		case 3:
+		case 2:
 			ArrayList<Merchant> merchants = new ArrayList<Merchant>();
 			int lengthMerchants = GameManager.getInstance().getResourceManager().getMerchants().size();
 			for (int i = 0; i < lengthMerchants; i++) {
@@ -135,12 +124,26 @@ public class Challenge {
 
 			break;
 		// Challenge: Event
-		case 4:
+		case 3:
 			ArrayList<Event> events = new ArrayList<Event>();
 			int lengthEvents = GameManager.getInstance().getResourceManager().getMerchants().size() - 1;
 			event = GameManager.getInstance().getResourceManager().getEvents().get(Randy.nextInt(lengthEvents));
 
 			break;
+
+		// Callenge NPCBeute
+		case 4:
+			ArrayList<Victim> victims = new ArrayList<Victim>();
+			int lengthVictim = GameManager.getInstance().getResourceManager().getVictims().size();
+			for (int i = 0; i < lengthVictim; i++) {
+				if (GameManager.getInstance().getResourceManager().getVictims().get(i).getBiom() == null
+						|| GameManager.getInstance().getResourceManager().getVictims().get(i).getBiom() == biom) {
+					victims.add(GameManager.getInstance().getResourceManager().getVictims().get(i));
+				}
+			}
+			npc = victims.get(Randy.nextInt(victims.size()));
+			break;
+
 		}
 		return true;
 

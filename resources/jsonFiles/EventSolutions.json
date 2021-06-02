@@ -9,7 +9,7 @@
 		"takeDamage": 10
 		},
 	"openTheGlas":{
-	"solutionTry": "Der (armen) Frau helfen das Glas zu öffnen!", 
+		"solutionTry": "Der (armen) Frau helfen das Glas zu öffnen!", 
 		"solutionShort": "Helfen!",
 		"success": "Du nimmst das Glas und öffnest es mit Leichtigkeit!", 
 		"failure": "Du gibst Alles, aber dieses Glas ist eine Nummer zu groß für dich ... gedehmütig ziehst du von dannen!",
@@ -17,11 +17,28 @@
 		"rewardXp": "50", "rewardItems": [], "rewardGold": 0, 
 		"takeDamage": 0},
 	"feetTheMan":{
-	"solutionTry": "Dem (armen) Mann ein Brot geben!", 
+		"solutionTry": "Dem (armen) Mann ein Brot geben!", 
 		"solutionShort": "Helfen!",
 		"success": "Dankbar  nimmt, der alte Mann deine Gabe an!", 
 		"failure": "Du hast kein Brot mehr, also lässt du den Mann hungrig zurück, sicher bist du der letzte, der ihn lebend gesehen hat...",
 		"skill": "", "skillValue": 0, "requiredItems": ["Bread"], "needOnlyOneItem": "true", "needItemPermanet": "true",
 		"rewardXp": "50", "rewardItems": [], "rewardGold": 0, 
+		"takeDamage": 0},
+	"fishing":{
+		"solutionTry": "Mit einer Angel fischen!", 
+		"solutionShort": "Angeln!",
+		"success": "Es dauert eine weile, aber schließlich fängst du einen großen Fisch!", 
+		"failure": "Die Fische beißen heute einfach nicht, nach einer Weile gibst du auf...",
+		"skill": "", "skillValue": 0, "requiredItems": ["FishingRod"], "needOnlyOneItem": "true", "needItemPermanet": "false",
+		"rewardXp": "15", "rewardItems": ["Fish"], "rewardGold": 0, 
+		"takeDamage": 0},
+	"spearFishing":{
+		"solutionTry": "Mit ein bisschen Geschick und einem Speer könntest du einen Fisch fangen!", 
+		"solutionShort": "Speerfischen!",
+		"success": "Es braucht einige Versuche, aber schließlich fängst du einen großen Fisch!", 
+		"failure": "Du bist einfach zu langsam, nach einer Weile gibst du auf...",
+		"skill": "ag", "skillValue": 7, "requiredItems": ["Spear"], "needOnlyOneItem": "true", "needItemPermanet": "false",
+		"rewardXp": "75", "rewardItems": ["Fish"], "rewardGold": 0, 
 		"takeDamage": 0}
+	
 }

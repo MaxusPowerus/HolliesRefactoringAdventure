@@ -1,5 +1,6 @@
 [
 	 {"uniqueName": "Stone","label": "Stein", "info": "Schlägt Schere", "value": 0, "chance": 95},
 	 {"uniqueName": "Paper", "label": "Papier", "info": "Schlägt Stein", "value": 1, "chance": 95},
-	 {"uniqueName": "Scissors", "label": "Schere", "info": "Schlägt Papier", "value": 1, "chance": 95}
+	 {"uniqueName": "Scissors", "label": "Schere", "info": "Schlägt Papier", "value": 1, "chance": 95},
+	 {"uniqueName": "FishingRod", "label": "Angel", "info": "Perfekt um sich einen saftigen Fisch zu fangen", "value": 45, "chance": 25}
 ]

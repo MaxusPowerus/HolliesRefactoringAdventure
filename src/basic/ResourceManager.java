@@ -551,8 +551,9 @@ public class ResourceManager {
 				});
 
 				String task = new String(jsonItem.get("task").toString().getBytes(), StandardCharsets.UTF_8);
+				String biom = new String(jsonItem.get("biom").toString().getBytes(), StandardCharsets.UTF_8);
 
-				Event event = new Event(keyName, task, solutions);
+				Event event = new Event(keyName, task, solutions, biom);
 
 				this.events.add(event);
 			}

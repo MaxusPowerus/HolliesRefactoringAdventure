@@ -68,6 +68,13 @@
       "energy": 100,
       "value": 100,
       "chance": 0
+   },
+   {
+      "uniqueName": "Fish",
+      "label": "Fisch",
+      "energy": 35,
+      "value": 15,
+      "chance": 0
    }
 ]
 
