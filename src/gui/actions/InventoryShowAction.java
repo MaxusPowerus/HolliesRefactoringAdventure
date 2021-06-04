@@ -185,9 +185,9 @@ public class InventoryShowAction implements ActionListener {
 					.setToolTipText(categoryText + " (" + itemCategories.get(category).size() + ")");
 			navigationButtonBackgroundPanel.add(buttonLabel, new GridBagConstraints());
 			navigationButtonBackgroundPanel.setName(category);
-			navigationButtonBackgroundPanel
-					.addMouseListener(new InventoryNavigationActions(this.gameManager, this.inventory,
-							inventoryContentPanel, navigationButtonBackgroundPanel, buy, sell, merchant, invName));
+			navigationButtonBackgroundPanel.addMouseListener(
+					new InventoryNavigationActions(this.gameManager, this.inventory, inventoryContentPanel,
+							inventoryNavigationPanel, navigationButtonBackgroundPanel, buy, sell, merchant, invName));
 
 			inventoryNavigationPanel.add(navigationButtonBackgroundPanel);
 

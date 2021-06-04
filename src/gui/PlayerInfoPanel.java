@@ -39,6 +39,7 @@ public class PlayerInfoPanel {
 		} else {
 			guiManager.getCurrentWeapon().setText("-");
 		}
+
 	}
 
 	private static void setSkills(GUIManager guiManager, Player player) {
