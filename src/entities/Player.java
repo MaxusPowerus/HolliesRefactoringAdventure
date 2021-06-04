@@ -2,6 +2,7 @@ package entities;
 
 import java.util.Random;
 
+import QuestClasses.Quest;
 import basic.Config;
 import basic.HelperFunctions;
 import items.Food;
@@ -33,15 +34,14 @@ public class Player {
 	private SkillSet skillSet;
 	private Outfit outfit;
 	private Weapon weapon;
+	private Quest currentQuest;
 
-	public Player(String name, Map mainMap) {
+	public Player(String name) {
 		this.name = name;
 		this.health = Config.PLAYER_HEALTH;
 		this.inventory = new Inventory();
 		this.experience = new Experience();
 		this.daysAlive = 0;
-		this.currentMap = mainMap;
-		this.currentMapField = mainMap.getMapFieldByCoordinate(Config.MAP_SIZEX / 2, Config.MAP_SIZEY / 2);
 		this.time = new Time(0);
 		this.skillSet = new SkillSet();
 		this.outfit = null;
@@ -69,6 +69,12 @@ public class Player {
 		this.equip(startWeapon);
 		this.equip(startOutfit);
 		// ================================================================================================================
+	}
+
+	public void setMap(Map mainMap) {
+
+		this.currentMap = mainMap;
+		this.currentMapField = mainMap.getMapFieldByCoordinate(Config.MAP_SIZEX / 2, Config.MAP_SIZEY / 2);
 	}
 
 	public double getHealth() {

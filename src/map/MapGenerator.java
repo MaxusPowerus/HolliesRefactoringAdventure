@@ -4,6 +4,7 @@ import java.util.Random;
 
 import basic.Config;
 import basic.GameManager;
+import entities.Player;
 import utilities.Challenge;
 import utilities.Coordinate;
 
