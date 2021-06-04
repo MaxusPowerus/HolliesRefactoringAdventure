@@ -27,6 +27,7 @@ import gui.buttons.FleeButton;
 import gui.buttons.InspectButton;
 import gui.buttons.LootButton;
 import gui.buttons.SellButton;
+import gui.views.PlayerEditor;
 import map.Biom;
 import map.Map;
 import map.MapGenerator;
@@ -45,10 +46,12 @@ public class GameManager {
 	private QuestManager questManager;
 	private JPanel backgroundImage;
 	private boolean fullscreen;
+	private boolean playerEditor;
 
-	public GameManager(boolean fullscreen) {
+	public GameManager(boolean fullscreen, boolean playerEditor) {
 		instance = this;
 		this.fullscreen = fullscreen;
+		this.playerEditor = playerEditor;
 		this.prepareGame();
 	}
 
@@ -65,6 +68,10 @@ public class GameManager {
 		player.setMap(mainMap);
 
 		this.guiManager = new GUIManager(this.fullscreen);
+
+		if (this.playerEditor) {
+			guiManager.getFrame().setContentPane(new PlayerEditor());
+		}
 		guiManager.getFrame().setVisible(true);
 
 		this.startGame();
@@ -87,11 +94,12 @@ public class GameManager {
 
 	public void execMainLogic() {
 		// clear fields
-		this.guiManager.getFieldInfos().removeAll();
-		this.guiManager.getActionButtonPanel().removeAll();
+		this.guiManager.getMain().getFieldInfos().removeAll();
+		this.guiManager.getMain().getActionButtonPanel().removeAll();
 
 		// switch biome
-		this.guiManager.addFieldInfo("<i>Du bist " + player.getCurrentMapField().getBiom().toString() + ":</i>");
+		this.guiManager.getMain()
+				.addFieldInfo("<i>Du bist " + player.getCurrentMapField().getBiom().toString() + ":</i>");
 
 		String path = "";
 		if (player.getCurrentMapField().getBiom() == Biom.DESERT) {
@@ -101,16 +109,16 @@ public class GameManager {
 		} else if (player.getCurrentMapField().getBiom() == Biom.MOUNTAINS) {
 			path = "mountains_var1.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.SWAMP) {
-			this.guiManager.getFieldInfoPanel().setBackground(Color.decode("#6D610D"));
+			this.guiManager.getMain().getFieldInfoPanel().setBackground(Color.decode("#6D610D"));
 			path = "meadow_var1.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.MEADOW) {
 			path = "meadow_var2.png";
 		}
 
 		// remove background image
-		for (Component c : this.guiManager.getFieldInfoPanel().getComponents()) {
+		for (Component c : this.guiManager.getMain().getFieldInfoPanel().getComponents()) {
 			if (c instanceof BackgroundImagePanel)
-				this.guiManager.getFieldInfoPanel().remove(c);
+				this.guiManager.getMain().getFieldInfoPanel().remove(c);
 		}
 
 		// set background image
@@ -118,9 +126,9 @@ public class GameManager {
 			try {
 				BufferedImage backgroundImageSource = ImageIO
 						.read(new File(HelperFunctions.getResource("images/backgrounds/" + path)));
-				this.guiManager.setBackgroundImagePanel(new BackgroundImagePanel(
+				this.guiManager.getMain().setBackgroundImagePanel(new BackgroundImagePanel(
 						GUIHelper.scaleIcon(new ImageIcon(backgroundImageSource), 650).getImage()));
-				this.guiManager.getFieldInfoPanel().add(this.guiManager.getBackgroundImagePanel());
+				this.guiManager.getMain().getFieldInfoPanel().add(this.guiManager.getMain().getBackgroundImagePanel());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -133,66 +141,66 @@ public class GameManager {
 			case 0:
 				Container container = challenge.getContainer();
 				if (!container.getFound()) {
-					this.guiManager.addFieldInfo(
+					this.guiManager.getMain().addFieldInfo(
 							"Du hast <b>" + container.toString() + "</b> gefunden. Halte nach Items ausschau.");
 
 					LootButton lootButton = new LootButton(challenge, this, challenge.getContainer().getInventory());
-					this.guiManager.getActionButtonPanel().add(lootButton);
+					this.guiManager.getMain().getActionButtonPanel().add(lootButton);
 				} else {
-					this.guiManager.addFieldInfo("Es ist ruhig hier...zu ruhig...");
+					this.guiManager.getMain().addFieldInfo("Es ist ruhig hier...zu ruhig...");
 					InspectButton button = new InspectButton(challenge, player, this);
-					this.guiManager.getActionButtonPanel().add(button);
+					this.guiManager.getMain().getActionButtonPanel().add(button);
 				}
 
 				break;
 			case 1:
 				Enemy enemy = (Enemy) challenge.getNpc();
-				this.guiManager.addFieldInfo(
+				this.guiManager.getMain().addFieldInfo(
 						"<b>" + enemy.toString() + "</b> ist erschienen. Was tust du? Wegrennen oder K‰mpfen?");
 
-				this.guiManager.setNavigationEnabled(false);
+				this.guiManager.getMain().setNavigationEnabled(false);
 
 				AttackButton attackButton = new AttackButton(challenge, player, this);
-				this.guiManager.getActionButtonPanel().add(attackButton);
+				this.guiManager.getMain().getActionButtonPanel().add(attackButton);
 
 				FleeButton escapeButton = new FleeButton(challenge, player, this);
-				this.guiManager.getActionButtonPanel().add(escapeButton);
+				this.guiManager.getMain().getActionButtonPanel().add(escapeButton);
 
 				break;
 			case 2:
 				Merchant merchant = (Merchant) challenge.getNpc();
-				this.guiManager.addFieldInfo("<b>" + merchant.toString()
+				this.guiManager.getMain().addFieldInfo("<b>" + merchant.toString()
 						+ "</b> ist erschienen. Mˆchtest du mit ihm einen Handel eingehen?");
 
 				BuyButton buyButton = new BuyButton(challenge, player, this);
-				this.guiManager.getActionButtonPanel().add(buyButton);
+				this.guiManager.getMain().getActionButtonPanel().add(buyButton);
 
 				SellButton sellButton = new SellButton(challenge, player, this);
-				this.guiManager.getActionButtonPanel().add(sellButton);
+				this.guiManager.getMain().getActionButtonPanel().add(sellButton);
 				break;
 			case 3:
 				Event event = challenge.getEvent();
-				this.guiManager.addFieldInfo(event.getTask());
+				this.guiManager.getMain().addFieldInfo(event.getTask());
 
 				int solutionIndex = 1;
 				for (EventSolution solution : event.getEventSolutions()) {
-					this.guiManager
+					this.guiManager.getMain()
 							.addFieldInfo("<b>Mˆglichkeit " + solutionIndex + ":</b> " + solution.getSolutionTry());
 
 					EventButton evtButton = new EventButton(solutionIndex, this, challenge, player, solution);
-					this.guiManager.getActionButtonPanel().add(evtButton);
+					this.guiManager.getMain().getActionButtonPanel().add(evtButton);
 
 					solutionIndex++;
 				}
 
 				break;
 			default:
-				this.guiManager.addFieldInfo(
+				this.guiManager.getMain().addFieldInfo(
 						"Wer das liest ist doof. Spaﬂ. Wer das liest, hat einen Bug entdeckt. :c Bitte kontaktieren Sie Ihren Administrator lul");
 				break;
 			}
 		} else {
-			this.guiManager.addFieldInfo("Du siehst nichts auﬂer deinen Fuﬂspuren");
+			this.guiManager.getMain().addFieldInfo("Du siehst nichts auﬂer deinen Fuﬂspuren");
 		}
 
 		this.update();

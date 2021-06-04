@@ -29,7 +29,7 @@ public class SellButton extends JButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.gameManager.getGuiManager().setNavigationEnabled(false);
+		this.gameManager.getGuiManager().getMain().setNavigationEnabled(false);
 		new InventoryShowAction(this.gameManager, this.player.getInventory(), "Items verkaufen: Dein Inventar",
 				(Merchant) this.challenge.getNpc()).initSell();
 
@@ -40,24 +40,24 @@ public class SellButton extends JButton implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				new MapShowAction(gameManager).initialize();
 
-				gameManager.getGuiManager()
+				gameManager.getGuiManager().getMain()
 						.addFieldInfo("Du hast den Handel mit <b>" + challenge.getNpc().getName() + "</b> beendet");
 
-				gameManager.getGuiManager().getActionButtonPanel().removeAll();
+				gameManager.getGuiManager().getMain().getActionButtonPanel().removeAll();
 
 				BuyButton buyButton = new BuyButton(challenge, player, gameManager);
-				gameManager.getGuiManager().getActionButtonPanel().add(buyButton);
+				gameManager.getGuiManager().getMain().getActionButtonPanel().add(buyButton);
 
 				SellButton sellButton = new SellButton(challenge, player, gameManager);
-				gameManager.getGuiManager().getActionButtonPanel().add(sellButton);
+				gameManager.getGuiManager().getMain().getActionButtonPanel().add(sellButton);
 
-				gameManager.getGuiManager().setNavigationEnabled(true);
+				gameManager.getGuiManager().getMain().setNavigationEnabled(true);
 
 				gameManager.update();
 			}
 		});
-		this.gameManager.getGuiManager().getActionButtonPanel().removeAll();
-		this.gameManager.getGuiManager().getActionButtonPanel().add(stopHandling);
+		this.gameManager.getGuiManager().getMain().getActionButtonPanel().removeAll();
+		this.gameManager.getGuiManager().getMain().getActionButtonPanel().add(stopHandling);
 
 	}
 

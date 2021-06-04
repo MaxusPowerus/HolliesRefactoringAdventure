@@ -39,21 +39,22 @@ public class LootButton extends JButton implements ActionListener {
 
 		int itemCount = this.inventory.getAllItems().size();
 		if (itemCount > 0) {
-			gameManager.getGuiManager().addFieldInfo("Du hast folgende Items eingesammelt: <b>" + itemsString + "</b>");
+			gameManager.getGuiManager().getMain()
+					.addFieldInfo("Du hast folgende Items eingesammelt: <b>" + itemsString + "</b>");
 		}
 
 		int gold = this.inventory.getGold();
 		if (gold > 0) {
-			gameManager.getGuiManager().addFieldInfo("Du hast <b>" + gold + " Gold</b> gefunden");
+			gameManager.getGuiManager().getMain().addFieldInfo("Du hast <b>" + gold + " Gold</b> gefunden");
 		}
 
 		if (itemCount == 0 && gold == 0) {
-			gameManager.getGuiManager()
+			gameManager.getGuiManager().getMain()
 					.addFieldInfo(this.challenge.getContainer().toString() + " ist leer, so ein Pech");
 		}
 
 		// update inventory when opened
-		if (this.gameManager.getGuiManager().getLeftPanelHeadline().getText().contains("Inventar")) {
+		if (this.gameManager.getGuiManager().getMain().getLeftPanelHeadline().getText().contains("Inventar")) {
 			new InventoryShowAction(this.gameManager, this.gameManager.getPlayer().getInventory()).initialize();
 		}
 

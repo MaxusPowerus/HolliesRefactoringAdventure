@@ -11,10 +11,10 @@ public class ActionPanel {
 		GUIManager guiManager = gameManager.getGuiManager();
 		Player player = gameManager.getPlayer();
 
-		guiManager.getGoNorthButton().setEnabled(player.canGo(Direction.NORTH));
-		guiManager.getGoEastButton().setEnabled(player.canGo(Direction.EAST));
-		guiManager.getGoSouthButton().setEnabled(player.canGo(Direction.SOUTH));
-		guiManager.getGoWestButton().setEnabled(player.canGo(Direction.WEST));
+		guiManager.getMain().getGoNorthButton().setEnabled(player.canGo(Direction.NORTH));
+		guiManager.getMain().getGoEastButton().setEnabled(player.canGo(Direction.EAST));
+		guiManager.getMain().getGoSouthButton().setEnabled(player.canGo(Direction.SOUTH));
+		guiManager.getMain().getGoWestButton().setEnabled(player.canGo(Direction.WEST));
 	}
 
 }

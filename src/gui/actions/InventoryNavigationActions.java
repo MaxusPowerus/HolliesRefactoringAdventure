@@ -153,7 +153,7 @@ public class InventoryNavigationActions implements MouseListener {
 		panel.setBackground(new Color(0, 0, 0, 0.4f));
 		panel.setMaximumSize(new Dimension(32767, 50));
 		panel.setBorder(BorderFactory.createMatteBorder(0, 0, 5, 0, new Color(0, 0, 0, 0f)));
-		gameManager.getGuiManager().getInventoryPanel().add(panel);
+		gameManager.getGuiManager().getMain().getInventoryPanel().add(panel);
 
 		JLabel name = new JLabel(item.getName() + " (" + item.getCount() + " Stück)");
 		name.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -217,11 +217,11 @@ public class InventoryNavigationActions implements MouseListener {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if (merchant.buy(gameManager.getPlayer(), item)) {
-							gameManager.getGuiManager().addFieldInfo(
+							gameManager.getGuiManager().getMain().addFieldInfo(
 									"<html><p>Du hast folgendes gekauft: <b>" + item.toString() + "</b></p></html>");
 							new InventoryShowAction(gameManager, inv, invName, merchant).initBuy();
 						} else {
-							gameManager.getGuiManager().addFieldInfo("Du hast nicht genügend Gold");
+							gameManager.getGuiManager().getMain().addFieldInfo("Du hast nicht genügend Gold");
 						}
 					}
 				});
@@ -244,12 +244,12 @@ public class InventoryNavigationActions implements MouseListener {
 						Item toSell = item.clone();
 						if (merchant.sell(gameManager.getPlayer(), item)) {
 							gameManager.getPlayer().dequip(toSell);
-							gameManager.getGuiManager().addFieldInfo(
+							gameManager.getGuiManager().getMain().addFieldInfo(
 									"<html><p>Du hast folgendes verkauft: <b>" + item.toString() + "</b></p></html>");
 							new InventoryShowAction(gameManager, inv, invName, merchant).initSell();
 							PlayerInfoPanel.update();
 						} else {
-							gameManager.getGuiManager()
+							gameManager.getGuiManager().getMain()
 									.addFieldInfo("Der Händler hat nicht genügend Geld, um dir das Item abzukaufen");
 						}
 					}

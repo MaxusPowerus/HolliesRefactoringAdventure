@@ -24,38 +24,38 @@ public class MapShowAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.gameManager.getGuiManager().getOpenInvButton().setEnabled(false);
-		this.gameManager.getGuiManager().getOpenInvButton().setText("Lade...");
+		this.gameManager.getGuiManager().getMain().getOpenInvButton().setEnabled(false);
+		this.gameManager.getGuiManager().getMain().getOpenInvButton().setText("Lade...");
 		initialize();
 	}
 
 	public void initialize() {
-		this.gameManager.getGuiManager().getInventoryPanel().setVisible(false);
-		this.gameManager.getGuiManager().getMapPanel().setVisible(false);
-		this.gameManager.getGuiManager().getMapPanel().setLayout(new BorderLayout());
+		this.gameManager.getGuiManager().getMain().getInventoryPanel().setVisible(false);
+		this.gameManager.getGuiManager().getMain().getMapPanel().setVisible(false);
+		this.gameManager.getGuiManager().getMain().getMapPanel().setLayout(new BorderLayout());
 
-		this.gameManager.getGuiManager().getOpenInvButton().setText("Inventar");
-		this.gameManager.getGuiManager().getOpenInvButton().removeActionListener(this);
-		this.gameManager.getGuiManager().getOpenInvButton().setEnabled(true);
+		this.gameManager.getGuiManager().getMain().getOpenInvButton().setText("Inventar");
+		this.gameManager.getGuiManager().getMain().getOpenInvButton().removeActionListener(this);
+		this.gameManager.getGuiManager().getMain().getOpenInvButton().setEnabled(true);
 
-		for (ActionListener al : this.gameManager.getGuiManager().getOpenInvButton().getActionListeners()) {
-			this.gameManager.getGuiManager().getOpenInvButton().removeActionListener(al);
+		for (ActionListener al : this.gameManager.getGuiManager().getMain().getOpenInvButton().getActionListeners()) {
+			this.gameManager.getGuiManager().getMain().getOpenInvButton().removeActionListener(al);
 		}
 
-		this.gameManager.getGuiManager().getOpenInvButton().addActionListener(
+		this.gameManager.getGuiManager().getMain().getOpenInvButton().addActionListener(
 				new InventoryShowAction(this.gameManager, this.gameManager.getPlayer().getInventory()));
 
-		this.gameManager.getGuiManager().getLeftPanelHeadline().setText("Map");
-		this.gameManager.getGuiManager().getOpenInvButton().setVisible(true);
+		this.gameManager.getGuiManager().getMain().getLeftPanelHeadline().setText("Map");
+		this.gameManager.getGuiManager().getMain().getOpenInvButton().setVisible(true);
 
-		this.gameManager.getGuiManager().getLeftContentPanel().setBackground(new Color(0, 0, 0, 0));
-		this.gameManager.getGuiManager().getMapPanel().setBackground(new Color(0, 0, 0, 0));
-		this.gameManager.getGuiManager().getMapPanel().setOpaque(true);
-		this.gameManager.getGuiManager().getMapPanel()
+		this.gameManager.getGuiManager().getMain().getLeftContentPanel().setBackground(new Color(0, 0, 0, 0));
+		this.gameManager.getGuiManager().getMain().getMapPanel().setBackground(new Color(0, 0, 0, 0));
+		this.gameManager.getGuiManager().getMain().getMapPanel().setOpaque(true);
+		this.gameManager.getGuiManager().getMain().getMapPanel()
 				.setLayout(new GridLayout(Config.MAP_SIZEX, Config.MAP_SIZEY, 1, 1));
 
 		// generate when not done
-		if (this.gameManager.getGuiManager().getMapPanel().getComponentCount() == 0) {
+		if (this.gameManager.getGuiManager().getMain().getMapPanel().getComponentCount() == 0) {
 			for (int y = 0; y < Config.MAP_SIZEY; y++) {
 				for (int x = 0; x < Config.MAP_SIZEX; x++) {
 					MapField field = this.gameManager.getPlayer().getCurrentMap().getMapFieldByCoordinate(x, y);
@@ -79,14 +79,14 @@ public class MapShowAction implements ActionListener {
 						p.setBackground(Color.RED);
 					}
 
-					this.gameManager.getGuiManager().getMapPanel().add(p);
+					this.gameManager.getGuiManager().getMain().getMapPanel().add(p);
 				}
 			}
 		} else {
 			this.update();
 		}
 
-		this.gameManager.getGuiManager().getMapPanel().setVisible(true);
+		this.gameManager.getGuiManager().getMain().getMapPanel().setVisible(true);
 		this.gameManager.update();
 	}
 
@@ -95,7 +95,7 @@ public class MapShowAction implements ActionListener {
 	}
 
 	public void update(boolean show) {
-		for (Component p : this.gameManager.getGuiManager().getMapPanel().getComponents()) {
+		for (Component p : this.gameManager.getGuiManager().getMain().getMapPanel().getComponents()) {
 			String name = p.getName();
 			String[] splitter = name.split(":");
 			int x = Integer.valueOf(splitter[0]);

@@ -60,18 +60,18 @@ public class InventoryItemHover implements MouseListener {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		this.gameManager.getGuiManager().getLeftInfoContentPanel().removeAll();
+		this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel().removeAll();
 
-		this.gameManager.getGuiManager().getLeftInfoContentPanel().setBackground(new Color(0, 0, 0, 0));
-		GroupLayout gl_leftInfoPanel = new GroupLayout(this.gameManager.getGuiManager().getLeftInfoPanel());
+		this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel().setBackground(new Color(0, 0, 0, 0));
+		GroupLayout gl_leftInfoPanel = new GroupLayout(this.gameManager.getGuiManager().getMain().getLeftInfoPanel());
 		gl_leftInfoPanel.setHorizontalGroup(gl_leftInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_leftInfoPanel.createSequentialGroup().addContainerGap()
-						.addComponent(this.gameManager.getGuiManager().getLeftInfoContentPanel(),
+						.addComponent(this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel(),
 								GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
 						.addContainerGap()));
 		gl_leftInfoPanel.setVerticalGroup(gl_leftInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_leftInfoPanel.createSequentialGroup().addContainerGap()
-						.addComponent(this.gameManager.getGuiManager().getLeftInfoContentPanel(),
+						.addComponent(this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel(),
 								GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
 						.addContainerGap()));
 
@@ -82,7 +82,7 @@ public class InventoryItemHover implements MouseListener {
 		itemIconPanel.setBackground(new Color(0, 0, 0, 0));
 		itemIconPanel.setLayout(new BorderLayout());
 		GroupLayout gl_leftInfoContentPanel = new GroupLayout(
-				this.gameManager.getGuiManager().getLeftInfoContentPanel());
+				this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel());
 		gl_leftInfoContentPanel.setHorizontalGroup(gl_leftInfoContentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(Alignment.TRAILING, gl_leftInfoContentPanel.createSequentialGroup()
 						.addComponent(itemInfoPanel, GroupLayout.PREFERRED_SIZE, 356, GroupLayout.PREFERRED_SIZE)
@@ -215,8 +215,8 @@ public class InventoryItemHover implements MouseListener {
 		}
 		itemIconPanel.add(icon, BorderLayout.CENTER);
 
-		this.gameManager.getGuiManager().getLeftInfoContentPanel().setLayout(gl_leftInfoContentPanel);
-		this.gameManager.getGuiManager().getLeftInfoPanel().setLayout(gl_leftInfoPanel);
+		this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel().setLayout(gl_leftInfoContentPanel);
+		this.gameManager.getGuiManager().getMain().getLeftInfoPanel().setLayout(gl_leftInfoPanel);
 
 		this.itemPanel.setBackground(new Color(0, 0, 0, 0.3f));
 
@@ -225,7 +225,7 @@ public class InventoryItemHover implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		this.gameManager.getGuiManager().getLeftInfoContentPanel().removeAll();
+		this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel().removeAll();
 
 		this.itemPanel.setBackground(new Color(0, 0, 0, 0.4f));
 

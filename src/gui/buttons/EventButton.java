@@ -36,27 +36,28 @@ public class EventButton extends JButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.gameManager.getGuiManager().getActionButtonPanel().removeAll();
+		this.gameManager.getGuiManager().getMain().getActionButtonPanel().removeAll();
 
 		if (this.eventSolution.tryIt(this.player)) {
-			this.gameManager.getGuiManager().addFieldInfo(this.eventSolution.getSuccess());
+			this.gameManager.getGuiManager().getMain().addFieldInfo(this.eventSolution.getSuccess());
 
 			int rewardXP = this.eventSolution.getRewardXp();
 			if (rewardXP > 0)
-				this.gameManager.getGuiManager().addFieldInfo("Du erhältst <b>" + rewardXP + " Erfahrungspunkte</b>");
+				this.gameManager.getGuiManager().getMain()
+						.addFieldInfo("Du erhältst <b>" + rewardXP + " Erfahrungspunkte</b>");
 
 			int rewardGold = this.eventSolution.getRewardGold();
 			if (rewardGold > 0)
-				this.gameManager.getGuiManager().addFieldInfo("Du erhältst <b>" + rewardGold + " Gold</b>");
+				this.gameManager.getGuiManager().getMain().addFieldInfo("Du erhältst <b>" + rewardGold + " Gold</b>");
 
 			ArrayList<Item> rewardItems = this.eventSolution.getRewardItems();
 			if (rewardItems.size() > 0)
-				this.gameManager.getGuiManager().addFieldInfo(
+				this.gameManager.getGuiManager().getMain().addFieldInfo(
 						"Du erhältst folgende Items: <b>" + GUIHelper.stringifyItemList(rewardItems) + "</b>");
 
 			this.eventSolution.rewardPlayer(this.player);
 		} else {
-			this.gameManager.getGuiManager().addFieldInfo(this.eventSolution.getFailure());
+			this.gameManager.getGuiManager().getMain().addFieldInfo(this.eventSolution.getFailure());
 			this.eventSolution.punishPlayer(this.player);
 		}
 

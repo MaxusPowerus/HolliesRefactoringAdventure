@@ -25,7 +25,7 @@ public class NavigationButtonAction implements ActionListener {
 		WorldInfoPanel.update();
 		ActionPanel.update();
 
-		if (gameManager.getGuiManager().getLeftPanelHeadline().getText() == "Map") {
+		if (gameManager.getGuiManager().getMain().getLeftPanelHeadline().getText() == "Map") {
 			new MapShowAction(gameManager).update();
 		}
 

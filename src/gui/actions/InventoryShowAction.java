@@ -56,8 +56,8 @@ public class InventoryShowAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.gameManager.getGuiManager().getOpenInvButton().setEnabled(false);
-		this.gameManager.getGuiManager().getOpenInvButton().setText("Lade...");
+		this.gameManager.getGuiManager().getMain().getOpenInvButton().setEnabled(false);
+		this.gameManager.getGuiManager().getMain().getOpenInvButton().setText("Lade...");
 		this.initialize();
 	}
 
@@ -75,28 +75,28 @@ public class InventoryShowAction implements ActionListener {
 		GUIManager gm = this.gameManager.getGuiManager();
 
 		// reset old and map panel
-		gm.getMapPanel().setVisible(false);
-		gm.getInventoryPanel().removeAll();
-		gm.getInventoryPanel().setVisible(true);
+		gm.getMain().getMapPanel().setVisible(false);
+		gm.getMain().getInventoryPanel().removeAll();
+		gm.getMain().getInventoryPanel().setVisible(true);
 
 		// change map/inv toggle button
-		gm.getOpenInvButton().setText("Map");
-		gm.getOpenInvButton().setEnabled(true);
+		gm.getMain().getOpenInvButton().setText("Map");
+		gm.getMain().getOpenInvButton().setEnabled(true);
 
 		// remove/add event listeners for map/inv toggle button
-		for (ActionListener al : gm.getOpenInvButton().getActionListeners()) {
-			gm.getOpenInvButton().removeActionListener(al);
+		for (ActionListener al : gm.getMain().getOpenInvButton().getActionListeners()) {
+			gm.getMain().getOpenInvButton().removeActionListener(al);
 		}
-		gm.getOpenInvButton().addActionListener(new MapShowAction(this.gameManager));
+		gm.getMain().getOpenInvButton().addActionListener(new MapShowAction(this.gameManager));
 
 		// set headline for left container
-		gm.getLeftPanelHeadline().setText(this.invName);
+		gm.getMain().getLeftPanelHeadline().setText(this.invName);
 
 		// hide map/inv toggle button on sell/buy
 		if (buy || sell) {
-			gm.getOpenInvButton().setVisible(false);
+			gm.getMain().getOpenInvButton().setVisible(false);
 		} else {
-			gm.getOpenInvButton().setVisible(true);
+			gm.getMain().getOpenInvButton().setVisible(true);
 		}
 
 		// prepare nav panel
@@ -120,7 +120,7 @@ public class InventoryShowAction implements ActionListener {
 		};
 		inventoryContentPanel.setBackground(new Color(0, 0, 0, 0));
 		inventoryContentPanel.setOpaque(false);
-		GroupLayout gl_invPanel = new GroupLayout(gm.getInventoryPanel());
+		GroupLayout gl_invPanel = new GroupLayout(gm.getMain().getInventoryPanel());
 		gl_invPanel.setHorizontalGroup(gl_invPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_invPanel
 				.createSequentialGroup().addContainerGap()
 				.addGroup(gl_invPanel.createParallelGroup(Alignment.TRAILING)
@@ -137,7 +137,7 @@ public class InventoryShowAction implements ActionListener {
 				.addComponent(inventoryContentPanel, GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
 				.addContainerGap()));
 		inventoryContentPanel.setLayout(new BoxLayout(inventoryContentPanel, BoxLayout.Y_AXIS));
-		gm.getInventoryPanel().setLayout(gl_invPanel);
+		gm.getMain().getInventoryPanel().setLayout(gl_invPanel);
 		inventoryNavigationPanel.setLayout(new BoxLayout(inventoryNavigationPanel, BoxLayout.X_AXIS));
 
 		// get all items by category

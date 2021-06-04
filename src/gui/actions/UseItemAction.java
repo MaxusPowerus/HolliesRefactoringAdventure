@@ -30,7 +30,7 @@ public class UseItemAction implements ActionListener {
 			player.getInventory().remove(item);
 
 			// update inventory when opened
-			if (this.gameManager.getGuiManager().getLeftPanelHeadline().getText().contains("Inventar")) {
+			if (this.gameManager.getGuiManager().getMain().getLeftPanelHeadline().getText().contains("Inventar")) {
 				new InventoryShowAction(this.gameManager, this.gameManager.getPlayer().getInventory()).updateView();
 			}
 		} else if (this.item instanceof Weapon) {

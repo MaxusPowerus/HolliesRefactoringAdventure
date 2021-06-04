@@ -56,53 +56,61 @@ public class ResizeAction extends ComponentAdapter {
 			int height = this.guiManager.getFrame().getHeight();
 
 			// RESIZE LEFT MAIN PANEL
-			this.guiManager.getLeftMainPanel().setBounds(0, 0, this.guiManager.getLeftMainPanel().getWidth(),
-					this.guiManager.getLeftMainPanel().getWidth());
+			this.guiManager.getMain().getLeftMainPanel().setBounds(0, 0,
+					this.guiManager.getMain().getLeftMainPanel().getWidth(),
+					this.guiManager.getMain().getLeftMainPanel().getWidth());
 
-			int contentPanelWidth = this.guiManager.getLeftContentPanel().getWidth();
-			int contentPanelHeight = this.guiManager.getLeftContentPanel().getHeight();
+			int contentPanelWidth = this.guiManager.getMain().getLeftContentPanel().getWidth();
+			int contentPanelHeight = this.guiManager.getMain().getLeftContentPanel().getHeight();
 
 			// RESIZE MAP
-			if (this.guiManager.getLeftPanelHeadline().getText() == "Map") {
-				int mapWidth = this.guiManager.getMapPanel().getWidth();
-				int mapHeight = this.guiManager.getMapPanel().getHeight();
+			if (this.guiManager.getMain().getLeftPanelHeadline().getText() == "Map") {
+				int mapWidth = this.guiManager.getMain().getMapPanel().getWidth();
+				int mapHeight = this.guiManager.getMain().getMapPanel().getHeight();
 
 				int borderX = (contentPanelWidth - mapWidth) / 2;
 				int borderY = (contentPanelHeight - mapHeight) / 2; // -5 because of the gap to the headline
 
 				if (contentPanelWidth > contentPanelHeight) {
-					this.guiManager.getMapPanel().setBounds(borderX, borderY, contentPanelHeight, contentPanelHeight);
+					this.guiManager.getMain().getMapPanel().setBounds(borderX, borderY, contentPanelHeight,
+							contentPanelHeight);
 				} else {
-					this.guiManager.getMapPanel().setBounds(borderX, borderY, contentPanelWidth, contentPanelWidth);
+					this.guiManager.getMain().getMapPanel().setBounds(borderX, borderY, contentPanelWidth,
+							contentPanelWidth);
 				}
 			}
 
 			// UPDATE FIELD BACKGROUND IMAGE
-			for (Component c : this.guiManager.getFieldInfoPanel().getComponents()) {
+			for (Component c : this.guiManager.getMain().getFieldInfoPanel().getComponents()) {
 				if (c instanceof BackgroundImagePanel)
-					this.guiManager.getFieldInfoPanel().remove(c);
+					this.guiManager.getMain().getFieldInfoPanel().remove(c);
 			}
-			if (this.guiManager.getBackgroundImagePanel() != null) {
-				Image backgroundImage = ((BackgroundImagePanel) this.guiManager.getBackgroundImagePanel()).getImg();
+			if (this.guiManager.getMain().getBackgroundImagePanel() != null) {
+				Image backgroundImage = ((BackgroundImagePanel) this.guiManager.getMain().getBackgroundImagePanel())
+						.getImg();
 				if (backgroundImage != null) {
-					this.guiManager.setBackgroundImagePanel(
-							new BackgroundImagePanel(GUIHelper.scaleIcon(new ImageIcon(backgroundImage),
-									this.guiManager.getFieldInfoPanel().getWidth() + 150).getImage()));
-					this.guiManager.getFieldInfoPanel().add(this.guiManager.getBackgroundImagePanel());
+					this.guiManager.getMain()
+							.setBackgroundImagePanel(new BackgroundImagePanel(GUIHelper
+									.scaleIcon(new ImageIcon(backgroundImage),
+											this.guiManager.getMain().getFieldInfoPanel().getWidth() + 150)
+									.getImage()));
+					this.guiManager.getMain().getFieldInfoPanel()
+							.add(this.guiManager.getMain().getBackgroundImagePanel());
 				}
 			}
 
 			// UPDATE FIELDINFOS DIMENSIONS
-			int fieldInfoPanelWidth = gm.getFieldInfoPanel().getWidth();
-			int fieldInfoPanelHeight = gm.getFieldInfoPanel().getHeight();
-			gm.getFieldInfos().setBounds(GAP, GAP, fieldInfoPanelWidth - GAP * 2, fieldInfoPanelHeight - GAP * 2);
-			for (Component c : gm.getFieldInfos().getComponents()) {
+			int fieldInfoPanelWidth = gm.getMain().getFieldInfoPanel().getWidth();
+			int fieldInfoPanelHeight = gm.getMain().getFieldInfoPanel().getHeight();
+			gm.getMain().getFieldInfos().setBounds(GAP, GAP, fieldInfoPanelWidth - GAP * 2,
+					fieldInfoPanelHeight - GAP * 2);
+			for (Component c : gm.getMain().getFieldInfos().getComponents()) {
 				updateFontSize(c);
 			}
 
 			// UPDATE HEADLINES
-			updateFontSize(gm.getLeftPanelHeadline());
-			updateFontSize(gm.getPlayerInfoHeadline());
+			updateFontSize(gm.getMain().getLeftPanelHeadline());
+			updateFontSize(gm.getMain().getPlayerInfoHeadline());
 
 			GameManager.getInstance().update();
 		}
