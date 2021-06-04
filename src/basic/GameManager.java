@@ -42,6 +42,7 @@ public class GameManager {
 	private static GameManager instance;
 	private GUIManager guiManager;
 	private ResourceManager resourceManager;
+	private QuestManager questManager;
 	private JPanel backgroundImage;
 	private boolean fullscreen;
 
@@ -52,14 +53,16 @@ public class GameManager {
 	}
 
 	public void prepareGame() {
+		player = new Player(Config.PLAYER_NAME);
+
 		resourceManager = new ResourceManager();
+		questManager = new QuestManager(player);
 
 		mainMap = new Map();
 		MapGenerator mapGenerator = new MapGenerator(mainMap);
 
 		mainMap = mapGenerator.generateMapMK2();
-
-		player = new Player(Config.PLAYER_NAME, mainMap);
+		player.setMap(mainMap);
 
 		this.guiManager = new GUIManager(this.fullscreen);
 		guiManager.getFrame().setVisible(true);
