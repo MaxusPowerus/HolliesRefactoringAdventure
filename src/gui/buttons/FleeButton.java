@@ -3,14 +3,13 @@ package gui.buttons;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-
 import basic.GameManager;
 import entities.Enemy;
 import entities.Player;
+import gui.GraphicalButton;
 import utilities.Challenge;
 
-public class FleeButton extends JButton implements ActionListener {
+public class FleeButton extends GraphicalButton implements ActionListener {
 
 	private Challenge challenge;
 	private Player player;
@@ -36,7 +35,7 @@ public class FleeButton extends JButton implements ActionListener {
 
 			this.gameManager.getGuiManager().getMain().getActionButtonPanel().removeAll();
 		} else {
-			this.gameManager.getGuiManager().getMain().addFieldInfo("GAME OVER");
+			this.gameManager.endGame();
 		}
 
 		this.gameManager.getGuiManager().getMain().setNavigationEnabled(true);

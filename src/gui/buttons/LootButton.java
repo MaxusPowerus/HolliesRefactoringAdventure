@@ -3,14 +3,13 @@ package gui.buttons;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-
 import basic.GameManager;
+import gui.GraphicalButton;
 import gui.actions.InventoryShowAction;
 import utilities.Challenge;
 import utilities.Inventory;
 
-public class LootButton extends JButton implements ActionListener {
+public class LootButton extends GraphicalButton implements ActionListener {
 
 	private Challenge challenge;
 	private GameManager gameManager;

@@ -3,6 +3,7 @@ package gui.actions;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,8 @@ import javax.swing.JPanel;
 
 import basic.Config;
 import basic.GameManager;
+import gui.GUIHelper;
+import gui.Icon;
 import map.Biom;
 import map.MapField;
 
@@ -24,8 +27,7 @@ public class MapShowAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.gameManager.getGuiManager().getMain().getOpenInvButton().setEnabled(false);
-		this.gameManager.getGuiManager().getMain().getOpenInvButton().setText("Lade...");
+		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().setEnabled(false);
 		initialize();
 	}
 
@@ -34,19 +36,22 @@ public class MapShowAction implements ActionListener {
 		this.gameManager.getGuiManager().getMain().getMapPanel().setVisible(false);
 		this.gameManager.getGuiManager().getMain().getMapPanel().setLayout(new BorderLayout());
 
-		this.gameManager.getGuiManager().getMain().getOpenInvButton().setText("Inventar");
-		this.gameManager.getGuiManager().getMain().getOpenInvButton().removeActionListener(this);
-		this.gameManager.getGuiManager().getMain().getOpenInvButton().setEnabled(true);
+		this.gameManager.getGuiManager().getMain().getInvMapToggleButton()
+				.setIcon(GUIHelper.getIcon(Icon.BACKPACK, 75, 75));
+		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().setCursor(new Cursor(Cursor.HAND_CURSOR));
+		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().removeActionListener(this);
+		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().setEnabled(true);
 
-		for (ActionListener al : this.gameManager.getGuiManager().getMain().getOpenInvButton().getActionListeners()) {
-			this.gameManager.getGuiManager().getMain().getOpenInvButton().removeActionListener(al);
+		for (ActionListener al : this.gameManager.getGuiManager().getMain().getInvMapToggleButton()
+				.getActionListeners()) {
+			this.gameManager.getGuiManager().getMain().getInvMapToggleButton().removeActionListener(al);
 		}
 
-		this.gameManager.getGuiManager().getMain().getOpenInvButton().addActionListener(
+		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().addActionListener(
 				new InventoryShowAction(this.gameManager, this.gameManager.getPlayer().getInventory()));
 
 		this.gameManager.getGuiManager().getMain().getLeftPanelHeadline().setText("Map");
-		this.gameManager.getGuiManager().getMain().getOpenInvButton().setVisible(true);
+		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().setVisible(true);
 
 		this.gameManager.getGuiManager().getMain().getLeftContentPanel().setBackground(new Color(0, 0, 0, 0));
 		this.gameManager.getGuiManager().getMain().getMapPanel().setBackground(new Color(0, 0, 0, 0));

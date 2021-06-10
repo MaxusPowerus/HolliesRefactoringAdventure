@@ -1,25 +1,17 @@
 package gui.views;
 
-import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import basic.Config;
 import basic.HelperFunctions;
 
-public class GameOver extends JPanel {
+public class Loading extends JLabel {
 
-	public GameOver() {
+	public Loading() {
 		setBounds(0, 0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
-		setLayout(null);
-
-		JLabel gameOver = new JLabel("GAME OVER");
-		gameOver.setBounds(0, 0, 1200, 800);
-		gameOver.setFont(new Font("Dialog", Font.BOLD, 99));
-		add(gameOver);
 	}
 
 	@Override
@@ -28,4 +20,5 @@ public class GameOver extends JPanel {
 		super.paintComponent(g);
 		g.drawImage(image.getImage(), 0, 0, null);
 	}
+
 }

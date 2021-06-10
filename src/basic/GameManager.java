@@ -222,4 +222,8 @@ public class GameManager {
 	public ResourceManager getResourceManager() {
 		return resourceManager;
 	}
+
+	public void endGame() {
+		this.guiManager.showGameOver();
+	}
 }

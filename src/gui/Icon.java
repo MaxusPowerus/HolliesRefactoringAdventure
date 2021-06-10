@@ -2,8 +2,8 @@ package gui;
 
 public enum Icon {
 
-	BACKPACK("backpack.png"), APPLE("apple.png"), SWORD("sword.png"), BREAD("bread.png"), MEAT("meat.png"),
-	BEER("beer.png");
+	BACKPACK("GUI\\InventoryIcon.png"), MAP("GUI\\MapIcon.png"), APPLE("items\\apple.png"), SWORD("items\\sword.png"),
+	BREAD("items\\bread.png"), MEAT("items\\meat.png"), BEER("items\\beer.png");
 
 	private String path;
 
@@ -12,7 +12,7 @@ public enum Icon {
 	}
 
 	public String getPath() {
-		return "resources\\images\\items\\" + path;
+		return "resources\\images\\" + path;
 	}
 
 	public static Icon getByName(String name) {
