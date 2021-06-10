@@ -35,6 +35,7 @@ public class Challenge {
 			containerChance = 100;
 			enemyChance = 100;
 			victimChance = 100;
+			traderChance = 100;
 			eventChance = 100;
 			break;
 		case FOREST:
@@ -67,7 +68,7 @@ public class Challenge {
 			break;
 		}
 
-		chooseChallenge(100, containerChance, enemyChance, victimChance, traderChance, eventChance);
+		chooseChallenge(100, containerChance, enemyChance, traderChance, eventChance, victimChance);
 	}
 
 	private boolean chooseChallenge(int challangeChance, int containerChance, int enemyChance, int traderChance,

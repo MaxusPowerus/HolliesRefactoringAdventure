@@ -3,15 +3,14 @@ package gui.buttons;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-
 import basic.GameManager;
 import entities.Enemy;
 import entities.Player;
+import gui.GraphicalButton;
 import gui.PlayerInfoPanel;
 import utilities.Challenge;
 
-public class AttackButton extends JButton implements ActionListener {
+public class AttackButton extends GraphicalButton implements ActionListener {
 
 	private Challenge challenge;
 	private Player player;
@@ -48,7 +47,7 @@ public class AttackButton extends JButton implements ActionListener {
 					+ Math.abs((int) healthBeforeFight - healthAfterFight) + " Lebenspunkte</b> verloren");
 
 		} else {
-			this.gameManager.getGuiManager().getMain().addFieldInfo("GAME OVER");
+			this.gameManager.endGame();
 		}
 
 		this.gameManager.getGuiManager().getMain().setNavigationEnabled(true);

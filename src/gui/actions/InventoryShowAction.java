@@ -1,6 +1,7 @@
 package gui.actions;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -56,8 +57,7 @@ public class InventoryShowAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.gameManager.getGuiManager().getMain().getOpenInvButton().setEnabled(false);
-		this.gameManager.getGuiManager().getMain().getOpenInvButton().setText("Lade...");
+		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().setEnabled(false);
 		this.initialize();
 	}
 
@@ -80,23 +80,24 @@ public class InventoryShowAction implements ActionListener {
 		gm.getMain().getInventoryPanel().setVisible(true);
 
 		// change map/inv toggle button
-		gm.getMain().getOpenInvButton().setText("Map");
-		gm.getMain().getOpenInvButton().setEnabled(true);
+		gm.getMain().getInvMapToggleButton().setIcon(GUIHelper.getIcon(Icon.MAP, 75, 75));
+		gm.getMain().getInvMapToggleButton().setCursor(new Cursor(Cursor.HAND_CURSOR));
+		gm.getMain().getInvMapToggleButton().setEnabled(true);
 
 		// remove/add event listeners for map/inv toggle button
-		for (ActionListener al : gm.getMain().getOpenInvButton().getActionListeners()) {
-			gm.getMain().getOpenInvButton().removeActionListener(al);
+		for (ActionListener al : gm.getMain().getInvMapToggleButton().getActionListeners()) {
+			gm.getMain().getInvMapToggleButton().removeActionListener(al);
 		}
-		gm.getMain().getOpenInvButton().addActionListener(new MapShowAction(this.gameManager));
+		gm.getMain().getInvMapToggleButton().addActionListener(new MapShowAction(this.gameManager));
 
 		// set headline for left container
 		gm.getMain().getLeftPanelHeadline().setText(this.invName);
 
 		// hide map/inv toggle button on sell/buy
 		if (buy || sell) {
-			gm.getMain().getOpenInvButton().setVisible(false);
+			gm.getMain().getInvMapToggleButton().setVisible(false);
 		} else {
-			gm.getMain().getOpenInvButton().setVisible(true);
+			gm.getMain().getInvMapToggleButton().setVisible(true);
 		}
 
 		// prepare nav panel

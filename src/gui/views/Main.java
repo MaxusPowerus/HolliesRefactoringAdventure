@@ -2,10 +2,12 @@ package gui.views;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +26,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
+import basic.Config;
+import basic.GameManager;
 import basic.HelperFunctions;
 import gui.BackgroundImagePanel;
 import gui.GUIHelper;
@@ -39,7 +43,7 @@ public class Main extends JLabel {
 	private JLabel healthLabel;
 	private JProgressBar healthBar;
 	private JLabel levelLabel;
-	private JButton openInvButton;
+	private JButton invMapToggleButton;
 	private JButton goNorthButton;
 	private JButton goEastButton;
 	private JButton goSouthButton;
@@ -82,8 +86,7 @@ public class Main extends JLabel {
 
 	public Main() {
 
-		setIcon(new ImageIcon(HelperFunctions.getResource("images/GUI/UI_Background.png")));
-		setOpaque(true);
+		setBounds(0, 0, Config.WINDOW_WIDTH - 10, Config.WINDOW_HEIGHT - 10);
 
 		leftMainPanel = new JPanel() {
 			protected void paintComponent(Graphics g) {
@@ -191,7 +194,8 @@ public class Main extends JLabel {
 		actionButtonPanel = new JPanel();
 		actionButtonPanel.setBackground(new Color(0, 0, 0, 0));
 
-		openInvButton = new JButton("[INV_BTN]");
+		invMapToggleButton = new JButton("");
+		invMapToggleButton.setContentAreaFilled(false);
 
 		BufferedImage compassBackground;
 		try {
@@ -275,26 +279,32 @@ public class Main extends JLabel {
 		goNorthButton.addActionListener(new NavigationButtonAction(Direction.NORTH));
 
 		GroupLayout gl_actionPanel = new GroupLayout(actionPanel);
-		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_actionPanel
-				.createSequentialGroup()
-				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_actionPanel.createSequentialGroup().addComponent(openInvButton)
-								.addPreferredGap(ComponentPlacement.RELATED, 64, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING,
-								gl_actionPanel.createSequentialGroup().addContainerGap()
-										.addComponent(compassBackgroundPanel, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addGap(32)))
-				.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 278, GroupLayout.PREFERRED_SIZE)));
+		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_actionPanel.createSequentialGroup()
+						.addComponent(invMapToggleButton, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(compassBackgroundPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addGap(32)
+						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)));
 		gl_actionPanel.setVerticalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_actionPanel
 				.createSequentialGroup()
 				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_actionPanel.createSequentialGroup().addComponent(openInvButton)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(compassBackgroundPanel, GroupLayout.PREFERRED_SIZE, 242, Short.MAX_VALUE))
-						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_actionPanel.createSequentialGroup().addGap(15).addComponent(compassBackgroundPanel,
+								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+						.addComponent(invMapToggleButton, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
 				.addContainerGap()));
-		actionButtonPanel.setLayout(new GridLayout(5, 1, 0, 5));
+		actionButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+
+		JButton btnTest = new JButton("test");
+		btnTest.setIconTextGap(0);
+		btnTest.setMargin(new Insets(10, 14, 10, 14));
+		btnTest.setSize(new Dimension(50, 50));
+		btnTest.setMinimumSize(new Dimension(51, 30));
+		btnTest.setMaximumSize(new Dimension(51, 30));
+		btnTest.setPreferredSize(new Dimension(51, 50));
+		actionButtonPanel.add(btnTest);
 		actionPanel.setLayout(gl_actionPanel);
 
 		leftPanelHeadline = new JLabel("[HEADLINE1]") {
@@ -622,10 +632,6 @@ public class Main extends JLabel {
 		return leftMainPanel;
 	}
 
-	public JButton getBtnInventar() {
-		return openInvButton;
-	}
-
 	public JButton getGoNorthButton() {
 		return goNorthButton;
 	}
@@ -674,8 +680,8 @@ public class Main extends JLabel {
 		return actionButtonPanel;
 	}
 
-	public JButton getOpenInvButton() {
-		return openInvButton;
+	public JButton getInvMapToggleButton() {
+		return invMapToggleButton;
 	}
 
 	public JPanel getLeftContentPanel() {
@@ -758,5 +764,14 @@ public class Main extends JLabel {
 		label.setFont(new Font("Dialog", Font.PLAIN, 16));
 		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 3, 0));
 		this.fieldInfos.add(label);
+
+		GameManager.getInstance().update();
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		ImageIcon image = new ImageIcon(HelperFunctions.getResource("images/GUI/UI_Background.png"));
+		super.paintComponent(g);
+		g.drawImage(image.getImage(), 0, 0, null);
 	}
 }

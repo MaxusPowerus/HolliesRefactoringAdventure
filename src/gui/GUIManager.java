@@ -13,6 +13,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import basic.Config;
 import basic.HelperFunctions;
 import gui.actions.ResizeAction;
+import gui.views.GameOver;
 import gui.views.Main;
 
 public class GUIManager {
@@ -67,5 +68,10 @@ public class GUIManager {
 
 	public JFrame getFrame() {
 		return frame;
+	}
+
+	public void showGameOver() {
+		GameOver gameOver = new GameOver();
+		frame.setContentPane(gameOver);
 	}
 }

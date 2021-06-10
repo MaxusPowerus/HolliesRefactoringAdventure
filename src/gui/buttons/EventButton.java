@@ -4,17 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-
 import basic.GameManager;
 import entities.Player;
 import gui.GUIHelper;
+import gui.GraphicalButton;
 import gui.PlayerInfoPanel;
 import items.Item;
 import utilities.Challenge;
 import utilities.EventSolution;
 
-public class EventButton extends JButton implements ActionListener {
+public class EventButton extends GraphicalButton implements ActionListener {
 
 	private int solutionIndex;
 	private GameManager gameManager;

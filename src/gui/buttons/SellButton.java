@@ -8,11 +8,12 @@ import javax.swing.JButton;
 import basic.GameManager;
 import entities.Merchant;
 import entities.Player;
+import gui.GraphicalButton;
 import gui.actions.InventoryShowAction;
 import gui.actions.MapShowAction;
 import utilities.Challenge;
 
-public class SellButton extends JButton implements ActionListener {
+public class SellButton extends GraphicalButton implements ActionListener {
 
 	private Challenge challenge;
 	private Player player;
