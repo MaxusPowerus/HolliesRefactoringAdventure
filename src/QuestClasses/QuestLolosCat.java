@@ -20,12 +20,6 @@ public class QuestLolosCat extends Quest {
 	@Override
 	// attempt = possibilities.get(was der player wählt)
 	public void update(String attempt, Player player) {
-		if (super.isActive() == false && super.isFinished() == false
-				&& player.getCurrentMapField().getCoordinate().equals(super.getTargetPoint())) {
-			super.setActive(true);
-			super.getPossibilities().add("Suche nach Lolos Katze");
-			super.setNewFlag("searchCat");
-		}
 
 		switch (getActiveFlagName()) {
 		case "searchCat":
@@ -86,16 +80,16 @@ public class QuestLolosCat extends Quest {
 				super.setActive(false);
 				super.setFinished(true);
 			}
-
 			break;
 		}
-
 	}
 
 	@Override
 	public void update(Player player) {
-		// TODO Auto-generated method stub
-
+		if (super.isActive() == false && super.isFinished() == false) {
+			super.setActive(true);
+			super.getPossibilities().add("Suche nach Lolos Katze");
+			super.setNewFlag("searchCat");
+		}
 	}
-
 }
