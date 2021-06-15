@@ -19,18 +19,12 @@ public abstract class Quest {
 	private ArrayList<Coordinate> targetZone;
 
 	private boolean appearsInQuestLog;
-	private String Title;
 
+	//// questLog
+	private String Title;
 	private String questInfo;
 
-	public ArrayList<Integer> getPossibilitiesChances() {
-		return possibilitiesChances;
-	}
-
-	public void setPossibilitiesChances(ArrayList<Integer> possibilitiesChances) {
-		this.possibilitiesChances = possibilitiesChances;
-	}
-
+	// infoPanel
 	private String WorldInfoLine;
 
 	// get this Lonz!======================================
@@ -256,6 +250,14 @@ public abstract class Quest {
 
 	public void setFinished(boolean finished) {
 		this.finished = finished;
+	}
+
+	public ArrayList<Integer> getPossibilitiesChances() {
+		return possibilitiesChances;
+	}
+
+	public void setPossibilitiesChances(ArrayList<Integer> possibilitiesChances) {
+		this.possibilitiesChances = possibilitiesChances;
 	}
 
 }

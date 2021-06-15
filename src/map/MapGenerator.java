@@ -272,7 +272,6 @@ public class MapGenerator {
 				map.getMapFieldByCoordinate(quests.get(i).getTargetPoint()).setChallenge(null);
 			}
 		}
-
 	}
 
 	public Map generateMapMK2() {
