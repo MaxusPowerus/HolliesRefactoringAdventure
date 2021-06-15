@@ -1,5 +1,6 @@
 package map;
 
+import QuestClasses.Quest;
 import utilities.Challenge;
 import utilities.Container;
 import utilities.Coordinate;
@@ -10,6 +11,7 @@ public class MapField {
 	private boolean disabled;
 	private Biom biom;
 	private Challenge challenge;
+	private Quest quest;
 
 	private Container container = null;
 	private Map subMap;
@@ -66,6 +68,14 @@ public class MapField {
 
 	public Challenge getChallenge() {
 		return challenge;
+	}
+
+	public Quest getQuest() {
+		return quest;
+	}
+
+	public void setQuest(Quest quest) {
+		this.quest = quest;
 	}
 
 }

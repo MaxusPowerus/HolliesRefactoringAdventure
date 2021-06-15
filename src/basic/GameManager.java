@@ -216,6 +216,10 @@ public class GameManager {
 		return resourceManager;
 	}
 
+	public QuestManager getQuestManager() {
+		return questManager;
+	}
+
 	public void endGame() {
 		this.guiManager.showGameOver();
 	}
