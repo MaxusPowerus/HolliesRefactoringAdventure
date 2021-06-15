@@ -22,6 +22,7 @@ public class QuestManager {
 		int il = 1;
 		Coordinate tp = new Coordinate(Config.MAP_SIZEX / 2, Config.MAP_SIZEY / 2 + 1);
 		ArrayList<Coordinate> tz = null;
+		boolean uoe = true;
 		boolean aiql = true;
 		String t = "Lolos Katze";
 		String qi = "Du triffst auf Lol, der dir berichtet, das seine Katzte davon gelaufen ist. Er bittet dich um Hilfe be der Suche.";
@@ -38,16 +39,16 @@ public class QuestManager {
 		pc.add(pc1);
 
 		ArrayList<Flag> f = new ArrayList<Flag>();
-		Flag f0 = new Flag("searchCat");
-		Flag f1 = new Flag("getCat");
-		Flag f2 = new Flag("catchCat");
-		Flag f3 = new Flag("looseCat");
+		Flag f0 = new Flag("search");
+		Flag f1 = new Flag("success");
+		Flag f2 = new Flag("catch");
+		Flag f3 = new Flag("failure");
 		f.add(f0);
 		f.add(f1);
 		f.add(f2);
 		f.add(f3);
 
-		QuestLolosCat qestLolosCat = new QuestLolosCat(il, tp, tz, aiql, t, qi, wil, p, pb, pc, f);
+		QuestLolosCat qestLolosCat = new QuestLolosCat(il, tp, tz, uoe, aiql, t, qi, wil, p, pb, pc, f);
 		return qestLolosCat;
 	}
 

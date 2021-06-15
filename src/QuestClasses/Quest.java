@@ -15,6 +15,8 @@ public abstract class Quest {
 	private boolean active;
 	private boolean finished;
 
+	private boolean updateOnEnter;
+
 	private Coordinate targetPoint;
 	private ArrayList<Coordinate> targetZone;
 
@@ -35,15 +37,16 @@ public abstract class Quest {
 
 	private ArrayList<Flag> flags;
 
-	public Quest(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, boolean appearsInQuestLog,
-			String title, String questInfo, String worldInfoLine, ArrayList<String> possibilities,
-			ArrayList<String> possibilitiesButtonlabels, ArrayList<Integer> possibilitiesChances,
-			ArrayList<Flag> flags) {
+	public Quest(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, boolean updateOnEnter,
+			boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
+			ArrayList<String> possibilities, ArrayList<String> possibilitiesButtonlabels,
+			ArrayList<Integer> possibilitiesChances, ArrayList<Flag> flags) {
 		super();
 		this.active = false;
 		this.finished = false;
 		this.targetPoint = targetPoint;
 		this.targetZone = targetZone;
+		this.updateOnEnter = updateOnEnter;
 		this.appearsInQuestLog = appearsInQuestLog;
 		Title = title;
 		this.questInfo = questInfo;
@@ -90,29 +93,14 @@ public abstract class Quest {
 	public abstract void update(String attempt, Player player);
 
 	public abstract void update(Player player);
-	// {
-	/*
-	 * String activeFlag = getActiveFlag();
-	 * 
-	 * switch (activeFlag) { case "firstFlag": firstFlagFunctio(attempt, player);
-	 * break;
-	 * 
-	 * case "secondFlag": firstFlagFunctio(attempt, player); break;
-	 * 
-	 * case "thirdFlag": firstFlagFunctio(attempt, player); break; }
-	 */
-	// }
 
-	public void firstFlagFunctio(String attempt, Player player) {
+	// abstract public void rewardPlayer(Player player);
+	// abstract public void punishPlayer(Player player);
 
-	}
-
-	public void secondFlagFunctio(String attempt, Player player) {
-
-	}
-
-	public void thirdFlagFunction(String attempt, Player player) {
-
+	public void clearPossibilities() {
+		this.possibilities.clear();
+		this.possibilitiesButtonlabels.clear();
+		// possibilitiesChances.clear();
 	}
 
 	public boolean useSkill(Player player, Skill skill) {
@@ -126,6 +114,12 @@ public abstract class Quest {
 
 	public boolean useOneItem(Player player, ArrayList<Item> item, boolean permanet) {
 		return false;
+	}
+
+	public void setAllFlagsOff() {
+		for (int i = 0; i < flags.size(); i++) {
+			flags.get(i).setValue(false);
+		}
 	}
 
 	public void setNewFlag(String name) {
@@ -250,6 +244,9 @@ public abstract class Quest {
 
 	public void setFinished(boolean finished) {
 		this.finished = finished;
+		if (finished) {
+			setAllFlagsOff();
+		}
 	}
 
 	public ArrayList<Integer> getPossibilitiesChances() {
@@ -258,6 +255,14 @@ public abstract class Quest {
 
 	public void setPossibilitiesChances(ArrayList<Integer> possibilitiesChances) {
 		this.possibilitiesChances = possibilitiesChances;
+	}
+
+	public boolean isUpdateOnEnter() {
+		return updateOnEnter;
+	}
+
+	public void setUpdateOnEnter(boolean updateOnEnter) {
+		this.updateOnEnter = updateOnEnter;
 	}
 
 }

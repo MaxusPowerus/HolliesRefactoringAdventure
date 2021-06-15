@@ -166,9 +166,15 @@ public class Player {
 		MapField newField = this.currentMap.getMapFieldByCoordinate(newCoordinate);
 
 		if (newField != null) {
+
 			this.currentMapField = newField;
 			this.currentMapField.getCoordinate().print();
 			this.time.addHours(2);
+
+			Quest quest = this.currentMapField.getQuest();
+			if (quest != null) {
+				quest.update(this);
+			}
 		}
 	}
 

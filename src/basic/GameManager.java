@@ -204,7 +204,7 @@ public class GameManager {
 				this.guiManager.getMain().getActionButtonPanel().add(questButton);
 			}
 		} else {
-			System.out.println("MAX DU HAST KAKI GEBAUT!");
+			System.out.println("MAX DU HAST KAKI GEBAUT! aber ich vergebe dir");
 		}
 
 		this.update();
