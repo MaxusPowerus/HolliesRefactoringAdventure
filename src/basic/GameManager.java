@@ -10,9 +10,11 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import QuestClasses.Quest;
 import entities.Enemy;
 import entities.Merchant;
 import entities.Player;
+import entities.Victim;
 import gui.ActionPanel;
 import gui.BackgroundImagePanel;
 import gui.GUIHelper;
@@ -22,10 +24,10 @@ import gui.WorldInfoPanel;
 import gui.actions.MapShowAction;
 import gui.buttons.AttackButton;
 import gui.buttons.BuyButton;
-import gui.buttons.EventButton;
 import gui.buttons.FleeButton;
 import gui.buttons.InspectButton;
 import gui.buttons.LootButton;
+import gui.buttons.QuestButton;
 import gui.buttons.SellButton;
 import gui.views.PlayerEditor;
 import map.Biom;
@@ -33,8 +35,6 @@ import map.Map;
 import map.MapGenerator;
 import utilities.Challenge;
 import utilities.Container;
-import utilities.Event;
-import utilities.EventSolution;
 
 public class GameManager {
 
@@ -136,71 +136,75 @@ public class GameManager {
 
 		// execute challenge
 		Challenge challenge = player.getCurrentMapField().getChallenge();
-		if (!challenge.isChallengeCompleted()) {
-			switch (challenge.getChallangeType()) {
-			case 0:
-				Container container = challenge.getContainer();
-				if (!container.getFound()) {
+		Quest quest = player.getCurrentMapField().getQuest();
+		if (quest == null && challenge != null) {
+			if (!challenge.isChallengeCompleted()) {
+				switch (challenge.getChallangeType()) {
+				case 0:
+					Container container = challenge.getContainer();
+					if (!container.getFound()) {
+						this.guiManager.getMain().addFieldInfo(
+								"Du hast <b>" + container.toString() + "</b> gefunden. Halte nach Items ausschau.");
+
+						LootButton lootButton = new LootButton(challenge, this,
+								challenge.getContainer().getInventory());
+						this.guiManager.getMain().getActionButtonPanel().add(lootButton);
+					} else {
+						this.guiManager.getMain().addFieldInfo("Es ist ruhig hier...zu ruhig...");
+						InspectButton button = new InspectButton(challenge, player, this);
+						this.guiManager.getMain().getActionButtonPanel().add(button);
+					}
+
+					break;
+				case 1:
+					Enemy enemy = (Enemy) challenge.getNpc();
 					this.guiManager.getMain().addFieldInfo(
-							"Du hast <b>" + container.toString() + "</b> gefunden. Halte nach Items ausschau.");
+							"<b>" + enemy.toString() + "</b> ist erschienen. Was tust du? Wegrennen oder Kämpfen?");
 
-					LootButton lootButton = new LootButton(challenge, this, challenge.getContainer().getInventory());
-					this.guiManager.getMain().getActionButtonPanel().add(lootButton);
-				} else {
-					this.guiManager.getMain().addFieldInfo("Es ist ruhig hier...zu ruhig...");
-					InspectButton button = new InspectButton(challenge, player, this);
-					this.guiManager.getMain().getActionButtonPanel().add(button);
+					this.guiManager.getMain().setNavigationEnabled(false);
+
+					AttackButton attackButton = new AttackButton(challenge, player, this);
+					this.guiManager.getMain().getActionButtonPanel().add(attackButton);
+
+					FleeButton escapeButton = new FleeButton(challenge, player, this);
+					this.guiManager.getMain().getActionButtonPanel().add(escapeButton);
+
+					break;
+				case 2:
+					Merchant merchant = (Merchant) challenge.getNpc();
+					this.guiManager.getMain().addFieldInfo("<b>" + merchant.toString()
+							+ "</b> ist erschienen. Möchtest du mit ihm einen Handel eingehen?");
+
+					BuyButton buyButton = new BuyButton(challenge, player, this);
+					this.guiManager.getMain().getActionButtonPanel().add(buyButton);
+
+					SellButton sellButton = new SellButton(challenge, player, this);
+					this.guiManager.getMain().getActionButtonPanel().add(sellButton);
+					break;
+				case 3:
+					Victim victim = (Victim) challenge.getNpc();
+
+					// TODO
+
+					break;
+				default:
+					this.guiManager.getMain().addFieldInfo(
+							"Wer das liest ist doof. Spaß. Wer das liest, hat einen Bug entdeckt. :c Bitte kontaktieren Sie Ihren Administrator lul");
+					break;
 				}
+			} else {
+				this.guiManager.getMain().addFieldInfo("Du siehst nichts außer deinen Fußspuren");
+			}
+		} else if (challenge == null && quest != null) {
+			this.getGuiManager().getMain().addFieldInfo(quest.getWorldInfoLine());
 
-				break;
-			case 1:
-				Enemy enemy = (Enemy) challenge.getNpc();
-				this.guiManager.getMain().addFieldInfo(
-						"<b>" + enemy.toString() + "</b> ist erschienen. Was tust du? Wegrennen oder Kämpfen?");
-
-				this.guiManager.getMain().setNavigationEnabled(false);
-
-				AttackButton attackButton = new AttackButton(challenge, player, this);
-				this.guiManager.getMain().getActionButtonPanel().add(attackButton);
-
-				FleeButton escapeButton = new FleeButton(challenge, player, this);
-				this.guiManager.getMain().getActionButtonPanel().add(escapeButton);
-
-				break;
-			case 2:
-				Merchant merchant = (Merchant) challenge.getNpc();
-				this.guiManager.getMain().addFieldInfo("<b>" + merchant.toString()
-						+ "</b> ist erschienen. Möchtest du mit ihm einen Handel eingehen?");
-
-				BuyButton buyButton = new BuyButton(challenge, player, this);
-				this.guiManager.getMain().getActionButtonPanel().add(buyButton);
-
-				SellButton sellButton = new SellButton(challenge, player, this);
-				this.guiManager.getMain().getActionButtonPanel().add(sellButton);
-				break;
-			case 3:
-				Event event = challenge.getEvent();
-				this.guiManager.getMain().addFieldInfo(event.getTask());
-
-				int solutionIndex = 1;
-				for (EventSolution solution : event.getEventSolutions()) {
-					this.guiManager.getMain()
-							.addFieldInfo("<b>Möglichkeit " + solutionIndex + ":</b> " + solution.getSolutionTry());
-
-					EventButton evtButton = new EventButton(solutionIndex, this, challenge, player, solution);
-					this.guiManager.getMain().getActionButtonPanel().add(evtButton);
-
-					solutionIndex++;
-				}
-
-				break;
-			default:
-				this.guiManager.getMain().addFieldInfo(
-						"Wer das liest ist doof. Spaß. Wer das liest, hat einen Bug entdeckt. :c Bitte kontaktieren Sie Ihren Administrator lul");
-				break;
+			for (int i = 0; i < quest.getPossibilities().size(); i++) {
+				QuestButton questButton = new QuestButton(quest, player, this,
+						quest.getPossibilitiesButtonlabels().get(i), quest.getPossibilitiesChances().get(i));
+				this.guiManager.getMain().getActionButtonPanel().add(questButton);
 			}
 		} else {
-			this.guiManager.getMain().addFieldInfo("Du siehst nichts außer deinen Fußspuren");
+			System.out.println("MAX DU HAST KAKI GEBAUT!");
 		}
 
 		this.update();
