@@ -74,8 +74,8 @@ public class ResourceManager {
 		this.loadVictims();
 		this.loadMerchants();
 
-		this.loadEventSolutions();
-		this.loadEvents();
+		// this.loadEventSolutions();
+		// this.loadEvents();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -470,111 +470,94 @@ public class ResourceManager {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
-	private void loadEventSolutions() {
-		try {
-
-			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/EventSolutions.json"));
-			JSONParser parser = new JSONParser();
-			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
-
-			Set<String> labels = jsonItems.keySet();
-
-			for (String keyName : labels) {
-				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
-
-				ArrayList<Item> requiredItems = new ArrayList<Item>();
-				((JSONArray) jsonItem.get("requiredItems")).forEach((item) -> {
-					requiredItems.add(this.getItemByUniqueName(item.toString()).clone());
-				});
-
-				ArrayList<Item> rewardItems = new ArrayList<Item>();
-				((JSONArray) jsonItem.get("rewardItems")).forEach((item) -> {
-					rewardItems.add(this.getItemByUniqueName(item.toString()).clone());
-				});
-
-				String solutionShort = new String(jsonItem.get("solutionTry").toString().getBytes(),
-						StandardCharsets.UTF_8);
-				String solutionTry = new String(jsonItem.get("solutionShort").toString().getBytes(),
-						StandardCharsets.UTF_8);
-				String success = new String(jsonItem.get("success").toString().getBytes(), StandardCharsets.UTF_8);
-				String failure = new String(jsonItem.get("failure").toString().getBytes(), StandardCharsets.UTF_8);
-
-				EventSolution eventSolution = new EventSolution(keyName, solutionShort, solutionTry, success, failure,
-						getSkillByString(jsonItem.get("skill").toString()),
-						Integer.valueOf(jsonItem.get("skillValue").toString()), requiredItems,
-						getBoolByString(jsonItem.get("needOnlyOneItem").toString()),
-						getBoolByString(jsonItem.get("needItemPermanet").toString()),
-						Integer.valueOf(jsonItem.get("rewardXp").toString()), rewardItems,
-						Integer.valueOf(jsonItem.get("rewardGold").toString()),
-						Integer.valueOf(jsonItem.get("takeDamage").toString()));
-
-				this.eventSolutions.add(eventSolution);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public EventSolution getEventSolutionByName(String name) {
-		for (EventSolution eventSolution : this.eventSolutions) {
-			if (eventSolution.getName().equalsIgnoreCase(name))
-				return eventSolution;
-		}
-		return null;
-	}
-
-	public ArrayList<EventSolution> getEventSolutions() {
-		return eventSolutions;
-	}
-
-	@SuppressWarnings("unchecked")
-	private void loadEvents() {
-		try {
-
-			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Events.json"));
-			JSONParser parser = new JSONParser();
-			JSONObject jsonItems = (JSONObject) parser.parse(fileReader);
-
-			Set<String> labels = jsonItems.keySet();
-
-			for (String keyName : labels) {
-				JSONObject jsonItem = (JSONObject) jsonItems.get(keyName);
-
-				ArrayList<EventSolution> solutions = new ArrayList<EventSolution>();
-
-				JSONArray solutionArray = (JSONArray) jsonItem.get("solutions");
-
-				solutionArray.forEach((solution) -> {
-					solutions.add(this.getEventSolutionByName(solution.toString()));
-				});
-
-				String task = new String(jsonItem.get("task").toString().getBytes(), StandardCharsets.UTF_8);
-				String biom = new String(jsonItem.get("biom").toString().getBytes(), StandardCharsets.UTF_8);
-
-				Event event = new Event(keyName, task, solutions, biom);
-
-				this.events.add(event);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public Event getEventByName(String name) {
-		for (Event event : this.events) {
-			if (event.getName().equalsIgnoreCase(name))
-				return event;
-		}
-		return null;
-	}
-
-	public ArrayList<Event> getEvents() {
-		return events;
-	}
-
+	/*
+	 * @SuppressWarnings("unchecked") private void loadEventSolutions() { try {
+	 * 
+	 * FileReader fileReader = new
+	 * FileReader(HelperFunctions.getResource("jsonFiles/EventSolutions.json"));
+	 * JSONParser parser = new JSONParser(); JSONObject jsonItems = (JSONObject)
+	 * parser.parse(fileReader);
+	 * 
+	 * Set<String> labels = jsonItems.keySet();
+	 * 
+	 * for (String keyName : labels) { JSONObject jsonItem = (JSONObject)
+	 * jsonItems.get(keyName);
+	 * 
+	 * ArrayList<Item> requiredItems = new ArrayList<Item>(); ((JSONArray)
+	 * jsonItem.get("requiredItems")).forEach((item) -> {
+	 * requiredItems.add(this.getItemByUniqueName(item.toString()).clone()); });
+	 * 
+	 * ArrayList<Item> rewardItems = new ArrayList<Item>(); ((JSONArray)
+	 * jsonItem.get("rewardItems")).forEach((item) -> {
+	 * rewardItems.add(this.getItemByUniqueName(item.toString()).clone()); });
+	 * 
+	 * String solutionShort = new
+	 * String(jsonItem.get("solutionTry").toString().getBytes(),
+	 * StandardCharsets.UTF_8); String solutionTry = new
+	 * String(jsonItem.get("solutionShort").toString().getBytes(),
+	 * StandardCharsets.UTF_8); String success = new
+	 * String(jsonItem.get("success").toString().getBytes(),
+	 * StandardCharsets.UTF_8); String failure = new
+	 * String(jsonItem.get("failure").toString().getBytes(),
+	 * StandardCharsets.UTF_8);
+	 * 
+	 * EventSolution eventSolution = new EventSolution(keyName, solutionShort,
+	 * solutionTry, success, failure,
+	 * getSkillByString(jsonItem.get("skill").toString()),
+	 * Integer.valueOf(jsonItem.get("skillValue").toString()), requiredItems,
+	 * getBoolByString(jsonItem.get("needOnlyOneItem").toString()),
+	 * getBoolByString(jsonItem.get("needItemPermanet").toString()),
+	 * Integer.valueOf(jsonItem.get("rewardXp").toString()), rewardItems,
+	 * Integer.valueOf(jsonItem.get("rewardGold").toString()),
+	 * Integer.valueOf(jsonItem.get("takeDamage").toString()));
+	 * 
+	 * this.eventSolutions.add(eventSolution); }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } }
+	 * 
+	 * public EventSolution getEventSolutionByName(String name) { for (EventSolution
+	 * eventSolution : this.eventSolutions) { if
+	 * (eventSolution.getName().equalsIgnoreCase(name)) return eventSolution; }
+	 * return null; }
+	 * 
+	 * public ArrayList<EventSolution> getEventSolutions() { return eventSolutions;
+	 * }
+	 */
+	/*
+	 * @SuppressWarnings("unchecked") private void loadEvents() { try {
+	 * 
+	 * FileReader fileReader = new
+	 * FileReader(HelperFunctions.getResource("jsonFiles/Events.json")); JSONParser
+	 * parser = new JSONParser(); JSONObject jsonItems = (JSONObject)
+	 * parser.parse(fileReader);
+	 * 
+	 * Set<String> labels = jsonItems.keySet();
+	 * 
+	 * for (String keyName : labels) { JSONObject jsonItem = (JSONObject)
+	 * jsonItems.get(keyName);
+	 * 
+	 * ArrayList<EventSolution> solutions = new ArrayList<EventSolution>();
+	 * 
+	 * JSONArray solutionArray = (JSONArray) jsonItem.get("solutions");
+	 * 
+	 * solutionArray.forEach((solution) -> {
+	 * solutions.add(this.getEventSolutionByName(solution.toString())); });
+	 * 
+	 * String task = new String(jsonItem.get("task").toString().getBytes(),
+	 * StandardCharsets.UTF_8); String biom = new
+	 * String(jsonItem.get("biom").toString().getBytes(), StandardCharsets.UTF_8);
+	 * 
+	 * Event event = new Event(keyName, task, solutions, biom);
+	 * 
+	 * this.events.add(event); }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } }
+	 * 
+	 * public Event getEventByName(String name) { for (Event event : this.events) {
+	 * if (event.getName().equalsIgnoreCase(name)) return event; } return null; }
+	 * 
+	 * public ArrayList<Event> getEvents() { return events; }
+	 */
 	public Skill getSkillByString(String string) {
 		if (string.equalsIgnoreCase("st")) {
 			return Skill.STRENGTH;

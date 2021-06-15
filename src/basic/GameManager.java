@@ -214,4 +214,8 @@ public class GameManager {
 	public ResourceManager getResourceManager() {
 		return resourceManager;
 	}
+
+	public QuestManager getQuestManager() {
+		return questManager;
+	}
 }

@@ -123,9 +123,11 @@ public class Challenge {
 			break;
 		// Challenge: Event
 		case 3:
-			ArrayList<Event> events = new ArrayList<Event>();
-			int lengthEvents = GameManager.getInstance().getResourceManager().getMerchants().size() - 1;
-			event = GameManager.getInstance().getResourceManager().getEvents().get(Randy.nextInt(lengthEvents));
+			// ArrayList<Event> events = new ArrayList<Event>();
+			// int lengthEvents =
+			// GameManager.getInstance().getResourceManager().getMerchants().size() - 1;
+			// event =
+			// GameManager.getInstance().getResourceManager().getEvents().get(Randy.nextInt(lengthEvents));
 
 			break;
 

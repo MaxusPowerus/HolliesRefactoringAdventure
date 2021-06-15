@@ -3,8 +3,10 @@ package QuestClasses;
 import java.util.ArrayList;
 
 import entities.Player;
+import items.Item;
 import utilities.Coordinate;
 import utilities.Flag;
+import utilities.Skill;
 
 public abstract class Quest {
 
@@ -18,18 +20,31 @@ public abstract class Quest {
 
 	private boolean appearsInQuestLog;
 	private String Title;
+
 	private String questInfo;
+
+	public ArrayList<Integer> getPossibilitiesChances() {
+		return possibilitiesChances;
+	}
+
+	public void setPossibilitiesChances(ArrayList<Integer> possibilitiesChances) {
+		this.possibilitiesChances = possibilitiesChances;
+	}
 
 	private String WorldInfoLine;
 
+	// get this Lonz!======================================
 	private ArrayList<String> possibilities;
 	private ArrayList<String> possibilitiesButtonlabels;
+	private ArrayList<Integer> possibilitiesChances;
+	// ===================================================
 
 	private ArrayList<Flag> flags;
 
 	public Quest(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, boolean appearsInQuestLog,
 			String title, String questInfo, String worldInfoLine, ArrayList<String> possibilities,
-			ArrayList<String> possibilitiesButtonlabels, ArrayList<Flag> flags) {
+			ArrayList<String> possibilitiesButtonlabels, ArrayList<Integer> possibilitiesChances,
+			ArrayList<Flag> flags) {
 		super();
 		this.active = false;
 		this.finished = false;
@@ -41,6 +56,7 @@ public abstract class Quest {
 		WorldInfoLine = worldInfoLine;
 		this.possibilities = possibilities;
 		this.possibilitiesButtonlabels = possibilitiesButtonlabels;
+		this.possibilitiesChances = possibilitiesChances;
 		this.flags = flags;
 		this.instanceLimit--;
 	}
@@ -103,6 +119,19 @@ public abstract class Quest {
 
 	public void thirdFlagFunction(String attempt, Player player) {
 
+	}
+
+	public boolean useSkill(Player player, Skill skill) {
+
+		return false;
+	}
+
+	public boolean useOneItem(Player player, Item item, boolean permanet) {
+		return false;
+	}
+
+	public boolean useOneItem(Player player, ArrayList<Item> item, boolean permanet) {
+		return false;
 	}
 
 	public void setNewFlag(String name) {

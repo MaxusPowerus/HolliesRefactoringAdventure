@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import QuestClasses.MainQuest01;
 import QuestClasses.Quest;
+import QuestClasses.QuestLolosCat;
 import entities.Player;
 import utilities.Coordinate;
 import utilities.Flag;
@@ -12,21 +13,42 @@ public class QuestManager {
 	ArrayList<Quest> quests;
 
 	public QuestManager(Player player) {
+		quests = new ArrayList<Quest>();
+		quests.add(initLolosCat());
 
-		MainQuest01 mainQuest01 = new MainQuest01(player);
+	}
 
-		/*
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 */// define & add Quests
+	public QuestLolosCat initLolosCat() {
+		int il = 1;
+		Coordinate tp = new Coordinate(Config.MAP_SIZEX / 2, Config.MAP_SIZEY / 2 + 1);
+		ArrayList<Coordinate> tz = null;
+		boolean aiql = true;
+		String t = "Lolos Katze";
+		String qi = "Du triffst auf Lol, der dir berichtet, das seine Katzte davon gelaufen ist. Er bittet dich um Hilfe be der Suche.";
+		String wil = "Lollo: \"Hallo kannst du mir hlefen meine Katze zu finden?\"";
 
+		ArrayList<String> p = new ArrayList<String>();
+		String p1 = "Nach Lolos Katze suchen";
+		p.add(p1);
+		ArrayList<String> pb = new ArrayList<String>();
+		String pb1 = "Katze suchen!";
+		pb.add(pb1);
+		ArrayList<Integer> pc = new ArrayList<Integer>();
+		int pc1 = -1;
+		pc.add(pc1);
+
+		ArrayList<Flag> f = new ArrayList<Flag>();
+		Flag f0 = new Flag("searchCat");
+		Flag f1 = new Flag("getCat");
+		Flag f2 = new Flag("catchCat");
+		Flag f3 = new Flag("looseCat");
+		f.add(f0);
+		f.add(f1);
+		f.add(f2);
+		f.add(f3);
+
+		QuestLolosCat qestLolosCat = new QuestLolosCat(il, tp, tz, aiql, t, qi, wil, p, pb, pc, f);
+		return qestLolosCat;
 	}
 
 	public ArrayList<Quest> getQuests() {

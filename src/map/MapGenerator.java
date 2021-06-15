@@ -1,7 +1,9 @@
 package map;
 
+import java.util.ArrayList;
 import java.util.Random;
 
+import QuestClasses.Quest;
 import basic.Config;
 import basic.GameManager;
 import entities.Player;
@@ -262,6 +264,17 @@ public class MapGenerator {
 		}
 	}
 
+	public void generateQuests() {
+		ArrayList<Quest> quests = GameManager.getInstance().getQuestManager().getQuests();
+		for (int i = 0; i < quests.size(); i++) {
+			if (quests.get(i).getTargetPoint() != null) {
+				map.getMapFieldByCoordinate(quests.get(i).getTargetPoint()).setQuest(quests.get(i));
+				map.getMapFieldByCoordinate(quests.get(i).getTargetPoint()).setChallenge(null);
+			}
+		}
+
+	}
+
 	public Map generateMapMK2() {
 		map = setMapToBiom(Biom.MEADOW);
 		// System.out.println("Meadow Done");
@@ -278,8 +291,10 @@ public class MapGenerator {
 
 		generateChallenge();
 		// System.out.println("Container Done");
+		generateQuests();
+		// System.out.println("Container Done");
 
-		map.printMapDebug("");
+		// map.printMapDebug("");
 
 		return map;
 	}
