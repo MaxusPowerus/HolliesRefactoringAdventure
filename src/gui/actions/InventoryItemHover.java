@@ -60,18 +60,18 @@ public class InventoryItemHover implements MouseListener {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		this.gameManager.getGuiManager().getLeftInfoContentPanel().removeAll();
+		this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel().removeAll();
 
-		this.gameManager.getGuiManager().getLeftInfoContentPanel().setBackground(new Color(0, 0, 0, 0));
-		GroupLayout gl_leftInfoPanel = new GroupLayout(this.gameManager.getGuiManager().getLeftInfoPanel());
+		this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel().setBackground(new Color(0, 0, 0, 0));
+		GroupLayout gl_leftInfoPanel = new GroupLayout(this.gameManager.getGuiManager().getMain().getLeftInfoPanel());
 		gl_leftInfoPanel.setHorizontalGroup(gl_leftInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_leftInfoPanel.createSequentialGroup().addContainerGap()
-						.addComponent(this.gameManager.getGuiManager().getLeftInfoContentPanel(),
+						.addComponent(this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel(),
 								GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
 						.addContainerGap()));
 		gl_leftInfoPanel.setVerticalGroup(gl_leftInfoPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_leftInfoPanel.createSequentialGroup().addContainerGap()
-						.addComponent(this.gameManager.getGuiManager().getLeftInfoContentPanel(),
+						.addComponent(this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel(),
 								GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
 						.addContainerGap()));
 
@@ -82,7 +82,7 @@ public class InventoryItemHover implements MouseListener {
 		itemIconPanel.setBackground(new Color(0, 0, 0, 0));
 		itemIconPanel.setLayout(new BorderLayout());
 		GroupLayout gl_leftInfoContentPanel = new GroupLayout(
-				this.gameManager.getGuiManager().getLeftInfoContentPanel());
+				this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel());
 		gl_leftInfoContentPanel.setHorizontalGroup(gl_leftInfoContentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(Alignment.TRAILING, gl_leftInfoContentPanel.createSequentialGroup()
 						.addComponent(itemInfoPanel, GroupLayout.PREFERRED_SIZE, 356, GroupLayout.PREFERRED_SIZE)
@@ -94,6 +94,7 @@ public class InventoryItemHover implements MouseListener {
 		itemInfoPanel.setLayout(new BoxLayout(itemInfoPanel, BoxLayout.Y_AXIS));
 
 		JLabel name = new JLabel(item.getName());
+		name.setForeground(Color.WHITE);
 
 		Font headlineFont = new Font("Dialog", Font.BOLD, 16);
 		Map headlineAttributes = headlineFont.getAttributes();
@@ -109,26 +110,31 @@ public class InventoryItemHover implements MouseListener {
 			if (hasItem != null)
 				itemCount = hasItem.getCount();
 			JLabel hasAmount = new JLabel("<html><i>Du besitzt " + itemCount + "</i></html>");
+			hasAmount.setForeground(Color.WHITE);
 			hasAmount.setFont(new Font("Dialog", Font.PLAIN, 14));
 			itemInfoPanel.add(hasAmount);
 		}
 
 		JLabel value = new JLabel("<html><b>Wert:</b> " + item.getValue() + " Gold</html>");
+		value.setForeground(Color.WHITE);
 		value.setFont(new Font("Dialog", Font.PLAIN, 14));
 		itemInfoPanel.add(value);
 
 		if (item instanceof Weapon) {
 			JLabel damage = new JLabel("<html><b>Schaden:</b> " + ((Weapon) item).getDamage() + "</html>");
+			damage.setForeground(Color.WHITE);
 			damage.setFont(new Font("Dialog", Font.ITALIC, 14));
 			itemInfoPanel.add(damage);
 		}
 		if (item instanceof Food) {
 			JLabel energy = new JLabel("<html><b>Energie:</b> " + ((Food) item).getEnergy() + "</html>");
+			energy.setForeground(Color.WHITE);
 			energy.setFont(new Font("Dialog", Font.ITALIC, 14));
 			itemInfoPanel.add(energy);
 		}
 		if (item instanceof Outfit) {
 			JLabel armor = new JLabel("<html><b>Rüstungspunkte:</b> " + ((Outfit) item).getArmor() + "</html>");
+			armor.setForeground(Color.WHITE);
 			armor.setFont(new Font("Dialog", Font.ITALIC, 14));
 			itemInfoPanel.add(armor);
 
@@ -136,42 +142,49 @@ public class InventoryItemHover implements MouseListener {
 				JLabel stFx = new JLabel("<html><b>Effekt auf Stärke:</b> "
 						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.STRENGTH) + "</html>");
 				stFx.setFont(new Font("Dialog", Font.ITALIC, 14));
+				stFx.setForeground(Color.WHITE);
 				itemInfoPanel.add(stFx);
 			}
 			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.PERCEPTION) != 0) {
 				JLabel peFx = new JLabel("<html><b>Effekt auf Wahrnehmung:</b> "
 						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.PERCEPTION) + "</html>");
 				peFx.setFont(new Font("Dialog", Font.ITALIC, 14));
+				peFx.setForeground(Color.WHITE);
 				itemInfoPanel.add(peFx);
 			}
 			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.ENDURANCE) != 0) {
 				JLabel enFx = new JLabel("<html><b>Effekt auf Ausdauer:</b> "
 						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.ENDURANCE) + "</html>");
 				enFx.setFont(new Font("Dialog", Font.ITALIC, 14));
+				enFx.setForeground(Color.WHITE);
 				itemInfoPanel.add(enFx);
 			}
 			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.CHARISMA) != 0) {
 				JLabel chFx = new JLabel("<html><b>Effekt auf Charisma:</b> "
 						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.CHARISMA) + "</html>");
 				chFx.setFont(new Font("Dialog", Font.ITALIC, 14));
+				chFx.setForeground(Color.WHITE);
 				itemInfoPanel.add(chFx);
 			}
 			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.INTELLIGENCE) != 0) {
 				JLabel inFx = new JLabel("<html><b>Effekt auf Intelligenz:</b> "
 						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.INTELLIGENCE) + "</html>");
 				inFx.setFont(new Font("Dialog", Font.ITALIC, 14));
+				inFx.setForeground(Color.WHITE);
 				itemInfoPanel.add(inFx);
 			}
 			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.AGILITY) != 0) {
 				JLabel agFx = new JLabel("<html><b>Effekt auf Gewandtheit:</b> "
 						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.AGILITY) + "</html>");
 				agFx.setFont(new Font("Dialog", Font.ITALIC, 14));
+				agFx.setForeground(Color.WHITE);
 				itemInfoPanel.add(agFx);
 			}
 			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.LUCK) != 0) {
 				JLabel lkFx = new JLabel("<html><b>Effekt auf Glück:</b> "
 						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.LUCK) + "</html>");
 				lkFx.setFont(new Font("Dialog", Font.ITALIC, 14));
+				lkFx.setForeground(Color.WHITE);
 				itemInfoPanel.add(lkFx);
 			}
 
@@ -179,16 +192,19 @@ public class InventoryItemHover implements MouseListener {
 		if (item instanceof Note) {
 			JLabel text = new JLabel("<html><b>Nachricht:<br></b> " + ((Note) item).getText() + "</html>");
 			text.setFont(new Font("Dialog", Font.ITALIC, 14));
+			text.setForeground(Color.WHITE);
 			itemInfoPanel.add(text);
 		}
 		if (item instanceof Other) {
 			JLabel info = new JLabel("<html><b>Information:</b> " + ((Other) item).getInfo() + "</html>");
 			info.setFont(new Font("Dialog", Font.ITALIC, 14));
+			info.setForeground(Color.WHITE);
 			itemInfoPanel.add(info);
 		}
 		if (item instanceof QuestItem) {
 			JLabel info = new JLabel("<html><b>Information:</b> " + ((QuestItem) item).getInfo() + "</html>");
 			info.setFont(new Font("Dialog", Font.ITALIC, 14));
+			info.setForeground(Color.WHITE);
 			itemInfoPanel.add(info);
 		}
 
@@ -199,8 +215,8 @@ public class InventoryItemHover implements MouseListener {
 		}
 		itemIconPanel.add(icon, BorderLayout.CENTER);
 
-		this.gameManager.getGuiManager().getLeftInfoContentPanel().setLayout(gl_leftInfoContentPanel);
-		this.gameManager.getGuiManager().getLeftInfoPanel().setLayout(gl_leftInfoPanel);
+		this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel().setLayout(gl_leftInfoContentPanel);
+		this.gameManager.getGuiManager().getMain().getLeftInfoPanel().setLayout(gl_leftInfoPanel);
 
 		this.itemPanel.setBackground(new Color(0, 0, 0, 0.3f));
 
@@ -209,7 +225,7 @@ public class InventoryItemHover implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		this.gameManager.getGuiManager().getLeftInfoContentPanel().removeAll();
+		this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel().removeAll();
 
 		this.itemPanel.setBackground(new Color(0, 0, 0, 0.4f));
 

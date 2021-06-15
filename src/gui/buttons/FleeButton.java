@@ -3,14 +3,13 @@ package gui.buttons;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-
 import basic.GameManager;
 import entities.Enemy;
 import entities.Player;
+import gui.GraphicalButton;
 import utilities.Challenge;
 
-public class FleeButton extends JButton implements ActionListener {
+public class FleeButton extends GraphicalButton implements ActionListener {
 
 	private Challenge challenge;
 	private Player player;
@@ -31,15 +30,15 @@ public class FleeButton extends JButton implements ActionListener {
 
 		boolean fleeSucced = this.player.flee((Enemy) this.challenge.getNpc());
 		if (fleeSucced) {
-			this.gameManager.getGuiManager().addFieldInfo(
+			this.gameManager.getGuiManager().getMain().addFieldInfo(
 					"Du rennst vor <b>" + this.challenge.getNpc().toString() + "</b> davon. Es gelingt dir!");
 
-			this.gameManager.getGuiManager().getActionButtonPanel().removeAll();
+			this.gameManager.getGuiManager().getMain().getActionButtonPanel().removeAll();
 		} else {
-			this.gameManager.getGuiManager().addFieldInfo("GAME OVER");
+			this.gameManager.endGame();
 		}
 
-		this.gameManager.getGuiManager().setNavigationEnabled(true);
+		this.gameManager.getGuiManager().getMain().setNavigationEnabled(true);
 
 		this.gameManager.update();
 	}

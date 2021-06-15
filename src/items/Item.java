@@ -113,6 +113,9 @@ public class Item {
 	}
 
 	public boolean equals(Item item) {
+		if (item == null)
+			return false;
+
 		if (uniqueName.equals(item.getUniqueName())) {
 			return true;
 		} else {

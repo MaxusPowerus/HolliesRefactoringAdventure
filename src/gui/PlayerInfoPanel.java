@@ -13,42 +13,43 @@ public class PlayerInfoPanel {
 		GUIManager guiManager = gameManager.getGuiManager();
 		Player player = gameManager.getPlayer();
 
-		guiManager.getHealthBar().setValue((int) player.getHealth());
-		guiManager.getHealthLabel().setText("HP");
-		guiManager.getHealthBar().setToolTipText((int) player.getHealth() + " Lebenspunkte");
+		guiManager.getMain().getHealthBar().setValue((int) player.getHealth());
+		guiManager.getMain().getHealthLabel().setText("HP");
+		guiManager.getMain().getHealthBar().setToolTipText((int) player.getHealth() + " Lebenspunkte");
 
 		double levelProgress = (100 / player.getExperience().getRequiredXp()) * player.getExperience().getXp();
 		int level = player.getExperience().getLevel();
-		guiManager.getLevelBar().setValue((int) levelProgress);
-		guiManager.getLevelLabel().setText("Level " + level);
-		guiManager.getLevelBar()
+		guiManager.getMain().getLevelBar().setValue((int) levelProgress);
+		guiManager.getMain().getLevelLabel().setText("Level " + level);
+		guiManager.getMain().getLevelBar()
 				.setToolTipText(player.getExperience().getXp() + "/" + player.getExperience().getRequiredXp() + " XP");
 
 		setSkills(guiManager, player);
 
 		if (player.isOutfitEquipped()) {
-			guiManager.getCurrentOutfit()
+			guiManager.getMain().getCurrentOutfit()
 					.setText(player.getOutfit().getName() + " (" + player.getOutfit().getArmor() + ")");
 		} else {
-			guiManager.getCurrentOutfit().setText("-");
+			guiManager.getMain().getCurrentOutfit().setText("-");
 		}
 
 		if (player.isWeaponEquipped()) {
-			guiManager.getCurrentWeapon()
+			guiManager.getMain().getCurrentWeapon()
 					.setText(player.getWeapon().getName() + " (" + player.getWeapon().getDamage() + ")");
 		} else {
-			guiManager.getCurrentWeapon().setText("-");
+			guiManager.getMain().getCurrentWeapon().setText("-");
 		}
+
 	}
 
 	private static void setSkills(GUIManager guiManager, Player player) {
-		guiManager.getStrengthValue().setForeground(Color.BLACK);
-		guiManager.getPerceptionValue().setForeground(Color.BLACK);
-		guiManager.getEnduranceValue().setForeground(Color.BLACK);
-		guiManager.getCharismaValue().setForeground(Color.BLACK);
-		guiManager.getIntelligenceValue().setForeground(Color.BLACK);
-		guiManager.getAgilityValue().setForeground(Color.BLACK);
-		guiManager.getLuckValue().setForeground(Color.BLACK);
+		guiManager.getMain().getStrengthValue().setForeground(Color.BLACK);
+		guiManager.getMain().getPerceptionValue().setForeground(Color.BLACK);
+		guiManager.getMain().getEnduranceValue().setForeground(Color.BLACK);
+		guiManager.getMain().getCharismaValue().setForeground(Color.BLACK);
+		guiManager.getMain().getIntelligenceValue().setForeground(Color.BLACK);
+		guiManager.getMain().getAgilityValue().setForeground(Color.BLACK);
+		guiManager.getMain().getLuckValue().setForeground(Color.BLACK);
 
 		// STRENGTH
 		int strengthBoost = 0;
@@ -58,9 +59,9 @@ public class PlayerInfoPanel {
 		String strengthSkill = (int) player.getSkillSet().getSkillValue(Skill.STRENGTH) + "";
 		if (strengthBoost > 0) {
 			strengthSkill += "(" + (strengthBoost > 0 ? "+" : "") + "" + strengthBoost + ")";
-			guiManager.getStrengthValue().setForeground(strengthBoost > 0 ? Color.GREEN : Color.RED);
+			guiManager.getMain().getStrengthValue().setForeground(strengthBoost > 0 ? Color.GREEN : Color.RED);
 		}
-		guiManager.getStrengthValue().setText(strengthSkill);
+		guiManager.getMain().getStrengthValue().setText(strengthSkill);
 
 		// PERCEPTION
 		int perceptionBoost = 0;
@@ -70,9 +71,9 @@ public class PlayerInfoPanel {
 		String perceptionSkill = (int) player.getSkillSet().getSkillValue(Skill.PERCEPTION) + "";
 		if (perceptionBoost > 0) {
 			perceptionSkill += "(" + (perceptionBoost > 0 ? "+" : "") + "" + perceptionBoost + ")";
-			guiManager.getPerceptionValue().setForeground(perceptionBoost > 0 ? Color.GREEN : Color.RED);
+			guiManager.getMain().getPerceptionValue().setForeground(perceptionBoost > 0 ? Color.GREEN : Color.RED);
 		}
-		guiManager.getPerceptionValue().setText(perceptionSkill);
+		guiManager.getMain().getPerceptionValue().setText(perceptionSkill);
 
 		// ENDURANCE
 		int enduranceBoost = 0;
@@ -82,9 +83,9 @@ public class PlayerInfoPanel {
 		String enduranceSkill = (int) player.getSkillSet().getSkillValue(Skill.ENDURANCE) + "";
 		if (enduranceBoost > 0) {
 			enduranceSkill += "(" + (enduranceBoost > 0 ? "+" : "") + "" + enduranceBoost + ")";
-			guiManager.getEnduranceValue().setForeground(enduranceBoost > 0 ? Color.GREEN : Color.RED);
+			guiManager.getMain().getEnduranceValue().setForeground(enduranceBoost > 0 ? Color.GREEN : Color.RED);
 		}
-		guiManager.getEnduranceValue().setText(enduranceSkill);
+		guiManager.getMain().getEnduranceValue().setText(enduranceSkill);
 
 		// CHARISMA
 		int charismaBoost = 0;
@@ -94,9 +95,9 @@ public class PlayerInfoPanel {
 		String charismaSkill = (int) player.getSkillSet().getSkillValue(Skill.CHARISMA) + "";
 		if (charismaBoost != 0) {
 			charismaSkill += "(" + (charismaBoost > 0 ? "+" : "") + "" + charismaBoost + ")";
-			guiManager.getCharismaValue().setForeground(charismaBoost > 0 ? Color.GREEN : Color.RED);
+			guiManager.getMain().getCharismaValue().setForeground(charismaBoost > 0 ? Color.GREEN : Color.RED);
 		}
-		guiManager.getCharismaValue().setText(charismaSkill);
+		guiManager.getMain().getCharismaValue().setText(charismaSkill);
 
 		// INTELLIGENCE
 		int intelligenceBoost = 0;
@@ -106,9 +107,9 @@ public class PlayerInfoPanel {
 		String intelligenceSkill = (int) player.getSkillSet().getSkillValue(Skill.INTELLIGENCE) + "";
 		if (intelligenceBoost != 0) {
 			intelligenceSkill += "(" + (intelligenceBoost > 0 ? "+" : "") + "" + intelligenceBoost + ")";
-			guiManager.getIntelligenceValue().setForeground(intelligenceBoost > 0 ? Color.GREEN : Color.RED);
+			guiManager.getMain().getIntelligenceValue().setForeground(intelligenceBoost > 0 ? Color.GREEN : Color.RED);
 		}
-		guiManager.getIntelligenceValue().setText(intelligenceSkill);
+		guiManager.getMain().getIntelligenceValue().setText(intelligenceSkill);
 
 		// AGILITY
 		int agilityBoost = 0;
@@ -118,9 +119,9 @@ public class PlayerInfoPanel {
 		String agilitySkill = (int) player.getSkillSet().getSkillValue(Skill.AGILITY) + "";
 		if (agilityBoost != 0) {
 			agilitySkill += "(" + (agilityBoost > 0 ? "+" : "") + "" + agilityBoost + ")";
-			guiManager.getAgilityValue().setForeground(agilityBoost > 0 ? Color.GREEN : Color.RED);
+			guiManager.getMain().getAgilityValue().setForeground(agilityBoost > 0 ? Color.GREEN : Color.RED);
 		}
-		guiManager.getAgilityValue().setText(agilitySkill);
+		guiManager.getMain().getAgilityValue().setText(agilitySkill);
 
 		// LUCK
 		int luckBoost = 0;
@@ -130,9 +131,9 @@ public class PlayerInfoPanel {
 		String luckSkill = (int) player.getSkillSet().getSkillValue(Skill.LUCK) + "";
 		if (luckBoost != 0) {
 			luckSkill += "(" + (luckBoost > 0 ? "+" : "") + "" + luckBoost + ")";
-			guiManager.getLuckValue().setForeground(luckBoost > 0 ? Color.GREEN : Color.RED);
+			guiManager.getMain().getLuckValue().setForeground(luckBoost > 0 ? Color.GREEN : Color.RED);
 		}
-		guiManager.getLuckValue().setText(luckSkill);
+		guiManager.getMain().getLuckValue().setText(luckSkill);
 	}
 
 }

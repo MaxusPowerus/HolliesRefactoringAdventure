@@ -3,14 +3,13 @@ package gui.buttons;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-
 import basic.GameManager;
 import entities.Player;
+import gui.GraphicalButton;
 import utilities.Challenge;
 import utilities.Container;
 
-public class InspectButton extends JButton implements ActionListener {
+public class InspectButton extends GraphicalButton implements ActionListener {
 
 	private Challenge challenge;
 	private Player player;
@@ -29,7 +28,7 @@ public class InspectButton extends JButton implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		this.setEnabled(false);
 
-		gameManager.getGuiManager()
+		gameManager.getGuiManager().getMain()
 				.addFieldInfo("Du hast <b>" + this.challenge.getContainer().getName() + "</b> gefunden");
 
 		// set container found when available
@@ -37,7 +36,7 @@ public class InspectButton extends JButton implements ActionListener {
 
 		LootButton lootButton = new LootButton(challenge, this.gameManager,
 				this.challenge.getContainer().getInventory());
-		this.gameManager.getGuiManager().getActionButtonPanel().add(lootButton);
+		this.gameManager.getGuiManager().getMain().getActionButtonPanel().add(lootButton);
 
 		this.gameManager.update();
 	}

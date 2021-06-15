@@ -1,6 +1,7 @@
 package gui.actions;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -45,6 +46,7 @@ public class InventoryNavigationActions implements MouseListener {
 	private static GameManager gameManager;
 	private static Inventory inv;
 	private static JPanel inventoryContentPanel;
+	private static JPanel inventoryNavigationPanel;
 	private BackgroundImagePanel navigationButtonBackgroundPanel;
 	private static boolean buy;
 	private static boolean sell;
@@ -52,11 +54,12 @@ public class InventoryNavigationActions implements MouseListener {
 	private static String invName;
 
 	public InventoryNavigationActions(GameManager gameManager, Inventory inv, JPanel inventoryContentPanel,
-			BackgroundImagePanel navigationButtonBackgroundPanel, boolean buy, boolean sell, Merchant merchant,
-			String invName) {
+			JPanel inventoryNavigationPanel, BackgroundImagePanel navigationButtonBackgroundPanel, boolean buy,
+			boolean sell, Merchant merchant, String invName) {
 		InventoryNavigationActions.gameManager = gameManager;
 		InventoryNavigationActions.inv = inv;
 		InventoryNavigationActions.inventoryContentPanel = inventoryContentPanel;
+		InventoryNavigationActions.inventoryNavigationPanel = inventoryNavigationPanel;
 		this.navigationButtonBackgroundPanel = navigationButtonBackgroundPanel;
 		InventoryNavigationActions.buy = buy;
 		InventoryNavigationActions.sell = sell;
@@ -66,36 +69,16 @@ public class InventoryNavigationActions implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		BufferedImage navButtonBackgroundSource = null;
-		try {
-			navButtonBackgroundSource = ImageIO
-					.read(new File(HelperFunctions.getResource("images/GUI/TabSelected.png")));
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-		navigationButtonBackgroundPanel
-				.setImg(GUIHelper.scaleIcon(new ImageIcon(navButtonBackgroundSource), 70).getImage());
-		navigationButtonBackgroundPanel.revalidate();
-		navigationButtonBackgroundPanel.repaint();
+		updateNavIcon(true);
 		navigationButtonBackgroundPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-		gameManager.update();
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		BufferedImage navButtonBackgroundSource = null;
-		try {
-			navButtonBackgroundSource = ImageIO.read(new File(HelperFunctions.getResource("images/GUI/Tab.png")));
-		} catch (IOException ex) {
-			ex.printStackTrace();
+		if (!inv.getSelectedCategory().equalsIgnoreCase(e.getComponent().getName())) {
+			updateNavIcon(false);
 		}
-		navigationButtonBackgroundPanel
-				.setImg(GUIHelper.scaleIcon(new ImageIcon(navButtonBackgroundSource), 70).getImage());
-		navigationButtonBackgroundPanel.repaint();
 		navigationButtonBackgroundPanel.setCursor(Cursor.getDefaultCursor());
-
-		gameManager.update();
 	}
 
 	@Override
@@ -113,17 +96,47 @@ public class InventoryNavigationActions implements MouseListener {
 
 	}
 
+	private static void updateNavIcon(BackgroundImagePanel navPanel, boolean selected) {
+		BufferedImage navButtonBackgroundSource = null;
+		try {
+			if (selected) {
+				navButtonBackgroundSource = ImageIO
+						.read(new File(HelperFunctions.getResource("images/GUI/TabSelected.png")));
+			} else {
+				navButtonBackgroundSource = ImageIO.read(new File(HelperFunctions.getResource("images/GUI/Tab.png")));
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		navPanel.setImg(GUIHelper.scaleIcon(new ImageIcon(navButtonBackgroundSource), 70).getImage());
+		navPanel.repaint();
+		navPanel.setCursor(Cursor.getDefaultCursor());
+
+		gameManager.update();
+	}
+
+	private void updateNavIcon(boolean selected) {
+		updateNavIcon(navigationButtonBackgroundPanel, selected);
+	}
+
 	public static void openCategory(String category) {
 		if (category == "")
 			category = "Kleidung/Rüstung"; // when not selected
 		inventoryContentPanel.removeAll();
+
+		// update navigation button icon
+		for (Component c : inventoryNavigationPanel.getComponents()) {
+			if (c instanceof BackgroundImagePanel) {
+				updateNavIcon((BackgroundImagePanel) c, category.equalsIgnoreCase(c.getName()));
+			}
+		}
 
 		inv.setSelectedCategory(category);
 
 		ArrayList<Item> items = inv.getItemsByCategory().get(category);
 
 		if (items.size() == 0) {
-			inventoryContentPanel.add(new JLabel("<html><b>In dieser Kategorie hast du kein Item</b></html>"));
+			inventoryContentPanel.add(new JLabel("<html><b>Was suchst du? Hier gibt es nichts zu sehen</b></html>"));
 		} else {
 			for (Item item : items) {
 				inventoryContentPanel.add(getItemComponent(item, category));
@@ -136,11 +149,11 @@ public class InventoryNavigationActions implements MouseListener {
 	private static JPanel getItemComponent(Item item, String category) {
 
 		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(500, 50));
+		panel.setPreferredSize(new Dimension(32767, 50));
 		panel.setBackground(new Color(0, 0, 0, 0.4f));
 		panel.setMaximumSize(new Dimension(32767, 50));
 		panel.setBorder(BorderFactory.createMatteBorder(0, 0, 5, 0, new Color(0, 0, 0, 0f)));
-		gameManager.getGuiManager().getInventoryPanel().add(panel);
+		gameManager.getGuiManager().getMain().getInventoryPanel().add(panel);
 
 		JLabel name = new JLabel(item.getName() + " (" + item.getCount() + " Stück)");
 		name.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -204,11 +217,11 @@ public class InventoryNavigationActions implements MouseListener {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if (merchant.buy(gameManager.getPlayer(), item)) {
-							gameManager.getGuiManager().addFieldInfo(
+							gameManager.getGuiManager().getMain().addFieldInfo(
 									"<html><p>Du hast folgendes gekauft: <b>" + item.toString() + "</b></p></html>");
 							new InventoryShowAction(gameManager, inv, invName, merchant).initBuy();
 						} else {
-							gameManager.getGuiManager().addFieldInfo("Du hast nicht genügend Gold");
+							gameManager.getGuiManager().getMain().addFieldInfo("Du hast nicht genügend Gold");
 						}
 					}
 				});
@@ -231,12 +244,12 @@ public class InventoryNavigationActions implements MouseListener {
 						Item toSell = item.clone();
 						if (merchant.sell(gameManager.getPlayer(), item)) {
 							gameManager.getPlayer().dequip(toSell);
-							gameManager.getGuiManager().addFieldInfo(
+							gameManager.getGuiManager().getMain().addFieldInfo(
 									"<html><p>Du hast folgendes verkauft: <b>" + item.toString() + "</b></p></html>");
 							new InventoryShowAction(gameManager, inv, invName, merchant).initSell();
 							PlayerInfoPanel.update();
 						} else {
-							gameManager.getGuiManager()
+							gameManager.getGuiManager().getMain()
 									.addFieldInfo("Der Händler hat nicht genügend Geld, um dir das Item abzukaufen");
 						}
 					}
