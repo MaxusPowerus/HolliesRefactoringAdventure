@@ -31,6 +31,7 @@ import basic.GameManager;
 import basic.HelperFunctions;
 import gui.BackgroundImagePanel;
 import gui.GUIHelper;
+import gui.Icon;
 import gui.actions.NavigationButtonAction;
 import map.Direction;
 
@@ -197,6 +198,10 @@ public class Main extends JLabel {
 		invMapToggleButton = new JButton("");
 		invMapToggleButton.setContentAreaFilled(false);
 
+		invMapToggleButton.setIcon(GUIHelper.getIcon(Icon.MAP_INV_TOGGLER, 75, 75));
+		invMapToggleButton.setRolloverIcon(GUIHelper.getIcon(Icon.MAP_INV_TOGGLER_HIGHLIGHTED, 75, 75));
+		invMapToggleButton.setDisabledIcon(GUIHelper.getIcon(Icon.MAP_INV_TOGGLER_DISABLED, 75, 75));
+
 		BufferedImage compassBackground;
 		try {
 			compassBackground = ImageIO.read(new File(HelperFunctions.getResource("images/GUI/Compass.png")));
@@ -300,10 +305,10 @@ public class Main extends JLabel {
 		JButton btnTest = new JButton("test");
 		btnTest.setIconTextGap(0);
 		btnTest.setMargin(new Insets(10, 14, 10, 14));
-		btnTest.setSize(new Dimension(50, 50));
-		btnTest.setMinimumSize(new Dimension(51, 30));
-		btnTest.setMaximumSize(new Dimension(51, 30));
-		btnTest.setPreferredSize(new Dimension(51, 50));
+		btnTest.setSize(new Dimension(50, 20));
+		btnTest.setMinimumSize(new Dimension(51, 20));
+		btnTest.setMaximumSize(new Dimension(51, 20));
+		btnTest.setPreferredSize(new Dimension(51, 20));
 		actionButtonPanel.add(btnTest);
 		actionPanel.setLayout(gl_actionPanel);
 

@@ -2,8 +2,10 @@ package gui;
 
 public enum Icon {
 
-	BACKPACK("GUI\\InventoryIcon.png"), MAP("GUI\\MapIcon.png"), APPLE("items\\apple.png"), SWORD("items\\sword.png"),
-	BREAD("items\\bread.png"), MEAT("items\\meat.png"), BEER("items\\beer.png");
+	MAP_INV_TOGGLER("GUI\\Buttons\\MapInvButton.png"),
+	MAP_INV_TOGGLER_DISABLED("GUI\\Buttons\\MapInvButton_Disabled.png"),
+	MAP_INV_TOGGLER_HIGHLIGHTED("GUI\\Buttons\\MapInvButton_Highlighted.png"), APPLE("items\\apple.png"),
+	SWORD("items\\sword.png"), BREAD("items\\bread.png"), MEAT("items\\meat.png"), BEER("items\\beer.png");
 
 	private String path;
 

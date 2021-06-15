@@ -19,6 +19,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import basic.GameManager;
 import gui.GUIHelper;
 import gui.Icon;
+import gui.PlayerInfoPanel;
 import items.Food;
 import items.Item;
 import items.Note;
@@ -116,7 +117,7 @@ public class InventoryItemHover implements MouseListener {
 		}
 
 		JLabel value = new JLabel("<html><b>Wert:</b> " + item.getValue() + " Gold</html>");
-		value.setForeground(Color.WHITE);
+		value.setForeground(Color.decode("#FFD700"));
 		value.setFont(new Font("Dialog", Font.PLAIN, 14));
 		itemInfoPanel.add(value);
 
@@ -131,6 +132,10 @@ public class InventoryItemHover implements MouseListener {
 			energy.setForeground(Color.WHITE);
 			energy.setFont(new Font("Dialog", Font.ITALIC, 14));
 			itemInfoPanel.add(energy);
+
+			// show in player health bar
+			this.gameManager.getGuiManager().getMain().getHealthBar().setValue(
+					this.gameManager.getGuiManager().getMain().getHealthBar().getValue() + ((Food) item).getEnergy());
 		}
 		if (item instanceof Outfit) {
 			JLabel armor = new JLabel("<html><b>Rüstungspunkte:</b> " + ((Outfit) item).getArmor() + "</html>");
@@ -227,7 +232,9 @@ public class InventoryItemHover implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 		this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel().removeAll();
 
-		this.itemPanel.setBackground(new Color(0, 0, 0, 0.4f));
+		this.itemPanel.setBackground(new Color(0, 0, 0, 0));
+
+		PlayerInfoPanel.update();
 
 		this.gameManager.update();
 	}

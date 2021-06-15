@@ -150,7 +150,7 @@ public class InventoryNavigationActions implements MouseListener {
 
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(32767, 50));
-		panel.setBackground(new Color(0, 0, 0, 0.4f));
+		panel.setBackground(new Color(0, 0, 0, 0));
 		panel.setMaximumSize(new Dimension(32767, 50));
 		panel.setBorder(BorderFactory.createMatteBorder(0, 0, 5, 0, new Color(0, 0, 0, 0f)));
 		gameManager.getGuiManager().getMain().getInventoryPanel().add(panel);

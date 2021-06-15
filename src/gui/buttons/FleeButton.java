@@ -21,6 +21,7 @@ public class FleeButton extends GraphicalButton implements ActionListener {
 		this.gameManager = gameManager;
 
 		this.setText("Wegrennen");
+		this.setToolTipText(player.getFleeChance((Enemy) this.challenge.getNpc()) + "%");
 		this.addActionListener(this);
 	}
 

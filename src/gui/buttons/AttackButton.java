@@ -22,6 +22,7 @@ public class AttackButton extends GraphicalButton implements ActionListener {
 		this.gameManager = gameManager;
 
 		this.setText("Angreifen");
+		this.setToolTipText(player.getFightChance((Enemy) this.challenge.getNpc()) + "%");
 		this.addActionListener(this);
 	}
 

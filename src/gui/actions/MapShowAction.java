@@ -3,7 +3,6 @@ package gui.actions;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Cursor;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,8 +11,6 @@ import javax.swing.JPanel;
 
 import basic.Config;
 import basic.GameManager;
-import gui.GUIHelper;
-import gui.Icon;
 import map.Biom;
 import map.MapField;
 
@@ -36,9 +33,6 @@ public class MapShowAction implements ActionListener {
 		this.gameManager.getGuiManager().getMain().getMapPanel().setVisible(false);
 		this.gameManager.getGuiManager().getMain().getMapPanel().setLayout(new BorderLayout());
 
-		this.gameManager.getGuiManager().getMain().getInvMapToggleButton()
-				.setIcon(GUIHelper.getIcon(Icon.BACKPACK, 75, 75));
-		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().setCursor(new Cursor(Cursor.HAND_CURSOR));
 		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().removeActionListener(this);
 		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().setEnabled(true);
 

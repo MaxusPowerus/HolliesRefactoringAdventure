@@ -1,7 +1,6 @@
 package gui.actions;
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -79,10 +78,7 @@ public class InventoryShowAction implements ActionListener {
 		gm.getMain().getInventoryPanel().removeAll();
 		gm.getMain().getInventoryPanel().setVisible(true);
 
-		// change map/inv toggle button
-		gm.getMain().getInvMapToggleButton().setIcon(GUIHelper.getIcon(Icon.MAP, 75, 75));
-		gm.getMain().getInvMapToggleButton().setCursor(new Cursor(Cursor.HAND_CURSOR));
-		gm.getMain().getInvMapToggleButton().setEnabled(true);
+		gm.getMain().getInvMapToggleButton().removeActionListener(this);
 
 		// remove/add event listeners for map/inv toggle button
 		for (ActionListener al : gm.getMain().getInvMapToggleButton().getActionListeners()) {
@@ -95,9 +91,9 @@ public class InventoryShowAction implements ActionListener {
 
 		// hide map/inv toggle button on sell/buy
 		if (buy || sell) {
-			gm.getMain().getInvMapToggleButton().setVisible(false);
+			gm.getMain().getInvMapToggleButton().setEnabled(false);
 		} else {
-			gm.getMain().getInvMapToggleButton().setVisible(true);
+			gm.getMain().getInvMapToggleButton().setEnabled(true);
 		}
 
 		// prepare nav panel
