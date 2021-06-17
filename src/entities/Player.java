@@ -4,7 +4,6 @@ import java.util.Random;
 
 import QuestClasses.Quest;
 import basic.Config;
-import basic.HelperFunctions;
 import items.Food;
 import items.Item;
 import items.Note;
@@ -46,9 +45,9 @@ public class Player {
 		this.skillSet = new SkillSet();
 		this.outfit = null;
 		this.weapon = null;
+	}
 
-		// Set StartInventory
-
+	public void setStartItems() {
 		Weapon startWeapon = new Weapon("Stick", "Stock", 1, 1, 0);
 		Outfit startOutfit = new Outfit("HolliesDress", "Hollys Lieblingskleid", 10, 0, 0, 0, 0, 0, 1, 0, 0, 1);
 		Food startFood = new Food("StewGrandmaStyle", "Eintopf nach Omas Art", 1, 25, 0);
@@ -68,7 +67,6 @@ public class Player {
 
 		this.equip(startWeapon);
 		this.equip(startOutfit);
-		// ================================================================================================================
 	}
 
 	public void setMap(Map mainMap) {

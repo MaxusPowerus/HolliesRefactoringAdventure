@@ -15,12 +15,14 @@ import basic.HelperFunctions;
 import gui.actions.ResizeAction;
 import gui.views.GameOver;
 import gui.views.Main;
+import gui.views.PlayerEditor;
 
 public class GUIManager {
 
 	private JFrame frame;
 	private Font customFont;
 	private Main main;
+	private PlayerEditor playerEditor;
 
 	public GUIManager(boolean fullscreen) {
 		initialize(fullscreen);
@@ -54,8 +56,11 @@ public class GUIManager {
 			frame.setUndecorated(true);
 		}
 
-		main = new Main();
-		frame.setContentPane(main);
+		playerEditor = new PlayerEditor();
+
+		frame.setContentPane(playerEditor);
+
+		frame.setVisible(true);
 	}
 
 	public Font getCustomFont() {
@@ -64,6 +69,10 @@ public class GUIManager {
 
 	public Main getMain() {
 		return main;
+	}
+
+	public void setMain(Main main) {
+		this.main = main;
 	}
 
 	public JFrame getFrame() {

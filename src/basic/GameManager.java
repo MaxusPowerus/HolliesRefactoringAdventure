@@ -27,7 +27,6 @@ import gui.buttons.FleeButton;
 import gui.buttons.InspectButton;
 import gui.buttons.LootButton;
 import gui.buttons.SellButton;
-import gui.views.PlayerEditor;
 import map.Biom;
 import map.Map;
 import map.MapGenerator;
@@ -66,20 +65,18 @@ public class GameManager {
 		player.setMap(mainMap);
 
 		this.guiManager = new GUIManager(this.fullscreen);
-
-		if (this.playerEditor) {
-			guiManager.getFrame().setContentPane(new PlayerEditor());
-		}
-		guiManager.getFrame().setVisible(true);
-
-		this.startGame();
 	}
 
 	public Player getPlayer() {
 		return player;
 	}
 
-	private void startGame() {
+	public void startGame() {
+		gui.views.Main main = new gui.views.Main();
+		guiManager.setMain(main);
+		guiManager.getFrame().setContentPane(main);
+		player.setStartItems();
+
 		PlayerInfoPanel.update();
 		WorldInfoPanel.update();
 		ActionPanel.update();
