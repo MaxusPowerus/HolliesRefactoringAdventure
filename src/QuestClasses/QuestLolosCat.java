@@ -20,12 +20,16 @@ public class QuestLolosCat extends Quest {
 	@Override
 	public void update(String attempt, Player player) {
 
+		if (super.isUpdateOnEnter() == false) {
+			return;
+		}
+
 		System.out.println(" EnterUpdate - ActiveFalg: " + super.getActiveFlagName());
 
 		switch (getActiveFlagName()) {
 		case "search":
 			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
-				if (player.getSkillSet().getSkillValue(Skill.PERCEPTION) >= 9) {
+				if (super.basicSkillCheck(player, Skill.PERCEPTION, 5)) {
 					super.setNewFlag("success");
 					super.setQuestInfo(
 							"Du entdeckst die Katze in einem Busch und schnappst sie dir!<br>Bringe sie zurück zu Lolo!");
@@ -59,7 +63,7 @@ public class QuestLolosCat extends Quest {
 
 		case "catch":
 			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
-				if (player.getSkillSet().getSkillValue(Skill.AGILITY) >= 5) {
+				if (super.basicSkillCheck(player, Skill.AGILITY, 7)) {
 					super.setNewFlag("success");
 
 					super.setQuestInfo("Du schnappst sie dir!<br>Bringe sie zurück zu Lolo!");

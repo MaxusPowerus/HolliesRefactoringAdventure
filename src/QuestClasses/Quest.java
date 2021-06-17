@@ -150,6 +150,14 @@ public abstract class Quest {
 		return null;
 	}
 
+	public boolean basicSkillCheck(Player player, Skill skill, int threshold) {
+		if (player.getSkillSet().getSkillValue(skill) >= threshold) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public boolean isActive() {
 		return active;
 	}
