@@ -270,6 +270,8 @@ public class MapGenerator {
 			if (quests.get(i).getTargetPoint() != null) {
 				map.getMapFieldByCoordinate(quests.get(i).getTargetPoint()).setQuest(quests.get(i));
 				map.getMapFieldByCoordinate(quests.get(i).getTargetPoint()).setChallenge(null);
+			} else {
+
 			}
 		}
 	}

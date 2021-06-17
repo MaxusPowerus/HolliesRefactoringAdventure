@@ -113,11 +113,7 @@ public class MapFieldHoverAction implements MouseListener {
 			info.setText("Hier erwartet dich ein Händler: " + ((Merchant) challenge.getNpc()).getName());
 			break;
 		case 3:
-			if (challenge.isChallengeCompleted()) {
-				info.setText("Du hast diese Aufgabe bereits abgeschlossen");
-			} else {
-				info.setText("Hier erwartet dich eine Aufgabe: " + challenge.getEvent().getTask());
-			}
+			// TODO
 			break;
 		}
 		mapFieldInfoPanel.add(info);
