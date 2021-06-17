@@ -23,7 +23,7 @@ public class QuestManager {
 
 	public QuestPattern initQuestPattern() {
 		int il = 1; // instanceLimit
-		Coordinate tp;
+		Coordinate tp = null;
 		ArrayList<Coordinate> tz = null;
 		Biom b = null; // null = Rabdom Biom
 
@@ -57,14 +57,14 @@ public class QuestManager {
 
 	public QuestLolosCat initLolosCat() {
 		int il = 1;
-		Coordinate tp = new Coordinate(Config.MAP_SIZEX / 2, Config.MAP_SIZEY / 2 + 1);
+		Coordinate tp = null;
 		ArrayList<Coordinate> tz = null;
 		Biom b = null;
 		boolean uoe = true;
 		boolean aiql = true;
 		String t = "Lolos Katze";
 		String qi = "Du triffst auf Lol, der dir berichtet, das seine Katzte davon gelaufen ist. Er bittet dich um Hilfe be der Suche.";
-		String wil = "Lollo: \"Hallo kannst du mir hlefen meine Katze zu finden?\"";
+		String wil = "Lollo: \"Hallo kannst du mir helfen meine Katze zu finden?\"";
 
 		ArrayList<String> p = new ArrayList<String>();
 		String p1 = "Nach Lolos Katze suchen";
@@ -118,7 +118,9 @@ public class QuestManager {
 		ArrayList<Quest> questsByBiom = new ArrayList<Quest>();
 		for (int i = 0; i < quests.size(); i++) {
 			if (quests.get(i).getBiom() == biom) {
-				questsByBiom.add(quests.get(i));
+				for (int j = 0; j < quests.get(i).getInstanceLimit(); j++) {
+					questsByBiom.add(quests.get(i));
+				}
 			}
 		}
 		return questsByBiom;
