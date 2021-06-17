@@ -100,7 +100,7 @@ public abstract class Quest {
 	public void clearPossibilities() {
 		this.possibilities.clear();
 		this.possibilitiesButtonlabels.clear();
-		// possibilitiesChances.clear();
+		this.possibilitiesChances.clear();
 	}
 
 	public boolean useSkill(Player player, Skill skill) {

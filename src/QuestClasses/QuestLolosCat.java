@@ -25,7 +25,7 @@ public class QuestLolosCat extends Quest {
 		switch (getActiveFlagName()) {
 		case "search":
 			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
-				if (player.getSkillSet().getSkillValue(Skill.PERCEPTION) >= 5) {
+				if (player.getSkillSet().getSkillValue(Skill.PERCEPTION) >= 9) {
 					super.setNewFlag("success");
 					super.setQuestInfo(
 							"Du entdeckst die Katze in einem Busch und schnappst sie dir!<br>Bringe sie zurück zu Lolo!");
@@ -34,6 +34,8 @@ public class QuestLolosCat extends Quest {
 
 					super.clearPossibilities();
 
+					super.getPossibilitiesChances().add(-1);
+					super.getPossibilitiesChances().add(-1);
 					super.getPossibilities().add("Lolo die Katze zurückgeben.");
 					super.getPossibilities().add("Lolos Katze essen!.");
 					super.getPossibilitiesButtonlabels().add("Lolo berichten!");
@@ -47,7 +49,7 @@ public class QuestLolosCat extends Quest {
 							"Du entdeckst die Katze allerdings etwas zu spät als sie sich bereits auf der Flucht befindet.<br>Wenn du sie jetzt Fangen willst musst du sehr schnell sein!");
 
 					super.clearPossibilities();
-
+					super.getPossibilitiesChances().add(-1);
 					super.getPossibilities().add("Versuchen Lolos Katze zu fangen.");
 					super.getPossibilitiesButtonlabels().add("Katze fangen");
 				}
@@ -65,6 +67,8 @@ public class QuestLolosCat extends Quest {
 
 					super.clearPossibilities();
 
+					super.getPossibilitiesChances().add(-1);
+					super.getPossibilitiesChances().add(-1);
 					super.getPossibilities().add("Lolo die Katze zurückgeben.");
 					super.getPossibilities().add("Lolos Katze essen!.");
 					super.getPossibilitiesButtonlabels().add("Lolo berichten!");
@@ -80,6 +84,7 @@ public class QuestLolosCat extends Quest {
 
 					super.clearPossibilities();
 
+					super.getPossibilitiesChances().add(-1);
 					super.getPossibilities().add("Lolo sagen, dass du seine Katze verloren hast.");
 					super.getPossibilitiesButtonlabels().add("Lolo berichten");
 				}
