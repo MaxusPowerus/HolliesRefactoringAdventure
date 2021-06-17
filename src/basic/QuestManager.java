@@ -13,9 +13,11 @@ import utilities.Flag;
 
 public class QuestManager {
 	ArrayList<Quest> quests;
+	ArrayList<Quest> mainQuests;
 
 	public QuestManager(Player player) {
 		quests = new ArrayList<Quest>();
+		mainQuests = new ArrayList<Quest>()
 
 		// quests.add(initQuestPattern());
 		quests.add(initLolosCat());
@@ -94,6 +96,10 @@ public class QuestManager {
 		return quests;
 	}
 
+	public ArrayList<Quest> getMainQuests() {
+		return mainQuests;
+	}
+
 	public ArrayList<Quest> getActiveQuests() {
 		ArrayList<Quest> activeQuests = new ArrayList<Quest>();
 		for (int i = 0; i < quests.size(); i++) {
@@ -127,8 +133,14 @@ public class QuestManager {
 	}
 
 	public ArrayList<Quest> getAllQuests() {
-		// TODO Auto-generated method stub
-		return quests;
+		ArrayList<Quest> allQuests = new ArrayList<Quest>();
+		for (int i = 0; i < quests.size(); i++) {
+			allQuests.add(quests.get(i));
+		}
+		for (int j = 0; j < mainQuests.size(); j++) {
+			allQuests.add(mainQuests.get(j));
+		}
+		return allQuests;
 	}
 
 }
