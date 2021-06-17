@@ -303,7 +303,7 @@ public class MapGenerator {
 
 	public void generateQuests() {
 
-		testQuest("FischenWiese");
+		testQuest("FischenSumpf");
 
 		ArrayList<MapField> fields;
 

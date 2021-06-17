@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import QuestClasses.Quest;
 import QuestClasses.QuestFishingMeadow;
+import QuestClasses.QuestFishingSwamp;
 import QuestClasses.QuestLolosCat;
 import QuestClasses.QuestPattern;
 import entities.Player;
@@ -22,6 +23,7 @@ public class QuestManager {
 		// quests.add(initQuestPattern());
 		quests.add(initLolosCat());
 		quests.add(initQuestFishingMeadow());
+		quests.add(initQuestFishingSwamp());
 	}
 
 	public QuestPattern initQuestPattern() {
@@ -97,7 +99,7 @@ public class QuestManager {
 		int il = Config.MAP_SIZEX; // instanceLimit
 		Coordinate tp = null;
 		ArrayList<Coordinate> tz = null;
-		Biom b = Biom.MEADOW; // null = Rabdom Biom
+		Biom b = Biom.MEADOW;
 
 		boolean uoe = true;
 		boolean aiql = false;
@@ -130,6 +132,44 @@ public class QuestManager {
 		QuestFishingMeadow questFishingMeadow = new QuestFishingMeadow(il, tp, tz, b, uoe, aiql, t, qi, wil, p, pb, pc,
 				f);
 		return questFishingMeadow;
+	}
+
+	public QuestFishingSwamp initQuestFishingSwamp() {
+		int il = Config.MAP_SIZEX; // instanceLimit
+		Coordinate tp = null;
+		ArrayList<Coordinate> tz = null;
+		Biom b = Biom.SWAMP;
+
+		boolean uoe = true;
+		boolean aiql = false;
+		String t = "FischenSumpf";
+		String qi = "questInfo";
+		String wil = "Du kommst an einen Fluss, in dem es vor Fischen nur so wimmelt. <br> Wenn du einen fängst, würde das ein brächtiges Abendesen abgeben!";
+
+		ArrayList<String> p = new ArrayList<String>();
+		String p1 = "Mit einem Angel fischen";
+		p.add(p1);
+		String p2 = "Mit einer Speer fischen";
+		p.add(p2);
+		ArrayList<String> pb = new ArrayList<String>();
+		String pb1 = "Angeln";
+		pb.add(pb1);
+		String pb2 = "Speerfischen";
+		pb.add(pb2);
+		ArrayList<Integer> pc = new ArrayList<Integer>();
+		int pc1 = -1; // possibilitiesChance01
+		pc.add(pc1);
+		int pc2 = -1; // possibilitiesChance01
+		pc.add(pc2);
+
+		ArrayList<Flag> f = new ArrayList<Flag>();
+		Flag f0 = new Flag("fishing");
+		Flag f1 = new Flag("empty");
+		f.add(f0);
+		f.add(f1);
+
+		QuestFishingSwamp questFishingSwamp = new QuestFishingSwamp(il, tp, tz, b, uoe, aiql, t, qi, wil, p, pb, pc, f);
+		return questFishingSwamp;
 	}
 
 	public ArrayList<Quest> getQuests() {
