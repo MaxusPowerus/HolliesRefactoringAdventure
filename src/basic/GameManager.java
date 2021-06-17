@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import QuestClasses.Quest;
 import entities.Enemy;
 import entities.Merchant;
 import entities.Player;
@@ -26,6 +27,7 @@ import gui.buttons.BuyButton;
 import gui.buttons.FleeButton;
 import gui.buttons.InspectButton;
 import gui.buttons.LootButton;
+import gui.buttons.QuestButton;
 import gui.buttons.SellButton;
 import map.Biom;
 import map.Map;
@@ -142,9 +144,8 @@ public class GameManager {
 
 		// execute challenge
 		Challenge challenge = player.getCurrentMapField().getChallenge();
-		if (challenge == null) { // QUEST
-			// TODO
-		} else { // CHALLENGE
+		Quest quest = player.getCurrentMapField().getQuest();
+		if (quest == null && challenge != null) {
 			if (!challenge.isChallengeCompleted()) {
 				switch (challenge.getChallangeType()) {
 				case 0:
@@ -166,7 +167,7 @@ public class GameManager {
 				case 1:
 					Enemy enemy = (Enemy) challenge.getNpc();
 					this.guiManager.getMain().addFieldInfo(
-							"<b>" + enemy.toString() + "</b> ist erschienen. Was tust du? Wegrennen oder Kämpfen?");
+							"<b>" + enemy.toString() + "</b> ist erschienen. Was tust du? Wegrennen oder Kï¿½mpfen?");
 
 					this.guiManager.getMain().setNavigationEnabled(false);
 
@@ -180,7 +181,7 @@ public class GameManager {
 				case 2:
 					Merchant merchant = (Merchant) challenge.getNpc();
 					this.guiManager.getMain().addFieldInfo("<b>" + merchant.toString()
-							+ "</b> ist erschienen. Möchtest du mit ihm einen Handel eingehen?");
+							+ "</b> ist erschienen. Mï¿½chtest du mit ihm einen Handel eingehen?");
 
 					BuyButton buyButton = new BuyButton(challenge, player, this);
 					this.guiManager.getMain().getActionButtonPanel().add(buyButton);
@@ -196,12 +197,22 @@ public class GameManager {
 					break;
 				default:
 					this.guiManager.getMain().addFieldInfo(
-							"Wer das liest ist doof. Spaß. Wer das liest, hat einen Bug entdeckt. :c Bitte kontaktieren Sie Ihren Administrator lul");
+							"Wer das liest ist doof. Spaï¿½. Wer das liest, hat einen Bug entdeckt. :c Bitte kontaktieren Sie Ihren Administrator lul");
 					break;
 				}
 			} else {
-				this.guiManager.getMain().addFieldInfo("Du siehst nichts außer deinen Fußspuren");
+				this.guiManager.getMain().addFieldInfo("Du siehst nichts auï¿½er deinen Fuï¿½spuren");
 			}
+		} else if (challenge == null && quest != null) {
+			this.getGuiManager().getMain().addFieldInfo(quest.getWorldInfoLine());
+
+			for (int i = 0; i < quest.getPossibilities().size(); i++) {
+				QuestButton questButton = new QuestButton(quest, player, this,
+						quest.getPossibilitiesButtonlabels().get(i), quest.getPossibilitiesChances().get(i));
+				this.guiManager.getMain().getActionButtonPanel().add(questButton);
+			}
+		} else {
+			System.out.println("MAX DU HAST KAKI GEBAUT! aber ich vergebe dir");
 		}
 
 		this.update();
