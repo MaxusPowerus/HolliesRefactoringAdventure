@@ -14,14 +14,16 @@ import basic.Config;
 import basic.HelperFunctions;
 import gui.actions.ResizeAction;
 import gui.views.GameOver;
+import gui.views.Loading;
 import gui.views.Main;
 import gui.views.PlayerEditor;
 
 public class GUIManager {
 
 	private JFrame frame;
-	private Font customFont;
+	private static Font customFont;
 	private Main main;
+	private Loading loading;
 	private PlayerEditor playerEditor;
 
 	public GUIManager(boolean fullscreen) {
@@ -36,7 +38,8 @@ public class GUIManager {
 			UIManager.setLookAndFeel(new FlatLightLaf());
 			UIManager.getLookAndFeelDefaults().put("Desktop.background", Color.decode("#FFFFFF"));
 
-			customFont = Font.createFont(Font.TRUETYPE_FONT, new File(HelperFunctions.getResource("Fontasy.ttf")))
+			customFont = Font
+					.createFont(Font.TRUETYPE_FONT, new File(HelperFunctions.getResource("FancyTalk-Regular.ttf")))
 					.deriveFont(70f);
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			ge.registerFont(customFont);
@@ -56,6 +59,7 @@ public class GUIManager {
 			frame.setUndecorated(true);
 		}
 
+		loading = new Loading();
 		playerEditor = new PlayerEditor();
 
 		frame.setContentPane(playerEditor);
@@ -63,12 +67,18 @@ public class GUIManager {
 		frame.setVisible(true);
 	}
 
-	public Font getCustomFont() {
+	public static Font getCustomFont() {
 		return customFont;
 	}
 
 	public Main getMain() {
 		return main;
+	}
+
+	public void setLoadingScreen() {
+		this.frame.setContentPane(this.loading);
+		this.frame.revalidate();
+		this.frame.repaint();
 	}
 
 	public void setMain(Main main) {

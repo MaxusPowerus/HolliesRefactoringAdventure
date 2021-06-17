@@ -84,7 +84,7 @@ public class InventoryShowAction implements ActionListener {
 		for (ActionListener al : gm.getMain().getInvMapToggleButton().getActionListeners()) {
 			gm.getMain().getInvMapToggleButton().removeActionListener(al);
 		}
-		gm.getMain().getInvMapToggleButton().addActionListener(new MapShowAction(this.gameManager));
+		gm.getMain().getInvMapToggleButton().addActionListener(new MapShowAction());
 
 		// set headline for left container
 		gm.getMain().getLeftPanelHeadline().setText(this.invName);

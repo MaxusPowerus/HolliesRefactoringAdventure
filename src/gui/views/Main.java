@@ -31,6 +31,7 @@ import basic.GameManager;
 import basic.HelperFunctions;
 import gui.BackgroundImagePanel;
 import gui.GUIHelper;
+import gui.GUIManager;
 import gui.Icon;
 import gui.actions.NavigationButtonAction;
 import map.Direction;
@@ -322,7 +323,7 @@ public class Main extends JLabel {
 		leftPanelHeadline.setOpaque(false);
 		leftPanelHeadline.setBackground(new Color(0, 0, 0, 0.4f));
 		leftPanelHeadline.setForeground(Color.WHITE);
-		leftPanelHeadline.setFont(new Font("Tahoma", Font.BOLD, 12));
+		leftPanelHeadline.setFont(new Font(GUIManager.getCustomFont().getFamily(), Font.BOLD, 18));
 		leftPanelHeadline.setBorder(null);
 		leftPanelHeadline.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -390,7 +391,7 @@ public class Main extends JLabel {
 		playerInfoHeadline.setOpaque(false);
 		playerInfoHeadline.setBackground(new Color(0, 0, 0, 0.4f));
 		playerInfoHeadline.setForeground(Color.WHITE);
-		playerInfoHeadline.setFont(new Font("Tahoma", Font.BOLD, 12));
+		playerInfoHeadline.setFont(new Font(GUIManager.getCustomFont().getFamily(), Font.BOLD, 18));
 		playerInfoHeadline.setBorder(null);
 		playerInfoHeadline.setHorizontalAlignment(SwingConstants.CENTER);
 

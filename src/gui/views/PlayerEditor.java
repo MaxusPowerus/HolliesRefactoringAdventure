@@ -3,8 +3,6 @@ package gui.views;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -12,17 +10,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.MatteBorder;
+import javax.swing.SwingConstants;
 
 import basic.Config;
-import basic.GameManager;
 import basic.HelperFunctions;
-import utilities.Skill;
+import gui.GUIManager;
+import gui.GraphicalButton;
+import gui.playereditor.ChangeValueButton;
+import gui.playereditor.StartGameAction;
 
 public class PlayerEditor extends JPanel {
-	private JTextField textField;
 	private JLabel strengthLabel;
 	private JLabel perceptionLabel;
 	private JLabel enduranceLabel;
@@ -35,12 +33,18 @@ public class PlayerEditor extends JPanel {
 	private JButton startGame;
 
 	public PlayerEditor() {
+		this.points = Config.SKILL_POINTS;
 
 		setBounds(0, 0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
 
-		points = 35;
-
-		JPanel panel = new JPanel();
+		JPanel panel = new JPanel() {
+			protected void paintComponent(Graphics g) {
+				g.setColor(getBackground());
+				g.fillRect(0, 0, getWidth(), getHeight());
+				super.paintComponent(g);
+			}
+		};
+		panel.setOpaque(false);
 		panel.setBackground(new Color(0, 0, 0, 0));
 		panel.setForeground(Color.RED);
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -51,53 +55,46 @@ public class PlayerEditor extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
 						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE).addContainerGap()));
 
-		textField = new JTextField();
-		textField.setColumns(10);
-
-		JLabel lblName = new JLabel("Name:");
-		lblName.setFont(new Font("Tahoma", Font.PLAIN, 14));
-
 		JPanel skillSetter = new JPanel();
 		skillSetter.setBackground(new Color(0, 0, 0, 0));
-		skillSetter.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 
-		startGame = new JButton("Spiel starten");
+		startGame = new GraphicalButton("Spiel starten");
 		startGame.setBorderPainted(false);
 		startGame.setBackground(Color.GREEN);
 		startGame.addActionListener(new StartGameAction(this));
 
-		leftPointsLabel = new JLabel("Noch 35 Punkte zu verteilen");
+		leftPointsLabel = new JLabel("<html>Noch <b>" + this.points + "</b> Punkte zu verteilen</html>");
+
+		JLabel title = new JLabel("Hollies Adventure", SwingConstants.CENTER);
+
+		title.setFont(new Font(GUIManager.getCustomFont().getFamily(), Font.PLAIN, 50));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
-				gl_panel.createSequentialGroup().addGap(42)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(lblName)
-								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(textField, Alignment.LEADING)
-										.addComponent(skillSetter, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 471,
-												Short.MAX_VALUE)
-										.addComponent(leftPointsLabel, Alignment.LEADING).addComponent(startGame,
-												Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)))
+				gl_panel.createSequentialGroup().addGap(42).addGroup(gl_panel
+						.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(title, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE)
+						.addComponent(skillSetter, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 471, Short.MAX_VALUE)
+						.addComponent(leftPointsLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(startGame, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE))
 						.addContainerGap(37, Short.MAX_VALUE)));
 		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addGap(33).addComponent(lblName)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE).addGap(35)
+				.addGroup(gl_panel.createSequentialGroup().addGap(61).addComponent(title).addGap(56)
 						.addComponent(skillSetter, GroupLayout.PREFERRED_SIZE, 367, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED).addComponent(leftPointsLabel).addGap(47)
 						.addComponent(startGame, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(169, Short.MAX_VALUE)));
+						.addContainerGap(119, Short.MAX_VALUE)));
 
 		JPanel line1 = new JPanel();
-		line1.setBackground(new Color(0, 0, 0, 0));
 
 		JPanel line2 = new JPanel();
-		line2.setBackground(new Color(0, 0, 0, 0));
 
 		JLabel lblWahrnehmung = new JLabel("Wahrnehmung");
 		lblWahrnehmung.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		perceptionLabel = new JLabel("0/10");
+		perceptionLabel = new JLabel("5/10");
 		perceptionLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JButton perceptionMinus = new JButton("-");
@@ -124,12 +121,11 @@ public class PlayerEditor extends JPanel {
 		line2.setLayout(gl_line2);
 
 		JPanel line3 = new JPanel();
-		line3.setBackground(new Color(0, 0, 0, 0));
 
 		JLabel lblCharisma = new JLabel("Ausdauer");
 		lblCharisma.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		enduranceLabel = new JLabel("0/10");
+		enduranceLabel = new JLabel("5/10");
 		enduranceLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JButton enduranceMinus = new JButton("-");
@@ -157,12 +153,11 @@ public class PlayerEditor extends JPanel {
 		line3.setLayout(gl_line3);
 
 		JPanel line4 = new JPanel();
-		line4.setBackground(new Color(0, 0, 0, 0));
 
 		JLabel lblCharisma_2 = new JLabel("Charisma");
 		lblCharisma_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		charismaLabel = new JLabel("0/10");
+		charismaLabel = new JLabel("5/10");
 		charismaLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JButton charismaMinus = new JButton("-");
@@ -190,12 +185,11 @@ public class PlayerEditor extends JPanel {
 		line4.setLayout(gl_line4);
 
 		JPanel line5 = new JPanel();
-		line5.setBackground(new Color(0, 0, 0, 0));
 
 		JLabel lblCharisma_2_1 = new JLabel("Intelligenz");
 		lblCharisma_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		intelligenceLabel = new JLabel("0/10");
+		intelligenceLabel = new JLabel("5/10");
 		intelligenceLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JButton intelligenceMinus = new JButton("-");
@@ -224,12 +218,11 @@ public class PlayerEditor extends JPanel {
 		line5.setLayout(gl_line5);
 
 		JPanel line6 = new JPanel();
-		line6.setBackground(new Color(0, 0, 0, 0));
 
 		JLabel lblCharisma_2_1_1 = new JLabel("Geschicklichkeit");
 		lblCharisma_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		agilityLabel = new JLabel("0/10");
+		agilityLabel = new JLabel("5/10");
 		agilityLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JButton agilityMinus = new JButton("-");
@@ -257,12 +250,11 @@ public class PlayerEditor extends JPanel {
 		line6.setLayout(gl_line6);
 
 		JPanel line7 = new JPanel();
-		line7.setBackground(new Color(0, 0, 0, 0));
 
 		JLabel lblCharisma_2_1_1_1 = new JLabel("Gl\u00FCck");
 		lblCharisma_2_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		luckLabel = new JLabel("0/10");
+		luckLabel = new JLabel("5/10");
 		luckLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JButton luckMinus = new JButton("-");
@@ -323,7 +315,7 @@ public class PlayerEditor extends JPanel {
 		JLabel lblStrke = new JLabel("St\u00E4rke");
 		lblStrke.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		strengthLabel = new JLabel("0/10");
+		strengthLabel = new JLabel("5/10");
 		strengthLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JButton strengthMinus = new JButton("-");
@@ -401,94 +393,5 @@ public class PlayerEditor extends JPanel {
 
 	public JButton getStartGame() {
 		return startGame;
-	}
-}
-
-class ChangeValueButton implements ActionListener {
-
-	private PlayerEditor playerEditor;
-	private String name;
-	private int value;
-
-	public ChangeValueButton(PlayerEditor playerEditor, String name, int value) {
-		this.playerEditor = playerEditor;
-		this.name = name;
-		this.value = value;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-		int points = 0;
-		JLabel label = null;
-
-		if (this.name == "perception")
-			label = this.playerEditor.getPerceptionLabel();
-		if (this.name == "luck")
-			label = this.playerEditor.getLuckLabel();
-		if (this.name == "agility")
-			label = this.playerEditor.getAgilityLabel();
-		if (this.name == "endurance")
-			label = this.playerEditor.getEnduranceLabel();
-		if (this.name == "intelligence")
-			label = this.playerEditor.getIntelligenceLabel();
-		if (this.name == "strength")
-			label = this.playerEditor.getStrengthLabel();
-		if (this.name == "charisma")
-			label = this.playerEditor.getCharismaLabel();
-
-		points = getPoints(label.getText());
-
-		if (this.value > 0 && this.playerEditor.getPoints() > 0 && points < 10) { // add
-			points++;
-			this.playerEditor.setPoints(this.playerEditor.getPoints() - 1);
-		} else if (this.value < 0 && points > 0) { // remove
-			points--;
-			this.playerEditor.setPoints(this.playerEditor.getPoints() + 1);
-		}
-
-		label.setText(points + "/10");
-		this.playerEditor.getLeftPointsLabel()
-				.setText("Noch " + this.playerEditor.getPoints() + " Punkte zu verteilen");
-
-	}
-
-	private int getPoints(String label) {
-		return Integer.parseInt(label.split("/")[0]);
-	}
-
-}
-
-class StartGameAction implements ActionListener {
-
-	private PlayerEditor playerEditor;
-
-	public StartGameAction(PlayerEditor playerEditor) {
-		this.playerEditor = playerEditor;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		GameManager gm = GameManager.getInstance();
-
-		this.playerEditor.getStartGame().setEnabled(false);
-
-		// set skill points
-		gm.getPlayer().getSkillSet().setSkillValue(Skill.AGILITY,
-				Integer.parseInt(this.playerEditor.getAgilityLabel().getText().split("/")[0]));
-		gm.getPlayer().getSkillSet().setSkillValue(Skill.PERCEPTION,
-				Integer.parseInt(this.playerEditor.getPerceptionLabel().getText().split("/")[0]));
-		gm.getPlayer().getSkillSet().setSkillValue(Skill.LUCK,
-				Integer.parseInt(this.playerEditor.getLuckLabel().getText().split("/")[0]));
-		gm.getPlayer().getSkillSet().setSkillValue(Skill.ENDURANCE,
-				Integer.parseInt(this.playerEditor.getEnduranceLabel().getText().split("/")[0]));
-		gm.getPlayer().getSkillSet().setSkillValue(Skill.STRENGTH,
-				Integer.parseInt(this.playerEditor.getStrengthLabel().getText().split("/")[0]));
-		gm.getPlayer().getSkillSet().setSkillValue(Skill.CHARISMA,
-				Integer.parseInt(this.playerEditor.getCharismaLabel().getText().split("/")[0]));
-		gm.getPlayer().getSkillSet().setSkillValue(Skill.INTELLIGENCE,
-				Integer.parseInt(this.playerEditor.getIntelligenceLabel().getText().split("/")[0]));
-
-		gm.startGame();
 	}
 }

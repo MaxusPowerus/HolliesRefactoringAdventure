@@ -39,7 +39,7 @@ public class SellButton extends GraphicalButton implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new MapShowAction(gameManager).initialize();
+				new MapShowAction().initialize();
 
 				gameManager.getGuiManager().getMain()
 						.addFieldInfo("Du hast den Handel mit <b>" + challenge.getNpc().getName() + "</b> beendet");

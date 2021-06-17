@@ -1,5 +1,6 @@
 package gui.views;
 
+import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
@@ -12,6 +13,12 @@ public class Loading extends JLabel {
 
 	public Loading() {
 		setBounds(0, 0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
+		setLayout(null);
+
+		JLabel gameOver = new JLabel("LOADING");
+		gameOver.setBounds(0, 0, 1200, 800);
+		gameOver.setFont(new Font("Dialog", Font.BOLD, 99));
+		add(gameOver);
 	}
 
 	@Override

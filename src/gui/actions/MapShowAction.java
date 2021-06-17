@@ -18,8 +18,8 @@ public class MapShowAction implements ActionListener {
 
 	GameManager gameManager;
 
-	public MapShowAction(GameManager gameManager) {
-		this.gameManager = gameManager;
+	public MapShowAction() {
+		this.gameManager = GameManager.getInstance();
 	}
 
 	@Override

@@ -72,19 +72,30 @@ public class GameManager {
 	}
 
 	public void startGame() {
-		gui.views.Main main = new gui.views.Main();
-		guiManager.setMain(main);
-		guiManager.getFrame().setContentPane(main);
-		player.setStartItems();
+		guiManager.setLoadingScreen();
 
-		PlayerInfoPanel.update();
-		WorldInfoPanel.update();
-		ActionPanel.update();
+		// start game logic in own thread
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				// generate main view
+				gui.views.Main main = new gui.views.Main();
+				guiManager.setMain(main);
+				guiManager.getFrame().setContentPane(main);
+				player.setStartItems();
 
-		// show map for default
-		new MapShowAction(this).initialize();
+				PlayerInfoPanel.update();
+				WorldInfoPanel.update();
+				ActionPanel.update();
 
-		this.execMainLogic();
+				// show map for default
+				new MapShowAction().initialize();
+
+				execMainLogic();
+
+			}
+
+		}).start();
 	}
 
 	public void execMainLogic() {
