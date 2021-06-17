@@ -162,6 +162,16 @@ public abstract class Quest {
 		}
 	}
 
+	public boolean basicUseItem(Player player, String itemName) {
+		for (int i = 0; i < player.getInventory().getAllItems().size(); i++) {
+			if (player.getInventory().getAllItems().get(i).getUniqueName().equals(itemName)) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
 	public static int getInstanceLimit() {
 		return instanceLimit;
 	}
