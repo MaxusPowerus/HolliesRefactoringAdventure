@@ -4,17 +4,18 @@ package QuestClasses;
 import java.util.ArrayList;
 
 import entities.Player;
+import map.Biom;
 import utilities.Coordinate;
 import utilities.Flag;
 import utilities.Skill;
 
 public class QuestPattern extends Quest {
-	public QuestPattern(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone,
+	public QuestPattern(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
 			boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
 			ArrayList<String> possibilities, ArrayList<String> possibilitiesButtonlabels,
 			ArrayList<Integer> possibilitiesChances, ArrayList<Flag> flags) {
-		super(instanceLimit, targetPoint, targetZone, updateOnEnter, appearsInQuestLog, title, questInfo, worldInfoLine,
-				possibilities, possibilitiesButtonlabels, possibilitiesChances, flags);
+		super(instanceLimit, targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo,
+				worldInfoLine, possibilities, possibilitiesButtonlabels, possibilitiesChances, flags);
 
 	}
 
