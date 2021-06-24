@@ -1,22 +1,30 @@
-
 package QuestClasses;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import basic.GameManager;
 import entities.Player;
+import items.Item;
 import map.Biom;
 import utilities.Coordinate;
 import utilities.Flag;
 import utilities.Skill;
 
-public class QuestPattern extends Quest {
-	public QuestPattern(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
+public class QuestFishingMeadow extends Quest {
+
+	private int limit;
+	private Item fish;
+
+	public QuestFishingMeadow(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
 			boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
 			ArrayList<String> possibilities, ArrayList<String> possibilitiesButtonlabels,
 			ArrayList<Integer> possibilitiesChances, ArrayList<Flag> flags) {
 		super(instanceLimit, targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo,
 				worldInfoLine, possibilities, possibilitiesButtonlabels, possibilitiesChances, flags);
-
+		Random Randy = new Random();
+		limit = Randy.nextInt(10);
+		fish = GameManager.getInstance().getResourceManager().getItemByUniqueName("Fish");
 	}
 
 	@Override
@@ -29,78 +37,61 @@ public class QuestPattern extends Quest {
 		System.out.println(" EnterUpdate - ActiveFalg: " + super.getActiveFlagName());
 
 		switch (getActiveFlagName()) {
-		case "flagName":
+		case "fishing":
 			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
-				if (super.basicSkillCheck(player, Skill.PERCEPTION, 5)) {
+				if (super.basicUseItem(player, "FishingRod")) {
 
-					// setNewFlag();
+					setWorldInfoLine("Es dauert einen Moment aber du fängst dir einen saftigen Fisch!");
 
-					// setWorldInfoLine();
-					// setQuestInfo();
+					player.getInventory().add(fish);
+					limit--;
 
-					// super.clearPossibilities();
-
-					// Xmal
-					// super.getPossibilitiesChances().add(-1);
-					// super.getPossibilities().add();
-					// super.getPossibilitiesButtonlabels().add();
 				} else {
-
-					// setNewFlag();
-
-					// setWorldInfoLine();
-					// setQuestInfo();
-
-					// super.clearPossibilities();
-
-					// Xmal
-					// super.getPossibilitiesChances().add(-1);
-					// super.getPossibilities().add();
-					// super.getPossibilitiesButtonlabels().add();
+					setWorldInfoLine("Besorg dir erstmal einen Angel!");
 				}
 
 			} else if (attempt.equals(getPossibilitiesButtonlabels().get(1))) {
-				/*
-				 * 
-				 */
+				if (super.basicUseItem(player, "Spear")) {
+					if (basicSkillCheck(player, Skill.AGILITY, 9)) {
+						setWorldInfoLine("Mit viel Geschick fängst du dir einen Fisch");
+
+						player.getInventory().add(fish);
+						limit--;
+					} else {
+						setWorldInfoLine(
+								"Dir fehlt einfach das Geschick. Nicht nur dass du nichts fängst, du verscheuchst auch noch Alle Fische!");
+						limit = 0;
+					}
+
+				} else {
+					setWorldInfoLine("Besorg dir erstmal einen Speer!");
+				}
 			}
 
 			break;
 
-		case "endCase":
+		case "empty":
 
-			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
-				// super.setQuestInfo();
-				// super.setWorldInfoLine();
+			setWorldInfoLine("Im Fluss sind keine Fische zu sehen...versuche es später nochmal!");
 
-				// reward or punish Player (XP, HP, Items, Gold)
-			}
-
-			// super.clearPossibilities();
-
-			// super.setUpdateOnEnter(false);
-			// super.setActive(false);
-			// super.setFinished(true);
+			super.setUpdateOnEnter(true);
+			super.setActive(false);
 
 			break;
-
-		// more Cases
-		/*
-		 * 
-		 */
+		}
+		if (limit <= 0) {
+			this.setNewFlag("empty");
 		}
 		System.out.println(" LeaveUpdate - ActiveFalg: " + super.getActiveFlagName());
 	}
 
 	@Override
 	public void update(Player player) {
-		if (isUpdateOnEnter() == false) {
-			return;
-		}
+
 		System.out.println(" EnterUpdate(Simple) - ActiveFalg: " + super.getActiveFlagName());
 		if (super.isActive() == false && super.isFinished() == false) {
 			super.setActive(true);
-			super.setNewFlag("flagName");
+			super.setNewFlag("fishing");
 		}
 
 		System.out.println(" LeaveUpdate - ActiveFalg: " + super.getActiveFlagName());

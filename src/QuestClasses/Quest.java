@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import entities.Player;
 import items.Item;
+import map.Biom;
 import utilities.Coordinate;
 import utilities.Flag;
 import utilities.Skill;
@@ -19,6 +20,7 @@ public abstract class Quest {
 
 	private Coordinate targetPoint;
 	private ArrayList<Coordinate> targetZone;
+	private Biom biom;
 
 	private boolean appearsInQuestLog;
 
@@ -37,8 +39,8 @@ public abstract class Quest {
 
 	private ArrayList<Flag> flags;
 
-	public Quest(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, boolean updateOnEnter,
-			boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
+	public Quest(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
+			boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
 			ArrayList<String> possibilities, ArrayList<String> possibilitiesButtonlabels,
 			ArrayList<Integer> possibilitiesChances, ArrayList<Flag> flags) {
 		super();
@@ -46,6 +48,7 @@ public abstract class Quest {
 		this.finished = false;
 		this.targetPoint = targetPoint;
 		this.targetZone = targetZone;
+		this.biom = biom;
 		this.updateOnEnter = updateOnEnter;
 		this.appearsInQuestLog = appearsInQuestLog;
 		Title = title;
@@ -67,7 +70,7 @@ public abstract class Quest {
 		 */
 	}
 
-	public void setQuest(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone,
+	public void setQuest(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
 			boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
 			ArrayList<String> possibilities, ArrayList<String> possibilitiesButtonlabels, ArrayList<Flag> flags) {
 
@@ -75,6 +78,7 @@ public abstract class Quest {
 		this.finished = false;
 		this.targetPoint = targetPoint;
 		this.targetZone = targetZone;
+		this.biom = biom;
 		this.appearsInQuestLog = appearsInQuestLog;
 		Title = title;
 		this.questInfo = questInfo;
@@ -158,12 +162,14 @@ public abstract class Quest {
 		}
 	}
 
-	public boolean isActive() {
-		return active;
-	}
+	public boolean basicUseItem(Player player, String itemName) {
+		for (int i = 0; i < player.getInventory().getAllItems().size(); i++) {
+			if (player.getInventory().getAllItems().get(i).getUniqueName().equals(itemName)) {
+				return true;
+			}
+		}
+		return false;
 
-	public boolean isFinished() {
-		return finished;
 	}
 
 	public static int getInstanceLimit() {
@@ -172,6 +178,30 @@ public abstract class Quest {
 
 	public static void setInstanceLimit(int instanceLimit) {
 		Quest.instanceLimit = instanceLimit;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public boolean isFinished() {
+		return finished;
+	}
+
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
+
+	public boolean isUpdateOnEnter() {
+		return updateOnEnter;
+	}
+
+	public void setUpdateOnEnter(boolean updateOnEnter) {
+		this.updateOnEnter = updateOnEnter;
 	}
 
 	public Coordinate getTargetPoint() {
@@ -188,6 +218,14 @@ public abstract class Quest {
 
 	public void setTargetZone(ArrayList<Coordinate> targetZone) {
 		this.targetZone = targetZone;
+	}
+
+	public Biom getBiom() {
+		return biom;
+	}
+
+	public void setBiom(Biom biom) {
+		this.biom = biom;
 	}
 
 	public boolean isAppearsInQuestLog() {
@@ -238,25 +276,6 @@ public abstract class Quest {
 		this.possibilitiesButtonlabels = possibilitiesButtonlabels;
 	}
 
-	public ArrayList<Flag> getFlags() {
-		return flags;
-	}
-
-	public void setFlags(ArrayList<Flag> flags) {
-		this.flags = flags;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	public void setFinished(boolean finished) {
-		this.finished = finished;
-		if (finished) {
-			setAllFlagsOff();
-		}
-	}
-
 	public ArrayList<Integer> getPossibilitiesChances() {
 		return possibilitiesChances;
 	}
@@ -265,12 +284,12 @@ public abstract class Quest {
 		this.possibilitiesChances = possibilitiesChances;
 	}
 
-	public boolean isUpdateOnEnter() {
-		return updateOnEnter;
+	public ArrayList<Flag> getFlags() {
+		return flags;
 	}
 
-	public void setUpdateOnEnter(boolean updateOnEnter) {
-		this.updateOnEnter = updateOnEnter;
+	public void setFlags(ArrayList<Flag> flags) {
+		this.flags = flags;
 	}
 
 }

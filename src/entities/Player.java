@@ -4,6 +4,7 @@ import java.util.Random;
 
 import QuestClasses.Quest;
 import basic.Config;
+import basic.GameManager;
 import items.Food;
 import items.Item;
 import items.Note;
@@ -57,11 +58,17 @@ public class Player {
 		Other startOther = new Other("HolliesTeddy", "SchrimplyPipples",
 				"Hollies ältester und wichtigster Begleiter: Ein alter abgenutzter Teddybär!", 0, 0);
 
+		Item speer = GameManager.getInstance().getResourceManager().getItemByUniqueName("Spear");
+		Item angel = GameManager.getInstance().getResourceManager().getItemByUniqueName("FishingRod");
+
 		inventory.add(startWeapon);
 		inventory.add(startOutfit);
 		inventory.add(startFood);
 		inventory.add(startNote);
 		inventory.add(startOther);
+
+		inventory.add(speer);
+		inventory.add(angel);
 
 		inventory.addGold(50);
 

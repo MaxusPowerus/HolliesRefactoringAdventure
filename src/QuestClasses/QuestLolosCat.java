@@ -3,17 +3,18 @@ package QuestClasses;
 import java.util.ArrayList;
 
 import entities.Player;
+import map.Biom;
 import utilities.Coordinate;
 import utilities.Flag;
 import utilities.Skill;
 
 public class QuestLolosCat extends Quest {
-	public QuestLolosCat(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone,
+	public QuestLolosCat(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
 			boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
 			ArrayList<String> possibilities, ArrayList<String> possibilitiesButtonlabels,
 			ArrayList<Integer> possibilitiesChances, ArrayList<Flag> flags) {
-		super(instanceLimit, targetPoint, targetZone, updateOnEnter, appearsInQuestLog, title, questInfo, worldInfoLine,
-				possibilities, possibilitiesButtonlabels, possibilitiesChances, flags);
+		super(instanceLimit, targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo,
+				worldInfoLine, possibilities, possibilitiesButtonlabels, possibilitiesChances, flags);
 
 	}
 
@@ -99,7 +100,9 @@ public class QuestLolosCat extends Quest {
 
 			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
 				super.setQuestInfo("Lolo ist überglücklich, das du ihn mit seinem Liebsten wiedervereint hast!");
-				super.setWorldInfoLine("Lolo ist überglücklich, das du ihn mit seinem Liebsten wiedervereint hast!");
+				super.setWorldInfoLine(
+						"Lolo: \"Danke das du sie wiedergefunden hast! Hier das ist für dich! \" [ + 5 Gold]");
+				player.getInventory().addGold(5);
 				player.getExperience().addXp(100);
 			}
 			if (attempt.equals(getPossibilitiesButtonlabels().get(1))) {

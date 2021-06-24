@@ -214,6 +214,12 @@ public class GameManager {
 			}
 		} else {
 			System.out.println("MAX DU HAST KAKI GEBAUT! aber ich vergebe dir");
+			if (quest == null) {
+				System.out.println("quest is null");
+			}
+			if (challenge == null) {
+				System.out.println("challenge is null");
+			}
 		}
 
 		this.update();
