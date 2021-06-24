@@ -60,12 +60,6 @@ public class GameManager {
 		resourceManager = new ResourceManager();
 		questManager = new QuestManager(player);
 
-		mainMap = new Map();
-		MapGenerator mapGenerator = new MapGenerator(mainMap);
-
-		mainMap = mapGenerator.generateMapMK2();
-		player.setMap(mainMap);
-
 		this.guiManager = new GUIManager(this.fullscreen);
 	}
 
@@ -80,6 +74,12 @@ public class GameManager {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				mainMap = new Map();
+				MapGenerator mapGenerator = new MapGenerator(mainMap);
+
+				mainMap = mapGenerator.generateMapMK2();
+				player.setMap(mainMap);
+
 				// generate main view
 				gui.views.Main main = new gui.views.Main();
 				guiManager.setMain(main);
@@ -248,4 +248,9 @@ public class GameManager {
 	public void endGame() {
 		this.guiManager.showGameOver();
 	}
+
+	public Map getMainMap() {
+		return mainMap;
+	}
+
 }

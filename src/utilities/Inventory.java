@@ -137,18 +137,21 @@ public class Inventory {
 		ArrayList<Item> questItems = new ArrayList<Item>();
 
 		for (Item item : this.items) {
-			if (item instanceof Food)
+			if (item instanceof Food) {
 				food.add(item);
-			if (item instanceof Note)
+			} else if (item instanceof Note) {
 				notes.add(item);
-			if (item instanceof Other)
+			} else if (item instanceof Other) {
 				others.add(item);
-			if (item instanceof Outfit)
+			} else if (item instanceof Outfit) {
 				outfits.add(item);
-			if (item instanceof Weapon)
+			} else if (item instanceof Weapon) {
 				weapons.add(item);
-			if (item instanceof QuestItem)
+			} else if (item instanceof QuestItem) {
 				questItems.add(item);
+			} else {
+				System.out.println("[DEBUG] no category: " + item.getName());
+			}
 		}
 
 		itemCategories.put("Nahrung", food);

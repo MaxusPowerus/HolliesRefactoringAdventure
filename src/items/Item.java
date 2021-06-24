@@ -104,6 +104,8 @@ public class Item {
 		} else if (this instanceof Outfit) {
 			item = new Outfit(this.uniqueName, this.name, this.value, ((Outfit) this).getArmor(), this.getSpawnChance(),
 					((Outfit) this).getOutfitFx());
+		} else if (this instanceof Other) {
+			item = new Other(uniqueName, name, ((Other) this).getInfo(), this.value, this.getSpawnChance());
 		} else {
 			item = new Item(this.uniqueName, this.name, this.value, this.getSpawnChance());
 		}

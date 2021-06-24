@@ -15,7 +15,7 @@ public class Config {
 	public final static int SKILL_POINTS = 5;
 
 	// MAP
-	public final static int MAP_SIZEX = 50;
-	public final static int MAP_SIZEY = 50;
+	public final static int MAP_SIZEX = 100;
+	public final static int MAP_SIZEY = 100;
 
 }

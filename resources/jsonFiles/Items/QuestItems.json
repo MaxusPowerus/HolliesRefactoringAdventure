@@ -1,3 +1,5 @@
 [
-			 {"uniqueName": "GiftForHolger", "label": "Geschenk für Holger", "info": "SexTape", "value": 1, "chance": 95}
+	{"uniqueName": "GiftForHolger", "label": "Geschenk für Holger", "info": "SexTape", "value": 1, "chance": 95},
+	{"uniqueName": "TheodorasAmulet", "label": "Theodoras Amulett", "info": "Ein wichtiges Erbstüch, das Theodoras einst von seiner Mutter bekam.", "value": 100, "chance": 0}
+		
 		]

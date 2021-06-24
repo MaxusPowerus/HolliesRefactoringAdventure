@@ -59,7 +59,7 @@ public class Player {
 				"Hollies ältester und wichtigster Begleiter: Ein alter abgenutzter Teddybär!", 0, 0);
 
 		Item speer = GameManager.getInstance().getResourceManager().getItemByUniqueName("Spear");
-		Item angel = GameManager.getInstance().getResourceManager().getItemByUniqueName("FishingRod");
+		Other angel = (Other) GameManager.getInstance().getResourceManager().getItemByUniqueName("FishingRod");
 
 		inventory.add(startWeapon);
 		inventory.add(startOutfit);

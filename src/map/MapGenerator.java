@@ -303,8 +303,16 @@ public class MapGenerator {
 
 	public void generateQuests() {
 
-		testQuest("FischenSumpf");
+		testQuest("Eine falsche Entscheidung!");
 
+		// Quests mit Vorbestimmten Koordinaten
+		ArrayList<Quest> questsPos = GameManager.getInstance().getQuestManager().getQuestWithCoordinates();
+		for (int i = 0; i < questsPos.size(); i++) {
+			map.getMapFieldByCoordinate(questsPos.get(i).getTargetPoint()).setQuest(questsPos.get(i));
+			map.getMapFieldByCoordinate(questsPos.get(i).getTargetPoint()).setChallenge(null);
+		}
+
+		//// Quests Nach Biomen
 		ArrayList<MapField> fields;
 
 		// beliebige Biome

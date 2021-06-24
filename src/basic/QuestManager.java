@@ -7,6 +7,8 @@ import QuestClasses.QuestFishingMeadow;
 import QuestClasses.QuestFishingSwamp;
 import QuestClasses.QuestLolosCat;
 import QuestClasses.QuestPattern;
+import QuestClasses.QuestPoorTrader;
+import QuestClasses.QuestPoorTraderTrigger;
 import entities.Player;
 import map.Biom;
 import utilities.Coordinate;
@@ -15,15 +17,19 @@ import utilities.Flag;
 public class QuestManager {
 	ArrayList<Quest> quests;
 	ArrayList<Quest> mainQuests;
+	ArrayList<Quest> questWithCoordinates;
 
 	public QuestManager(Player player) {
 		quests = new ArrayList<Quest>();
 		mainQuests = new ArrayList<Quest>();
+		questWithCoordinates = new ArrayList<Quest>();
 
 		// quests.add(initQuestPattern());
 		quests.add(initLolosCat());
 		quests.add(initQuestFishingMeadow());
 		quests.add(initQuestFishingSwamp());
+		questWithCoordinates.add(initQuestPoorTraderTrigger());
+		// questWithCoordinates.add(initQuestPoorTrader());
 	}
 
 	public QuestPattern initQuestPattern() {
@@ -96,7 +102,7 @@ public class QuestManager {
 	}
 
 	public QuestFishingMeadow initQuestFishingMeadow() {
-		int il = Config.MAP_SIZEX; // instanceLimit
+		int il = Config.MAP_SIZEX * 5; // instanceLimit
 		Coordinate tp = null;
 		ArrayList<Coordinate> tz = null;
 		Biom b = Biom.MEADOW;
@@ -135,7 +141,7 @@ public class QuestManager {
 	}
 
 	public QuestFishingSwamp initQuestFishingSwamp() {
-		int il = Config.MAP_SIZEX; // instanceLimit
+		int il = 5; // instanceLimit
 		Coordinate tp = null;
 		ArrayList<Coordinate> tz = null;
 		Biom b = Biom.SWAMP;
@@ -172,12 +178,69 @@ public class QuestManager {
 		return questFishingSwamp;
 	}
 
+	public QuestPoorTraderTrigger initQuestPoorTraderTrigger() {
+		int il = 1; // instanceLimit
+
+		Coordinate tp = new Coordinate(Config.MAP_SIZEX / 2, Config.MAP_SIZEY / 2 + 1);
+		ArrayList<Coordinate> tz = null;
+		Biom b = null; // null = Random Biom
+
+		boolean uoe = true;
+		boolean aiql = true;
+		String t = "Eine falsche Entscheidung";
+		String qi = "Du triffst auf Theodoras, er bereut es ein altes Familienerbstück an einen Händler verkauft zu haben. Er bittet dich um Hilfe und sagt, dass der Händler Richtung Osten gezogen ist.";
+		String wil = "Theodoras: \"Hilf mir ich habe das Amulett meiner Mutter verkauft aber es war ein großer Fehler. Der händler ist Richtung Osten gegangen, bitte hole es zurück, es bedeutet mir Alles!\"";
+
+		ArrayList<String> p = new ArrayList<String>();
+		String p1 = "Alles klar, ich werde sehen was ich tun kann!";
+		p.add(p1);
+		ArrayList<String> pb = new ArrayList<String>();
+		String pb1 = "Bin Unterwegs!";
+		pb.add(pb1);
+		ArrayList<Integer> pc = new ArrayList<Integer>();
+		int pc1 = -1;
+		pc.add(pc1);
+
+		ArrayList<Flag> f = new ArrayList<Flag>();
+		Flag f0 = new Flag("start");
+		Flag f1 = new Flag("wait");
+		Flag f2 = new Flag("stillWait");
+		Flag f3 = new Flag("success");
+		Flag f4 = new Flag("failure");
+		f.add(f0);
+		f.add(f1);
+		f.add(f2);
+		f.add(f3);
+		f.add(f4);
+
+		QuestPoorTraderTrigger questPoorTraderTrigger = new QuestPoorTraderTrigger(il, tp, tz, b, uoe, aiql, t, qi, wil,
+				p, pb, pc, f);
+		return questPoorTraderTrigger;
+	}
+
 	public ArrayList<Quest> getQuests() {
 		return quests;
 	}
 
 	public ArrayList<Quest> getMainQuests() {
 		return mainQuests;
+	}
+
+	public ArrayList<Quest> getQuestWithCoordinates() {
+		return questWithCoordinates;
+	}
+
+	public Quest getQuestByTitle(String title) {
+		ArrayList<Quest> quests = getAllQuests();
+		for (int i = 0; i < quests.size(); i++) {
+			if (quests.get(i).getTitle().equals(title)) {
+				return quests.get(i);
+			}
+			// System.out.println("title: " + title + " QuestName: " +
+			// quests.get(i).getTitle());
+		}
+		System.out.println("quest ist NULL");
+		return null;
 	}
 
 	public ArrayList<Quest> getActiveQuests() {
@@ -219,6 +282,9 @@ public class QuestManager {
 		}
 		for (int j = 0; j < mainQuests.size(); j++) {
 			allQuests.add(mainQuests.get(j));
+		}
+		for (int j = 0; j < questWithCoordinates.size(); j++) {
+			allQuests.add(questWithCoordinates.get(j));
 		}
 		return allQuests;
 	}
