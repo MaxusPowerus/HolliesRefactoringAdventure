@@ -94,7 +94,6 @@ public class GameManager {
 				new MapShowAction().initialize();
 
 				execMainLogic();
-
 			}
 
 		}).start();
@@ -193,6 +192,7 @@ public class GameManager {
 					Victim victim = (Victim) challenge.getNpc();
 
 					// TODO
+					this.guiManager.getMain().addFieldInfo("VICTIM // TODO");
 
 					break;
 				default:
@@ -208,7 +208,8 @@ public class GameManager {
 
 			for (int i = 0; i < quest.getPossibilities().size(); i++) {
 				QuestButton questButton = new QuestButton(quest, player, this,
-						quest.getPossibilitiesButtonlabels().get(i), quest.getPossibilitiesChances().get(i));
+						quest.getPossibilitiesButtonlabels().get(i), quest.getPossibilitiesChances().get(i),
+						quest.getPossibilities().get(i));
 				this.guiManager.getMain().getActionButtonPanel().add(questButton);
 			}
 		} else {

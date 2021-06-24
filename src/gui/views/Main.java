@@ -768,7 +768,7 @@ public class Main extends JLabel {
 		label.setForeground(Color.WHITE);
 		label.setBackground(new Color(0, 0, 0, 0));
 		label.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 3, 0));
+		label.setBorder(BorderFactory.createEmptyBorder(2, 0, 4, 0));
 		this.fieldInfos.add(label);
 
 		GameManager.getInstance().update();
