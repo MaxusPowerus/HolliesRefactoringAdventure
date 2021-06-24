@@ -16,16 +16,22 @@ public class QuestButton extends GraphicalButton implements ActionListener {
 	private GameManager gameManager;
 	private String label;
 	private int possibility;
+	private String possibilityString;
 
-	public QuestButton(Quest quest, Player player, GameManager gameManager, String label, int possibility) {
+	public QuestButton(Quest quest, Player player, GameManager gameManager, String label, int possibility,
+			String possibilityString) {
 		this.quest = quest;
 		this.player = player;
 		this.gameManager = gameManager;
 		this.label = label;
 		this.possibility = possibility;
+		this.possibilityString = possibilityString;
 
 		this.setText(label);
-		this.setToolTipText("Wahrscheinlichkeit: " + possibility);
+		if (possibility != -1) {
+			possibilityString += " (Wahrscheinlichkeit: " + possibility + ")";
+		}
+		this.setToolTipText(possibilityString);
 		this.addActionListener(this);
 	}
 
@@ -41,7 +47,8 @@ public class QuestButton extends GraphicalButton implements ActionListener {
 
 		for (int i = 0; i < quest.getPossibilities().size(); i++) {
 			QuestButton questButton = new QuestButton(this.quest, player, this.gameManager,
-					quest.getPossibilitiesButtonlabels().get(i), quest.getPossibilitiesChances().get(i));
+					quest.getPossibilitiesButtonlabels().get(i), quest.getPossibilitiesChances().get(i),
+					quest.getPossibilities().get(i));
 			this.gameManager.getGuiManager().getMain().getActionButtonPanel().add(questButton);
 		}
 
