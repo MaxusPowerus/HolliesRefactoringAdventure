@@ -13,11 +13,11 @@ import utilities.Inventory;
 import utilities.Skill;
 
 public class QuestPoorTrader extends Quest {
-	public QuestPoorTrader(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
-			boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
+	public QuestPoorTrader(Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom, boolean updateOnEnter,
+			boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
 			ArrayList<Possibility> possibilities, ArrayList<Flag> flags) {
-		super(instanceLimit, targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo,
-				worldInfoLine, possibilities, flags);
+		super(targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo, worldInfoLine,
+				possibilities, flags);
 
 	}
 
@@ -32,7 +32,7 @@ public class QuestPoorTrader extends Quest {
 
 		switch (getActiveFlagName()) {
 		case "start":
-			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
+			if (attempt.equals(super.possibilities.get(0).getButtonLabel())) {
 				if (basicSkillCheck(player, Skill.CHARISMA, 10)) {
 					GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
 							.setNewFlag("success");
@@ -57,7 +57,7 @@ public class QuestPoorTrader extends Quest {
 				super.setActive(false);
 				super.setFinished(true);
 
-			} else if (attempt.equals(getPossibilitiesButtonlabels().get(1))) {
+			} else if (attempt.equals(super.possibilities.get(1).getButtonLabel())) {
 				Inventory inv = new Inventory();
 				inv.add(GameManager.getInstance().getResourceManager().getItemByUniqueName("TheodorasAmulet"));
 				Merchant merchant = new Merchant("Händler", "den", "Wiese", "HändlerTheodoras", 3);
@@ -81,7 +81,7 @@ public class QuestPoorTrader extends Quest {
 					return;
 				}
 
-			} else if (attempt.equals(getPossibilitiesButtonlabels().get(2))) {
+			} else if (attempt.equals(super.possibilities.get(2).getButtonLabel())) {
 				if (basicSkillCheck(player, Skill.STRENGTH, 6)) {
 					GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
 							.setNewFlag("success");
@@ -134,42 +134,32 @@ public class QuestPoorTrader extends Quest {
 		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
 				.setWorldInfoLine("Und habt ihr das Amullett zurückbekommen?");
 
-		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung").getPossibilities()
-				.add("\"Es warsehr anstrengend das Amulett zu beschaffen, also werde ich es behalten!\"");
-		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung").getPossibilities().add(
-				"\"Es warsehr anstrengend das Amulett zu beschaffen, deshalb wird es dich eine Kleinigkeit kosten!\"");
-		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung").getPossibilities()
-				.add("\"Bittesehr\"");
+		Possibility p1 = new Possibility(
+				"\"Es warsehr anstrengend das Amulett zu beschaffen, also werde ich es behalten!\"", "Behalten", -1);
+		Possibility p2 = new Possibility(
+				"\"Es warsehr anstrengend das Amulett zu beschaffen, deshalb wird es dich eine Kleinigkeit kosten!\"",
+				"Verkaufen", -1);
+		Possibility p3 = new Possibility("\"Bittesehr\"", "Geben", -1);
 
-		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
-				.getPossibilitiesButtonlabels().add("Behalten");
-		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
-				.getPossibilitiesButtonlabels().add("Verkaufen");
-		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
-				.getPossibilitiesButtonlabels().add("Geben");
-
-		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
-				.getPossibilitiesChances().add(-1);
-		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
-				.getPossibilitiesChances().add(-1);
-		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
-				.getPossibilitiesChances().add(-1);
+		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung").getPossibilities()
+				.add(p1);
+		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung").getPossibilities()
+				.add(p2);
+		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung").getPossibilities()
+				.add(p3);
 
 		GameManager.getInstance().getMainMap().getMapFieldByCoordinate(super.getTargetPoint()).setQuest(null);
 	}
 
 	public void setFailure() {
+		Possibility p1 = new Possibility(
+				"\"\\\"Es ist mir leider nicht gelungen das Amulet wieder zu bekommen...es tut mir Leid!\\\"\"",
+				"Es tut mir Leid...", -1);
 
 		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
 				.setWorldInfoLine("Und habt ihr das Amullett zurückbekommen?");
 		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung").getPossibilities()
-				.add("\"Es ist mir leider nicht gelungen das Amulet wieder zu bekommen...es tut mir Leid!\"");
-
-		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
-				.getPossibilitiesButtonlabels().add("Es tut mir Leid...");
-
-		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
-				.getPossibilitiesChances().add(-1);
+				.add(p1);
 
 		GameManager.getInstance().getMainMap().getMapFieldByCoordinate(super.getTargetPoint()).setQuest(null);
 	}

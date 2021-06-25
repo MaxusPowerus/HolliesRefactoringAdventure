@@ -12,11 +12,11 @@ import utilities.Skill;
 
 public class QuestPoorTraderTrigger extends Quest {
 
-	public QuestPoorTraderTrigger(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone,
-			Biom biom, boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo,
-			String worldInfoLine, ArrayList<Possibility> possibilities, ArrayList<Flag> flags) {
-		super(instanceLimit, targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo,
-				worldInfoLine, possibilities, flags);
+	public QuestPoorTraderTrigger(Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
+			boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
+			ArrayList<Possibility> possibilities, ArrayList<Flag> flags) {
+		super(targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo, worldInfoLine,
+				possibilities, flags);
 
 	}
 
@@ -64,17 +64,17 @@ public class QuestPoorTraderTrigger extends Quest {
 
 		case "success":
 
-			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
+			if (attempt.equals(getPossibilities().get(0).getButtonLabel())) {
 				super.setQuestInfo("Du hast beschlossen das Amulett zu behalten.");
 				super.setWorldInfoLine("Theodoras: \"Was?! Wie kannst du das nur tun?\"");
 
-			} else if (attempt.equals(getPossibilitiesButtonlabels().get(1))) {
+			} else if (attempt.equals(getPossibilities().get(1).getButtonLabel())) {
 				super.setQuestInfo(
 						"Du hast beschlossen Theodoras das Amulett nur gegen eine Bezahlung zurück zu geben!.");
 				super.setWorldInfoLine("Theodoras: \"Was?! Nagut, nehmt das...mehr habe ich nicht ich schöwre es!\"");
 				player.getInventory().addGold(38);
 
-			} else if (attempt.equals(getPossibilitiesButtonlabels().get(2))) {
+			} else if (attempt.equals(getPossibilities().get(2).getButtonLabel())) {
 				super.setQuestInfo("Du hast beschlossen Theodoras das Amulett zurück zu geben!.");
 				super.setWorldInfoLine("Theodoras: \"Habt vielen dank mein Freund.\"");
 				player.getInventory()
@@ -93,7 +93,7 @@ public class QuestPoorTraderTrigger extends Quest {
 
 		case "failure":
 
-			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
+			if (attempt.equals(getPossibilities().get(0).getButtonLabel())) {
 				super.setQuestInfo("Du hast Theodoras von deinem Misserfolg berichtet!.");
 				super.setWorldInfoLine("Theodoras: \"Oh nein ... was seid ihr nur für ein Nichtsnutz!\"");
 
@@ -129,9 +129,9 @@ public class QuestPoorTraderTrigger extends Quest {
 			super.setWorldInfoLine("Theodoras: \"Hast du das Amulett schon zurückholen können?\"");
 			// setQuestInfo();
 
-			super.getPossibilitiesChances().add(-1);
-			super.getPossibilities().add("\"Noch nicht aber ich bin dran\n");
-			super.getPossibilitiesButtonlabels().add("Noch nicht");
+			Possibility p1 = new Possibility("Noch nicht", "\"Noch nicht aber ich bin dran\n", -1);
+
+			super.getPossibilities().add(p1);
 
 			return;
 		} else if (super.getActiveFlagName().equals("stillWait")) {
@@ -146,7 +146,7 @@ public class QuestPoorTraderTrigger extends Quest {
 	}
 
 	public QuestPoorTrader initQuestPoorTrader() {
-		int il = 1; // instanceLimit
+
 		Coordinate tp = new Coordinate(Config.MAP_SIZEX / 2 + 1, Config.MAP_SIZEY / 2 + 1);
 		ArrayList<Coordinate> tz = null;
 		Biom b = null; // null = Rabdom Biom
@@ -165,11 +165,15 @@ public class QuestPoorTraderTrigger extends Quest {
 		Possibility p3 = new Possibility("Wegnehmen", "Den Händler verprügeln und das Amulett mit Gewalt beschaffen.",
 				-1);
 
+		p.add(p1);
+		p.add(p2);
+		p.add(p3);
+
 		ArrayList<Flag> f = new ArrayList<Flag>();
 		Flag f0 = new Flag("start");
 		f.add(f0);
 
-		QuestPoorTrader questPoorTrader = new QuestPoorTrader(il, tp, tz, b, uoe, aiql, t, qi, wil, p, f);
+		QuestPoorTrader questPoorTrader = new QuestPoorTrader(tp, tz, b, uoe, aiql, t, qi, wil, p, f);
 		return questPoorTrader;
 	}
 

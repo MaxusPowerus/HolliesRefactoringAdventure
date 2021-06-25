@@ -9,11 +9,11 @@ import utilities.Flag;
 import utilities.Skill;
 
 public class QuestLolosCat extends Quest {
-	public QuestLolosCat(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
-			boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
+	public QuestLolosCat(Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom, boolean updateOnEnter,
+			boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
 			ArrayList<Possibility> possibilities, ArrayList<Flag> flags) {
-		super(instanceLimit, targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo,
-				worldInfoLine, possibilities, flags);
+		super(targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo, worldInfoLine,
+				possibilities, flags);
 
 	}
 
@@ -28,7 +28,7 @@ public class QuestLolosCat extends Quest {
 
 		switch (getActiveFlagName()) {
 		case "search":
-			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
+			if (attempt.equals(getPossibilities().get(0).getButtonLabel())) {
 				if (super.basicSkillCheck(player, Skill.PERCEPTION, 5)) {
 					super.setNewFlag("success");
 					super.setQuestInfo(
@@ -38,12 +38,10 @@ public class QuestLolosCat extends Quest {
 
 					super.clearPossibilities();
 
-					super.getPossibilitiesChances().add(-1);
-					super.getPossibilitiesChances().add(-1);
-					super.getPossibilities().add("Lolo die Katze zurückgeben.");
-					super.getPossibilities().add("Lolos Katze essen!.");
-					super.getPossibilitiesButtonlabels().add("Lolo berichten!");
-					super.getPossibilitiesButtonlabels().add("Katze essen!");
+					Possibility p1 = new Possibility("Lolo die Katze zurückgeben.", "Lolo berichten", -1);
+					Possibility p2 = new Possibility("Lolos Katze essen!.", "Katze essen!", -1);
+					super.getPossibilities().add(p1);
+					super.getPossibilities().add(p2);
 
 				} else {
 					super.setNewFlag("catch");
@@ -52,17 +50,17 @@ public class QuestLolosCat extends Quest {
 					super.setWorldInfoLine(
 							"Du entdeckst die Katze allerdings etwas zu spät als sie sich bereits auf der Flucht befindet.<br>Wenn du sie jetzt Fangen willst musst du sehr schnell sein!");
 
+					Possibility p1 = new Possibility("Versuchen Lolos Katze zu fangen.", "Katze fangen", -1);
+
 					super.clearPossibilities();
-					super.getPossibilitiesChances().add(-1);
-					super.getPossibilities().add("Versuchen Lolos Katze zu fangen.");
-					super.getPossibilitiesButtonlabels().add("Katze fangen");
+					super.getPossibilities().add(p1);
 				}
 
 			}
 			break;
 
 		case "catch":
-			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
+			if (attempt.equals(getPossibilities().get(0).getButtonLabel())) {
 				if (super.basicSkillCheck(player, Skill.AGILITY, 7)) {
 					super.setNewFlag("success");
 
@@ -71,12 +69,10 @@ public class QuestLolosCat extends Quest {
 
 					super.clearPossibilities();
 
-					super.getPossibilitiesChances().add(-1);
-					super.getPossibilitiesChances().add(-1);
-					super.getPossibilities().add("Lolo die Katze zurückgeben.");
-					super.getPossibilities().add("Lolos Katze essen!.");
-					super.getPossibilitiesButtonlabels().add("Lolo berichten!");
-					super.getPossibilitiesButtonlabels().add("Katze essen!");
+					Possibility p1 = new Possibility("Lolo die Katze zurückgeben.", "Lolo berichten!", -1);
+					Possibility p2 = new Possibility("Lolos Katze essen!", "Katze essen!", -1);
+					super.getPossibilities().add(p1);
+					super.getPossibilities().add(p2);
 
 				} else {
 					super.setNewFlag("failure");
@@ -88,23 +84,23 @@ public class QuestLolosCat extends Quest {
 
 					super.clearPossibilities();
 
-					super.getPossibilitiesChances().add(-1);
-					super.getPossibilities().add("Lolo sagen, dass du seine Katze verloren hast.");
-					super.getPossibilitiesButtonlabels().add("Lolo berichten");
+					Possibility p1 = new Possibility("Lolo sagen, dass du seine Katze verloren hast.", "Lolo berichten",
+							-1);
+					super.getPossibilities().add(p1);
 				}
 			}
 			break;
 
 		case "success":
 
-			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
+			if (attempt.equals(getPossibilities().get(0).getButtonLabel())) {
 				super.setQuestInfo("Lolo ist überglücklich, das du ihn mit seinem Liebsten wiedervereint hast!");
 				super.setWorldInfoLine(
 						"Lolo: \"Danke das du sie wiedergefunden hast! Hier das ist für dich! \" [ + 5 Gold]");
 				player.getInventory().addGold(5);
 				player.getExperience().addXp(100);
 			}
-			if (attempt.equals(getPossibilitiesButtonlabels().get(1))) {
+			if (attempt.equals(getPossibilities().get(1).getButtonLabel())) {
 				super.setQuestInfo(
 						"Lolo ist Fassungslos, als er sieht wie du seine Katze bei lebendigem Leib verspeißt!");
 				super.setWorldInfoLine(
@@ -122,7 +118,7 @@ public class QuestLolosCat extends Quest {
 
 		case "failure":
 
-			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
+			if (attempt.equals(getPossibilities().get(0).getButtonLabel())) {
 
 				super.clearPossibilities();
 

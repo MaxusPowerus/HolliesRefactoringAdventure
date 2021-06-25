@@ -16,11 +16,11 @@ public class QuestFishingMeadow extends Quest {
 	private int limit;
 	private Item fish;
 
-	public QuestFishingMeadow(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
+	public QuestFishingMeadow(Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
 			boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
 			ArrayList<Possibility> possibilities, ArrayList<Flag> flags) {
-		super(instanceLimit, targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo,
-				worldInfoLine, possibilities, flags);
+		super(targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo, worldInfoLine,
+				possibilities, flags);
 		Random Randy = new Random();
 		limit = Randy.nextInt(10);
 		fish = GameManager.getInstance().getResourceManager().getItemByUniqueName("Fish");
@@ -37,7 +37,7 @@ public class QuestFishingMeadow extends Quest {
 
 		switch (getActiveFlagName()) {
 		case "fishing":
-			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
+			if (attempt.equals(super.possibilities.get(0).getButtonLabel())) {
 				if (super.basicUseItem(player, "FishingRod")) {
 
 					setWorldInfoLine("Es dauert einen Moment aber du fängst dir einen saftigen Fisch!");
@@ -49,7 +49,7 @@ public class QuestFishingMeadow extends Quest {
 					setWorldInfoLine("Besorg dir erstmal einen Angel!");
 				}
 
-			} else if (attempt.equals(getPossibilitiesButtonlabels().get(1))) {
+			} else if (attempt.equals(super.possibilities.get(1).getButtonLabel())) {
 				if (super.basicUseItem(player, "Spear")) {
 					if (basicSkillCheck(player, Skill.AGILITY, 9)) {
 						setWorldInfoLine("Mit viel Geschick fängst du dir einen Fisch");

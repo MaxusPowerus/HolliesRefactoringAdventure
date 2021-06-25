@@ -9,7 +9,7 @@ public class Main {
 		if (args.length > 0 && args[0].equalsIgnoreCase("exit_after_time")) {
 			setTimeout(() -> {
 				System.exit(0);
-			}, 1000 * 3);
+			}, 1000 * 120);
 		} else if (args.length > 0 && args[0].equalsIgnoreCase("fullscreen")) {
 			fullscreen = true;
 		} else if (args.length > 0 && args[0].equalsIgnoreCase("player_editor")) {

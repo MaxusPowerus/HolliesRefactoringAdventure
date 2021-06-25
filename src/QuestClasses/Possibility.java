@@ -5,7 +5,7 @@ public class Possibility {
 	private String buttonLabel;
 	private int chance;
 
-	public Possibility(String line, String buttonLabel, int chance) {
+	public Possibility(String buttonLabel, String line, int chance) {
 		this.line = line;
 		this.buttonLabel = buttonLabel;
 		this.chance = chance;

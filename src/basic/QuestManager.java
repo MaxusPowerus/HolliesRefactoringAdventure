@@ -27,14 +27,19 @@ public class QuestManager {
 
 		// quests.add(initQuestPattern());
 		quests.add(initLolosCat());
-		quests.add(initQuestFishingMeadow());
-		quests.add(initQuestFishingSwamp());
+		for (int i = 0; i < Config.MAP_SIZEX * 5; i++)
+			quests.add(initQuestFishingMeadow());
+
+		// for (int i = 0; i < Config.MAP_SIZEX; i++)
+		// quests.add(initQuestFishingSwamp());
+
 		questWithCoordinates.add(initQuestPoorTraderTrigger());
+		System.out.println("QustCount: " + quests.size() + "" + mainQuests.size() + "" + questWithCoordinates.size());
 		// questWithCoordinates.add(initQuestPoorTrader());
 	}
 
 	public QuestPattern initQuestPattern() {
-		int il = 1; // instanceLimit
+
 		Coordinate tp = null;
 		ArrayList<Coordinate> tz = null;
 		Biom b = null; // null = Rabdom Biom
@@ -47,6 +52,7 @@ public class QuestManager {
 
 		ArrayList<Possibility> p = new ArrayList<Possibility>();
 		Possibility p1 = new Possibility("possibilitie01", "possibilitiesButtonlabel01", -1);
+		p.add(p1);
 
 		ArrayList<Flag> f = new ArrayList<Flag>();
 		Flag f0 = new Flag("firstFlag");
@@ -56,12 +62,12 @@ public class QuestManager {
 		f.add(f1);
 		f.add(f2);
 
-		QuestPattern questPattern = new QuestPattern(il, tp, tz, b, uoe, aiql, t, qi, wil, p, f);
+		QuestPattern questPattern = new QuestPattern(tp, tz, b, uoe, aiql, t, qi, wil, p, f);
 		return questPattern;
 	}
 
 	public QuestLolosCat initLolosCat() {
-		int il = 1;
+
 		Coordinate tp = null;
 		ArrayList<Coordinate> tz = null;
 		Biom b = null;
@@ -73,6 +79,7 @@ public class QuestManager {
 
 		ArrayList<Possibility> p = new ArrayList<Possibility>();
 		Possibility p1 = new Possibility("Katze suchen!", "Nach Lolos Katze suchen", -1);
+		p.add(p1);
 
 		ArrayList<Flag> f = new ArrayList<Flag>();
 		Flag f0 = new Flag("search");
@@ -84,12 +91,12 @@ public class QuestManager {
 		f.add(f2);
 		f.add(f3);
 
-		QuestLolosCat qeustLolosCat = new QuestLolosCat(il, tp, tz, b, uoe, aiql, t, qi, wil, p, f);
+		QuestLolosCat qeustLolosCat = new QuestLolosCat(tp, tz, b, uoe, aiql, t, qi, wil, p, f);
 		return qeustLolosCat;
 	}
 
 	public QuestFishingMeadow initQuestFishingMeadow() {
-		int il = Config.MAP_SIZEX * 5; // instanceLimit
+
 		Coordinate tp = null;
 		ArrayList<Coordinate> tz = null;
 		Biom b = Biom.MEADOW;
@@ -103,6 +110,8 @@ public class QuestManager {
 		ArrayList<Possibility> p = new ArrayList<Possibility>();
 		Possibility p1 = new Possibility("Angeln", "Mit einem Angel fischen", -1);
 		Possibility p2 = new Possibility("Speerfischen", "Mit einer Speer fischen", -1);
+		p.add(p1);
+		p.add(p2);
 
 		ArrayList<Flag> f = new ArrayList<Flag>();
 		Flag f0 = new Flag("fishing");
@@ -110,12 +119,12 @@ public class QuestManager {
 		f.add(f0);
 		f.add(f1);
 
-		QuestFishingMeadow questFishingMeadow = new QuestFishingMeadow(il, tp, tz, b, uoe, aiql, t, qi, wil, p, f);
+		QuestFishingMeadow questFishingMeadow = new QuestFishingMeadow(tp, tz, b, uoe, aiql, t, qi, wil, p, f);
 		return questFishingMeadow;
 	}
 
 	public QuestFishingSwamp initQuestFishingSwamp() {
-		int il = 5; // instanceLimit
+
 		Coordinate tp = null;
 		ArrayList<Coordinate> tz = null;
 		Biom b = Biom.SWAMP;
@@ -129,6 +138,8 @@ public class QuestManager {
 		ArrayList<Possibility> p = new ArrayList<Possibility>();
 		Possibility p1 = new Possibility("Angeln", "Mit einem Angel fischen", -1);
 		Possibility p2 = new Possibility("Speerfischen", "Mit einer Speer fischen", -1);
+		p.add(p1);
+		p.add(p2);
 
 		ArrayList<Flag> f = new ArrayList<Flag>();
 		Flag f0 = new Flag("fishing");
@@ -136,12 +147,11 @@ public class QuestManager {
 		f.add(f0);
 		f.add(f1);
 
-		QuestFishingSwamp questFishingSwamp = new QuestFishingSwamp(il, tp, tz, b, uoe, aiql, t, qi, wil, p, f);
+		QuestFishingSwamp questFishingSwamp = new QuestFishingSwamp(tp, tz, b, uoe, aiql, t, qi, wil, p, f);
 		return questFishingSwamp;
 	}
 
 	public QuestPoorTraderTrigger initQuestPoorTraderTrigger() {
-		int il = 1; // instanceLimit
 
 		Coordinate tp = new Coordinate(Config.MAP_SIZEX / 2, Config.MAP_SIZEY / 2 + 1);
 		ArrayList<Coordinate> tz = null;
@@ -155,6 +165,7 @@ public class QuestManager {
 
 		ArrayList<Possibility> p = new ArrayList<Possibility>();
 		Possibility p1 = new Possibility("Bin Unterwegs!", "Alles klar, ich werde sehen was ich tun kann!", -1);
+		p.add(p1);
 
 		ArrayList<Flag> f = new ArrayList<Flag>();
 		Flag f0 = new Flag("start");
@@ -168,8 +179,8 @@ public class QuestManager {
 		f.add(f3);
 		f.add(f4);
 
-		QuestPoorTraderTrigger questPoorTraderTrigger = new QuestPoorTraderTrigger(il, tp, tz, b, uoe, aiql, t, qi, wil,
-				p, f);
+		QuestPoorTraderTrigger questPoorTraderTrigger = new QuestPoorTraderTrigger(tp, tz, b, uoe, aiql, t, qi, wil, p,
+				f);
 		return questPoorTraderTrigger;
 	}
 
@@ -222,9 +233,7 @@ public class QuestManager {
 		ArrayList<Quest> questsByBiom = new ArrayList<Quest>();
 		for (int i = 0; i < quests.size(); i++) {
 			if (quests.get(i).getBiom() == biom) {
-				for (int j = 0; j < quests.get(i).getInstanceLimit(); j++) {
-					questsByBiom.add(quests.get(i));
-				}
+				questsByBiom.add(quests.get(i));
 			}
 		}
 		return questsByBiom;

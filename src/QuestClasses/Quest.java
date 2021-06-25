@@ -11,7 +11,7 @@ import utilities.Skill;
 
 public abstract class Quest {
 
-	private static int instanceLimit;
+	private int instanceLimit;
 
 	private boolean active;
 	private boolean finished;
@@ -37,8 +37,8 @@ public abstract class Quest {
 
 	private ArrayList<Flag> flags;
 
-	public Quest(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
-			boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
+	public Quest(Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom, boolean updateOnEnter,
+			boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
 			ArrayList<Possibility> possibilities, ArrayList<Flag> flags) {
 		super();
 		this.active = false;
@@ -53,7 +53,7 @@ public abstract class Quest {
 		WorldInfoLine = worldInfoLine;
 		this.possibilities = possibilities;
 		this.flags = flags;
-		this.instanceLimit--;
+		// this.instanceLimit--;
 	}
 
 	public Quest() {
@@ -65,9 +65,9 @@ public abstract class Quest {
 		 */
 	}
 
-	public void setQuest(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
-			boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
-			ArrayList<Possibility> possibilities, ArrayList<Flag> flags) {
+	public void setQuest(Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom, boolean appearsInQuestLog,
+			String title, String questInfo, String worldInfoLine, ArrayList<Possibility> possibilities,
+			ArrayList<Flag> flags) {
 
 		this.active = false;
 		this.finished = false;
@@ -164,12 +164,12 @@ public abstract class Quest {
 
 	}
 
-	public static int getInstanceLimit() {
+	public int getInstanceLimit() {
 		return instanceLimit;
 	}
 
-	public static void setInstanceLimit(int instanceLimit) {
-		Quest.instanceLimit = instanceLimit;
+	public void setInstanceLimit(int instanceLimit) {
+		// Quest.instanceLimit = instanceLimit;
 	}
 
 	public boolean isActive() {

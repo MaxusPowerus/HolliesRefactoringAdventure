@@ -268,24 +268,24 @@ public class MapGenerator {
 				}
 			}
 		} else {
-
 			for (int y = 0; y < Config.MAP_SIZEY; y++) {
 				for (int x = 0; x < Config.MAP_SIZEX; x++) {
 					if (map.getMapFieldByCoordinate(x, y).getBiom().getName().equals(biom.getName())
 							&& map.getMapFieldByCoordinate(x, y).getQuest() == null) {
+
 						fields.add(map.getMapFieldByCoordinate(x, y));
 					}
-
 				}
 			}
 		}
 		Collections.shuffle(fields);
-
+		System.out.println("COUNT: " + count);
+		System.out.println("FIELDSIZE 1: " + fields.size());
 		Random Randy = new Random();
 		while (fields.size() > count) {
 			fields.remove(Randy.nextInt(fields.size()));
 		}
-
+		System.out.println("FIELDSIZE 2: " + fields.size());
 		return fields;
 	}
 
@@ -303,13 +303,14 @@ public class MapGenerator {
 
 	public void generateQuests() {
 
-		testQuest("Eine falsche Entscheidung!");
+		testQuest("Eine Falsche Entscheidung");
 
 		// Quests mit Vorbestimmten Koordinaten
 		ArrayList<Quest> questsPos = GameManager.getInstance().getQuestManager().getQuestWithCoordinates();
 		for (int i = 0; i < questsPos.size(); i++) {
 			map.getMapFieldByCoordinate(questsPos.get(i).getTargetPoint()).setQuest(questsPos.get(i));
 			map.getMapFieldByCoordinate(questsPos.get(i).getTargetPoint()).setChallenge(null);
+
 		}
 
 		//// Quests Nach Biomen
@@ -318,60 +319,75 @@ public class MapGenerator {
 		// beliebige Biome
 		ArrayList<Quest> questsNull = GameManager.getInstance().getQuestManager().getQuestsByBiom(null);
 		fields = getRandomMapfielsdWithNoQuest(null, questsNull.size());
+
 		for (int i = 0; i < questsNull.size(); i++) {
 			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setQuest(questsNull.get(i));
 			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setChallenge(null);
 			questsNull.get(i).setTargetPoint(fields.get(i).getCoordinate());
+			System.out.println("Spwan quest at :" + questsPos.get(i).getTargetPoint().toString());
 		}
 		fields.clear();
 
 		// Wiese
 		ArrayList<Quest> questsMeadow = GameManager.getInstance().getQuestManager().getQuestsByBiom(Biom.MEADOW);
-		fields = getRandomMapfielsdWithNoQuest(null, questsMeadow.size());
+		System.out.println("MEADOW: " + questsMeadow.size());
+
+		fields = getRandomMapfielsdWithNoQuest(Biom.MEADOW, questsMeadow.size());
+
 		for (int i = 0; i < questsMeadow.size(); i++) {
 			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setQuest(questsMeadow.get(i));
 			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setChallenge(null);
 			questsMeadow.get(i).setTargetPoint(fields.get(i).getCoordinate());
+
 		}
 		fields.clear();
 
 		// Wald
 		ArrayList<Quest> questsForest = GameManager.getInstance().getQuestManager().getQuestsByBiom(Biom.FOREST);
-		fields = getRandomMapfielsdWithNoQuest(null, questsForest.size());
+		System.out.println("FOREST: " + questsForest.size());
+		fields = getRandomMapfielsdWithNoQuest(Biom.FOREST, questsForest.size());
 		for (int i = 0; i < questsForest.size(); i++) {
 			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setQuest(questsForest.get(i));
 			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setChallenge(null);
 			questsForest.get(i).setTargetPoint(fields.get(i).getCoordinate());
+
 		}
 		fields.clear();
 
 		// Wüste
 		ArrayList<Quest> questsWüste = GameManager.getInstance().getQuestManager().getQuestsByBiom(Biom.DESERT);
-		fields = getRandomMapfielsdWithNoQuest(null, questsWüste.size());
+		System.out.println("DESERT: " + questsWüste.size());
+		fields = getRandomMapfielsdWithNoQuest(Biom.DESERT, questsWüste.size());
 		for (int i = 0; i < questsWüste.size(); i++) {
 			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setQuest(questsWüste.get(i));
 			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setChallenge(null);
 			questsWüste.get(i).setTargetPoint(fields.get(i).getCoordinate());
+
 		}
 		fields.clear();
 
 		// Sumpf
 		ArrayList<Quest> questsSumpf = GameManager.getInstance().getQuestManager().getQuestsByBiom(Biom.SWAMP);
-		fields = getRandomMapfielsdWithNoQuest(null, questsSumpf.size());
+		System.out.println("SWAMP: " + questsSumpf.size());
+		fields = getRandomMapfielsdWithNoQuest(Biom.SWAMP, questsSumpf.size());
+		System.out.println("FIELD: " + fields.size());
 		for (int i = 0; i < questsSumpf.size(); i++) {
 			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setQuest(questsSumpf.get(i));
 			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setChallenge(null);
 			questsSumpf.get(i).setTargetPoint(fields.get(i).getCoordinate());
+
 		}
 		fields.clear();
 
 		// Berge
 		ArrayList<Quest> questsMountains = GameManager.getInstance().getQuestManager().getQuestsByBiom(Biom.MOUNTAINS);
-		fields = getRandomMapfielsdWithNoQuest(null, questsMountains.size());
+		System.out.println("MOUNTAINS: " + questsMountains.size());
+		fields = getRandomMapfielsdWithNoQuest(Biom.MOUNTAINS, questsMountains.size());
 		for (int i = 0; i < questsMountains.size(); i++) {
 			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setQuest(questsMountains.get(i));
 			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setChallenge(null);
 			questsMountains.get(i).setTargetPoint(fields.get(i).getCoordinate());
+
 		}
 		fields.clear();
 
@@ -405,6 +421,7 @@ public class MapGenerator {
 
 		generateChallenge();
 		// System.out.println("Container Done");
+
 		generateQuests();
 		// System.out.println("Container Done");
 

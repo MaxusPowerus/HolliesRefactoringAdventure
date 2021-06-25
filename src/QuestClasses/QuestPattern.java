@@ -10,11 +10,11 @@ import utilities.Flag;
 import utilities.Skill;
 
 public class QuestPattern extends Quest {
-	public QuestPattern(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
-			boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
+	public QuestPattern(Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom, boolean updateOnEnter,
+			boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
 			ArrayList<Possibility> possibilities, ArrayList<Flag> flags) {
-		super(instanceLimit, targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo,
-				worldInfoLine, possibilities, flags);
+		super(targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo, worldInfoLine,
+				possibilities, flags);
 
 	}
 
