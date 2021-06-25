@@ -14,10 +14,9 @@ public class QuestPoorTraderTrigger extends Quest {
 
 	public QuestPoorTraderTrigger(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone,
 			Biom biom, boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo,
-			String worldInfoLine, ArrayList<String> possibilities, ArrayList<String> possibilitiesButtonlabels,
-			ArrayList<Integer> possibilitiesChances, ArrayList<Flag> flags) {
+			String worldInfoLine, ArrayList<Possibility> possibilities, ArrayList<Flag> flags) {
 		super(instanceLimit, targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo,
-				worldInfoLine, possibilities, possibilitiesButtonlabels, possibilitiesChances, flags);
+				worldInfoLine, possibilities, flags);
 
 	}
 
@@ -158,34 +157,19 @@ public class QuestPoorTraderTrigger extends Quest {
 		String qi = "Du triffst auf den Händler, von dem Theodoras berichtet hat..";
 		String wil = "Händler: \"Hallo fremder wollt ihr einen Blick auf meine Waren werfen?\"";
 
-		ArrayList<String> p = new ArrayList<String>();
-		String p1 = "Hey der Arme Theodoras ist am Boden zerstört...das Amulett gehörte seiner Toten Mutter...bitte lass es mich ihm zurück  geben!";
-		String p2 = "Kaufe dem Händler das Amulett ab.";
-		String p3 = "Den Händler verprügeln und das Amulett mit Gewalt beschaffen.";
-		p.add(p1);
-		p.add(p2);
-		p.add(p3);
-
-		ArrayList<String> pb = new ArrayList<String>();
-		String pb1 = "Überreden";
-		String pb2 = "Abkaufen";
-		String pb3 = "Wegnehmen";
-		pb.add(pb1);
-		pb.add(pb2);
-		pb.add(pb3);
-		ArrayList<Integer> pc = new ArrayList<Integer>();
-		int pc1 = -1;
-		int pc2 = -1;
-		int pc3 = -1;
-		pc.add(pc1);
-		pc.add(pc2);
-		pc.add(pc3);
+		ArrayList<Possibility> p = new ArrayList<Possibility>();
+		Possibility p1 = new Possibility("Überreden",
+				"\"Hey der Arme Theodoras ist am Boden zerstört...das Amulett gehörte seiner Toten Mutter...bitte lass es mich ihm zurück  geben!\"",
+				-1);
+		Possibility p2 = new Possibility("Abkaufen", "Kaufe dem Händler das Amulett ab.", -1);
+		Possibility p3 = new Possibility("Wegnehmen", "Den Händler verprügeln und das Amulett mit Gewalt beschaffen.",
+				-1);
 
 		ArrayList<Flag> f = new ArrayList<Flag>();
 		Flag f0 = new Flag("start");
 		f.add(f0);
 
-		QuestPoorTrader questPoorTrader = new QuestPoorTrader(il, tp, tz, b, uoe, aiql, t, qi, wil, p, pb, pc, f);
+		QuestPoorTrader questPoorTrader = new QuestPoorTrader(il, tp, tz, b, uoe, aiql, t, qi, wil, p, f);
 		return questPoorTrader;
 	}
 

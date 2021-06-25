@@ -1,4 +1,5 @@
 [
+	{"uniqueName": "TheodorasAmulet", "label": "Theodoras Amulett", "info": "Ein wichtiges Erbstüch, das Theodoras einst von seiner Mutter bekam.", "value": 100, "chance": 0},
 	 {"uniqueName": "Stone","label": "Stein", "info": "Schlägt Schere", "value": 0, "chance": 95},
 	 {"uniqueName": "Paper", "label": "Papier", "info": "Schlägt Stein", "value": 1, "chance": 95},
 	 {"uniqueName": "Scissors", "label": "Schere", "info": "Schlägt Papier", "value": 1, "chance": 95},

@@ -2,6 +2,7 @@ package basic;
 
 import java.util.ArrayList;
 
+import QuestClasses.Possibility;
 import QuestClasses.Quest;
 import QuestClasses.QuestFishingMeadow;
 import QuestClasses.QuestFishingSwamp;
@@ -44,15 +45,8 @@ public class QuestManager {
 		String qi = "questInfo";
 		String wil = "worldInfoLine";
 
-		ArrayList<String> p = new ArrayList<String>();
-		String p1 = "possibilitie01";
-		p.add(p1);
-		ArrayList<String> pb = new ArrayList<String>();
-		String pb1 = "possibilitiesButtonlabel01";
-		pb.add(pb1);
-		ArrayList<Integer> pc = new ArrayList<Integer>();
-		int pc1 = -1; // possibilitiesChance01
-		pc.add(pc1);
+		ArrayList<Possibility> p = new ArrayList<Possibility>();
+		Possibility p1 = new Possibility("possibilitie01", "possibilitiesButtonlabel01", -1);
 
 		ArrayList<Flag> f = new ArrayList<Flag>();
 		Flag f0 = new Flag("firstFlag");
@@ -62,7 +56,7 @@ public class QuestManager {
 		f.add(f1);
 		f.add(f2);
 
-		QuestPattern questPattern = new QuestPattern(il, tp, tz, b, uoe, aiql, t, qi, wil, p, pb, pc, f);
+		QuestPattern questPattern = new QuestPattern(il, tp, tz, b, uoe, aiql, t, qi, wil, p, f);
 		return questPattern;
 	}
 
@@ -77,15 +71,8 @@ public class QuestManager {
 		String qi = "Du triffst auf Lol, der dir berichtet, das seine Katzte davon gelaufen ist. Er bittet dich um Hilfe be der Suche.";
 		String wil = "Lollo: \"Hallo kannst du mir helfen meine Katze zu finden?\"";
 
-		ArrayList<String> p = new ArrayList<String>();
-		String p1 = "Nach Lolos Katze suchen";
-		p.add(p1);
-		ArrayList<String> pb = new ArrayList<String>();
-		String pb1 = "Katze suchen!";
-		pb.add(pb1);
-		ArrayList<Integer> pc = new ArrayList<Integer>();
-		int pc1 = -1;
-		pc.add(pc1);
+		ArrayList<Possibility> p = new ArrayList<Possibility>();
+		Possibility p1 = new Possibility("Katze suchen!", "Nach Lolos Katze suchen", -1);
 
 		ArrayList<Flag> f = new ArrayList<Flag>();
 		Flag f0 = new Flag("search");
@@ -97,7 +84,7 @@ public class QuestManager {
 		f.add(f2);
 		f.add(f3);
 
-		QuestLolosCat qeustLolosCat = new QuestLolosCat(il, tp, tz, b, uoe, aiql, t, qi, wil, p, pb, pc, f);
+		QuestLolosCat qeustLolosCat = new QuestLolosCat(il, tp, tz, b, uoe, aiql, t, qi, wil, p, f);
 		return qeustLolosCat;
 	}
 
@@ -113,21 +100,9 @@ public class QuestManager {
 		String qi = "questInfo";
 		String wil = "Du kommst an einen Fluss, in dem es vor Fischen nur so wimmelt. <br> Wenn du einen fängst, würde das ein brächtiges Abendesen abgeben!";
 
-		ArrayList<String> p = new ArrayList<String>();
-		String p1 = "Mit einem Angel fischen";
-		p.add(p1);
-		String p2 = "Mit einer Speer fischen";
-		p.add(p2);
-		ArrayList<String> pb = new ArrayList<String>();
-		String pb1 = "Angeln";
-		pb.add(pb1);
-		String pb2 = "Speerfischen";
-		pb.add(pb2);
-		ArrayList<Integer> pc = new ArrayList<Integer>();
-		int pc1 = -1; // possibilitiesChance01
-		pc.add(pc1);
-		int pc2 = -1; // possibilitiesChance01
-		pc.add(pc2);
+		ArrayList<Possibility> p = new ArrayList<Possibility>();
+		Possibility p1 = new Possibility("Angeln", "Mit einem Angel fischen", -1);
+		Possibility p2 = new Possibility("Speerfischen", "Mit einer Speer fischen", -1);
 
 		ArrayList<Flag> f = new ArrayList<Flag>();
 		Flag f0 = new Flag("fishing");
@@ -135,8 +110,7 @@ public class QuestManager {
 		f.add(f0);
 		f.add(f1);
 
-		QuestFishingMeadow questFishingMeadow = new QuestFishingMeadow(il, tp, tz, b, uoe, aiql, t, qi, wil, p, pb, pc,
-				f);
+		QuestFishingMeadow questFishingMeadow = new QuestFishingMeadow(il, tp, tz, b, uoe, aiql, t, qi, wil, p, f);
 		return questFishingMeadow;
 	}
 
@@ -152,21 +126,9 @@ public class QuestManager {
 		String qi = "questInfo";
 		String wil = "Du kommst an einen Fluss, in dem es vor Fischen nur so wimmelt. <br> Wenn du einen fängst, würde das ein brächtiges Abendesen abgeben!";
 
-		ArrayList<String> p = new ArrayList<String>();
-		String p1 = "Mit einem Angel fischen";
-		p.add(p1);
-		String p2 = "Mit einer Speer fischen";
-		p.add(p2);
-		ArrayList<String> pb = new ArrayList<String>();
-		String pb1 = "Angeln";
-		pb.add(pb1);
-		String pb2 = "Speerfischen";
-		pb.add(pb2);
-		ArrayList<Integer> pc = new ArrayList<Integer>();
-		int pc1 = -1; // possibilitiesChance01
-		pc.add(pc1);
-		int pc2 = -1; // possibilitiesChance01
-		pc.add(pc2);
+		ArrayList<Possibility> p = new ArrayList<Possibility>();
+		Possibility p1 = new Possibility("Angeln", "Mit einem Angel fischen", -1);
+		Possibility p2 = new Possibility("Speerfischen", "Mit einer Speer fischen", -1);
 
 		ArrayList<Flag> f = new ArrayList<Flag>();
 		Flag f0 = new Flag("fishing");
@@ -174,7 +136,7 @@ public class QuestManager {
 		f.add(f0);
 		f.add(f1);
 
-		QuestFishingSwamp questFishingSwamp = new QuestFishingSwamp(il, tp, tz, b, uoe, aiql, t, qi, wil, p, pb, pc, f);
+		QuestFishingSwamp questFishingSwamp = new QuestFishingSwamp(il, tp, tz, b, uoe, aiql, t, qi, wil, p, f);
 		return questFishingSwamp;
 	}
 
@@ -191,15 +153,8 @@ public class QuestManager {
 		String qi = "Du triffst auf Theodoras, er bereut es ein altes Familienerbstück an einen Händler verkauft zu haben. Er bittet dich um Hilfe und sagt, dass der Händler Richtung Osten gezogen ist.";
 		String wil = "Theodoras: \"Hilf mir ich habe das Amulett meiner Mutter verkauft aber es war ein großer Fehler. Der händler ist Richtung Osten gegangen, bitte hole es zurück, es bedeutet mir Alles!\"";
 
-		ArrayList<String> p = new ArrayList<String>();
-		String p1 = "Alles klar, ich werde sehen was ich tun kann!";
-		p.add(p1);
-		ArrayList<String> pb = new ArrayList<String>();
-		String pb1 = "Bin Unterwegs!";
-		pb.add(pb1);
-		ArrayList<Integer> pc = new ArrayList<Integer>();
-		int pc1 = -1;
-		pc.add(pc1);
+		ArrayList<Possibility> p = new ArrayList<Possibility>();
+		Possibility p1 = new Possibility("Bin Unterwegs!", "Alles klar, ich werde sehen was ich tun kann!", -1);
 
 		ArrayList<Flag> f = new ArrayList<Flag>();
 		Flag f0 = new Flag("start");
@@ -214,7 +169,7 @@ public class QuestManager {
 		f.add(f4);
 
 		QuestPoorTraderTrigger questPoorTraderTrigger = new QuestPoorTraderTrigger(il, tp, tz, b, uoe, aiql, t, qi, wil,
-				p, pb, pc, f);
+				p, f);
 		return questPoorTraderTrigger;
 	}
 

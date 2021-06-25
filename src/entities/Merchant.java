@@ -7,12 +7,10 @@ import utilities.Inventory;
 
 public class Merchant extends NPC {
 
-	private Inventory inventory;
 	private String type;
 
 	public Merchant(String name, String prefix, String biom, String type, int size) {
 		super(name, prefix, biom);
-		inventory = new Inventory();
 		this.type = type;
 
 		Random Randy = new Random();

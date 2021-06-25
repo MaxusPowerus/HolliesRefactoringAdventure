@@ -8,6 +8,7 @@ import basic.GameManager;
 import entities.Player;
 import gui.GraphicalButton;
 import gui.PlayerInfoPanel;
+import gui.actions.InventoryShowAction;
 
 public class QuestButton extends GraphicalButton implements ActionListener {
 
@@ -53,6 +54,9 @@ public class QuestButton extends GraphicalButton implements ActionListener {
 		}
 
 		PlayerInfoPanel.update();
+		if (this.gameManager.getGuiManager().getMain().getLeftPanelHeadline().getText().contains("Inventar")) {
+			new InventoryShowAction(this.gameManager, this.gameManager.getPlayer().getInventory()).updateView();
+		}
 		this.gameManager.update();
 	}
 }

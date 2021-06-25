@@ -18,10 +18,9 @@ public class QuestFishingSwamp extends Quest {
 
 	public QuestFishingSwamp(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
 			boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
-			ArrayList<String> possibilities, ArrayList<String> possibilitiesButtonlabels,
-			ArrayList<Integer> possibilitiesChances, ArrayList<Flag> flags) {
+			ArrayList<Possibility> possibilities, ArrayList<Flag> flags) {
 		super(instanceLimit, targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo,
-				worldInfoLine, possibilities, possibilitiesButtonlabels, possibilitiesChances, flags);
+				worldInfoLine, possibilities, flags);
 		Random Randy = new Random();
 		limit = Randy.nextInt(5);
 		fish = GameManager.getInstance().getResourceManager().getItemByUniqueName("Fish");

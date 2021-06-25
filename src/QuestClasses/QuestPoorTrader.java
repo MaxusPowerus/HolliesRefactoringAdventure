@@ -15,10 +15,9 @@ import utilities.Skill;
 public class QuestPoorTrader extends Quest {
 	public QuestPoorTrader(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
 			boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
-			ArrayList<String> possibilities, ArrayList<String> possibilitiesButtonlabels,
-			ArrayList<Integer> possibilitiesChances, ArrayList<Flag> flags) {
+			ArrayList<Possibility> possibilities, ArrayList<Flag> flags) {
 		super(instanceLimit, targetPoint, targetZone, biom, updateOnEnter, appearsInQuestLog, title, questInfo,
-				worldInfoLine, possibilities, possibilitiesButtonlabels, possibilitiesChances, flags);
+				worldInfoLine, possibilities, flags);
 
 	}
 
@@ -59,9 +58,10 @@ public class QuestPoorTrader extends Quest {
 				super.setFinished(true);
 
 			} else if (attempt.equals(getPossibilitiesButtonlabels().get(1))) {
-				// TODO
-				Merchant merchant = new Merchant("Händler", "den", "Wiese", "HändlerTheodoras", 3);
 				Inventory inv = new Inventory();
+				inv.add(GameManager.getInstance().getResourceManager().getItemByUniqueName("TheodorasAmulet"));
+				Merchant merchant = new Merchant("Händler", "den", "Wiese", "HändlerTheodoras", 3);
+				merchant.setInventory(inv);
 				new InventoryShowAction(GameManager.getInstance(), inv, "Händler", merchant).initBuy();
 				if (super.basicUseItem(player, "TheodorasAmulet")) {
 					GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
@@ -97,7 +97,7 @@ public class QuestPoorTrader extends Quest {
 					GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
 							.setNewFlag("failure");
 					super.setQuestInfo(
-							"Da warst du wohl zu übermütig, der Händler zhebt seine Fäuste und weiß damit umzugehen...du kannst froh sein das du noch lebest! Sag Theodoras bescheid!");
+							"Da warst du wohl zu übermütig, der Händler hebt seine Fäuste und weiß damit umzugehen...du kannst froh sein das du noch lebest! Sag Theodoras bescheid!");
 					super.setWorldInfoLine(
 							"Händler: \"Ich hoffe das wird dir eine Lehere sein, dass dich Gewalt im Leben nicht weiter bringt, Kleine!\"");
 					player.setHealth(player.getHealth() - 30);

@@ -56,20 +56,20 @@ public class NPC {
 		return biom;
 	}
 
-	public void setInventory(Inventory inventory) {
-		this.inventory = inventory;
-	}
-
-	public Inventory getInventory() {
-		return inventory;
-	}
-
 	public boolean isDiscovered() {
 		return discovered;
 	}
 
 	public void setDiscovered(boolean discovered) {
 		this.discovered = discovered;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
+
+	public Inventory getInventory() {
+		return inventory;
 	}
 
 	@Override

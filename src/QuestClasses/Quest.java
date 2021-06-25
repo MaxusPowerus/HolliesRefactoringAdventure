@@ -32,17 +32,14 @@ public abstract class Quest {
 	private String WorldInfoLine;
 
 	// get this Lonz!======================================
-	private ArrayList<String> possibilities;
-	private ArrayList<String> possibilitiesButtonlabels;
-	private ArrayList<Integer> possibilitiesChances;
+	ArrayList<Possibility> possibilities;
 	// ===================================================
 
 	private ArrayList<Flag> flags;
 
 	public Quest(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
 			boolean updateOnEnter, boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
-			ArrayList<String> possibilities, ArrayList<String> possibilitiesButtonlabels,
-			ArrayList<Integer> possibilitiesChances, ArrayList<Flag> flags) {
+			ArrayList<Possibility> possibilities, ArrayList<Flag> flags) {
 		super();
 		this.active = false;
 		this.finished = false;
@@ -55,8 +52,6 @@ public abstract class Quest {
 		this.questInfo = questInfo;
 		WorldInfoLine = worldInfoLine;
 		this.possibilities = possibilities;
-		this.possibilitiesButtonlabels = possibilitiesButtonlabels;
-		this.possibilitiesChances = possibilitiesChances;
 		this.flags = flags;
 		this.instanceLimit--;
 	}
@@ -72,7 +67,7 @@ public abstract class Quest {
 
 	public void setQuest(int instanceLimit, Coordinate targetPoint, ArrayList<Coordinate> targetZone, Biom biom,
 			boolean appearsInQuestLog, String title, String questInfo, String worldInfoLine,
-			ArrayList<String> possibilities, ArrayList<String> possibilitiesButtonlabels, ArrayList<Flag> flags) {
+			ArrayList<Possibility> possibilities, ArrayList<Flag> flags) {
 
 		this.active = false;
 		this.finished = false;
@@ -84,7 +79,6 @@ public abstract class Quest {
 		this.questInfo = questInfo;
 		WorldInfoLine = worldInfoLine;
 		this.possibilities = possibilities;
-		this.possibilitiesButtonlabels = possibilitiesButtonlabels;
 		this.flags = flags;
 		this.instanceLimit--;
 	}
@@ -103,8 +97,6 @@ public abstract class Quest {
 
 	public void clearPossibilities() {
 		this.possibilities.clear();
-		this.possibilitiesButtonlabels.clear();
-		this.possibilitiesChances.clear();
 	}
 
 	public boolean useSkill(Player player, Skill skill) {
@@ -260,28 +252,62 @@ public abstract class Quest {
 		WorldInfoLine = worldInfoLine;
 	}
 
+	/*
+	 * public ArrayList<Possibility> getPossibilities() { return possibilities; }
+	 * 
+	 * public void setPossibilities(ArrayList<Possibility> possibilities) {
+	 * this.possibilities = possibilities; }
+	 */
+
+	// Lösche mich
 	public ArrayList<String> getPossibilities() {
-		return possibilities;
+		ArrayList<String> p = new ArrayList<String>();
+		for (int i = 0; i < this.possibilities.size(); i++) {
+			p.add(this.possibilities.get(i).getLine());
+		}
+		return p;
 	}
 
+	// Lösche mich
 	public void setPossibilities(ArrayList<String> possibilities) {
-		this.possibilities = possibilities;
+		ArrayList<String> p = new ArrayList<String>();
+		for (int i = 0; i < possibilities.size(); i++) {
+			this.possibilities.get(i).setLine(possibilities.get(i));
+		}
 	}
 
+	// Lösche mich
 	public ArrayList<String> getPossibilitiesButtonlabels() {
-		return possibilitiesButtonlabels;
+		ArrayList<String> pbl = new ArrayList<String>();
+		for (int i = 0; i < this.possibilities.size(); i++) {
+			pbl.add(this.possibilities.get(i).getButtonLabel());
+			System.out.println(pbl.get(i));
+		}
+
+		return pbl;
 	}
 
+	// Lösche mich
 	public void setPossibilitiesButtonlabels(ArrayList<String> possibilitiesButtonlabels) {
-		this.possibilitiesButtonlabels = possibilitiesButtonlabels;
+		for (int i = 0; i < this.possibilities.size(); i++) {
+			this.possibilities.get(i).setButtonLabel(possibilitiesButtonlabels.get(i));
+		}
 	}
 
+	// Lösche mich
 	public ArrayList<Integer> getPossibilitiesChances() {
-		return possibilitiesChances;
+		ArrayList<Integer> pc = new ArrayList<Integer>();
+		for (int i = 0; i < this.possibilities.size(); i++) {
+			pc.add(this.possibilities.get(i).getChance());
+		}
+		return pc;
 	}
 
+	// Lösche mich
 	public void setPossibilitiesChances(ArrayList<Integer> possibilitiesChances) {
-		this.possibilitiesChances = possibilitiesChances;
+		for (int i = 0; i < possibilities.size(); i++) {
+			this.possibilities.get(i).setChance(possibilitiesChances.get(i));
+		}
 	}
 
 	public ArrayList<Flag> getFlags() {
@@ -291,5 +317,4 @@ public abstract class Quest {
 	public void setFlags(ArrayList<Flag> flags) {
 		this.flags = flags;
 	}
-
 }
