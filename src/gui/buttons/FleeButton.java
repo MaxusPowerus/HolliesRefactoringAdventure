@@ -31,8 +31,7 @@ public class FleeButton extends GraphicalButton implements ActionListener {
 
 		boolean fleeSucced = this.player.flee((Enemy) this.challenge.getNpc());
 		if (fleeSucced) {
-			this.gameManager.getGuiManager().getMain().addFieldInfo(
-					"Du rennst vor <b>" + this.challenge.getNpc().toString() + "</b> davon. Es gelingt dir!");
+			this.gameManager.getGuiManager().getMain().addFieldInfo("Du rennst davon. Es gelingt dir!");
 
 			this.gameManager.getGuiManager().getMain().getActionButtonPanel().removeAll();
 		} else {

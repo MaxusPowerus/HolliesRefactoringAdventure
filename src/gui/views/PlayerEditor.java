@@ -67,7 +67,7 @@ public class PlayerEditor extends JPanel {
 
 		JLabel title = new JLabel("Hollies Adventure", SwingConstants.CENTER);
 
-		title.setFont(new Font(GUIManager.getCustomFont().getFamily(), Font.PLAIN, 50));
+		title.setFont(new Font(GUIManager.getCustomFont().getFamily(), Font.PLAIN, 70));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
 				gl_panel.createSequentialGroup().addGap(42).addGroup(gl_panel

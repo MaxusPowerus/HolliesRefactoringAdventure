@@ -5,10 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.font.TextAttribute;
-import java.util.Map;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -34,7 +31,7 @@ public class InventoryItemHover implements MouseListener {
 	private JPanel itemPanel;
 	private GameManager gameManager;
 	private Item item;
-	boolean buy;
+	private boolean buy;
 
 	public InventoryItemHover(JPanel itemPanel, GameManager gameManager, Item item, boolean buy) {
 		this.itemPanel = itemPanel;
@@ -55,10 +52,9 @@ public class InventoryItemHover implements MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-
+		this.mouseExited(e);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		this.gameManager.getGuiManager().getMain().getLeftInfoContentPanel().removeAll();
@@ -96,13 +92,7 @@ public class InventoryItemHover implements MouseListener {
 
 		JLabel name = new JLabel(item.getName());
 		name.setForeground(Color.WHITE);
-
-		Font headlineFont = new Font("Dialog", Font.BOLD, 16);
-		Map headlineAttributes = headlineFont.getAttributes();
-		headlineAttributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-		name.setFont(headlineFont.deriveFont(headlineAttributes));
-//		name.setForeground(Color.decode("#A33E3C"));
-		name.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+		name.setFont(new Font(this.gameManager.getGuiManager().getCustomFont().getFamily(), Font.PLAIN, 40));
 		itemInfoPanel.add(name);
 
 		if (buy) {
@@ -116,7 +106,18 @@ public class InventoryItemHover implements MouseListener {
 			itemInfoPanel.add(hasAmount);
 		}
 
-		JLabel value = new JLabel("<html><b>Wert:</b> " + item.getValue() + " Gold</html>");
+		JLabel value = new JLabel("<html><b>Wert:</b> " + item.getValue() + " Gold");
+		if (item.getValue() != item.getSpecificBuyValue(GameManager.getInstance().getPlayer())) {
+			int diff = item.getValue() - item.getSpecificBuyValue(GameManager.getInstance().getPlayer());
+			if (buy) {
+				value.setText(
+						value.getText() + " (" + (diff > 0 ? "-" : "+") + " " + Math.abs(diff) + " durch Charisma)");
+			} else {
+				value.setText(
+						value.getText() + " (" + (diff < 0 ? "-" : "+") + " " + Math.abs(diff) + " durch Charisma)");
+			}
+		}
+		value.setText(value.getText() + "</html>");
 		value.setForeground(Color.decode("#FFD700"));
 		value.setFont(new Font("Dialog", Font.PLAIN, 14));
 		itemInfoPanel.add(value);

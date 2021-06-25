@@ -10,7 +10,7 @@
     "in":2,
     "ag":3,
     "lk":5,
-    "biom":"meadow",
+    "biom":"all",
     "xp":5,
     "lootTable":"basicEnemy"
   },
@@ -27,6 +27,21 @@
     "lk":3,
     "biom":"meadow",
     "xp":5,
+    "lootTable":"basicEnemy"
+  },
+  "Rabbit":{
+    "label":"Reh",
+    "prefix":"ein",
+    "health":30,
+    "st":5,
+    "pe":6,
+    "en":4,
+    "ch":9,
+    "in":3,
+    "ag":9,
+    "lk":2,
+    "biom":"forest",
+    "xp":20,
     "lootTable":"basicEnemy"
   }
 }

@@ -1,5 +1,7 @@
 package utilities;
 
+import basic.GameManager;
+
 public class Experience {
 	private int level;
 	private int xp;
@@ -23,12 +25,16 @@ public class Experience {
 		return xp;
 	}
 
-	public void setXp(int xp) {
-		this.xp = xp;
+	public void addXp(int xp) {
+		this.addXp(xp, true);
 	}
 
-	public void addXp(int xp) {
+	public void addXp(int xp, boolean showHint) {
 		this.xp += xp;
+
+		if (showHint)
+			GameManager.getInstance().addHint("+ " + xp + " XP");
+
 		update();
 	}
 
@@ -46,7 +52,8 @@ public class Experience {
 	}
 
 	public void levelUp() {
-
+		GameManager.getInstance().addHint("LEVEL UP // TODO");
+		// TODO
 	}
 
 }

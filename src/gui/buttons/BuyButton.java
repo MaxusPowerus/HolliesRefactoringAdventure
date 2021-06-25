@@ -34,7 +34,7 @@ public class BuyButton extends GraphicalButton implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		this.gameManager.getGuiManager().getMain().setNavigationEnabled(false);
 		new InventoryShowAction(this.gameManager, ((Merchant) challenge.getNpc()).getInventory(),
-				"Items kaufen: Inventar des Händlers", (Merchant) this.challenge.getNpc()).initBuy();
+				"Items kaufen: Inventar des Händlers", (Merchant) this.challenge.getNpc(), false).initBuy();
 
 		JButton stopHandling = new GraphicalButton("Handel beenden");
 		stopHandling.addActionListener(new ActionListener() {
@@ -42,9 +42,6 @@ public class BuyButton extends GraphicalButton implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new MapShowAction().initialize();
-
-				gameManager.getGuiManager().getMain()
-						.addFieldInfo("Du hast den Handel mit <b>" + challenge.getNpc().getName() + "</b> beendet");
 
 				gameManager.getGuiManager().getMain().getActionButtonPanel().removeAll();
 

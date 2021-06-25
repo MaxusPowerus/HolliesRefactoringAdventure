@@ -382,7 +382,7 @@ public class ResourceManager {
 	private void loadVictims() {
 		try {
 
-			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Npc/Enemy.json"));
+			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Npc/Victims.json"));
 			JSONParser parser = new JSONParser();
 			JSONObject jsonNPCs = (JSONObject) parser.parse(fileReader);
 
