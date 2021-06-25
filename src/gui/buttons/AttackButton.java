@@ -44,8 +44,6 @@ public class AttackButton extends GraphicalButton implements ActionListener {
 			this.gameManager.getGuiManager().getMain().getActionButtonPanel().add(lootButton);
 
 			double healthAfterFight = this.player.getHealth();
-			this.gameManager.getGuiManager().getMain().addFieldInfo("Im Kampf hast du <b>"
-					+ Math.abs((int) healthBeforeFight - healthAfterFight) + " Lebenspunkte</b> verloren");
 
 		} else {
 			this.gameManager.endGame();

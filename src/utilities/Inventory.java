@@ -26,11 +26,18 @@ public class Inventory {
 	}
 
 	public void add(Item item) {
+		this.add(item, false);
+	}
+
+	public void add(Item item, boolean showHint) {
 		Item itemInInv = this.getItem(item);
 		if (itemInInv != null) {
 			itemInInv.incrementCount();
 			return;
 		}
+
+		if (showHint)
+			GameManager.getInstance().addHint("+ " + item.getCount() + "x " + item.getName());
 
 		items.add(item.clone());
 	}
@@ -41,28 +48,47 @@ public class Inventory {
 	}
 
 	public void add(Inventory inventory) {
+		this.add(inventory, false);
+	}
+
+	public void add(Inventory inventory, boolean showHint) {
 		ArrayList<Item> items = inventory.getAllItems();
-		this.add(items, inventory.getGold());
+		this.add(items, inventory.getGold(), showHint);
 	}
 
 	public void add(ArrayList<Item> items, int gold) {
+		this.add(items, gold, false);
+	}
+
+	public void add(ArrayList<Item> items, int gold, boolean showHint) {
 		this.gold += gold;
 		for (int i = 0; i < items.size(); i++) {
-			this.add(items.get(i));
+			this.add(items.get(i), showHint);
 		}
 	}
 
 	public void add(LootTable lootTable) {
-		this.add(lootTable.getItems(), lootTable.getGold());
+		this.add(lootTable, false);
+	}
+
+	public void add(LootTable lootTable, boolean showHint) {
+		this.add(lootTable.getItems(), lootTable.getGold(), showHint);
 	}
 
 	public void remove(Item item) {
+		this.remove(item, false);
+	}
+
+	public void remove(Item item, boolean showHint) {
 		Item itemInInv = this.getItem(item);
+		int count = itemInInv.getCount();
 		itemInInv.decrementCount();
 		if (itemInInv.getCount() == 0) {
 			items.remove(itemInInv);
 		}
 
+		if (showHint)
+			GameManager.getInstance().addHint("- " + count + "x " + item.getName());
 	}
 
 	public Item getItem(Item item) {
@@ -174,13 +200,23 @@ public class Inventory {
 	}
 
 	public void addGold(int gold) {
+		this.addGold(gold, false);
+	}
+
+	public void addGold(int gold, boolean showHint) {
 		this.gold += gold;
-		GameManager.getInstance().addHint("+ " + gold + " Gold");
+		if (showHint)
+			GameManager.getInstance().addHint("+ " + gold + " Gold");
 	}
 
 	public void removeGold(int gold) {
+		this.removeGold(gold, false);
+	}
+
+	public void removeGold(int gold, boolean showHint) {
 		this.gold -= gold;
-		GameManager.getInstance().addHint("- " + gold + " Gold");
+		if (showHint)
+			GameManager.getInstance().addHint("- " + gold + " Gold");
 	}
 
 	public String getSelectedCategory() {

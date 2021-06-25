@@ -34,18 +34,11 @@ public class LootButton extends GraphicalButton implements ActionListener {
 
 		String itemsString = this.inventory.stringifyItems();
 
-		this.gameManager.getPlayer().getInventory().add(this.inventory);
+		this.gameManager.getPlayer().getInventory().add(this.inventory, true);
 
 		int itemCount = this.inventory.getAllItems().size();
-		if (itemCount > 0) {
-			gameManager.getGuiManager().getMain()
-					.addFieldInfo("Du hast folgende Items eingesammelt: <b>" + itemsString + "</b>");
-		}
 
 		int gold = this.inventory.getGold();
-		if (gold > 0) {
-			gameManager.getGuiManager().getMain().addFieldInfo("Du hast <b>" + gold + " Gold</b> gefunden");
-		}
 
 		if (itemCount == 0 && gold == 0) {
 			gameManager.getGuiManager().getMain()

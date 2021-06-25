@@ -70,7 +70,7 @@ public class Player {
 		inventory.add(speer);
 		inventory.add(angel);
 
-		inventory.addGold(50);
+		inventory.addGold(50, true);
 
 		this.equip(startWeapon);
 		this.equip(startOutfit);
@@ -87,8 +87,23 @@ public class Player {
 	}
 
 	public void setHealth(double health) {
+		this.setHealth(health, false);
+	}
+
+	public void setHealth(double health, boolean showHint) {
 		if (health > 100)
 			health = 100;
+
+		if (showHint) {
+			if (this.health > health) {
+				if (showHint)
+					GameManager.getInstance().addHint("- " + Math.abs((int) this.health - health) + " HP");
+			} else if (this.health < health) {
+				if (showHint)
+					GameManager.getInstance().addHint("+ " + Math.abs((int) health) + " HP");
+			}
+		}
+
 		this.health = health;
 	}
 
@@ -253,7 +268,7 @@ public class Player {
 
 			// Enemy ist am Zug
 			if (Randy.nextInt(threshold) <= enemy.getSkillSet().getSkillValue(Skill.LUCK)) {
-				this.health -= enemyDmg * dmgFacEnemy;
+				this.setHealth(this.health - (enemyDmg * dmgFacEnemy), true);
 			}
 			if (this.health <= 0) {
 				break;
@@ -263,7 +278,7 @@ public class Player {
 			round++;
 		}
 		if (health > 0) {
-			this.experience.addXp(enemy.getXp());
+			this.experience.addXp(enemy.getXp(), true);
 			return true;
 		} else {
 			return false;

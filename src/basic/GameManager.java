@@ -257,7 +257,7 @@ public class GameManager {
 	}
 
 	public void addHint(String hint) {
-		this.addHint(hint, Color.WHITE);
+		this.addHint(hint, null);
 	}
 
 	public ArrayList<JLabel> getHints() {
@@ -266,7 +266,15 @@ public class GameManager {
 
 	public void addHint(String hint, Color color) {
 		JLabel label = new JLabel(hint);
-		label.setForeground(color);
+
+		if (hint.substring(0, 1).equals("-") && color == null) {
+			color = Color.RED;
+		} else if (hint.substring(0, 1).equals("+") && color == null) {
+			color = Color.GREEN;
+		}
+
+		if (color != null)
+			label.setForeground(color);
 		this.hints.add(label);
 	}
 

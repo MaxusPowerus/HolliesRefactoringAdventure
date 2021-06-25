@@ -380,12 +380,6 @@ public class Main extends JLabel {
 		gl_invPanel
 				.setVerticalGroup(gl_invPanel.createParallelGroup(Alignment.LEADING).addGap(0, 537, Short.MAX_VALUE));
 		inventoryPanel.setLayout(gl_invPanel);
-
-		hintPanel = new JPanel();
-		hintPanel.setBounds(getWidth() - 150, getHeight() - 100, 150, 100);
-		hintPanel.setBackground(new Color(0, 0, 0, 0));
-		this.add(hintPanel);
-		hintPanel.setLayout(null);
 		leftMainPanel.setLayout(gl_leftMainPanel);
 
 		playerInfoHeadline = new JLabel("Das ist Holly. Holly ist spielsüchtig.") {
@@ -610,6 +604,12 @@ public class Main extends JLabel {
 		playerInfoPanel.setLayout(gl_playerInfoPanel);
 		setLayout(groupLayout);
 
+		hintPanel = new JPanel();
+		hintPanel.setBounds(getWidth() - 150, getHeight() - 100, 150, 100);
+		hintPanel.setBackground(new Color(0, 0, 0, 0));
+		this.add(hintPanel);
+		hintPanel.setLayout(null);
+
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
 			@Override
@@ -617,6 +617,7 @@ public class Main extends JLabel {
 				updateHintPanel();
 			}
 		};
+//		GameManager.getInstance().getHints().clear();
 		timer.schedule(task, 0L, 1000L);
 	}
 
@@ -795,12 +796,27 @@ public class Main extends JLabel {
 	private void updateHintPanel() {
 		if (GameManager.getInstance().getHints().size() > 0) {
 			this.hintPanel.setBackground(new Color(0, 0, 0, 0.4f));
-
 			this.hintPanel.removeAll();
-			this.hintPanel.add(GameManager.getInstance().getHints().remove(0));
+
+			int max = 3;
+			if (GameManager.getInstance().getHints().size() < max) {
+				max = GameManager.getInstance().getHints().size();
+			}
+
+			int y = 10;
+			for (int i = 0; i < max; i++) {
+				JLabel element = GameManager.getInstance().getHints().get(i);
+				element.setBounds(10, y, 150, 20);
+				y += 18;
+				this.hintPanel.add(element);
+			}
+			GameManager.getInstance().getHints().remove(0);
+			GameManager.getInstance().update();
 
 		} else {
+			this.hintPanel.removeAll();
 			this.hintPanel.setBackground(new Color(0, 0, 0, 0));
+			GameManager.getInstance().update();
 		}
 	}
 
