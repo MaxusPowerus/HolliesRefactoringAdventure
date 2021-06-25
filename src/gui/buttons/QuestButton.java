@@ -3,6 +3,7 @@ package gui.buttons;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import QuestClasses.Possibility;
 import QuestClasses.Quest;
 import basic.GameManager;
 import entities.Player;
@@ -15,21 +16,17 @@ public class QuestButton extends GraphicalButton implements ActionListener {
 	private Quest quest;
 	private Player player;
 	private GameManager gameManager;
-	private String label;
-	private int possibility;
-	private String possibilityString;
+	private Possibility possibility;
 
-	public QuestButton(Quest quest, Player player, GameManager gameManager, String label, int possibility,
-			String possibilityString) {
+	public QuestButton(Quest quest, Player player, GameManager gameManager, Possibility possibility) {
 		this.quest = quest;
 		this.player = player;
 		this.gameManager = gameManager;
-		this.label = label;
 		this.possibility = possibility;
-		this.possibilityString = possibilityString;
 
-		this.setText(label);
-		if (possibility != -1) {
+		String possibilityString = possibility.getLine();
+		this.setText(possibility.getButtonLabel());
+		if (possibility.getChance() != -1) {
 			possibilityString += " (Wahrscheinlichkeit: " + possibility + ")";
 		}
 		this.setToolTipText(possibilityString);
@@ -40,7 +37,7 @@ public class QuestButton extends GraphicalButton implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		this.setEnabled(false);
 
-		this.quest.update(this.label, this.player);
+		this.quest.update(this.possibility.getButtonLabel(), this.player);
 
 		this.gameManager.getGuiManager().getMain().addFieldInfo(quest.getWorldInfoLine());
 
@@ -48,7 +45,6 @@ public class QuestButton extends GraphicalButton implements ActionListener {
 
 		for (int i = 0; i < quest.getPossibilities().size(); i++) {
 			QuestButton questButton = new QuestButton(this.quest, player, this.gameManager,
-					quest.getPossibilitiesButtonlabels().get(i), quest.getPossibilitiesChances().get(i),
 					quest.getPossibilities().get(i));
 			this.gameManager.getGuiManager().getMain().getActionButtonPanel().add(questButton);
 		}

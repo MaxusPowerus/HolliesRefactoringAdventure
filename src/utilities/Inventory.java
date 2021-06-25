@@ -3,6 +3,7 @@ package utilities;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import basic.GameManager;
 import items.Food;
 import items.Item;
 import items.LootTable;
@@ -174,10 +175,12 @@ public class Inventory {
 
 	public void addGold(int gold) {
 		this.gold += gold;
+		GameManager.getInstance().addHint("+ " + gold + " Gold");
 	}
 
 	public void removeGold(int gold) {
 		this.gold -= gold;
+		GameManager.getInstance().addHint("- " + gold + " Gold");
 	}
 
 	public String getSelectedCategory() {

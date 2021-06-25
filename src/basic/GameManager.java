@@ -5,9 +5,11 @@ import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import QuestClasses.Quest;
@@ -46,11 +48,13 @@ public class GameManager {
 	private JPanel backgroundImage;
 	private boolean fullscreen;
 	private boolean playerEditor;
+	private ArrayList<JLabel> hints;
 
 	public GameManager(boolean fullscreen, boolean playerEditor) {
 		instance = this;
 		this.fullscreen = fullscreen;
 		this.playerEditor = playerEditor;
+		this.hints = new ArrayList<JLabel>();
 		this.prepareGame();
 	}
 
@@ -207,9 +211,7 @@ public class GameManager {
 			this.getGuiManager().getMain().addFieldInfo(quest.getWorldInfoLine());
 
 			for (int i = 0; i < quest.getPossibilities().size(); i++) {
-				QuestButton questButton = new QuestButton(quest, player, this,
-						quest.getPossibilitiesButtonlabels().get(i), quest.getPossibilitiesChances().get(i),
-						quest.getPossibilities().get(i));
+				QuestButton questButton = new QuestButton(quest, player, this, quest.getPossibilities().get(i));
 				this.guiManager.getMain().getActionButtonPanel().add(questButton);
 			}
 		} else {
@@ -252,6 +254,20 @@ public class GameManager {
 
 	public Map getMainMap() {
 		return mainMap;
+	}
+
+	public void addHint(String hint) {
+		this.addHint(hint, Color.WHITE);
+	}
+
+	public ArrayList<JLabel> getHints() {
+		return hints;
+	}
+
+	public void addHint(String hint, Color color) {
+		JLabel label = new JLabel(hint);
+		label.setForeground(color);
+		this.hints.add(label);
 	}
 
 }

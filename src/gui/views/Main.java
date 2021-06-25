@@ -11,7 +11,8 @@ import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -87,11 +88,9 @@ public class Main extends JLabel {
 	private BackgroundImagePanel compassBackgroundPanel;
 	private JLabel playerInfoHeadline;
 	private JPanel hintPanel;
-	private ArrayList<String> hints;
 
 	public Main() {
 
-		this.hints = new ArrayList<String>();
 		setBounds(0, 0, Config.WINDOW_WIDTH - 10, Config.WINDOW_HEIGHT - 10);
 
 		leftMainPanel = new JPanel() {
@@ -384,7 +383,7 @@ public class Main extends JLabel {
 
 		hintPanel = new JPanel();
 		hintPanel.setBounds(getWidth() - 150, getHeight() - 100, 150, 100);
-		hintPanel.setBackground(new Color(0, 0, 0, 0.4f));
+		hintPanel.setBackground(new Color(0, 0, 0, 0));
 		this.add(hintPanel);
 		hintPanel.setLayout(null);
 		leftMainPanel.setLayout(gl_leftMainPanel);
@@ -610,6 +609,15 @@ public class Main extends JLabel {
 		playerBarPanelFirstLine.setLayout(gl_playerBarPanelFirstLine);
 		playerInfoPanel.setLayout(gl_playerInfoPanel);
 		setLayout(groupLayout);
+
+		Timer timer = new Timer();
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+				updateHintPanel();
+			}
+		};
+		timer.schedule(task, 0L, 1000L);
 	}
 
 	public JLabel getHealthLabel() {
@@ -784,8 +792,16 @@ public class Main extends JLabel {
 		GameManager.getInstance().update();
 	}
 
-	public void addHint(String hint) {
+	private void updateHintPanel() {
+		if (GameManager.getInstance().getHints().size() > 0) {
+			this.hintPanel.setBackground(new Color(0, 0, 0, 0.4f));
 
+			this.hintPanel.removeAll();
+			this.hintPanel.add(GameManager.getInstance().getHints().remove(0));
+
+		} else {
+			this.hintPanel.setBackground(new Color(0, 0, 0, 0));
+		}
 	}
 
 	@Override

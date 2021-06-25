@@ -252,62 +252,12 @@ public abstract class Quest {
 		WorldInfoLine = worldInfoLine;
 	}
 
-	/*
-	 * public ArrayList<Possibility> getPossibilities() { return possibilities; }
-	 * 
-	 * public void setPossibilities(ArrayList<Possibility> possibilities) {
-	 * this.possibilities = possibilities; }
-	 */
-
-	// Lösche mich
-	public ArrayList<String> getPossibilities() {
-		ArrayList<String> p = new ArrayList<String>();
-		for (int i = 0; i < this.possibilities.size(); i++) {
-			p.add(this.possibilities.get(i).getLine());
-		}
-		return p;
+	public ArrayList<Possibility> getPossibilities() {
+		return possibilities;
 	}
 
-	// Lösche mich
-	public void setPossibilities(ArrayList<String> possibilities) {
-		ArrayList<String> p = new ArrayList<String>();
-		for (int i = 0; i < possibilities.size(); i++) {
-			this.possibilities.get(i).setLine(possibilities.get(i));
-		}
-	}
-
-	// Lösche mich
-	public ArrayList<String> getPossibilitiesButtonlabels() {
-		ArrayList<String> pbl = new ArrayList<String>();
-		for (int i = 0; i < this.possibilities.size(); i++) {
-			pbl.add(this.possibilities.get(i).getButtonLabel());
-			System.out.println(pbl.get(i));
-		}
-
-		return pbl;
-	}
-
-	// Lösche mich
-	public void setPossibilitiesButtonlabels(ArrayList<String> possibilitiesButtonlabels) {
-		for (int i = 0; i < this.possibilities.size(); i++) {
-			this.possibilities.get(i).setButtonLabel(possibilitiesButtonlabels.get(i));
-		}
-	}
-
-	// Lösche mich
-	public ArrayList<Integer> getPossibilitiesChances() {
-		ArrayList<Integer> pc = new ArrayList<Integer>();
-		for (int i = 0; i < this.possibilities.size(); i++) {
-			pc.add(this.possibilities.get(i).getChance());
-		}
-		return pc;
-	}
-
-	// Lösche mich
-	public void setPossibilitiesChances(ArrayList<Integer> possibilitiesChances) {
-		for (int i = 0; i < possibilities.size(); i++) {
-			this.possibilities.get(i).setChance(possibilitiesChances.get(i));
-		}
+	public void setPossibilities(ArrayList<Possibility> possibilities) {
+		this.possibilities = possibilities;
 	}
 
 	public ArrayList<Flag> getFlags() {
