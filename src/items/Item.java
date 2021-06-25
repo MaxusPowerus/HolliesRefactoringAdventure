@@ -106,6 +106,10 @@ public class Item {
 					((Outfit) this).getOutfitFx());
 		} else if (this instanceof Other) {
 			item = new Other(uniqueName, name, ((Other) this).getInfo(), this.value, this.getSpawnChance());
+		} else if (this instanceof QuestItem) {
+			item = new QuestItem(uniqueName, name, ((QuestItem) this).getInfo(), value, this.getSpawnChance());
+		} else if (this instanceof Note) {
+			item = new Note(uniqueName, name, ((Note) this).getText(), value, this.getSpawnChance());
 		} else {
 			item = new Item(this.uniqueName, this.name, this.value, this.getSpawnChance());
 		}

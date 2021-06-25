@@ -11,6 +11,7 @@ import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -85,9 +86,12 @@ public class Main extends JLabel {
 	private JPanel backgroundImagePanel;
 	private BackgroundImagePanel compassBackgroundPanel;
 	private JLabel playerInfoHeadline;
+	private JPanel hintPanel;
+	private ArrayList<String> hints;
 
 	public Main() {
 
+		this.hints = new ArrayList<String>();
 		setBounds(0, 0, Config.WINDOW_WIDTH - 10, Config.WINDOW_HEIGHT - 10);
 
 		leftMainPanel = new JPanel() {
@@ -377,6 +381,12 @@ public class Main extends JLabel {
 		gl_invPanel
 				.setVerticalGroup(gl_invPanel.createParallelGroup(Alignment.LEADING).addGap(0, 537, Short.MAX_VALUE));
 		inventoryPanel.setLayout(gl_invPanel);
+
+		hintPanel = new JPanel();
+		hintPanel.setBounds(getWidth() - 150, getHeight() - 100, 150, 100);
+		hintPanel.setBackground(new Color(0, 0, 0, 0.4f));
+		this.add(hintPanel);
+		hintPanel.setLayout(null);
 		leftMainPanel.setLayout(gl_leftMainPanel);
 
 		playerInfoHeadline = new JLabel("Das ist Holly. Holly ist spielsüchtig.") {
@@ -772,6 +782,10 @@ public class Main extends JLabel {
 		this.fieldInfos.add(label);
 
 		GameManager.getInstance().update();
+	}
+
+	public void addHint(String hint) {
+
 	}
 
 	@Override
