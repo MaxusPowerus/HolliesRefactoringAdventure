@@ -70,7 +70,7 @@ public class Player {
 		inventory.add(speer);
 		inventory.add(angel);
 
-		inventory.addGold(50, true);
+		inventory.addGold(50);
 
 		this.equip(startWeapon);
 		this.equip(startOutfit);

@@ -85,7 +85,6 @@ public class MapFieldHoverAction implements MouseListener {
 		JLabel name = new JLabel(this.mapField.getBiom().getName());
 		name.setForeground(Color.WHITE);
 		name.setFont(new Font(this.gameManager.getGuiManager().getCustomFont().getFamily(), Font.PLAIN, 40));
-//		name.setFont(new Font("Dialog", Font.BOLD, 16));
 		name.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
 		mapFieldInfoPanel.add(name);
 

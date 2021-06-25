@@ -217,7 +217,7 @@ public class InventoryNavigationActions implements MouseListener {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if (merchant.buy(gameManager.getPlayer(), item)) {
-							new InventoryShowAction(gameManager, inv, invName, merchant).initBuy();
+							new InventoryShowAction(gameManager, inv, invName, merchant, false).initBuy();
 						} else {
 							gameManager.getGuiManager().getMain().addFieldInfo("Du hast nicht genügend Gold");
 						}
@@ -242,7 +242,7 @@ public class InventoryNavigationActions implements MouseListener {
 						Item toSell = item.clone();
 						if (merchant.sell(gameManager.getPlayer(), item)) {
 							gameManager.getPlayer().dequip(toSell);
-							new InventoryShowAction(gameManager, inv, invName, merchant).initSell();
+							new InventoryShowAction(gameManager, inv, invName, merchant, false).initSell();
 							PlayerInfoPanel.update();
 						} else {
 							gameManager.getGuiManager().getMain()

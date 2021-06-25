@@ -40,18 +40,21 @@ public class InventoryShowAction implements ActionListener {
 	private boolean sell;
 	private boolean buy;
 	private Merchant merchant;
+	private boolean isQuest;
 
-	public InventoryShowAction(GameManager gameManager, Inventory inventory, String invName, Merchant merchant) {
+	public InventoryShowAction(GameManager gameManager, Inventory inventory, String invName, Merchant merchant,
+			boolean isQuest) {
 		this.gameManager = gameManager;
 		this.inventory = inventory;
 		this.invName = invName;
 		this.buy = false;
 		this.sell = false;
 		this.merchant = merchant;
+		this.isQuest = isQuest;
 	}
 
 	public InventoryShowAction(GameManager gameManager, Inventory inventory) {
-		this(gameManager, inventory, "Inventar", null);
+		this(gameManager, inventory, "Inventar", null, false);
 	}
 
 	@Override
@@ -222,6 +225,10 @@ public class InventoryShowAction implements ActionListener {
 		System.out.println("update");
 		this.initialize();
 		// TODO
+	}
+
+	public boolean isQuest() {
+		return isQuest;
 	}
 
 }

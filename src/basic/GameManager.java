@@ -27,6 +27,7 @@ import gui.actions.MapShowAction;
 import gui.buttons.AttackButton;
 import gui.buttons.BuyButton;
 import gui.buttons.FleeButton;
+import gui.buttons.HuntButton;
 import gui.buttons.InspectButton;
 import gui.buttons.LootButton;
 import gui.buttons.QuestButton;
@@ -47,13 +48,11 @@ public class GameManager {
 	private QuestManager questManager;
 	private JPanel backgroundImage;
 	private boolean fullscreen;
-	private boolean playerEditor;
 	private ArrayList<JLabel> hints;
 
-	public GameManager(boolean fullscreen, boolean playerEditor) {
+	public GameManager(boolean fullscreen) {
 		instance = this;
 		this.fullscreen = fullscreen;
-		this.playerEditor = playerEditor;
 		this.hints = new ArrayList<JLabel>();
 		this.prepareGame();
 	}
@@ -107,10 +106,6 @@ public class GameManager {
 		// clear fields
 		this.guiManager.getMain().getFieldInfos().removeAll();
 		this.guiManager.getMain().getActionButtonPanel().removeAll();
-
-		// switch biome
-		this.guiManager.getMain()
-				.addFieldInfo("<i>Du bist " + player.getCurrentMapField().getBiom().toString() + ":</i>");
 
 		String path = "";
 		if (player.getCurrentMapField().getBiom() == Biom.DESERT) {
@@ -170,21 +165,21 @@ public class GameManager {
 				case 1:
 					Enemy enemy = (Enemy) challenge.getNpc();
 					this.guiManager.getMain().addFieldInfo(
-							"<b>" + enemy.toString() + "</b> ist erschienen. Was tust du? Wegrennen oder K�mpfen?");
+							"<b>" + enemy.toString() + "</b> ist erschienen. Was tust du? Wegrennen oder Kämpfen?");
 
 					this.guiManager.getMain().setNavigationEnabled(false);
 
 					AttackButton attackButton = new AttackButton(challenge, player, this);
 					this.guiManager.getMain().getActionButtonPanel().add(attackButton);
 
-					FleeButton escapeButton = new FleeButton(challenge, player, this);
-					this.guiManager.getMain().getActionButtonPanel().add(escapeButton);
+					FleeButton fleeButton = new FleeButton(challenge, player, this);
+					this.guiManager.getMain().getActionButtonPanel().add(fleeButton);
 
 					break;
 				case 2:
 					Merchant merchant = (Merchant) challenge.getNpc();
 					this.guiManager.getMain().addFieldInfo("<b>" + merchant.toString()
-							+ "</b> ist erschienen. M�chtest du mit ihm einen Handel eingehen?");
+							+ "</b> ist erschienen. Möchtest du mit ihm einen Handel eingehen?");
 
 					BuyButton buyButton = new BuyButton(challenge, player, this);
 					this.guiManager.getMain().getActionButtonPanel().add(buyButton);
@@ -195,13 +190,15 @@ public class GameManager {
 				case 3:
 					Victim victim = (Victim) challenge.getNpc();
 
-					// TODO
-					this.guiManager.getMain().addFieldInfo("VICTIM // TODO");
+					this.guiManager.getMain().addFieldInfo(
+							"Du siehst <b>" + victim.toString(true) + "</b>. Du kannst versuchen es zu jagen.");
+					HuntButton huntButton = new HuntButton(challenge, player, this);
+					this.guiManager.getMain().getActionButtonPanel().add(huntButton);
 
 					break;
 				default:
 					this.guiManager.getMain().addFieldInfo(
-							"Wer das liest ist doof. Spa�. Wer das liest, hat einen Bug entdeckt. :c Bitte kontaktieren Sie Ihren Administrator lul");
+							"Wer das liest ist doof. Spaß. Wer das liest, hat einen Bug entdeckt. :c Bitte kontaktieren Sie Ihren Administrator lul");
 					break;
 				}
 			} else {

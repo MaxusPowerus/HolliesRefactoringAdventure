@@ -32,7 +32,7 @@ public class SellButton extends GraphicalButton implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		this.gameManager.getGuiManager().getMain().setNavigationEnabled(false);
 		new InventoryShowAction(this.gameManager, this.player.getInventory(), "Items verkaufen: Dein Inventar",
-				(Merchant) this.challenge.getNpc()).initSell();
+				(Merchant) this.challenge.getNpc(), false).initSell();
 
 		JButton stopHandling = new GraphicalButton("Handel beenden");
 		stopHandling.addActionListener(new ActionListener() {

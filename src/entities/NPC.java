@@ -77,4 +77,8 @@ public class NPC {
 		return HelperFunctions.firstLetter2Upper(prefix) + " " + name;
 	}
 
+	public String toString(boolean startWithLower) {
+		return HelperFunctions.firstLetter2Lower(prefix) + " " + name;
+	}
+
 }

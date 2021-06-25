@@ -61,7 +61,7 @@ public class Inventory {
 	}
 
 	public void add(ArrayList<Item> items, int gold, boolean showHint) {
-		this.gold += gold;
+		this.addGold(gold, showHint);
 		for (int i = 0; i < items.size(); i++) {
 			this.add(items.get(i), showHint);
 		}
@@ -205,7 +205,7 @@ public class Inventory {
 
 	public void addGold(int gold, boolean showHint) {
 		this.gold += gold;
-		if (showHint)
+		if (showHint && gold > 0)
 			GameManager.getInstance().addHint("+ " + gold + " Gold");
 	}
 

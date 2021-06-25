@@ -35,11 +35,10 @@ public class HuntButton extends GraphicalButton implements ActionListener {
 		boolean hunted = this.player.hunt((Victim) this.challenge.getNpc());
 		if (hunted) {
 			this.gameManager.getGuiManager().getMain()
-					.addFieldInfo("Du hast <b>" + this.challenge.getNpc().toString() + "</b> gefangen");
+					.addFieldInfo("Du hast <b>" + this.challenge.getNpc().toString(true) + "</b> erlegt!");
 			this.challenge.setChallengeCompleted(true);
 		} else {
-			this.gameManager.getGuiManager().getMain()
-					.addFieldInfo(this.challenge.getNpc().toString() + "</b> ist dir entkommen");
+			this.gameManager.getGuiManager().getMain().addFieldInfo("So ein Mist, es ist dir entkommen!");
 		}
 
 		PlayerInfoPanel.update();
