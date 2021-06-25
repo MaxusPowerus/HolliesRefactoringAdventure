@@ -62,7 +62,7 @@ public class QuestPoorTrader extends Quest {
 				inv.add(GameManager.getInstance().getResourceManager().getItemByUniqueName("TheodorasAmulet"));
 				Merchant merchant = new Merchant("Händler", "den", "Wiese", "HändlerTheodoras", 3);
 				merchant.setInventory(inv);
-				new InventoryShowAction(GameManager.getInstance(), inv, "Händler", merchant).initBuy();
+				new InventoryShowAction(GameManager.getInstance(), inv, "Händler", merchant, true).initBuy();
 				if (super.basicUseItem(player, "TheodorasAmulet")) {
 					GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
 							.setNewFlag("success");
