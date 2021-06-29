@@ -70,7 +70,7 @@ public class Player {
 		inventory.add(speer);
 		inventory.add(angel);
 
-		inventory.addGold(50);
+		inventory.addGold(100);
 
 		this.equip(startWeapon);
 		this.equip(startOutfit);
@@ -345,9 +345,9 @@ public class Player {
 
 		if (Randy.nextInt(10) < skillSet.getSkillValue(Skill.LUCK)) {
 			System.out.println("saveMe +");
-			return true;
+			// return true;
 		} else {
-			System.out.println("saveMe -");
+			// System.out.println("saveMe -");
 			return false;
 		}
 	}

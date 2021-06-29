@@ -29,7 +29,7 @@ public class QuestPattern extends Quest {
 
 		switch (getActiveFlagName()) {
 		case "flagName":
-			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
+			if (attempt.equals(super.getPossibilities().get(0).getButtonLabel())) {
 				if (super.basicSkillCheck(player, Skill.PERCEPTION, 5)) {
 
 					// setNewFlag();
@@ -58,7 +58,7 @@ public class QuestPattern extends Quest {
 					// super.getPossibilitiesButtonlabels().add();
 				}
 
-			} else if (attempt.equals(getPossibilitiesButtonlabels().get(1))) {
+			} else if (attempt.equals(super.getPossibilities().get(1).getButtonLabel())) {
 				/*
 				 * 
 				 */
@@ -68,7 +68,7 @@ public class QuestPattern extends Quest {
 
 		case "endCase":
 
-			if (attempt.equals(getPossibilitiesButtonlabels().get(0))) {
+			if (attempt.equals(super.getPossibilities().get(0).getButtonLabel())) {
 				// super.setQuestInfo();
 				// super.setWorldInfoLine();
 
