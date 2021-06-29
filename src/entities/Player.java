@@ -100,7 +100,7 @@ public class Player {
 					GameManager.getInstance().addHint("- " + Math.abs((int) this.health - health) + " HP");
 			} else if (this.health < health) {
 				if (showHint)
-					GameManager.getInstance().addHint("+ " + Math.abs((int) health) + " HP");
+					GameManager.getInstance().addHint("+ " + Math.abs((int) health - this.health) + " HP");
 			}
 		}
 

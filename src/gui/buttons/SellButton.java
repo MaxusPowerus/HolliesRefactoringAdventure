@@ -41,9 +41,6 @@ public class SellButton extends GraphicalButton implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				new MapShowAction().initialize();
 
-				gameManager.getGuiManager().getMain()
-						.addFieldInfo("Du hast den Handel mit <b>" + challenge.getNpc().getName() + "</b> beendet");
-
 				gameManager.getGuiManager().getMain().getActionButtonPanel().removeAll();
 
 				BuyButton buyButton = new BuyButton(challenge, player, gameManager);

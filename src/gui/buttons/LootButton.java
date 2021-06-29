@@ -39,8 +39,7 @@ public class LootButton extends GraphicalButton implements ActionListener {
 		int gold = this.inventory.getGold();
 
 		if (itemCount == 0 && gold == 0) {
-			gameManager.getGuiManager().getMain()
-					.addFieldInfo(this.challenge.getContainer().toString() + " ist leer, so ein Pech");
+			gameManager.getGuiManager().getMain().addFieldInfo("So ein Pech, da ist leider nichts drin");
 		}
 
 		// update inventory when opened

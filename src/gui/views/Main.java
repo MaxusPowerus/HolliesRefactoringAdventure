@@ -617,7 +617,6 @@ public class Main extends JLabel {
 				updateHintPanel();
 			}
 		};
-//		GameManager.getInstance().getHints().clear();
 		timer.schedule(task, 0L, 1000L);
 	}
 
@@ -795,7 +794,7 @@ public class Main extends JLabel {
 
 	private void updateHintPanel() {
 		if (GameManager.getInstance().getHints().size() > 0) {
-			this.hintPanel.setBackground(new Color(0, 0, 0, 0.4f));
+			this.hintPanel.setBackground(new Color(0, 0, 0, 0.2f));
 			this.hintPanel.removeAll();
 
 			int max = 3;
@@ -817,6 +816,7 @@ public class Main extends JLabel {
 			this.hintPanel.removeAll();
 			this.hintPanel.setBackground(new Color(0, 0, 0, 0));
 			GameManager.getInstance().update();
+
 		}
 	}
 

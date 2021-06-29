@@ -26,7 +26,7 @@ public class UseItemAction implements ActionListener {
 		Player player = this.gameManager.getPlayer();
 
 		if (this.item instanceof Food) {
-			player.setHealth(player.getHealth() + ((Food) item).getEnergy());
+			player.setHealth(player.getHealth() + ((Food) item).getEnergy(), true);
 			player.getInventory().remove(item);
 
 			// update inventory when opened
