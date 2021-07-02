@@ -34,6 +34,10 @@ public class LootButton extends GraphicalButton implements ActionListener {
 
 		this.gameManager.getPlayer().getInventory().add(this.inventory, true);
 
+		// DEBUG
+		this.gameManager.getPlayer().getExperience().addXp(100);
+		// DEBUG END
+
 		int itemCount = this.inventory.getAllItems().size();
 
 		int gold = this.inventory.getGold();

@@ -37,6 +37,10 @@ public class HuntButton extends GraphicalButton implements ActionListener {
 			this.gameManager.getGuiManager().getMain()
 					.addFieldInfo("Du hast <b>" + this.challenge.getNpc().toString(true) + "</b> erlegt!");
 			this.challenge.setChallengeCompleted(true);
+
+			LootButton lootButton = new LootButton(this.challenge, this.gameManager,
+					this.challenge.getNpc().getInventory());
+			this.gameManager.getGuiManager().getMain().getActionButtonPanel().add(lootButton);
 		} else {
 			this.gameManager.getGuiManager().getMain().addFieldInfo("So ein Mist, es ist dir entkommen!");
 		}

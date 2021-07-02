@@ -344,8 +344,8 @@ public class Player {
 		Random Randy = new Random();
 
 		if (Randy.nextInt(10) < skillSet.getSkillValue(Skill.LUCK)) {
-			System.out.println("saveMe +");
-			// return true;
+//			System.out.println("saveMe +");
+			return true;
 		} else {
 			// System.out.println("saveMe -");
 			return false;

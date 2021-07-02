@@ -27,6 +27,7 @@ public abstract class Quest {
 	//// questLog
 	private String Title;
 	private String questInfo;
+	private ArrayList<String> allQuestInfoLines;
 
 	// infoPanel
 	private String WorldInfoLine;
@@ -50,6 +51,11 @@ public abstract class Quest {
 		this.appearsInQuestLog = appearsInQuestLog;
 		Title = title;
 		this.questInfo = questInfo;
+		this.allQuestInfoLines = new ArrayList<String>();
+		// DEBUG START
+		this.allQuestInfoLines.add("Line 1");
+		this.allQuestInfoLines.add("Line 2");
+		// DEBUG END
 		WorldInfoLine = worldInfoLine;
 		this.possibilities = possibilities;
 		this.flags = flags;
@@ -178,6 +184,10 @@ public abstract class Quest {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public ArrayList<String> getAllQuestInfoLines() {
+		return allQuestInfoLines;
 	}
 
 	public boolean isFinished() {

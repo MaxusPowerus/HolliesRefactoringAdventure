@@ -6,6 +6,7 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatLightLaf;
@@ -60,7 +61,7 @@ public class GUIManager {
 		}
 
 		loading = new Loading();
-		playerEditor = new PlayerEditor();
+		playerEditor = new PlayerEditor(false);
 
 		frame.setContentPane(playerEditor);
 
@@ -92,5 +93,11 @@ public class GUIManager {
 	public void showGameOver() {
 		GameOver gameOver = new GameOver();
 		frame.setContentPane(gameOver);
+	}
+
+	public void setPane(JPanel panel) {
+		this.frame.setContentPane(panel);
+		this.frame.revalidate();
+		this.frame.repaint();
 	}
 }

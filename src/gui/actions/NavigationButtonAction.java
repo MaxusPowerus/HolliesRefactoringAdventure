@@ -29,6 +29,10 @@ public class NavigationButtonAction implements ActionListener {
 			new MapShowAction().update();
 		}
 
+		if (gameManager.getGuiManager().getMain().getLeftPanelHeadline().getText() == "Quest Tagebuch") {
+			new LogShowAction().update();
+		}
+
 		gameManager.execMainLogic();
 	}
 

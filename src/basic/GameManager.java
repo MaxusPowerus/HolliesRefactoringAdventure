@@ -202,7 +202,7 @@ public class GameManager {
 					break;
 				}
 			} else {
-				this.guiManager.getMain().addFieldInfo("Du siehst nichts au�er deinen Fu�spuren");
+				this.guiManager.getMain().addFieldInfo("Du siehst nichts außer deinen Fußspuren");
 			}
 		} else if (challenge == null && quest != null) {
 			this.getGuiManager().getMain().addFieldInfo(quest.getWorldInfoLine());

@@ -47,7 +47,7 @@ public class Main extends JLabel {
 	private JLabel healthLabel;
 	private JProgressBar healthBar;
 	private JLabel levelLabel;
-	private JButton invMapToggleButton;
+	private JButton invButton;
 	private JButton goNorthButton;
 	private JButton goEastButton;
 	private JButton goSouthButton;
@@ -88,6 +88,9 @@ public class Main extends JLabel {
 	private BackgroundImagePanel compassBackgroundPanel;
 	private JLabel playerInfoHeadline;
 	private JPanel hintPanel;
+	private JButton logButton;
+	private JButton mapButton;
+	private JPanel logPanel;
 
 	public Main() {
 
@@ -199,12 +202,11 @@ public class Main extends JLabel {
 		actionButtonPanel = new JPanel();
 		actionButtonPanel.setBackground(new Color(0, 0, 0, 0));
 
-		invMapToggleButton = new JButton("");
-		invMapToggleButton.setContentAreaFilled(false);
-
-		invMapToggleButton.setIcon(GUIHelper.getIcon(Icon.MAP_INV_TOGGLER, 75, 75));
-		invMapToggleButton.setRolloverIcon(GUIHelper.getIcon(Icon.MAP_INV_TOGGLER_HIGHLIGHTED, 75, 75));
-		invMapToggleButton.setDisabledIcon(GUIHelper.getIcon(Icon.MAP_INV_TOGGLER_DISABLED, 75, 75));
+		invButton = new JButton("");
+		invButton.setContentAreaFilled(false);
+		invButton.setIcon(GUIHelper.getIcon(Icon.INV_TOGGLER, 75, 75));
+		invButton.setRolloverIcon(GUIHelper.getIcon(Icon.INV_TOGGLER_HIGHLIGHTED, 75, 75));
+		invButton.setDisabledIcon(GUIHelper.getIcon(Icon.INV_TOGGLER_DISABLED, 75, 75));
 
 		BufferedImage compassBackground;
 		try {
@@ -287,22 +289,43 @@ public class Main extends JLabel {
 		goSouthButton.addActionListener(new NavigationButtonAction(Direction.SOUTH));
 		goNorthButton.addActionListener(new NavigationButtonAction(Direction.NORTH));
 
+		mapButton = new JButton("");
+		mapButton.setContentAreaFilled(false);
+		mapButton.setIcon(GUIHelper.getIcon(Icon.MAP_TOGGLER, 75, 75));
+		mapButton.setRolloverIcon(GUIHelper.getIcon(Icon.MAP_TOGGLER_HIGHLIGHTED, 75, 75));
+		mapButton.setDisabledIcon(GUIHelper.getIcon(Icon.MAP_TOGGLER_DISABLED, 75, 75));
+
+		logButton = new JButton("");
+		logButton.setContentAreaFilled(false);
+		logButton.setIcon(GUIHelper.getIcon(Icon.LOG_TOGGLER, 75, 75));
+		logButton.setRolloverIcon(GUIHelper.getIcon(Icon.LOG_TOGGLER_HIGHLIGHTED, 75, 75));
+		logButton.setDisabledIcon(GUIHelper.getIcon(Icon.LOG_TOGGLER_DISABLED, 75, 75));
+
 		GroupLayout gl_actionPanel = new GroupLayout(actionPanel);
-		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_actionPanel.createSequentialGroup()
-						.addComponent(invMapToggleButton, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(compassBackgroundPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(32)
-						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)));
+		gl_actionPanel.setHorizontalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_actionPanel
+				.createSequentialGroup().addContainerGap()
+				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_actionPanel.createParallelGroup(Alignment.TRAILING)
+								.addComponent(invButton, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+								.addComponent(mapButton, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
+						.addComponent(logButton, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addComponent(compassBackgroundPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						GroupLayout.PREFERRED_SIZE)
+				.addGap(32)
+				.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)));
 		gl_actionPanel.setVerticalGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_actionPanel
 				.createSequentialGroup()
 				.addGroup(gl_actionPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_actionPanel.createSequentialGroup().addGap(15).addComponent(compassBackgroundPanel,
 								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addComponent(actionButtonPanel, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-						.addComponent(invMapToggleButton, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_actionPanel.createSequentialGroup()
+								.addComponent(invButton, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(mapButton, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(logButton, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)))
 				.addContainerGap()));
 		actionButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
@@ -360,18 +383,18 @@ public class Main extends JLabel {
 		mapPanel.setOpaque(false);
 		mapPanel.setBorder(null);
 		mapPanel.setBackground(new Color(0, 0, 0, 0));
-		mapPanel.setBounds(0, 0, 561, 537);
+		mapPanel.setBounds(0, 0, 537, 537);
 		leftContentPanel.add(mapPanel);
 		GroupLayout gl_mapPanel = new GroupLayout(mapPanel);
 		gl_mapPanel
-				.setHorizontalGroup(gl_mapPanel.createParallelGroup(Alignment.LEADING).addGap(0, 561, Short.MAX_VALUE));
+				.setHorizontalGroup(gl_mapPanel.createParallelGroup(Alignment.LEADING).addGap(0, 547, Short.MAX_VALUE));
 		gl_mapPanel
-				.setVerticalGroup(gl_mapPanel.createParallelGroup(Alignment.LEADING).addGap(0, 537, Short.MAX_VALUE));
+				.setVerticalGroup(gl_mapPanel.createParallelGroup(Alignment.LEADING).addGap(0, 548, Short.MAX_VALUE));
 		mapPanel.setLayout(gl_mapPanel);
 
 		inventoryPanel = new JPanel();
 		inventoryPanel.setBackground(new Color(0, 0, 0, 0));
-		inventoryPanel.setBounds(0, 0, 561, 537);
+		inventoryPanel.setBounds(0, 0, 537, 537);
 		leftContentPanel.add(inventoryPanel);
 		leftMainPanel.setLayout(gl_leftMainPanel);
 		GroupLayout gl_invPanel = new GroupLayout(inventoryPanel);
@@ -380,6 +403,19 @@ public class Main extends JLabel {
 		gl_invPanel
 				.setVerticalGroup(gl_invPanel.createParallelGroup(Alignment.LEADING).addGap(0, 537, Short.MAX_VALUE));
 		inventoryPanel.setLayout(gl_invPanel);
+
+		logPanel = new JPanel();
+		logPanel.setBounds(0, 0, 537, 537);
+		leftContentPanel.add(logPanel);
+		logPanel.setOpaque(false);
+		logPanel.setBorder(null);
+		logPanel.setBackground(new Color(0, 0, 0, 0));
+		GroupLayout gl_logPanel = new GroupLayout(logPanel);
+		gl_logPanel.setHorizontalGroup(gl_logPanel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 537, Short.MAX_VALUE).addGap(0, 561, Short.MAX_VALUE));
+		gl_logPanel.setVerticalGroup(gl_logPanel.createParallelGroup(Alignment.LEADING).addGap(0, 537, Short.MAX_VALUE)
+				.addGap(0, 537, Short.MAX_VALUE));
+		logPanel.setLayout(gl_logPanel);
 		leftMainPanel.setLayout(gl_leftMainPanel);
 
 		playerInfoHeadline = new JLabel("Das ist Holly. Holly ist spielsüchtig.") {
@@ -704,8 +740,16 @@ public class Main extends JLabel {
 		return actionButtonPanel;
 	}
 
-	public JButton getInvMapToggleButton() {
-		return invMapToggleButton;
+	public JButton getInvButton() {
+		return invButton;
+	}
+
+	public JButton getMapButton() {
+		return mapButton;
+	}
+
+	public JButton getLogButton() {
+		return logButton;
 	}
 
 	public JPanel getLeftContentPanel() {
@@ -750,6 +794,10 @@ public class Main extends JLabel {
 
 	public JPanel getBackgroundImagePanel() {
 		return backgroundImagePanel;
+	}
+
+	public JPanel getLogPanel() {
+		return logPanel;
 	}
 
 	public void setBackgroundImagePanel(JPanel backgroundImagePanel) {

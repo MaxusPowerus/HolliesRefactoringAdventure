@@ -12,11 +12,13 @@ public class ChangeValueButton implements ActionListener {
 	private PlayerEditor playerEditor;
 	private String name;
 	private int value;
+	private boolean levelUp;
 
-	public ChangeValueButton(PlayerEditor playerEditor, String name, int value) {
+	public ChangeValueButton(PlayerEditor playerEditor, String name, int value, boolean levelUp) {
 		this.playerEditor = playerEditor;
 		this.name = name;
 		this.value = value;
+		this.levelUp = levelUp;
 	}
 
 	@Override
@@ -45,6 +47,11 @@ public class ChangeValueButton implements ActionListener {
 		if (this.value > 0 && this.playerEditor.getPoints() > 0 && points < 10) { // add
 			points++;
 			this.playerEditor.setPoints(this.playerEditor.getPoints() - 1);
+
+			if (levelUp) {
+				// TODO
+			}
+
 		} else if (this.value < 0 && points > 0) { // remove
 			points--;
 			this.playerEditor.setPoints(this.playerEditor.getPoints() + 1);

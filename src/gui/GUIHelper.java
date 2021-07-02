@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -52,6 +53,12 @@ public class GUIHelper {
 		}
 		return builder.substring(0, builder.toString().lastIndexOf(',') > -1 ? builder.toString().lastIndexOf(',') : 0)
 				.toString();
+	}
+
+	public static void removeActionListener(JButton button) {
+		for (ActionListener al : button.getActionListeners()) {
+			button.removeActionListener(al);
+		}
 	}
 
 }

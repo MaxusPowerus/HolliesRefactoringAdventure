@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import basic.Config;
 import basic.GameManager;
+import gui.GUIHelper;
 import map.Biom;
 import map.MapField;
 
@@ -24,28 +25,29 @@ public class MapShowAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().setEnabled(false);
 		initialize();
 	}
 
 	public void initialize() {
 		this.gameManager.getGuiManager().getMain().getInventoryPanel().setVisible(false);
+		this.gameManager.getGuiManager().getMain().getLogPanel().setVisible(false);
 		this.gameManager.getGuiManager().getMain().getMapPanel().setVisible(false);
 		this.gameManager.getGuiManager().getMain().getMapPanel().setLayout(new BorderLayout());
 
-		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().removeActionListener(this);
-		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().setEnabled(true);
-
-		for (ActionListener al : this.gameManager.getGuiManager().getMain().getInvMapToggleButton()
-				.getActionListeners()) {
-			this.gameManager.getGuiManager().getMain().getInvMapToggleButton().removeActionListener(al);
-		}
-
-		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().addActionListener(
+		// set map/inv/log button states
+		GUIHelper.removeActionListener(this.gameManager.getGuiManager().getMain().getInvButton());
+		this.gameManager.getGuiManager().getMain().getInvButton().addActionListener(
 				new InventoryShowAction(this.gameManager, this.gameManager.getPlayer().getInventory()));
 
+		GUIHelper.removeActionListener(this.gameManager.getGuiManager().getMain().getLogButton());
+		this.gameManager.getGuiManager().getMain().getLogButton().addActionListener(new LogShowAction());
+
+		this.gameManager.getGuiManager().getMain().getMapButton().setEnabled(false);
+		this.gameManager.getGuiManager().getMain().getInvButton().setEnabled(true);
+		this.gameManager.getGuiManager().getMain().getLogButton().setEnabled(true);
+
 		this.gameManager.getGuiManager().getMain().getLeftPanelHeadline().setText("Map");
-		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().setVisible(true);
+		this.gameManager.getGuiManager().getMain().getInvButton().setVisible(true);
 
 		this.gameManager.getGuiManager().getMain().getLeftContentPanel().setBackground(new Color(0, 0, 0, 0));
 		this.gameManager.getGuiManager().getMain().getMapPanel().setBackground(new Color(0, 0, 0, 0));

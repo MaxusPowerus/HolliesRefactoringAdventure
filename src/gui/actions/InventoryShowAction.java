@@ -59,7 +59,6 @@ public class InventoryShowAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.gameManager.getGuiManager().getMain().getInvMapToggleButton().setEnabled(false);
 		this.initialize();
 	}
 
@@ -78,26 +77,23 @@ public class InventoryShowAction implements ActionListener {
 
 		// reset old and map panel
 		gm.getMain().getMapPanel().setVisible(false);
+		gm.getMain().getLogPanel().setVisible(false);
 		gm.getMain().getInventoryPanel().removeAll();
 		gm.getMain().getInventoryPanel().setVisible(true);
 
-		gm.getMain().getInvMapToggleButton().removeActionListener(this);
+		// set map/inv/log button states
+		GUIHelper.removeActionListener(gm.getMain().getMapButton());
+		gm.getMain().getMapButton().addActionListener(new MapShowAction());
 
-		// remove/add event listeners for map/inv toggle button
-		for (ActionListener al : gm.getMain().getInvMapToggleButton().getActionListeners()) {
-			gm.getMain().getInvMapToggleButton().removeActionListener(al);
-		}
-		gm.getMain().getInvMapToggleButton().addActionListener(new MapShowAction());
+		GUIHelper.removeActionListener(gm.getMain().getLogButton());
+		gm.getMain().getLogButton().addActionListener(new LogShowAction());
+
+		gm.getMain().getMapButton().setEnabled(true);
+		gm.getMain().getInvButton().setEnabled(false);
+		gm.getMain().getLogButton().setEnabled(true);
 
 		// set headline for left container
 		gm.getMain().getLeftPanelHeadline().setText(this.invName);
-
-		// hide map/inv toggle button on sell/buy
-		if (buy || sell) {
-			gm.getMain().getInvMapToggleButton().setEnabled(false);
-		} else {
-			gm.getMain().getInvMapToggleButton().setEnabled(true);
-		}
 
 		// prepare nav panel
 		JPanel inventoryNavigationPanel = new JPanel() {
@@ -162,27 +158,31 @@ public class InventoryShowAction implements ActionListener {
 
 			// create tab label/icon
 			JLabel buttonLabel = new JLabel();
-			String categoryText = category;
 
 			ImageIcon icon = null;
 			if (category == "Nahrung") {
-				icon = GUIHelper.getIcon(Icon.BREAD, 40, 40);
-				categoryText = "";
+				icon = GUIHelper.getIcon(Icon.INV_FOOD, 40, 40);
 			}
 			if (category == "Waffen") {
-				icon = GUIHelper.getIcon(Icon.SWORD, 40, 40);
-				categoryText = "";
+				icon = GUIHelper.getIcon(Icon.INV_WEAPON, 40, 40);
+			}
+			if (category == "Sonstiges") {
+				icon = GUIHelper.getIcon(Icon.INV_MISC, 40, 40);
+			}
+			if (category == "Notizen") {
+				icon = GUIHelper.getIcon(Icon.INV_NOTES, 40, 40);
+			}
+			if (category == "Quest-Items") {
+				icon = GUIHelper.getIcon(Icon.INV_QUEST_ITEMS, 40, 40);
+			}
+			if (category == "Kleidung/Rüstung") {
+				icon = GUIHelper.getIcon(Icon.INV_CLOTHES, 40, 40);
 			}
 
-			if (categoryText != "") {
-				buttonLabel.setText(categoryText + " (" + itemCategories.get(category).size() + ")");
-			} else {
-				buttonLabel.setText("(" + itemCategories.get(category).size() + ")");
-			}
+			buttonLabel.setText("(" + itemCategories.get(category).size() + ")");
 			buttonLabel.setIcon(icon);
 			navigationButtonBackgroundPanel.setLayout(new GridBagLayout());
-			navigationButtonBackgroundPanel
-					.setToolTipText(categoryText + " (" + itemCategories.get(category).size() + ")");
+			navigationButtonBackgroundPanel.setToolTipText(category + " (" + itemCategories.get(category).size() + ")");
 			navigationButtonBackgroundPanel.add(buttonLabel, new GridBagConstraints());
 			navigationButtonBackgroundPanel.setName(category);
 			navigationButtonBackgroundPanel.addMouseListener(
