@@ -115,8 +115,7 @@ public class GameManager {
 		} else if (player.getCurrentMapField().getBiom() == Biom.MOUNTAINS) {
 			path = "mountains_var1.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.SWAMP) {
-			this.guiManager.getMain().getFieldInfoPanel().setBackground(Color.decode("#6D610D"));
-			path = "meadow_var1.png";
+			path = "swamp_var1.png";
 		} else if (player.getCurrentMapField().getBiom() == Biom.MEADOW) {
 			path = "meadow_var2.png";
 		}

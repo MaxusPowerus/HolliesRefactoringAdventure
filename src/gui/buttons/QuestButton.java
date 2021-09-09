@@ -51,6 +51,8 @@ public class QuestButton extends GraphicalButton implements ActionListener {
 
 		PlayerInfoPanel.update();
 
+		this.gameManager.getGuiManager().getMain().updateCompass();
+
 		// update inventory when opened
 		if (this.gameManager.getGuiManager().getMain().getLeftPanelHeadline().getText().contains("Inventar")) {
 			new InventoryShowAction(this.gameManager, this.gameManager.getPlayer().getInventory()).updateView();

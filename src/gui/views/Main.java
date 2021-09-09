@@ -28,6 +28,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
+import QuestClasses.Quest;
 import basic.Config;
 import basic.GameManager;
 import basic.HelperFunctions;
@@ -37,6 +38,7 @@ import gui.GUIManager;
 import gui.Icon;
 import gui.actions.NavigationButtonAction;
 import map.Direction;
+import utilities.Coordinate;
 
 public class Main extends JLabel {
 	private JPanel leftInfoPanel;
@@ -208,15 +210,7 @@ public class Main extends JLabel {
 		invButton.setRolloverIcon(GUIHelper.getIcon(Icon.INV_TOGGLER_HIGHLIGHTED, 75, 75));
 		invButton.setDisabledIcon(GUIHelper.getIcon(Icon.INV_TOGGLER_DISABLED, 75, 75));
 
-		BufferedImage compassBackground;
-		try {
-			compassBackground = ImageIO.read(new File(HelperFunctions.getResource("images/GUI/Compass.png")));
-			compassBackgroundPanel = new BackgroundImagePanel(
-					GUIHelper.scaleIcon(new ImageIcon(compassBackground), 250).getImage());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		compassBackgroundPanel.setOpaque(false);
+		this.updateCompass();
 
 		goNorthButton = new JButton();
 		goNorthButton
@@ -813,6 +807,31 @@ public class Main extends JLabel {
 		this.goEastButton.setEnabled(enabled);
 		this.goSouthButton.setEnabled(enabled);
 		this.goWestButton.setEnabled(enabled);
+	}
+
+	public void updateCompass() {
+		Quest currentQuest = GameManager.getInstance().getPlayer().getCurrentQuest();
+		BufferedImage compassBackground;
+		String ressource = "images/GUI/Compass.png";
+		if (currentQuest != null) {
+			System.out.println("FOOBAR");
+			Coordinate targetPoint = currentQuest.getTargetPoint();
+			Coordinate currentPos = GameManager.getInstance().getPlayer().getCurrentMapField().getCoordinate();
+			if (targetPoint != null && !targetPoint.isEqual(currentPos)) {
+				String direction = currentPos.getDirectionTo(targetPoint);
+				ressource = "images/GUI/CompassPointer/CompassPointer_" + direction + ".png";
+			}
+		}
+		try {
+			compassBackground = ImageIO.read(new File(HelperFunctions.getResource(ressource)));
+			this.compassBackgroundPanel = new BackgroundImagePanel(
+					GUIHelper.scaleIcon(new ImageIcon(compassBackground), 250).getImage());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		this.compassBackgroundPanel.setOpaque(false);
+
+		GameManager.getInstance().update();
 	}
 
 	public void addFieldInfo(String info) {

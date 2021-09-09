@@ -31,6 +31,20 @@ public class Coordinate {
 		return posY;
 	}
 
+	public String getDirectionTo(Coordinate c) {
+		System.out.println(c.getPosX() + ":" + this.posX + "|" + c.getPosY() + ":" + this.posY);
+		if (c.getPosX() == this.posX && c.getPosY() > this.posY)
+			return "S";
+		if (c.getPosX() == this.posX && c.getPosY() < this.posY)
+			return "N";
+		if (c.getPosX() > this.posX && c.getPosY() == this.posY)
+			return "O";
+		if (c.getPosX() < this.posX && c.getPosY() == this.posY)
+			return "W";
+		// TODO
+		return null;
+	}
+
 	public Coordinate[] getNeighbours() {
 		Coordinate[] neighbours = new Coordinate[8];
 

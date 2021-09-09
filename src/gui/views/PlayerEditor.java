@@ -160,14 +160,22 @@ public class PlayerEditor extends JPanel {
 					GameManager.getInstance().getPlayer().getSkillSet().getSkillValue(Skill.ENDURANCE) + "/10");
 		enduranceLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JButton enduranceMinus = new JButton("-");
+		JButton enduranceMinus = new JButton();
+		enduranceMinus.setContentAreaFilled(false);
+		enduranceMinus.setIcon(GUIHelper.getIcon(Icon.MINUS, 25, 25));
+		enduranceMinus.setRolloverIcon(GUIHelper.getIcon(Icon.MINUS_HIGHLIGHTED, 25, 25));
+		enduranceMinus.setDisabledIcon(GUIHelper.getIcon(Icon.MINUS_DISABLED, 25, 25));
 		enduranceMinus.addActionListener(new ChangeValueButton(this, "endurance", -1, levelUp));
 		enduranceMinus.setFont(new Font("Tahoma", Font.BOLD, 14));
 		enduranceMinus.setAlignmentY(0.0f);
 		if (levelUp)
 			enduranceMinus.setVisible(false);
 
-		JButton endurancePlus = new JButton("+");
+		JButton endurancePlus = new JButton();
+		endurancePlus.setContentAreaFilled(false);
+		endurancePlus.setIcon(GUIHelper.getIcon(Icon.PLUS, 25, 25));
+		endurancePlus.setRolloverIcon(GUIHelper.getIcon(Icon.PLUS_HIGHLIGHTED, 25, 25));
+		endurancePlus.setDisabledIcon(GUIHelper.getIcon(Icon.PLUS_DISABLED, 25, 25));
 		endurancePlus.setFont(new Font("Tahoma", Font.BOLD, 14));
 		endurancePlus.addActionListener(new ChangeValueButton(this, "endurance", 1, levelUp));
 		endurancePlus.setAlignmentY(0.0f);
@@ -197,14 +205,22 @@ public class PlayerEditor extends JPanel {
 					.setText(GameManager.getInstance().getPlayer().getSkillSet().getSkillValue(Skill.CHARISMA) + "/10");
 		charismaLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JButton charismaMinus = new JButton("-");
+		JButton charismaMinus = new JButton();
+		charismaMinus.setContentAreaFilled(false);
+		charismaMinus.setIcon(GUIHelper.getIcon(Icon.MINUS, 25, 25));
+		charismaMinus.setRolloverIcon(GUIHelper.getIcon(Icon.MINUS_HIGHLIGHTED, 25, 25));
+		charismaMinus.setDisabledIcon(GUIHelper.getIcon(Icon.MINUS_DISABLED, 25, 25));
 		charismaMinus.addActionListener(new ChangeValueButton(this, "charisma", -1, levelUp));
 		charismaMinus.setFont(new Font("Tahoma", Font.BOLD, 14));
 		charismaMinus.setAlignmentY(0.0f);
 		if (levelUp)
 			charismaMinus.setVisible(false);
 
-		JButton charismaPlus = new JButton("+");
+		JButton charismaPlus = new JButton();
+		charismaPlus.setContentAreaFilled(false);
+		charismaPlus.setIcon(GUIHelper.getIcon(Icon.PLUS, 25, 25));
+		charismaPlus.setRolloverIcon(GUIHelper.getIcon(Icon.PLUS_HIGHLIGHTED, 25, 25));
+		charismaPlus.setDisabledIcon(GUIHelper.getIcon(Icon.PLUS_DISABLED, 25, 25));
 		charismaPlus.addActionListener(new ChangeValueButton(this, "charisma", 1, levelUp));
 		charismaPlus.setFont(new Font("Tahoma", Font.BOLD, 14));
 		charismaPlus.setAlignmentY(0.0f);
@@ -234,14 +250,22 @@ public class PlayerEditor extends JPanel {
 					GameManager.getInstance().getPlayer().getSkillSet().getSkillValue(Skill.INTELLIGENCE) + "/10");
 		intelligenceLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JButton intelligenceMinus = new JButton("-");
+		JButton intelligenceMinus = new JButton();
+		intelligenceMinus.setContentAreaFilled(false);
+		intelligenceMinus.setIcon(GUIHelper.getIcon(Icon.MINUS, 25, 25));
+		intelligenceMinus.setRolloverIcon(GUIHelper.getIcon(Icon.MINUS_HIGHLIGHTED, 25, 25));
+		intelligenceMinus.setDisabledIcon(GUIHelper.getIcon(Icon.MINUS_DISABLED, 25, 25));
 		intelligenceMinus.addActionListener(new ChangeValueButton(this, "intelligence", -1, levelUp));
 		intelligenceMinus.setFont(new Font("Tahoma", Font.BOLD, 14));
 		intelligenceMinus.setAlignmentY(0.0f);
 		if (levelUp)
 			intelligenceMinus.setVisible(false);
 
-		JButton intelligencePlus = new JButton("+");
+		JButton intelligencePlus = new JButton();
+		intelligencePlus.setContentAreaFilled(false);
+		intelligencePlus.setIcon(GUIHelper.getIcon(Icon.PLUS, 25, 25));
+		intelligencePlus.setRolloverIcon(GUIHelper.getIcon(Icon.PLUS_HIGHLIGHTED, 25, 25));
+		intelligencePlus.setDisabledIcon(GUIHelper.getIcon(Icon.PLUS_DISABLED, 25, 25));
 		intelligencePlus.addActionListener(new ChangeValueButton(this, "intelligence", 1, levelUp));
 		intelligencePlus.setFont(new Font("Tahoma", Font.BOLD, 14));
 		intelligencePlus.setAlignmentY(0.0f);
@@ -272,14 +296,22 @@ public class PlayerEditor extends JPanel {
 					.setText(GameManager.getInstance().getPlayer().getSkillSet().getSkillValue(Skill.AGILITY) + "/10");
 		agilityLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JButton agilityMinus = new JButton("-");
+		JButton agilityMinus = new JButton();
+		agilityMinus.setContentAreaFilled(false);
+		agilityMinus.setIcon(GUIHelper.getIcon(Icon.MINUS, 25, 25));
+		agilityMinus.setRolloverIcon(GUIHelper.getIcon(Icon.MINUS_HIGHLIGHTED, 25, 25));
+		agilityMinus.setDisabledIcon(GUIHelper.getIcon(Icon.MINUS_DISABLED, 25, 25));
 		agilityMinus.addActionListener(new ChangeValueButton(this, "agility", -1, levelUp));
 		agilityMinus.setFont(new Font("Tahoma", Font.BOLD, 14));
 		agilityMinus.setAlignmentY(0.0f);
 		if (levelUp)
 			agilityMinus.setVisible(false);
 
-		JButton agilityPlus = new JButton("+");
+		JButton agilityPlus = new JButton();
+		agilityPlus.setContentAreaFilled(false);
+		agilityPlus.setIcon(GUIHelper.getIcon(Icon.PLUS, 25, 25));
+		agilityPlus.setRolloverIcon(GUIHelper.getIcon(Icon.PLUS_HIGHLIGHTED, 25, 25));
+		agilityPlus.setDisabledIcon(GUIHelper.getIcon(Icon.PLUS_DISABLED, 25, 25));
 		agilityPlus.addActionListener(new ChangeValueButton(this, "agility", 1, levelUp));
 		agilityPlus.setFont(new Font("Tahoma", Font.BOLD, 14));
 		agilityPlus.setAlignmentY(0.0f);
@@ -308,14 +340,22 @@ public class PlayerEditor extends JPanel {
 			luckLabel.setText(GameManager.getInstance().getPlayer().getSkillSet().getSkillValue(Skill.LUCK) + "/10");
 		luckLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JButton luckMinus = new JButton("-");
+		JButton luckMinus = new JButton();
+		luckMinus.setContentAreaFilled(false);
+		luckMinus.setIcon(GUIHelper.getIcon(Icon.MINUS, 25, 25));
+		luckMinus.setRolloverIcon(GUIHelper.getIcon(Icon.MINUS_HIGHLIGHTED, 25, 25));
+		luckMinus.setDisabledIcon(GUIHelper.getIcon(Icon.MINUS_DISABLED, 25, 25));
 		luckMinus.addActionListener(new ChangeValueButton(this, "luck", -1, levelUp));
 		luckMinus.setFont(new Font("Tahoma", Font.BOLD, 14));
 		luckMinus.setAlignmentY(0.0f);
 		if (levelUp)
 			luckMinus.setVisible(false);
 
-		JButton luckPlus = new JButton("+");
+		JButton luckPlus = new JButton();
+		luckPlus.setContentAreaFilled(false);
+		luckPlus.setIcon(GUIHelper.getIcon(Icon.PLUS, 25, 25));
+		luckPlus.setRolloverIcon(GUIHelper.getIcon(Icon.PLUS_HIGHLIGHTED, 25, 25));
+		luckPlus.setDisabledIcon(GUIHelper.getIcon(Icon.PLUS_DISABLED, 25, 25));
 		luckPlus.addActionListener(new ChangeValueButton(this, "luck", 1, levelUp));
 		luckPlus.setFont(new Font("Tahoma", Font.BOLD, 14));
 		luckPlus.setAlignmentY(0.0f);
@@ -374,14 +414,22 @@ public class PlayerEditor extends JPanel {
 					.setText(GameManager.getInstance().getPlayer().getSkillSet().getSkillValue(Skill.STRENGTH) + "/10");
 		strengthLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JButton strengthMinus = new JButton("-");
+		JButton strengthMinus = new JButton();
+		strengthMinus.setContentAreaFilled(false);
+		strengthMinus.setIcon(GUIHelper.getIcon(Icon.MINUS, 25, 25));
+		strengthMinus.setRolloverIcon(GUIHelper.getIcon(Icon.MINUS_HIGHLIGHTED, 25, 25));
+		strengthMinus.setDisabledIcon(GUIHelper.getIcon(Icon.MINUS_DISABLED, 25, 25));
 		strengthMinus.addActionListener(new ChangeValueButton(this, "strength", -1, levelUp));
 		strengthMinus.setFont(new Font("Tahoma", Font.BOLD, 14));
 		strengthMinus.setAlignmentY(0.0f);
 		if (levelUp)
 			strengthMinus.setVisible(false);
 
-		JButton strengthPlus = new JButton("+");
+		JButton strengthPlus = new JButton();
+		strengthPlus.setContentAreaFilled(false);
+		strengthPlus.setIcon(GUIHelper.getIcon(Icon.PLUS, 25, 25));
+		strengthPlus.setRolloverIcon(GUIHelper.getIcon(Icon.PLUS_HIGHLIGHTED, 25, 25));
+		strengthPlus.setDisabledIcon(GUIHelper.getIcon(Icon.PLUS_DISABLED, 25, 25));
 		strengthPlus.addActionListener(new ChangeValueButton(this, "strength", 1, levelUp));
 		strengthPlus.setFont(new Font("Tahoma", Font.BOLD, 14));
 		strengthPlus.setAlignmentY(0.0f);

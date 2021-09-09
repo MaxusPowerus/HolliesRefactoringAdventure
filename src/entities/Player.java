@@ -127,6 +127,14 @@ public class Player {
 		return experience;
 	}
 
+	public void setCurrentQuest(Quest currentQuest) {
+		this.currentQuest = currentQuest;
+	}
+
+	public Quest getCurrentQuest() {
+		return currentQuest;
+	}
+
 	public int getDaysAlive() {
 		return daysAlive;
 	}

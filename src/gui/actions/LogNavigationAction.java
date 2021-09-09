@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -176,15 +178,29 @@ public class LogNavigationAction implements MouseListener {
 		JButton button = new JButton();
 		button.setBorder(null);
 
+		Quest currentQuest = GameManager.getInstance().getPlayer().getCurrentQuest();
+
 		button.setBackground(Color.decode("#71F899"));
-		if (true) { // TODO
+		if (currentQuest != null && currentQuest.equals(quest)) { // TODO
 			button.setText("abrüsten");
 			button.setBackground(Color.decode("#ed394a"));
 			button.setForeground(Color.WHITE);
 		} else {
 			button.setText("ausrüsten");
 		}
-//		button.addActionListener(new UseItemAction(gameManager, item));	TODO
+		button.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (currentQuest != null && currentQuest.equals(quest)) {
+					GameManager.getInstance().getPlayer().setCurrentQuest(null);
+				} else {
+					GameManager.getInstance().getPlayer().setCurrentQuest(quest);
+				}
+				openCategory(openedCategory);
+				GameManager.getInstance().getGuiManager().getMain().updateCompass();
+			}
+		});
 
 		// hide button because there is no action left
 		if (quest.isFinished()) {

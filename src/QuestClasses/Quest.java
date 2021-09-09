@@ -25,12 +25,12 @@ public abstract class Quest {
 	private boolean appearsInQuestLog;
 
 	//// questLog
-	private String Title;
+	private String title;
 	private String questInfo;
 	private ArrayList<String> allQuestInfoLines;
 
 	// infoPanel
-	private String WorldInfoLine;
+	private String worldInfoLine;
 
 	// get this Lonz!======================================
 	ArrayList<Possibility> possibilities;
@@ -49,14 +49,14 @@ public abstract class Quest {
 		this.biom = biom;
 		this.updateOnEnter = updateOnEnter;
 		this.appearsInQuestLog = appearsInQuestLog;
-		Title = title;
+		this.title = title;
 		this.questInfo = questInfo;
 		this.allQuestInfoLines = new ArrayList<String>();
 		// DEBUG START
 		this.allQuestInfoLines.add("Line 1");
 		this.allQuestInfoLines.add("Line 2");
 		// DEBUG END
-		WorldInfoLine = worldInfoLine;
+		this.worldInfoLine = worldInfoLine;
 		this.possibilities = possibilities;
 		this.flags = flags;
 		// this.instanceLimit--;
@@ -81,9 +81,9 @@ public abstract class Quest {
 		this.targetZone = targetZone;
 		this.biom = biom;
 		this.appearsInQuestLog = appearsInQuestLog;
-		Title = title;
+		this.title = title;
 		this.questInfo = questInfo;
-		WorldInfoLine = worldInfoLine;
+		this.worldInfoLine = worldInfoLine;
 		this.possibilities = possibilities;
 		this.flags = flags;
 		this.instanceLimit--;
@@ -239,11 +239,11 @@ public abstract class Quest {
 	}
 
 	public String getTitle() {
-		return Title;
+		return title;
 	}
 
 	public void setTitle(String title) {
-		Title = title;
+		this.title = title;
 	}
 
 	public String getQuestInfo() {
@@ -255,11 +255,11 @@ public abstract class Quest {
 	}
 
 	public String getWorldInfoLine() {
-		return WorldInfoLine;
+		return worldInfoLine;
 	}
 
 	public void setWorldInfoLine(String worldInfoLine) {
-		WorldInfoLine = worldInfoLine;
+		this.worldInfoLine = worldInfoLine;
 	}
 
 	public ArrayList<Possibility> getPossibilities() {
@@ -276,5 +276,12 @@ public abstract class Quest {
 
 	public void setFlags(ArrayList<Flag> flags) {
 		this.flags = flags;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
+		return ((Quest) obj).getTitle() == this.title;
 	}
 }
