@@ -1,7 +1,6 @@
 package utilities;
 
 import basic.GameManager;
-import gui.views.PlayerEditor;
 
 public class Experience {
 	private int level;
@@ -54,7 +53,7 @@ public class Experience {
 
 	public void levelUp() {
 		// TODO
-		GameManager.getInstance().getGuiManager().setPane(new PlayerEditor(true));
+//		GameManager.getInstance().getGuiManager().setPane(new PlayerEditor(true));
 	}
 
 }

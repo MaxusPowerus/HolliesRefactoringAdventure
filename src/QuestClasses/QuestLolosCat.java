@@ -32,13 +32,13 @@ public class QuestLolosCat extends Quest {
 				if (super.basicSkillCheck(player, Skill.PERCEPTION, 5)) {
 					super.setNewFlag("success");
 					super.setQuestInfo(
-							"Du entdeckst die Katze in einem Busch und schnappst sie dir!<br>Bringe sie zurück zu Lolo!");
+							"Du entdeckst die Katze in einem Busch und schnappst sie dir!<br>Bringe sie zurÃ¼ck zu Lolo!");
 					super.setWorldInfoLine(
-							"Du entdeckst die Katze in einem Busch und schnappst sie dir!<br>Bringe sie zurück zu Lolo!");
+							"Du entdeckst die Katze in einem Busch und schnappst sie dir!<br>Bringe sie zurÃ¼ck zu Lolo!");
 
 					super.clearPossibilities();
 
-					Possibility p1 = new Possibility("Lolo die Katze zurückgeben.", "Lolo berichten", -1);
+					Possibility p1 = new Possibility("Lolo die Katze zurÃ¼ckgeben.", "Lolo berichten", -1);
 					Possibility p2 = new Possibility("Lolos Katze essen!.", "Katze essen!", -1);
 					super.getPossibilities().add(p1);
 					super.getPossibilities().add(p2);
@@ -46,9 +46,9 @@ public class QuestLolosCat extends Quest {
 				} else {
 					super.setNewFlag("catch");
 					super.setQuestInfo(
-							"Du entdeckst die Katze allerdings etwas zu spät als sie sich bereits auf der Flucht befindet.<br>Wenn du sie jetzt Fangen willst musst du sehr schnell sein!");
+							"Du entdeckst die Katze allerdings etwas zu spÃ¤t als sie sich bereits auf der Flucht befindet.<br>Wenn du sie jetzt Fangen willst musst du sehr schnell sein!");
 					super.setWorldInfoLine(
-							"Du entdeckst die Katze allerdings etwas zu spät als sie sich bereits auf der Flucht befindet.<br>Wenn du sie jetzt Fangen willst musst du sehr schnell sein!");
+							"Du entdeckst die Katze allerdings etwas zu spÃ¤t als sie sich bereits auf der Flucht befindet.<br>Wenn du sie jetzt Fangen willst musst du sehr schnell sein!");
 
 					Possibility p1 = new Possibility("Versuchen Lolos Katze zu fangen.", "Katze fangen", -1);
 
@@ -64,12 +64,12 @@ public class QuestLolosCat extends Quest {
 				if (super.basicSkillCheck(player, Skill.AGILITY, 7)) {
 					super.setNewFlag("success");
 
-					super.setQuestInfo("Du schnappst sie dir!<br>Bringe sie zurück zu Lolo!");
-					super.setWorldInfoLine("Du schnappst sie dir!<br>Bringe sie zurück zu Lolo!");
+					super.setQuestInfo("Du schnappst sie dir!<br>Bringe sie zurÃ¼ck zu Lolo!");
+					super.setWorldInfoLine("Du schnappst sie dir!<br>Bringe sie zurÃ¼ck zu Lolo!");
 
 					super.clearPossibilities();
 
-					Possibility p1 = new Possibility("Lolo die Katze zurückgeben.", "Lolo berichten!", -1);
+					Possibility p1 = new Possibility("Lolo die Katze zurÃ¼ckgeben.", "Lolo berichten!", -1);
 					Possibility p2 = new Possibility("Lolos Katze essen!", "Katze essen!", -1);
 					super.getPossibilities().add(p1);
 					super.getPossibilities().add(p2);
@@ -94,17 +94,17 @@ public class QuestLolosCat extends Quest {
 		case "success":
 
 			if (attempt.equals(getPossibilities().get(0).getButtonLabel())) {
-				super.setQuestInfo("Lolo ist überglücklich, das du ihn mit seinem Liebsten wiedervereint hast!");
+				super.setQuestInfo("Lolo ist Ã¼berglÃ¼cklich, das du ihn mit seinem Liebsten wiedervereint hast!");
 				super.setWorldInfoLine(
-						"Lolo: \"Danke das du sie wiedergefunden hast! Hier das ist für dich! \" [ + 5 Gold]");
+						"Lolo: \"Danke das du sie wiedergefunden hast! Hier das ist fÃ¼r dich! \" [ + 5 Gold]");
 				player.getInventory().addGold(5);
 				player.getExperience().addXp(100);
 			}
 			if (attempt.equals(getPossibilities().get(1).getButtonLabel())) {
 				super.setQuestInfo(
-						"Lolo ist Fassungslos, als er sieht wie du seine Katze bei lebendigem Leib verspeißt!");
+						"Lolo ist Fassungslos, als er sieht wie du seine Katze bei lebendigem Leib verspeiÃŸt!");
 				super.setWorldInfoLine(
-						"Lolo ist Fassungslos, als er sieht wie du seine Katze bei lebendigem Leib verspeißt!");
+						"Lolo ist Fassungslos, als er sieht wie du seine Katze bei lebendigem Leib verspeiÃŸt!");
 				player.setHealth(1000);
 			}
 

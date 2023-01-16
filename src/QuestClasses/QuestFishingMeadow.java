@@ -40,7 +40,7 @@ public class QuestFishingMeadow extends Quest {
 			if (attempt.equals(super.possibilities.get(0).getButtonLabel())) {
 				if (super.basicUseItem(player, "FishingRod")) {
 
-					setWorldInfoLine("Es dauert einen Moment aber du f‰ngst dir einen saftigen Fisch!");
+					setWorldInfoLine("Es dauert einen Moment aber du f√§ngst dir einen saftigen Fisch!");
 
 					player.getInventory().add(fish);
 					limit--;
@@ -52,13 +52,13 @@ public class QuestFishingMeadow extends Quest {
 			} else if (attempt.equals(super.possibilities.get(1).getButtonLabel())) {
 				if (super.basicUseItem(player, "Spear")) {
 					if (basicSkillCheck(player, Skill.AGILITY, 9)) {
-						setWorldInfoLine("Mit viel Geschick f‰ngst du dir einen Fisch");
+						setWorldInfoLine("Mit viel Geschick f√§ngst du dir einen Fisch");
 
 						player.getInventory().add(fish);
 						limit--;
 					} else {
 						setWorldInfoLine(
-								"Dir fehlt einfach das Geschick. Nicht nur dass du nichts f‰ngst, du verscheuchst auch noch Alle Fische!");
+								"Dir fehlt einfach das Geschick. Nicht nur dass du nichts f√§ngst, du verscheuchst auch noch Alle Fische!");
 						limit = 0;
 					}
 
@@ -71,7 +71,7 @@ public class QuestFishingMeadow extends Quest {
 
 		case "empty":
 
-			setWorldInfoLine("Im Fluss sind keine Fische zu sehen...versuche es sp‰ter nochmal!");
+			setWorldInfoLine("Im Fluss sind keine Fische zu sehen...versuche es sp√§ter nochmal!");
 
 			super.setUpdateOnEnter(true);
 			super.setActive(false);

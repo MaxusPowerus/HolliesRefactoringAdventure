@@ -36,17 +36,17 @@ public class QuestPoorTrader extends Quest {
 				if (basicSkillCheck(player, Skill.CHARISMA, 10)) {
 					GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
 							.setNewFlag("success");
-					super.setQuestInfo("Du hast das Amulett umsonst zurückbekommen, gehe zu Theodoras!");
-					super.setWorldInfoLine("Händler: \"Nagut...ich wusste ja nicht wie viel es ihm bedeutet...\"");
+					super.setQuestInfo("Du hast das Amulett umsonst zurÃ¼ckbekommen, gehe zu Theodoras!");
+					super.setWorldInfoLine("HÃ¤ndler: \"Nagut...ich wusste ja nicht wie viel es ihm bedeutet...\"");
 					player.getInventory()
 							.add(GameManager.getInstance().getResourceManager().getItemByUniqueName("TheodorasAmulet"));
 					setSuccess();
 				} else {
 					GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
 							.setNewFlag("failure");
-					super.setQuestInfo("Du hast das Amulett nicht zurück bekommen, gehe zu Theodoras!");
+					super.setQuestInfo("Du hast das Amulett nicht zurÃ¼ck bekommen, gehe zu Theodoras!");
 					super.setWorldInfoLine(
-							"Händler: \"Haha...mach dich nicht lächerlich kleine, ich verschenke doch nicht meine Ware!");
+							"HÃ¤ndler: \"Haha...mach dich nicht lÃ¤cherlich kleine, ich verschenke doch nicht meine Ware!");
 
 					setFailure();
 
@@ -60,14 +60,14 @@ public class QuestPoorTrader extends Quest {
 			} else if (attempt.equals(super.possibilities.get(1).getButtonLabel())) {
 				Inventory inv = new Inventory();
 				inv.add(GameManager.getInstance().getResourceManager().getItemByUniqueName("TheodorasAmulet"));
-				Merchant merchant = new Merchant("Händler", "den", "Wiese", "HändlerTheodoras", 3);
+				Merchant merchant = new Merchant("HÃ¤ndler", "den", "Wiese", "HÃ¤ndlerTheodoras", 3);
 				merchant.setInventory(inv);
-				new InventoryShowAction(GameManager.getInstance(), inv, "Händler", merchant, true).initBuy();
+				new InventoryShowAction(GameManager.getInstance(), inv, "HÃ¤ndler", merchant, true).initBuy();
 				if (super.basicUseItem(player, "TheodorasAmulet")) {
 					GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
 							.setNewFlag("success");
-					super.setQuestInfo("Du hast das Amulett zurückgekauft, gehe zu Theodoras!");
-					super.setWorldInfoLine("Händler: \"Eine Freude mit euch Geschäfte zu machen!\"");
+					super.setQuestInfo("Du hast das Amulett zurÃ¼ckgekauft, gehe zu Theodoras!");
+					super.setWorldInfoLine("HÃ¤ndler: \"Eine Freude mit euch GeschÃ¤fte zu machen!\"");
 
 					super.clearPossibilities();
 
@@ -86,8 +86,8 @@ public class QuestPoorTrader extends Quest {
 					GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
 							.setNewFlag("success");
 					super.setQuestInfo(
-							"Du machst den Händlern mit deinen Fäusten bekannt und nimmst dir das Amlett zurück.");
-					super.setWorldInfoLine("Händler: \"Nehmt Alles! Aber tut mir nicht weiter weh!\"");
+							"Du machst den HÃ¤ndlern mit deinen FÃ¤usten bekannt und nimmst dir das Amlett zurÃ¼ck.");
+					super.setWorldInfoLine("HÃ¤ndler: \"Nehmt Alles! Aber tut mir nicht weiter weh!\"");
 					player.getInventory()
 							.add(GameManager.getInstance().getResourceManager().getItemByUniqueName("TheodorasAmulet"));
 					player.getInventory().addGold(50);
@@ -97,9 +97,9 @@ public class QuestPoorTrader extends Quest {
 					GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
 							.setNewFlag("failure");
 					super.setQuestInfo(
-							"Da warst du wohl zu übermütig, der Händler hebt seine Fäuste und weiß damit umzugehen...du kannst froh sein das du noch lebest! Sag Theodoras bescheid!");
+							"Da warst du wohl zu Ã¼bermÃ¼tig, der HÃ¤ndler hebt seine FÃ¤uste und weiÃŸ damit umzugehen...du kannst froh sein das du noch lebest! Sag Theodoras bescheid!");
 					super.setWorldInfoLine(
-							"Händler: \"Ich hoffe das wird dir eine Lehere sein, dass dich Gewalt im Leben nicht weiter bringt, Kleine!\"");
+							"HÃ¤ndler: \"Ich hoffe das wird dir eine Lehere sein, dass dich Gewalt im Leben nicht weiter bringt, Kleine!\"");
 					player.setHealth(player.getHealth() - 30);
 					setFailure();
 				}
@@ -132,7 +132,7 @@ public class QuestPoorTrader extends Quest {
 
 	public void setSuccess() {
 		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
-				.setWorldInfoLine("Und habt ihr das Amullett zurückbekommen?");
+				.setWorldInfoLine("Und habt ihr das Amullett zurÃ¼ckbekommen?");
 
 		Possibility p1 = new Possibility(
 				"\"Es warsehr anstrengend das Amulett zu beschaffen, also werde ich es behalten!\"", "Behalten", -1);
@@ -157,7 +157,7 @@ public class QuestPoorTrader extends Quest {
 				"Es tut mir Leid...", -1);
 
 		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung")
-				.setWorldInfoLine("Und habt ihr das Amullett zurückbekommen?");
+				.setWorldInfoLine("Und habt ihr das Amullett zurÃ¼ckbekommen?");
 		GameManager.getInstance().getQuestManager().getQuestByTitle("Eine falsche Entscheidung").getPossibilities()
 				.add(p1);
 

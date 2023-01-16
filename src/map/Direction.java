@@ -2,7 +2,7 @@ package map;
 
 public enum Direction {
 
-	NORTH("Norden"), EAST("Osten"), SOUTH("Süden"), WEST("Westen");
+	NORTH("Norden"), EAST("Osten"), SOUTH("SÃ¼den"), WEST("Westen");
 
 	String name;
 

@@ -2,8 +2,8 @@ package utilities;
 
 public enum Skill {
 
-	STRENGTH("Stärke"), PERCEPTION("Wahrnehmung"), ENDURANCE("Ausdauer"), CHARISMA("Charisma"),
-	INTELLIGENCE("Intelligenz"), AGILITY("Beweglichkeit"), LUCK("Glück");
+	STRENGTH("StÃ¤rke"), PERCEPTION("Wahrnehmung"), ENDURANCE("Ausdauer"), CHARISMA("Charisma"),
+	INTELLIGENCE("Intelligenz"), AGILITY("Beweglichkeit"), LUCK("GlÃ¼ck");
 
 	String name;
 

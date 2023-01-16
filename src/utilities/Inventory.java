@@ -184,7 +184,7 @@ public class Inventory {
 		itemCategories.put("Nahrung", food);
 		itemCategories.put("Notizen", notes);
 		itemCategories.put("Sonstiges", others);
-		itemCategories.put("Kleidung/Rüstung", outfits);
+		itemCategories.put("Kleidung/RÃ¼stung", outfits);
 		itemCategories.put("Waffen", weapons);
 		itemCategories.put("Quest-Items", questItems);
 

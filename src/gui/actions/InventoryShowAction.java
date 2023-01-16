@@ -175,7 +175,7 @@ public class InventoryShowAction implements ActionListener {
 			if (category == "Quest-Items") {
 				icon = GUIHelper.getIcon(Icon.INV_QUEST_ITEMS, 40, 40);
 			}
-			if (category == "Kleidung/Rüstung") {
+			if (category == "Kleidung/RÃ¼stung") {
 				icon = GUIHelper.getIcon(Icon.INV_CLOTHES, 40, 40);
 			}
 
@@ -202,7 +202,7 @@ public class InventoryShowAction implements ActionListener {
 			goldLabel.setBorder(new EmptyBorder(0, 10, 0, 0));
 			inventoryNavigationPanel.add(goldLabel);
 
-			JLabel merchantGoldLabel = new JLabel("<html><b>Gold vom Händler:</b> "
+			JLabel merchantGoldLabel = new JLabel("<html><b>Gold vom HÃ¤ndler:</b> "
 					+ this.gameManager.getPlayer().getInventory().getGold() + "</html>");
 			merchantGoldLabel.setForeground(Color.decode("#FFD700"));
 			merchantGoldLabel.setBorder(new EmptyBorder(0, 10, 0, 0));

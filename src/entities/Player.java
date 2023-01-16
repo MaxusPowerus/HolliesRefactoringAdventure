@@ -53,10 +53,10 @@ public class Player {
 		Outfit startOutfit = new Outfit("HolliesDress", "Hollys Lieblingskleid", 10, 0, 0, 0, 0, 0, 1, 0, 0, 1);
 		Food startFood = new Food("StewGrandmaStyle", "Eintopf nach Omas Art", 1, 25, 0);
 		Note startNote = new Note("LetterFromHolger01", "Nachricht von Holger",
-				"Hey Holly!<br>Triff mich heute Abend im Wald!<br>Ich habe eine Überraschung für dich!<br>Dein Holger ;)",
+				"Hey Holly!<br>Triff mich heute Abend im Wald!<br>Ich habe eine Ãœberraschung fÃ¼r dich!<br>Dein Holger ;)",
 				0, 0);
 		Other startOther = new Other("HolliesTeddy", "SchrimplyPipples",
-				"Hollies ältester und wichtigster Begleiter: Ein alter abgenutzter Teddybär!", 0, 0);
+				"Hollies Ã¤ltester und wichtigster Begleiter: Ein alter abgenutzter TeddybÃ¤r!", 0, 0);
 
 		Item speer = GameManager.getInstance().getResourceManager().getItemByUniqueName("Spear");
 		Other angel = (Other) GameManager.getInstance().getResourceManager().getItemByUniqueName("FishingRod");

@@ -8,7 +8,6 @@ import QuestClasses.QuestFishingMeadow;
 import QuestClasses.QuestFishingSwamp;
 import QuestClasses.QuestLolosCat;
 import QuestClasses.QuestPattern;
-import QuestClasses.QuestPoorTrader;
 import QuestClasses.QuestPoorTraderTrigger;
 import entities.Player;
 import map.Biom;
@@ -105,7 +104,7 @@ public class QuestManager {
 		boolean aiql = false;
 		String t = "FischenWiese";
 		String qi = "questInfo";
-		String wil = "Du kommst an einen Fluss, in dem es vor Fischen nur so wimmelt. <br> Wenn du einen f‰ngst, w¸rde das ein br‰chtiges Abendesen abgeben!";
+		String wil = "Du kommst an einen Fluss, in dem es vor Fischen nur so wimmelt. <br> Wenn du einen f√§ngst, w√ºrde das ein br√§chtiges Abendessen abgeben!";
 
 		ArrayList<Possibility> p = new ArrayList<Possibility>();
 		Possibility p1 = new Possibility("Angeln", "Mit einem Angel fischen", -1);
@@ -133,7 +132,7 @@ public class QuestManager {
 		boolean aiql = false;
 		String t = "FischenSumpf";
 		String qi = "questInfo";
-		String wil = "Du kommst an einen Fluss, in dem es vor Fischen nur so wimmelt. <br> Wenn du einen f‰ngst, w¸rde das ein br‰chtiges Abendesen abgeben!";
+		String wil = "Du kommst an einen Fluss, in dem es vor Fischen nur so wimmelt. <br> Wenn du einen f√§ngst, w√ºrde das ein br√§chtiges Abendesen abgeben!";
 
 		ArrayList<Possibility> p = new ArrayList<Possibility>();
 		Possibility p1 = new Possibility("Angeln", "Mit einem Angel fischen", -1);
@@ -160,8 +159,8 @@ public class QuestManager {
 		boolean uoe = true;
 		boolean aiql = true;
 		String t = "Eine falsche Entscheidung";
-		String qi = "Du triffst auf Theodoras, er bereut es ein altes Familienerbst¸ck an einen H‰ndler verkauft zu haben. Er bittet dich um Hilfe und sagt, dass der H‰ndler Richtung Osten gezogen ist.";
-		String wil = "Theodoras: \"Hilf mir ich habe das Amulett meiner Mutter verkauft aber es war ein groﬂer Fehler. Der h‰ndler ist Richtung Osten gegangen, bitte hole es zur¸ck, es bedeutet mir Alles!\"";
+		String qi = "Du triffst auf Theodoras, er bereut es ein altes Familienerbst√ºck an einen H√§ndler verkauft zu haben. Er bittet dich um Hilfe und sagt, dass der H√§ndler Richtung Osten gezogen ist.";
+		String wil = "Theodoras: \"Hilf mir ich habe das Amulett meiner Mutter verkauft aber es war ein gro√üer Fehler. Der H√§ndler ist Richtung Osten gegangen, bitte hole es zur√ºck, es bedeutet mir Alles!\"";
 
 		ArrayList<Possibility> p = new ArrayList<Possibility>();
 		Possibility p1 = new Possibility("Bin Unterwegs!", "Alles klar, ich werde sehen was ich tun kann!", -1);

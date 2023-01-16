@@ -133,7 +133,7 @@ public class LogNavigationAction implements MouseListener {
 				contentPanel.add(getQuestLine(quest));
 			}
 		} else {
-			contentPanel.add(new JLabel("<html><b>Hier erscheinen deine Quests, sobald sie verfügbar sind</b></html>"));
+			contentPanel.add(new JLabel("<html><b>Hier erscheinen deine Quests, sobald sie verfÃ¼gbar sind</b></html>"));
 		}
 
 		gameManager.update();
@@ -182,11 +182,11 @@ public class LogNavigationAction implements MouseListener {
 
 		button.setBackground(Color.decode("#71F899"));
 		if (currentQuest != null && currentQuest.equals(quest)) { // TODO
-			button.setText("abrüsten");
+			button.setText("abrÃ¼sten");
 			button.setBackground(Color.decode("#ed394a"));
 			button.setForeground(Color.WHITE);
 		} else {
-			button.setText("ausrüsten");
+			button.setText("ausrÃ¼sten");
 		}
 		button.addActionListener(new ActionListener() {
 

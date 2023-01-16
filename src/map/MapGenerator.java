@@ -1,14 +1,12 @@
 package map;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 
 import QuestClasses.Quest;
 import basic.Config;
 import basic.GameManager;
-import entities.Player;
 import utilities.Challenge;
 import utilities.Coordinate;
 
@@ -354,14 +352,14 @@ public class MapGenerator {
 		}
 		fields.clear();
 
-		// Wüste
-		ArrayList<Quest> questsWüste = GameManager.getInstance().getQuestManager().getQuestsByBiom(Biom.DESERT);
-		System.out.println("DESERT: " + questsWüste.size());
-		fields = getRandomMapfielsdWithNoQuest(Biom.DESERT, questsWüste.size());
-		for (int i = 0; i < questsWüste.size(); i++) {
-			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setQuest(questsWüste.get(i));
+		// WÃ¼ste
+		ArrayList<Quest> questsWueste = GameManager.getInstance().getQuestManager().getQuestsByBiom(Biom.DESERT);
+		System.out.println("DESERT: " + questsWueste.size());
+		fields = getRandomMapfielsdWithNoQuest(Biom.DESERT, questsWueste.size());
+		for (int i = 0; i < questsWueste.size(); i++) {
+			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setQuest(questsWueste.get(i));
 			map.getMapFieldByCoordinate(fields.get(i).getCoordinate()).setChallenge(null);
-			questsWüste.get(i).setTargetPoint(fields.get(i).getCoordinate());
+			questsWueste.get(i).setTargetPoint(fields.get(i).getCoordinate());
 
 		}
 		fields.clear();

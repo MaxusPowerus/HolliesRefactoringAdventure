@@ -412,7 +412,7 @@ public class Main extends JLabel {
 		logPanel.setLayout(gl_logPanel);
 		leftMainPanel.setLayout(gl_leftMainPanel);
 
-		playerInfoHeadline = new JLabel("Das ist Holly. Holly ist spielsüchtig.") {
+		playerInfoHeadline = new JLabel("Das ist Holly. Holly ist spielsÃ¼chtig.") {
 			protected void paintComponent(Graphics g) {
 				g.setColor(getBackground());
 				g.fillRect(0, 0, getWidth(), getHeight());

@@ -139,13 +139,13 @@ public class InventoryItemHover implements MouseListener {
 					this.gameManager.getGuiManager().getMain().getHealthBar().getValue() + ((Food) item).getEnergy());
 		}
 		if (item instanceof Outfit) {
-			JLabel armor = new JLabel("<html><b>Rüstungspunkte:</b> " + ((Outfit) item).getArmor() + "</html>");
+			JLabel armor = new JLabel("<html><b>RÃ¼stungspunkte:</b> " + ((Outfit) item).getArmor() + "</html>");
 			armor.setForeground(Color.WHITE);
 			armor.setFont(new Font("Dialog", Font.ITALIC, 14));
 			itemInfoPanel.add(armor);
 
 			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.STRENGTH) != 0) {
-				JLabel stFx = new JLabel("<html><b>Effekt auf Stärke:</b> "
+				JLabel stFx = new JLabel("<html><b>Effekt auf StÃ¤rke:</b> "
 						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.STRENGTH) + "</html>");
 				stFx.setFont(new Font("Dialog", Font.ITALIC, 14));
 				stFx.setForeground(Color.WHITE);
@@ -187,7 +187,7 @@ public class InventoryItemHover implements MouseListener {
 				itemInfoPanel.add(agFx);
 			}
 			if (((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.LUCK) != 0) {
-				JLabel lkFx = new JLabel("<html><b>Effekt auf Glück:</b> "
+				JLabel lkFx = new JLabel("<html><b>Effekt auf GlÃ¼ck:</b> "
 						+ ((Outfit) item).getOutfitFx().getSkillBoost().getSkillValue(Skill.LUCK) + "</html>");
 				lkFx.setFont(new Font("Dialog", Font.ITALIC, 14));
 				lkFx.setForeground(Color.WHITE);

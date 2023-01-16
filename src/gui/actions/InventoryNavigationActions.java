@@ -121,7 +121,7 @@ public class InventoryNavigationActions implements MouseListener {
 
 	public static void openCategory(String category) {
 		if (category == "")
-			category = "Kleidung/Rüstung"; // when not selected
+			category = "Kleidung/RÃ¼stung"; // when not selected
 		inventoryContentPanel.removeAll();
 
 		// update navigation button icon
@@ -155,7 +155,7 @@ public class InventoryNavigationActions implements MouseListener {
 		panel.setBorder(BorderFactory.createMatteBorder(0, 0, 5, 0, new Color(0, 0, 0, 0f)));
 		gameManager.getGuiManager().getMain().getInventoryPanel().add(panel);
 
-		JLabel name = new JLabel(item.getName() + " (" + item.getCount() + " Stück)");
+		JLabel name = new JLabel(item.getName() + " (" + item.getCount() + " StÃ¼ck)");
 		name.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		// TODO
@@ -195,22 +195,22 @@ public class InventoryNavigationActions implements MouseListener {
 
 			// has not enough money
 			if (item.getSpecificBuyValue(gameManager.getPlayer()) > gameManager.getPlayer().getInventory().getGold()) {
-				button.setText("<html>für <b>" + item.getSpecificBuyValue(gameManager.getPlayer())
+				button.setText("<html>fÃ¼r <b>" + item.getSpecificBuyValue(gameManager.getPlayer())
 						+ "</b> Gold kaufen</html>");
 				button.addMouseListener(new MouseAdapter() {
 					public void mouseEntered(java.awt.event.MouseEvent evt) {
-						button.setText("nicht genügend Gold");
+						button.setText("nicht genÃ¼gend Gold");
 					}
 
 					public void mouseExited(java.awt.event.MouseEvent evt) {
-						button.setText("<html>für <b>" + item.getSpecificBuyValue(gameManager.getPlayer())
+						button.setText("<html>fÃ¼r <b>" + item.getSpecificBuyValue(gameManager.getPlayer())
 								+ "</b> Gold kaufen</html>");
 					}
 				});
 				button.setBackground(Color.decode("#B8B8B8"));
 				button.setForeground(Color.WHITE);
 			} else {
-				button.setText("<html>für <b>" + item.getSpecificBuyValue(gameManager.getPlayer())
+				button.setText("<html>fÃ¼r <b>" + item.getSpecificBuyValue(gameManager.getPlayer())
 						+ "</b> Gold kaufen</html>");
 				button.addActionListener(new ActionListener() {
 
@@ -219,7 +219,7 @@ public class InventoryNavigationActions implements MouseListener {
 						if (merchant.buy(gameManager.getPlayer(), item)) {
 							new InventoryShowAction(gameManager, inv, invName, merchant, false).initBuy();
 						} else {
-							gameManager.getGuiManager().getMain().addFieldInfo("Du hast nicht genügend Gold");
+							gameManager.getGuiManager().getMain().addFieldInfo("Du hast nicht genÃ¼gend Gold");
 						}
 					}
 				});
@@ -229,11 +229,11 @@ public class InventoryNavigationActions implements MouseListener {
 
 			// has not enough money
 			if (item.getSpecificSellValue(gameManager.getPlayer()) > merchant.getInventory().getGold()) {
-				button.setText("nicht genügend Gold");
+				button.setText("nicht genÃ¼gend Gold");
 				button.setBackground(Color.decode("#B8B8B8"));
 				button.setForeground(Color.WHITE);
 			} else {
-				button.setText("<html>für <b>" + item.getSpecificSellValue(gameManager.getPlayer())
+				button.setText("<html>fÃ¼r <b>" + item.getSpecificSellValue(gameManager.getPlayer())
 						+ "</b> Gold verkaufen</html>");
 				button.addActionListener(new ActionListener() {
 
@@ -246,7 +246,7 @@ public class InventoryNavigationActions implements MouseListener {
 							PlayerInfoPanel.update();
 						} else {
 							gameManager.getGuiManager().getMain()
-									.addFieldInfo("Der Händler hat nicht genügend Geld, um dir das Item abzukaufen");
+									.addFieldInfo("Der HÃ¤ndler hat nicht genÃ¼gend Geld, um dir das Item abzukaufen");
 						}
 					}
 				});
@@ -259,7 +259,7 @@ public class InventoryNavigationActions implements MouseListener {
 					button.setBackground(Color.decode("#ed394a"));
 					button.setForeground(Color.WHITE);
 				} else {
-					button.setText("ausrüsten");
+					button.setText("ausrÃ¼sten");
 				}
 			}
 			if (item instanceof Food) {

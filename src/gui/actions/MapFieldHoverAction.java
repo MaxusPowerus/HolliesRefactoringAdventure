@@ -98,7 +98,7 @@ public class MapFieldHoverAction implements MouseListener {
 			if (challenge.isChallengeCompleted()) {
 				info.setText("Du hast diesen Container bereits gefunden");
 			} else {
-				info.setText("Hier gibt es " + challenge.getContainer().toString() + " für dich");
+				info.setText("Hier gibt es " + challenge.getContainer().toString() + " fÃ¼r dich");
 			}
 			break;
 		case 1:
@@ -109,7 +109,7 @@ public class MapFieldHoverAction implements MouseListener {
 			}
 			break;
 		case 2:
-			info.setText("Hier erwartet dich ein Händler: " + ((Merchant) challenge.getNpc()).getName());
+			info.setText("Hier erwartet dich ein HÃ¤ndler: " + ((Merchant) challenge.getNpc()).getName());
 			break;
 		case 3:
 			// TODO

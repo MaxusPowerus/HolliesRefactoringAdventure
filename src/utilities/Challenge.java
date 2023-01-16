@@ -109,7 +109,7 @@ public class Challenge {
 
 			break;
 
-		// Callenge: Händler
+		// Callenge: HÃ¤ndler
 		case 2:
 			ArrayList<Merchant> merchants = new ArrayList<Merchant>();
 			int lengthMerchants = GameManager.getInstance().getResourceManager().getMerchants().size();

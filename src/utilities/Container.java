@@ -21,7 +21,7 @@ public class Container {
 		this.prefix = prefix;
 		inventory = new Inventory();
 		if (name == "random") {
-			String[] containerNames = { "Truhe", "Geldbeutel", "Leiche", "Kühlschrank" };
+			String[] containerNames = { "Truhe", "Geldbeutel", "Leiche", "KÃ¼hlschrank" };
 			String[] containerPrefixes = { "eine", "einen", "die ", "einen" };
 
 			Random Randy = new Random();
@@ -41,7 +41,7 @@ public class Container {
 				inventory.addGold(Randy.nextInt(20));
 				break;
 			case "Leiche":
-				String[] types = { " eines Vagabunden", " eines Kaufmanns", " eines Söldners" };
+				String[] types = { " eines Vagabunden", " eines Kaufmanns", " eines SÃ¶ldners" };
 				String[] lootTabelsNames = { "homeless", "trader", "mercenary" };
 				int littleRandy2 = Randy.nextInt(types.length);
 				this.name = this.name + types[littleRandy2];
@@ -49,7 +49,7 @@ public class Container {
 						.getLootTableByName(lootTabelsNames[littleRandy2]));
 
 				break;
-			case "Kühlschrank":
+			case "KÃ¼hlschrank":
 				int spawnChance = Randy.nextInt(101);
 
 				for (int i = 0; i < 5; i++) {

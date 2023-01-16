@@ -8,7 +8,6 @@ import entities.Player;
 import map.Biom;
 import utilities.Coordinate;
 import utilities.Flag;
-import utilities.Skill;
 
 public class QuestPoorTraderTrigger extends Quest {
 
@@ -70,12 +69,12 @@ public class QuestPoorTraderTrigger extends Quest {
 
 			} else if (attempt.equals(getPossibilities().get(1).getButtonLabel())) {
 				super.setQuestInfo(
-						"Du hast beschlossen Theodoras das Amulett nur gegen eine Bezahlung zurück zu geben!.");
-				super.setWorldInfoLine("Theodoras: \"Was?! Nagut, nehmt das...mehr habe ich nicht ich schöwre es!\"");
+						"Du hast beschlossen Theodoras das Amulett nur gegen eine Bezahlung zurÃ¼ck zu geben!.");
+				super.setWorldInfoLine("Theodoras: \"Was?! Nagut, nehmt das...mehr habe ich nicht ich schÃ¶wre es!\"");
 				player.getInventory().addGold(38);
 
 			} else if (attempt.equals(getPossibilities().get(2).getButtonLabel())) {
-				super.setQuestInfo("Du hast beschlossen Theodoras das Amulett zurück zu geben!.");
+				super.setQuestInfo("Du hast beschlossen Theodoras das Amulett zurÃ¼ck zu geben!.");
 				super.setWorldInfoLine("Theodoras: \"Habt vielen dank mein Freund.\"");
 				player.getInventory()
 						.remove(GameManager.getInstance().getResourceManager().getItemByUniqueName("TheodorasAmulet"));
@@ -95,7 +94,7 @@ public class QuestPoorTraderTrigger extends Quest {
 
 			if (attempt.equals(getPossibilities().get(0).getButtonLabel())) {
 				super.setQuestInfo("Du hast Theodoras von deinem Misserfolg berichtet!.");
-				super.setWorldInfoLine("Theodoras: \"Oh nein ... was seid ihr nur für ein Nichtsnutz!\"");
+				super.setWorldInfoLine("Theodoras: \"Oh nein ... was seid ihr nur fÃ¼r ein Nichtsnutz!\"");
 
 			}
 
@@ -126,7 +125,7 @@ public class QuestPoorTraderTrigger extends Quest {
 		}
 		if (super.getActiveFlagName().equals("wait")) {
 			super.setNewFlag("stillWait");
-			super.setWorldInfoLine("Theodoras: \"Hast du das Amulett schon zurückholen können?\"");
+			super.setWorldInfoLine("Theodoras: \"Hast du das Amulett schon zurÃ¼ckholen kÃ¶nnen?\"");
 			// setQuestInfo();
 
 			Possibility p1 = new Possibility("Noch nicht", "\"Noch nicht aber ich bin dran\n", -1);
@@ -154,15 +153,15 @@ public class QuestPoorTraderTrigger extends Quest {
 		boolean uoe = true;
 		boolean aiql = true;
 		String t = "Eine falsche Entscheidung II";
-		String qi = "Du triffst auf den Händler, von dem Theodoras berichtet hat..";
-		String wil = "Händler: \"Hallo fremder wollt ihr einen Blick auf meine Waren werfen?\"";
+		String qi = "Du triffst auf den HÃ¤ndler, von dem Theodoras berichtet hat..";
+		String wil = "HÃ¤ndler: \"Hallo fremder wollt ihr einen Blick auf meine Waren werfen?\"";
 
 		ArrayList<Possibility> p = new ArrayList<Possibility>();
-		Possibility p1 = new Possibility("Überreden",
-				"\"Hey der Arme Theodoras ist am Boden zerstört...das Amulett gehörte seiner Toten Mutter...bitte lass es mich ihm zurück  geben!\"",
+		Possibility p1 = new Possibility("Ã¼berreden",
+				"\"Hey der Arme Theodoras ist am Boden zerstÃ¶rt...das Amulett gehÃ¶rte seiner Toten Mutter...bitte lass es mich ihm zurÃ¼ck  geben!\"",
 				-1);
-		Possibility p2 = new Possibility("Abkaufen", "Kaufe dem Händler das Amulett ab.", -1);
-		Possibility p3 = new Possibility("Wegnehmen", "Den Händler verprügeln und das Amulett mit Gewalt beschaffen.",
+		Possibility p2 = new Possibility("Abkaufen", "Kaufe dem HÃ¤ndler das Amulett ab.", -1);
+		Possibility p3 = new Possibility("Wegnehmen", "Den HÃ¤ndler verprÃ¼geln und das Amulett mit Gewalt beschaffen.",
 				-1);
 
 		p.add(p1);
