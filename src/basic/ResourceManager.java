@@ -1,13 +1,13 @@
 package basic;
 
-import java.io.FileReader;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Set;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import entities.Enemy;
 import entities.Merchant;
@@ -82,10 +82,10 @@ public class ResourceManager {
 	private void loadWeapons() {
 		try {
 
-			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Weapons.json"));
-			JSONParser parser = new JSONParser();
+			Scanner sc = new Scanner(new File(HelperFunctions.getResource("jsonFiles/Items/Weapons.json")));
+			String content = sc.useDelimiter("\\A").next();
+			JSONArray jsonItems = new JSONArray(content);
 
-			JSONArray jsonItems = (JSONArray) parser.parse(fileReader);
 			jsonItems.forEach((item) -> {
 				JSONObject itemObj = (JSONObject) item;
 				String label = new String(itemObj.get("label").toString().getBytes(), StandardCharsets.UTF_8);
@@ -100,15 +100,15 @@ public class ResourceManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	private void loadFood() {
 		try {
+			Scanner sc = new Scanner(new File(HelperFunctions.getResource("jsonFiles/Items/Food.json")));
+			String content = sc.useDelimiter("\\A").next();
+			JSONArray jsonItems = new JSONArray(content);
 
-			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Food.json"));
-			JSONParser parser = new JSONParser();
-
-			JSONArray jsonItems = (JSONArray) parser.parse(fileReader);
 			jsonItems.forEach((item) -> {
 				JSONObject itemObj = (JSONObject) item;
 				String label = new String(itemObj.get("label").toString().getBytes(), StandardCharsets.UTF_8);
@@ -129,11 +129,10 @@ public class ResourceManager {
 	@SuppressWarnings("unchecked")
 	private void loadOutfits() {
 		try {
+			Scanner sc = new Scanner(new File(HelperFunctions.getResource("jsonFiles/Items/Outfits.json")));
+			String content = sc.useDelimiter("\\A").next();
+			JSONArray jsonItems = new JSONArray(content);
 
-			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Outfits.json"));
-			JSONParser parser = new JSONParser();
-
-			JSONArray jsonItems = (JSONArray) parser.parse(fileReader);
 			jsonItems.forEach((item) -> {
 				JSONObject itemObj = (JSONObject) item;
 				String label = new String(itemObj.get("label").toString().getBytes(), StandardCharsets.UTF_8);
@@ -159,11 +158,10 @@ public class ResourceManager {
 	@SuppressWarnings("unchecked")
 	private void loadNotes() {
 		try {
+			Scanner sc = new Scanner(new File(HelperFunctions.getResource("jsonFiles/Items/Notes.json")));
+			String content = sc.useDelimiter("\\A").next();
+			JSONArray jsonItems = new JSONArray(content);
 
-			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Notes.json"));
-			JSONParser parser = new JSONParser();
-
-			JSONArray jsonItems = (JSONArray) parser.parse(fileReader);
 			jsonItems.forEach((item) -> {
 				JSONObject itemObj = (JSONObject) item;
 				String label = new String(itemObj.get("label").toString().getBytes(), StandardCharsets.UTF_8);
@@ -185,11 +183,10 @@ public class ResourceManager {
 	@SuppressWarnings("unchecked")
 	private void loadOthers() {
 		try {
+			Scanner sc = new Scanner(new File(HelperFunctions.getResource("jsonFiles/Items/Others.json")));
+			String content = sc.useDelimiter("\\A").next();
+			JSONArray jsonItems = new JSONArray(content);
 
-			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/Others.json"));
-			JSONParser parser = new JSONParser();
-
-			JSONArray jsonItems = (JSONArray) parser.parse(fileReader);
 			jsonItems.forEach((item) -> {
 				JSONObject itemObj = (JSONObject) item;
 				String label = new String(itemObj.get("label").toString().getBytes(), StandardCharsets.UTF_8);
@@ -208,11 +205,10 @@ public class ResourceManager {
 
 	private void loadQuestItems() {
 		try {
+			Scanner sc = new Scanner(new File(HelperFunctions.getResource("jsonFiles/Items/QuestItems.json")));
+			String content = sc.useDelimiter("\\A").next();
+			JSONArray jsonItems = new JSONArray(content);
 
-			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/QuestItems.json"));
-			JSONParser parser = new JSONParser();
-
-			JSONArray jsonItems = (JSONArray) parser.parse(fileReader);
 			jsonItems.forEach((item) -> {
 				JSONObject itemObj = (JSONObject) item;
 				String label = new String(itemObj.get("label").toString().getBytes(), StandardCharsets.UTF_8);
@@ -307,10 +303,9 @@ public class ResourceManager {
 	@SuppressWarnings("unchecked")
 	private void loadLootTables() {
 		try {
-
-			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Items/LootTables.json"));
-			JSONParser parser = new JSONParser();
-			JSONObject jsonNPCs = (JSONObject) parser.parse(fileReader);
+			Scanner sc = new Scanner(new File(HelperFunctions.getResource("jsonFiles/Items/LootTables.json")));
+			String content = sc.useDelimiter("\\A").next();
+			JSONObject jsonNPCs = new JSONObject(content);
 
 			Set<String> labels = jsonNPCs.keySet();
 
@@ -343,10 +338,9 @@ public class ResourceManager {
 	@SuppressWarnings("unchecked")
 	private void loadEnemies() {
 		try {
-
-			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Npc/Enemy.json"));
-			JSONParser parser = new JSONParser();
-			JSONObject jsonNPCs = (JSONObject) parser.parse(fileReader);
+			Scanner sc = new Scanner(new File(HelperFunctions.getResource("jsonFiles/Npc/Enemy.json")));
+			String content = sc.useDelimiter("\\A").next();
+			JSONObject jsonNPCs = new JSONObject(content);
 
 			Set<String> labels = jsonNPCs.keySet();
 
@@ -381,10 +375,9 @@ public class ResourceManager {
 
 	private void loadVictims() {
 		try {
-
-			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Npc/Victims.json"));
-			JSONParser parser = new JSONParser();
-			JSONObject jsonNPCs = (JSONObject) parser.parse(fileReader);
+			Scanner sc = new Scanner(new File(HelperFunctions.getResource("jsonFiles/Npc/Victims.json")));
+			String content = sc.useDelimiter("\\A").next();
+			JSONObject jsonNPCs = new JSONObject(content);
 
 			Set<String> labels = jsonNPCs.keySet();
 
@@ -419,10 +412,9 @@ public class ResourceManager {
 	@SuppressWarnings("unchecked")
 	private void loadMerchants() {
 		try {
-
-			FileReader fileReader = new FileReader(HelperFunctions.getResource("jsonFiles/Npc/Merchant.json"));
-			JSONParser parser = new JSONParser();
-			JSONObject jsonNPCs = (JSONObject) parser.parse(fileReader);
+			Scanner sc = new Scanner(new File(HelperFunctions.getResource("jsonFiles/Npc/Merchant.json")));
+			String content = sc.useDelimiter("\\A").next();
+			JSONObject jsonNPCs = new JSONObject(content);
 
 			Set<String> labels = jsonNPCs.keySet();
 
